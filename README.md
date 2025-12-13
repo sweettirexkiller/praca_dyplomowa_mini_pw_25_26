@@ -1,8 +1,10 @@
 # Coolaborative Text Editor
 
-Praca inzynierska Sofya Karahoda, Piotr Jankiewicz 
+Praca inzynierska Piotr Jankiewicz 
 
 Mini PW Informatyka i Systemy informatyczne, 2025/26
+
+Promotor: dr. inz. Paweł Kotowski
 
 ## Struktura folderów
 
