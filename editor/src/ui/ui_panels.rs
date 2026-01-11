@@ -9,10 +9,10 @@ impl AppView {
                 self.sidebar.visible = !self.sidebar.visible;
             }
             if i.modifiers.command && i.key_pressed(egui::Key::O) {
-                // self.open_file();
+                self.open_file();
             }
             if i.modifiers.command && i.key_pressed(egui::Key::S) {
-                // self.save();
+                self.save_file();
             }
         });
     }
@@ -22,6 +22,14 @@ impl AppView {
             ui.horizontal(|ui| {
                 if ui.button("☰ Menu").clicked() {
                     self.sidebar.visible = !self.sidebar.visible;
+                }
+
+                if ui.button("Save").clicked() {
+                    self.save_file();
+                }
+                
+                if ui.button("Open").clicked() {
+                    self.open_file();
                 }
 
                 // ui.with_layout(egui::Layout::right_to_left(egui::Align::Center), |ui| {

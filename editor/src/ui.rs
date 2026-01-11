@@ -382,7 +382,30 @@ impl AppView {
         // Also clear local whiteboard? No, keep it.
         // But maybe clear sync states?
     }
-    // ...existing code...
+    
+    pub fn save_file(&mut self) {
+        if let Some(path) = rfd::FileDialog::new().save_file() {
+            let data = self.backend.save();
+            if let Err(e) = std::fs::write(&path, data) {
+                eprintln!("Failed to save file: {}", e);
+            } else {
+                 println!("Saved to {:?}", path);
+            }
+        }
+    }
+
+    pub fn open_file(&mut self) {
+        if let Some(path) = rfd::FileDialog::new().pick_file() {
+            if let Ok(data) = std::fs::read(&path) {
+                self.backend.load(data);
+                // Refresh UI
+                let strokes = self.backend.get_strokes();
+                self.apply_update(crate::backend_api::FrontendUpdate { strokes });
+            } else {
+                 eprintln!("Failed to read file");
+            }
+        }
+    }
 }
 
 // eframe trait for AppView

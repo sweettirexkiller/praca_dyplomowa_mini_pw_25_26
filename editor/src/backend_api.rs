@@ -51,6 +51,10 @@ pub trait DocBackend: Send {
     fn peer_disconnected(&mut self, peer_id: &str);
     fn receive_sync_message(&mut self, peer_id: &str, message: Vec<u8>) -> FrontendUpdate;
     fn generate_sync_message(&mut self, peer_id: &str) -> Option<Vec<u8>>;
+
+    // Persistence
+    fn save(&mut self) -> Vec<u8>;
+    fn load(&mut self, data: Vec<u8>);
 }
 
 pub struct SimpleBackend;
@@ -78,6 +82,12 @@ impl DocBackend for SimpleBackend {
     fn generate_sync_message(&mut self, _peer_id: &str) -> Option<Vec<u8>> {
          None
     }
+
+    fn save(&mut self) -> Vec<u8> {
+        Vec::new()
+    }
+
+    fn load(&mut self, _data: Vec<u8>) {}
 }
 
 
@@ -124,4 +134,10 @@ impl DocBackend for MockBackend {
     fn generate_sync_message(&mut self, _peer_id: &str) -> Option<Vec<u8>> {
         None
     }
+
+    fn save(&mut self) -> Vec<u8> {
+        Vec::new()
+    }
+
+    fn load(&mut self, _data: Vec<u8>) {}
 }

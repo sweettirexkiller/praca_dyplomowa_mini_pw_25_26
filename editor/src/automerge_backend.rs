@@ -108,4 +108,15 @@ impl DocBackend for AutomergeBackend {
         }
         None
     }
+
+    fn save(&mut self) -> Vec<u8> {
+        self.doc.save()
+    }
+
+    fn load(&mut self, data: Vec<u8>) {
+        if let Ok(doc) = AutoCommit::load(&data) {
+            self.doc = doc;
+            self.sync_states.clear();
+        }
+    }
 }
