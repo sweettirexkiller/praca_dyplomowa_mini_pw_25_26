@@ -50,6 +50,7 @@ struct WhiteboardState {
     texture: Option<egui::TextureHandle>,
     stroke_color: egui::Color32,
     stroke_width: f32,
+    current_stroke: Vec<crate::backend_api::Point>,
 }
 
 #[derive(PartialEq, Eq)]
@@ -60,7 +61,7 @@ pub enum Page {
 
 impl AppView {
     pub fn new(backend: Box<dyn DocBackend>) -> Self {
-        let text_cache = backend.render_text();
+        // let text_cache = backend.render_text(); // Removed, as we use get_strokes dynamically or on event
         let host = std::env::var("LIVEKIT_URL").unwrap_or_else(|_| "127.0.0.1:7880".to_string());
         let web_socket_url = if host.starts_with("ws://") || host.starts_with("wss://") {
             host
@@ -72,7 +73,7 @@ impl AppView {
             format!("ws://{}", host)
         };
 
-        Self {
+        let mut app = Self {
             backend,
             status: "Ready".into(),
             sidebar: SidebarState {
@@ -86,6 +87,7 @@ impl AppView {
                 texture: None,
                 stroke_color: egui::Color32::BLACK,
                 stroke_width: 5.0,
+                current_stroke: Vec::new(),
             },
             page: Page::Editor,
             livekit_events: Arc::new(Mutex::new(Vec::new())),
@@ -98,14 +100,56 @@ impl AppView {
             livekit_room: "".into(),
             livekit_message: "".into(),
             livekit_command_sender: None,
-        }
+        };
+        
+        // Initial load
+        let initial_strokes = app.backend.get_strokes();
+        app.apply_update(crate::backend_api::FrontendUpdate { strokes: initial_strokes });
+        
+        app
     }
 
     fn handle_intent(&mut self, intent: Intent) {
         println!("Handling intent: {:?}", intent);
         let update = self.backend.apply_intent(intent);
-        if let Some(new_text) = update.full_text {
-            // self.editor.text = new_text;
+        self.apply_update(update);
+    }
+    
+    fn apply_update(&mut self, update: crate::backend_api::FrontendUpdate) {
+        // Simple full redraw for now
+        self.whiteboard.image = egui::ColorImage::new([800, 600], vec![egui::Color32::WHITE; 800 * 600]);
+        for stroke in update.strokes {
+            self.draw_stroke_on_image(&stroke);
+        }
+        if let Some(texture) = &mut self.whiteboard.texture {
+             texture.set(self.whiteboard.image.clone(), egui::TextureOptions::NEAREST);
+        }
+    }
+    
+    fn draw_stroke_on_image(&mut self, stroke: &crate::backend_api::Stroke) {
+        let color = egui::Color32::from_rgba_premultiplied(
+            stroke.color[0], stroke.color[1], stroke.color[2], stroke.color[3]
+        );
+        let brush_size = stroke.width as i32;
+        let width = self.whiteboard.image.width();
+        let height = self.whiteboard.image.height();
+        
+        for point in &stroke.points {
+            let x = point.x;
+            let y = point.y;
+             for dy in -brush_size..=brush_size {
+                for dx in -brush_size..=brush_size {
+                    let nx = x + dx;
+                    let ny = y + dy;
+                    if nx >= 0 && nx < width as i32 && ny >= 0 && ny < height as i32 {
+                         // Check circular brush
+                        if dx * dx + dy * dy <= brush_size * brush_size {
+                            let idx = (ny as usize * width) + nx as usize;
+                            self.whiteboard.image.pixels[idx] = color;
+                        }
+                    }
+                }
+             }
         }
     }
 

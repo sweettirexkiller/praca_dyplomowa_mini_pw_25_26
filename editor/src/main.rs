@@ -1,9 +1,8 @@
 mod backend_api;
-// mod crdt;
+mod automerge_backend;
 mod ui;
 
-use crate::backend_api::SimpleBackend;
-// use crate::crdt::CrdtBackend;
+use crate::automerge_backend::AutomergeBackend;
 use crate::ui::AppView;
 use eframe::NativeOptions;
 
@@ -20,7 +19,7 @@ fn main() -> eframe::Result<()> {
         "Collaborative Text Editor",
         native_options,
         Box::new(move |_cc| {
-            Ok(Box::new(AppView::new(Box::new(SimpleBackend::new()))))
+            Ok(Box::new(AppView::new(Box::new(AutomergeBackend::new()))))
         }),
     )
 }

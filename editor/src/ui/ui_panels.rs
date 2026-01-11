@@ -40,16 +40,7 @@ impl AppView {
             .default_width(self.sidebar.default_width)
             .show(ctx, |ui| {
                 if ui.button("+ New").clicked() {
-                    // self.handle_intent(Intent::ReplaceAll {
-                    //    text: String::new(),
-                    // });
-                    for pixel in self.whiteboard.image.pixels.iter_mut() {
-                        *pixel = egui::Color32::WHITE; // Clear to white
-                    }
-                    if let Some(texture) = &mut self.whiteboard.texture {
-                        texture.set(self.whiteboard.image.clone(), egui::TextureOptions::NEAREST);
-                    }
-                    // self.editor.cursor = 0;
+                    self.handle_intent(crate::backend_api::Intent::Clear);
                     self.status = "New whiteboard".into();
                     self.sidebar.docs.push("untitled.png".into());
                     self.sidebar.selected = self.sidebar.docs.len() - 1;
@@ -193,6 +184,9 @@ impl AppView {
                         // Map scaled image coordinates to actual pixel coordinates
                         let x = ((rel_pos.x / rect.width()) * width as f32) as i32;
                         let y = ((rel_pos.y / rect.height()) * height as f32) as i32;
+                        
+                        // Add point to current stroke
+                        self.whiteboard.current_stroke.push(crate::backend_api::Point { x, y });
 
                         let brush_size = self.whiteboard.stroke_width as i32;
                         let color = self.whiteboard.stroke_color;
@@ -221,6 +215,18 @@ impl AppView {
                         }
                     }
                 }
+            }
+            
+            if image_response.drag_stopped() {
+                 if !self.whiteboard.current_stroke.is_empty() {
+                    let stroke = crate::backend_api::Stroke {
+                        points: self.whiteboard.current_stroke.clone(),
+                        color: self.whiteboard.stroke_color.to_array(),
+                        width: self.whiteboard.stroke_width,
+                    };
+                    self.handle_intent(crate::backend_api::Intent::Draw(stroke));
+                    self.whiteboard.current_stroke.clear();
+                 }
             }
         });
     }
