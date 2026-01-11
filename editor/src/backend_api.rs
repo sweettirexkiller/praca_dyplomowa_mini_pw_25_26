@@ -45,4 +45,83 @@ pub trait DocBackend: Send {
     // ta metoda dostaje "intencje" z edytora i zwraca aktualizacje dla edytora
     fn apply_intent(&mut self, intent: Intent) -> FrontendUpdate;
     fn get_strokes(&self) -> Vec<Stroke>;
+    
+    // Sync methods
+    fn peer_connected(&mut self, peer_id: &str);
+    fn peer_disconnected(&mut self, peer_id: &str);
+    fn receive_sync_message(&mut self, peer_id: &str, message: Vec<u8>) -> FrontendUpdate;
+    fn generate_sync_message(&mut self, peer_id: &str) -> Option<Vec<u8>>;
+}
+
+pub struct SimpleBackend;
+
+impl SimpleBackend {
+    pub fn new() -> Self {
+        SimpleBackend
+    }
+}
+
+impl DocBackend for SimpleBackend {
+    fn apply_intent(&mut self, _intent: Intent) -> FrontendUpdate {
+        FrontendUpdate::empty()
+    }
+
+    fn get_strokes(&self) -> Vec<Stroke> {
+        Vec::new()
+    }
+
+    fn peer_connected(&mut self, _peer_id: &str) {}
+    fn peer_disconnected(&mut self, _peer_id: &str) {}
+    fn receive_sync_message(&mut self, _peer_id: &str, _message: Vec<u8>) -> FrontendUpdate {
+        FrontendUpdate::empty()
+    }
+    fn generate_sync_message(&mut self, _peer_id: &str) -> Option<Vec<u8>> {
+         None
+    }
+}
+
+
+pub struct MockBackend {
+    strokes: Vec<Stroke>,
+}
+
+// implementacja traitu Default dla MockBackend, ktory zmusza do implementacji metody default
+impl Default for MockBackend {
+    fn default() -> Self {
+        Self {
+            strokes: Vec::new(),
+        }
+    }
+}
+
+// implementujaemy trait DocBackend dla MockBackend
+// backend bedzie musial byc w przyszlosci podmieniony
+// zmuszamy do implementacji apply_intent i render_text
+impl DocBackend for MockBackend {
+    // kiedy dostaniemy intencje, to zaktualizujemy tekst i zwrocimy aktualizacje
+    fn apply_intent(&mut self, intent: Intent) -> FrontendUpdate {
+
+        match intent {
+            Intent::Draw(stroke) => self.strokes.push(stroke),
+            Intent::Clear => self.strokes.clear(),
+        }
+        FrontendUpdate {
+            strokes: self.strokes.clone(),
+        }
+    }
+
+    fn get_strokes(&self) -> Vec<Stroke> {
+        self.strokes.clone()
+    }
+
+    fn peer_connected(&mut self, _peer_id: &str) {}
+    fn peer_disconnected(&mut self, _peer_id: &str) {}
+    fn receive_sync_message(&mut self, _peer_id: &str, _message: Vec<u8>) -> FrontendUpdate {
+         FrontendUpdate {
+            strokes: self.strokes.clone(),
+        }
+    }
+    fn generate_sync_message(&mut self, _peer_id: &str) -> Option<Vec<u8>> {
+        None
+    }
 }

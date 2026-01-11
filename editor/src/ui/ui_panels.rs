@@ -45,9 +45,30 @@ impl AppView {
                     self.sidebar.docs.push("untitled.png".into());
                     self.sidebar.selected = self.sidebar.docs.len() - 1;
                 }
+                
+                ui.separator();
+                
+                if ui.button("Share").clicked() {
+                    self.livekit_room = "".into(); // Force new name generation
+                    self.connect_or_create_to_room();
+                    self.page = Page::LiveKit;
+                }
+                
+                ui.horizontal(|ui| {
+                    ui.label("Room:");
+                    ui.text_edit_singleline(&mut self.livekit_room);
+                });
+                if !self.livekit_room.is_empty() {
+                     if ui.button("Join Session").clicked() {
+                         self.connect_or_create_to_room();
+                         self.page = Page::LiveKit;
+                    }
+                }
+                
+                ui.separator();
 
                 // new: open LiveKit page
-                if ui.button("Open LiveKit").clicked() {
+                if ui.button("Open LiveKit Console").clicked() {
                     self.page = Page::LiveKit;
                 }
 

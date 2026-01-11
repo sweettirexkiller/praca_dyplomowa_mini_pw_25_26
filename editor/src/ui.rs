@@ -9,10 +9,32 @@ use jsonwebtoken::{encode, EncodingKey, Header};
 use livekit_api::access_token;
 use serde::{Deserialize, Serialize};
 use std::time::{SystemTime, UNIX_EPOCH};
+use rand::{distr::Alphanumeric, Rng};
 
 mod ui_panels;
 
 use livekit::prelude::*;
+
+#[derive(Serialize, Deserialize, Debug)]
+pub enum NetworkMessage {
+    Sync(Vec<u8>),
+    Chat(String),
+}
+
+#[derive(Debug)]
+pub enum AppCommand {
+    Disconnect,
+    Broadcast(NetworkMessage),
+    Send { recipients: Vec<String>, message: NetworkMessage },
+}
+
+#[derive(Debug)]
+pub enum AppMsg {
+    Log(String),
+    ParticipantConnected(String),
+    ParticipantDisconnected(String),
+    NetworkMessage { sender: String, message: NetworkMessage },
+}
 
 pub struct AppView {
     backend: Box<dyn DocBackend>,
@@ -35,7 +57,8 @@ pub struct AppView {
     livekit_room: String,
     livekit_message: String,
      // Channel to send messages to the background LiveKit task
-    livekit_command_sender: Option<tokio::sync::mpsc::UnboundedSender<String>>,
+    livekit_command_sender: Option<tokio::sync::mpsc::UnboundedSender<AppCommand>>,
+    app_msg_receiver: Option<tokio::sync::mpsc::UnboundedReceiver<AppMsg>>,
 }
 
 struct SidebarState {
@@ -100,6 +123,7 @@ impl AppView {
             livekit_room: "".into(),
             livekit_message: "".into(),
             livekit_command_sender: None,
+            app_msg_receiver: None,
         };
         
         // Initial load
@@ -109,10 +133,26 @@ impl AppView {
         app
     }
 
+    fn sync_with_all(&mut self) {
+        let participants = self.livekit_participants.lock().unwrap().clone();
+        for p in participants {
+            if p.contains("(You)") { continue; }
+             if let Some(payload) = self.backend.generate_sync_message(&p) {
+                if let Some(tx) = &self.livekit_command_sender {
+                    let _ = tx.send(AppCommand::Send { 
+                        recipients: vec![p], 
+                        message: NetworkMessage::Sync(payload) 
+                    });
+                }
+            }
+        }
+    }
+
     fn handle_intent(&mut self, intent: Intent) {
         println!("Handling intent: {:?}", intent);
         let update = self.backend.apply_intent(intent);
         self.apply_update(update);
+        self.sync_with_all();
     }
     
     fn apply_update(&mut self, update: crate::backend_api::FrontendUpdate) {
@@ -179,7 +219,24 @@ impl AppView {
         }
         self.livekit_connecting = true;
 
-        println!("Connecting to LiveKit room...");
+        if self.livekit_room.is_empty() {
+             // Generate random room name if empty (e.g. from Share button or just empty)
+             self.livekit_room = rand::rng()
+                .sample_iter(&Alphanumeric)
+                .take(5)
+                .map(char::from)
+                .collect();
+        }
+
+        if self.livekit_identity.is_empty() {
+             self.livekit_identity = rand::rng()
+                .sample_iter(&Alphanumeric)
+                .take(5)
+                .map(char::from)
+                .collect();
+        }
+
+        println!("Connecting to LiveKit room {} as {}...", self.livekit_room, self.livekit_identity);
 
         println!("Generating token...");
         let token = match Self::create_token(&self.livekit_room, &self.livekit_identity) {
@@ -194,15 +251,18 @@ impl AppView {
 
         println!("Token generated: {}", token);
         self.livekit_token = token.clone();
-        println!("Connecting to LiveKit room at {}", self.livekit_ws_url);
-
-        let url = self.livekit_ws_url.clone();
-        let events_log = self.livekit_events.clone();
-        let participants_log = self.livekit_participants.clone();
         
-        // Create a channel to send messages from UI to the background task
-        let (tx, mut rx) = tokio::sync::mpsc::unbounded_channel::<String>();
-        self.livekit_command_sender = Some(tx);
+        let url = self.livekit_ws_url.clone();
+        
+        // Channel for App -> Thread
+        let (tx_cmd, mut rx_cmd) = tokio::sync::mpsc::unbounded_channel::<AppCommand>();
+        self.livekit_command_sender = Some(tx_cmd);
+        
+        // Channel for Thread -> App
+        let (tx_msg, rx_msg) = tokio::sync::mpsc::unbounded_channel::<AppMsg>();
+        self.app_msg_receiver = Some(rx_msg);
+
+        let tx_msg_clone = tx_msg.clone();
 
         std::thread::spawn(move || {
             let rt = tokio::runtime::Runtime::new().unwrap();
@@ -210,24 +270,19 @@ impl AppView {
                 let (room, mut room_events) = match Room::connect(&url, &token, RoomOptions::default()).await {
                     Ok(res) => res,
                     Err(e) => {
-                        events_log.lock().unwrap().push(format!("Connection failed: {}", e));
+                         let _ = tx_msg.send(AppMsg::Log(format!("Connection failed: {}", e)));
                         return;
                     }
                 };
                 
                 let room = Arc::new(room);
-                events_log.lock().unwrap().push("Connected to Room".to_string());
+                 let _ = tx_msg.send(AppMsg::Log("Connected to Room".to_string()));
 
                 // Initial participants list
-                {
-                    let mut guard = participants_log.lock().unwrap();
-                    guard.clear();
-                    // Add local participant
-                    guard.push(format!("{} (You)", room.local_participant().identity()));
-                    // Add remote participants
-                    for (_, p) in room.remote_participants() {
-                        guard.push(p.identity().to_string());
-                    }
+                // We should probably send connection events for existing participants? 
+                // Or let the UI pull them? For now, we rely on events.
+                for (_, p) in room.remote_participants() {
+                     let _ = tx_msg.send(AppMsg::ParticipantConnected(p.identity().to_string()));
                 }
 
                 loop {
@@ -235,61 +290,61 @@ impl AppView {
                         Some(event) = room_events.recv() => {
                             match event {
                                 RoomEvent::DataReceived { payload, participant, .. } => {
-                                    let text = String::from_utf8_lossy(&payload);
-                                    let sender = participant.map(|p| p.name().to_string()).unwrap_or("Unknown".to_string());
-                                    events_log.lock().unwrap().push(format!("[{}] {}", sender, text));
+                                    let sender = participant.map(|p| p.identity().to_string()).unwrap_or("Unknown".to_string());
+                                     if let Ok(msg) = serde_json::from_slice::<NetworkMessage>(&payload) {
+                                         let _ = tx_msg.send(AppMsg::NetworkMessage { sender, message: msg });
+                                     } else {
+                                        // Try as legacy chat string
+                                        let text = String::from_utf8_lossy(&payload).to_string();
+                                        let _ = tx_msg.send(AppMsg::NetworkMessage { 
+                                            sender: sender.clone(), 
+                                            message: NetworkMessage::Chat(text) 
+                                        });
+                                     }
                                 }
                                 RoomEvent::ParticipantConnected(p) => {
-                                    let identity = p.identity().to_string();
-                                    participants_log.lock().unwrap().push(identity.clone());
-                                    events_log.lock().unwrap().push(format!("Participant connected: {}", identity));
+                                    let _ = tx_msg.send(AppMsg::ParticipantConnected(p.identity().to_string()));
                                 }
                                 RoomEvent::ParticipantDisconnected(p) => {
-                                    let identity = p.identity().to_string();
-                                    println!("Participant disconnected: {}", identity);
-                                    let mut guard = participants_log.lock().unwrap();
-                                    if let Some(pos) = guard.iter().position(|x| *x == identity) {
-                                        guard.remove(pos);
-                                    }
-                                    events_log.lock().unwrap().push(format!("Participant disconnected: {}", identity));
-                                }
-                                RoomEvent::DataReceived { payload, participant, .. } => {
-                                    let text = String::from_utf8_lossy(&payload);
-                                    let sender = participant.map(|p| p.name().to_string()).unwrap_or("Unknown".to_string());
-                                    events_log.lock().unwrap().push(format!("[{}] {}", sender, text));
+                                    let _ = tx_msg.send(AppMsg::ParticipantDisconnected(p.identity().to_string()));
                                 }
                                 RoomEvent::Disconnected { reason } => {
-                                     events_log.lock().unwrap().push(format!("Disconnected: {:?}", reason));
+                                     let _ = tx_msg.send(AppMsg::Log(format!("Disconnected: {:?}", reason)));
                                      break;
                                 }
-                                
                                 _ => {}
                             }
                         }
-                        msg = rx.recv() => {
-                            match msg {
-                                Some(s) => {
-                                    if s == "Disconnect" {
-                                        break; // Break the loop on user disconnect command
-                                    }
-                                     // Send message to others
-                                    let res = room.local_participant()
-                                        .publish_data(DataPacket {
-                                            payload: s.as_bytes().to_vec(),
-                                            reliable: true,
-                                            ..Default::default()
-                                        })
-                                        .await;
-                                    
-                                    if let Err(e) = res {
-                                        events_log.lock().unwrap().push(format!("Failed to send: {}", e));
-                                    } else {
-                                        events_log.lock().unwrap().push(format!("[You] {}", s));
+                        cmd = rx_cmd.recv() => {
+                            match cmd {
+                                Some(AppCommand::Disconnect) => {
+                                    break; 
+                                }
+                                Some(AppCommand::Broadcast(msg)) => {
+                                    if let Ok(payload) = serde_json::to_vec(&msg) {
+                                        let _ = room.local_participant()
+                                            .publish_data(DataPacket {
+                                                payload,
+                                                reliable: true,
+                                                ..Default::default()
+                                            })
+                                            .await;
                                     }
                                 }
-                                None => break, // Break if UI drops the sender
+                                Some(AppCommand::Send { recipients, message }) => {
+                                     if let Ok(payload) = serde_json::to_vec(&message) {
+                                        let _ = room.local_participant()
+                                            .publish_data(DataPacket {
+                                                payload,
+                                                reliable: true,
+                                                destination_identities: recipients.into_iter().map(Into::into).collect(),
+                                                ..Default::default()
+                                            })
+                                            .await;
+                                    }
+                                }
+                                None => break, 
                             }
-                           
                         }
                     }
                 }
@@ -300,6 +355,7 @@ impl AppView {
 
         self.livekit_connecting = false;
         self.livekit_connected = true;
+        self.livekit_participants.lock().unwrap().push(self.livekit_identity.clone());
     }
 
     pub fn send_livekit_message(&mut self, message: String) {
@@ -307,21 +363,24 @@ impl AppView {
             return;
         }
         if let Some(sender) = &self.livekit_command_sender {
-            if let Err(e) = sender.send(message) {
-                let mut guard = self.livekit_events.lock().unwrap();
-                guard.push(format!("Failed to enqueue message: {}", e));
-            }
+            // Log locally
+            self.livekit_events.lock().unwrap().push(format!("You: {}", message));
+            let _ = sender.send(AppCommand::Broadcast(NetworkMessage::Chat(message)));
         }
     }
 
     pub fn disconnect_room(&mut self) {
         if let Some(sender) = &self.livekit_command_sender {
-            let _ = sender.send("Disconnect".to_string());
+            let _ = sender.send(AppCommand::Disconnect);
         }
         self.livekit_connected = false;
         self.livekit_command_sender = None;
+        self.app_msg_receiver = None;
         self.livekit_participants.lock().unwrap().clear();
         self.livekit_events.lock().unwrap().push("Disconnected.".to_string());
+        
+        // Also clear local whiteboard? No, keep it.
+        // But maybe clear sync states?
     }
     // ...existing code...
 }
@@ -329,9 +388,55 @@ impl AppView {
 // eframe trait for AppView
 impl eframe::App for AppView {
     fn update(&mut self, ctx: &Context, _frame: &mut eframe::Frame) {
-        // If background thread wrote a token into the shared slot, copy it into the editable input
-        // ...existing code in impl eframe::App for AppView, inside update() ...
-        // If background thread wrote a token into the shared slot, copy it into the editable input
+        // Handle incoming messages
+        if let Some(mut rx) = self.app_msg_receiver.take() {
+            while let Ok(msg) = rx.try_recv() {
+                 match msg {
+                    AppMsg::Log(s) => {
+                         self.livekit_events.lock().unwrap().push(s);
+                    }
+                    AppMsg::ParticipantConnected(id) => {
+                        {
+                            let mut participants = self.livekit_participants.lock().unwrap();
+                            if !participants.contains(&id) {
+                                participants.push(id.clone());
+                            }
+                        }
+                         self.livekit_events.lock().unwrap().push(format!("Participant connected: {}", id));
+                        self.backend.peer_connected(&id);
+                        if let Some(payload) = self.backend.generate_sync_message(&id) {
+                            if let Some(tx) = &self.livekit_command_sender {
+                                let _ = tx.send(AppCommand::Send { 
+                                    recipients: vec![id], 
+                                    message: NetworkMessage::Sync(payload) 
+                                });
+                            }
+                        }
+                    }
+                    AppMsg::ParticipantDisconnected(id) => {
+                        let mut guard = self.livekit_participants.lock().unwrap();
+                        if let Some(pos) = guard.iter().position(|x| *x == id) {
+                            guard.remove(pos);
+                        }
+                         self.livekit_events.lock().unwrap().push(format!("Participant disconnected: {}", id));
+                        self.backend.peer_disconnected(&id);
+                    }
+                    AppMsg::NetworkMessage { sender, message } => {
+                        match message {
+                            NetworkMessage::Chat(text) => {
+                                 self.livekit_events.lock().unwrap().push(format!("[{}] {}", sender, text));
+                            }
+                            NetworkMessage::Sync(data) => {
+                                let update = self.backend.receive_sync_message(&sender, data);
+                                self.apply_update(update);
+                                self.sync_with_all();
+                            }
+                        }
+                    }
+                }
+            }
+            self.app_msg_receiver = Some(rx);
+        }
 
         self.top_bar(ctx);
         self.sidebar_panel(ctx);
