@@ -47,20 +47,27 @@ impl FrontendUpdate {
 pub trait DocBackend: Send {
     // ta metoda dostaje "intencje" z edytora i zwraca aktualizacje dla edytora
     fn apply_intent(&mut self, intent: Intent) -> FrontendUpdate;
+    fn render_text(&self) -> String;
+}
 
-    // apply remote update from other peers, return update for editor, default empty
-    fn apply_remote(&mut self, _bytes: &[u8]) -> FrontendUpdate {
+pub struct SimpleBackend;
+
+impl SimpleBackend {
+    pub fn new() -> Self {
+        SimpleBackend
+    }
+}
+
+impl DocBackend for SimpleBackend {
+    fn apply_intent(&mut self, _intent: Intent) -> FrontendUpdate {
         FrontendUpdate::empty()
     }
 
-    /// Current full text (used for initial paint and saving)
-    fn render_text(&self) -> String;
-
-    // current remote cursor states , default empty
-    fn remote_cursors(&self) -> Vec<RemoteCursor> {
-        Vec::new()
+    fn render_text(&self) -> String {
+        String::new()
     }
 }
+
 
 pub struct MockBackend {
     text: String,

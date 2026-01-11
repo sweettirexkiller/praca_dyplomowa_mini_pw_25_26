@@ -40,13 +40,18 @@ impl AppView {
             .default_width(self.sidebar.default_width)
             .show(ctx, |ui| {
                 if ui.button("+ New").clicked() {
-                    self.handle_intent(Intent::ReplaceAll {
-                        text: String::new(),
-                    });
-                    self.editor.text.clear();
-                    self.editor.cursor = 0;
-                    self.status = "New document".into();
-                    self.sidebar.docs.push("untitled.txt".into());
+                    // self.handle_intent(Intent::ReplaceAll {
+                    //    text: String::new(),
+                    // });
+                    for pixel in self.whiteboard.image.pixels.iter_mut() {
+                        *pixel = egui::Color32::WHITE; // Clear to white
+                    }
+                    if let Some(texture) = &mut self.whiteboard.texture {
+                        texture.set(self.whiteboard.image.clone(), egui::TextureOptions::NEAREST);
+                    }
+                    // self.editor.cursor = 0;
+                    self.status = "New whiteboard".into();
+                    self.sidebar.docs.push("untitled.png".into());
                     self.sidebar.selected = self.sidebar.docs.len() - 1;
                 }
 
@@ -161,147 +166,62 @@ impl AppView {
             // keep shortcuts here so they work even when sidebar hidden
             self.handle_shortcuts(ctx);
 
-            // centered column
-            let available = ui.available_size();
-            ui.with_layout(egui::Layout::top_down(egui::Align::LEFT), |ui| {
-                // display the document text with a visible cursor
-                let mut display_text = self.editor.text.clone();
-                let cursor_pos = self.editor.cursor;
-                if cursor_pos <= display_text.len() {
-                    display_text.insert_str(cursor_pos, "|"); // Use "|" as a cursor indicator
-                }
+            if self.whiteboard.texture.is_none() {
+                self.whiteboard.texture = Some(ui.ctx().load_texture(
+                    "whiteboard",
+                    self.whiteboard.image.clone(),
+                    egui::TextureOptions::NEAREST,
+                ));
+            }
 
-                egui::ScrollArea::vertical()
-                    .auto_shrink([false, false])
-                    .show(ui, |ui| {
-                        ui.add(egui::Label::new(display_text).wrap());
-                    });
+            let texture = self.whiteboard.texture.as_mut().unwrap();
 
-                // invisible capture buffer to keep keyboard focus and receive events
-                let mut _capture = String::new();
-                let output = egui::TextEdit::multiline(&mut _capture)
-                    .desired_rows((available.y / 18.0) as usize)
-                    .lock_focus(true)
-                    .desired_width(self.editor.max_width)
-                    .show(ui);
+            // Display the image
+            // We want to handle clicks on the image.
+            // Using a sense of drag triggers response on drag
+            let image_response = ui.add(egui::Image::new(&*texture).sense(egui::Sense::drag()));
 
-                // helpers for char-boundary navigation/removal
-                fn prev_char_idx(s: &str, idx: usize) -> usize {
-                    if idx == 0 {
-                        return 0;
-                    }
-                    let mut i = idx;
-                    // step back one UTF-8 codepoint
-                    while !s.is_char_boundary(i) {
-                        i -= 1;
-                    }
-                    // now find previous char boundary
-                    let mut j = i;
-                    loop {
-                        if j == 0 {
-                            return 0;
-                        }
-                        j -= 1;
-                        if s.is_char_boundary(j) {
-                            return j;
-                        }
-                    }
-                }
-                fn next_char_idx(s: &str, idx: usize) -> usize {
-                    if idx >= s.len() {
-                        return s.len();
-                    }
-                    let mut i = idx;
-                    // step forward to next char boundary
-                    i += 1;
-                    while i < s.len() && !s.is_char_boundary(i) {
-                        i += 1;
-                    }
-                    i.min(s.len())
-                }
+            // Handle drawing
+            if image_response.dragged() || image_response.clicked() {
+                if let Some(pointer_pos) = ui.input(|i| i.pointer.interact_pos()) {
+                    let rect = image_response.rect;
+                    if rect.contains(pointer_pos) {
+                        let rel_pos = pointer_pos - rect.min;
+                        let width = self.whiteboard.image.width();
+                        let height = self.whiteboard.image.height();
 
-                // process low-level input events and turn them into intents
-                ctx.input(|input| {
-                    for event in input.events.iter() {
-                        match event {
-                            egui::Event::Text(text) => {
-                                // insert text at cursor
-                                if !text.is_empty() {
-                                    let mut new_text = self.editor.text.clone();
-                                    new_text.insert_str(self.editor.cursor, text);
-                                    self.handle_intent(Intent::ReplaceAll { text: new_text });
-                                    // advance cursor by bytes of inserted text
-                                    self.editor.cursor += text.len();
-                                    let _ = self.backend.apply_intent(Intent::MoveCursor {
-                                        pos: self.editor.cursor,
-                                    });
+                        // Map scaled image coordinates to actual pixel coordinates
+                        let x = ((rel_pos.x / rect.width()) * width as f32) as i32;
+                        let y = ((rel_pos.y / rect.height()) * height as f32) as i32;
+
+                        let brush_size = self.whiteboard.stroke_width as i32;
+                        let color = self.whiteboard.stroke_color;
+
+                        let mut changed = false;
+                        for dy in -brush_size..=brush_size {
+                            for dx in -brush_size..=brush_size {
+                                let nx = x + dx;
+                                let ny = y + dy;
+                                if nx >= 0 && nx < width as i32 && ny >= 0 && ny < height as i32 {
+                                    // Check circular brush
+                                    if dx * dx + dy * dy <= brush_size * brush_size {
+                                        let idx = (ny as usize * width) + nx as usize;
+                                        if self.whiteboard.image.pixels[idx] != color {
+                                            self.whiteboard.image.pixels[idx] = color;
+                                            changed = true;
+                                        }
+                                    }
                                 }
                             }
-                            egui::Event::Key {
-                                key, pressed: true, ..
-                            } => {
-                                match key {
-                                    Key::Backspace => {
-                                        if self.editor.cursor > 0 {
-                                            let prev = prev_char_idx(
-                                                &self.editor.text,
-                                                self.editor.cursor,
-                                            );
-                                            // use handle_intent so editor.text gets updated from backend response
-                                            self.handle_intent(Intent::DeleteRange {
-                                                start: prev,
-                                                end: self.editor.cursor,
-                                            });
-                                            self.editor.cursor = prev;
-                                            // notify backend about cursor move
-                                            self.handle_intent(Intent::MoveCursor {
-                                                pos: self.editor.cursor,
-                                            });
-                                        }
-                                    }
-                                    Key::ArrowLeft => {
-                                        if self.editor.cursor > 0 {
-                                            let prev = prev_char_idx(
-                                                &self.editor.text,
-                                                self.editor.cursor,
-                                            );
-                                            self.editor.cursor = prev;
-                                            let _ = self.backend.apply_intent(Intent::MoveCursor {
-                                                pos: self.editor.cursor,
-                                            });
-                                        }
-                                    }
-                                    Key::ArrowRight => {
-                                        if self.editor.cursor < self.editor.text.len() {
-                                            let next = next_char_idx(
-                                                &self.editor.text,
-                                                self.editor.cursor,
-                                            );
-                                            self.editor.cursor = next;
-                                            let _ = self.backend.apply_intent(Intent::MoveCursor {
-                                                pos: self.editor.cursor,
-                                            });
-                                        }
-                                    }
-                                    Key::Enter => {
-                                        // insert newline using Intent::InsertAt
-                                        self.handle_intent(Intent::InsertAt {
-                                            pos: self.editor.cursor,
-                                            text: "\n".into(),
-                                        });
-                                        self.editor.cursor += 1;
-                                        let _ = self.backend.apply_intent(Intent::MoveCursor {
-                                            pos: self.editor.cursor,
-                                        });
-                                    }
-                                    _ => {}
-                                }
-                            }
-                            _ => {}
+                        }
+
+                        if changed {
+                            // Update texture
+                            texture.set(self.whiteboard.image.clone(), egui::TextureOptions::NEAREST);
                         }
                     }
-                });
-            });
+                }
+            }
         });
     }
 

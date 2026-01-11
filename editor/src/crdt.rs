@@ -145,11 +145,10 @@ impl Buffer {
         
         Op {
             id,
-            relative_id: None,
+            relative_id: target_id,
             text: None,
             version: self.version.clone(),
             is_delete: true,
-            target_id,
         }
     }
     

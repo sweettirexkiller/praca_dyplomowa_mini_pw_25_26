@@ -19,7 +19,7 @@ pub struct AppView {
     status: String,
     sidebar: SidebarState,
     page: Page,
-    editor: EditorState,
+    whiteboard: WhiteboardState,
 
     // Connected LiveKit room state
     livekit_events: Arc<Mutex<Vec<String>>>,
@@ -45,10 +45,11 @@ struct SidebarState {
     selected: usize,
 }
 
-struct EditorState {
-    text: String,
-    cursor: usize,
-    max_width: f32,
+struct WhiteboardState {
+    image: egui::ColorImage,
+    texture: Option<egui::TextureHandle>,
+    stroke_color: egui::Color32,
+    stroke_width: f32,
 }
 
 #[derive(PartialEq, Eq)]
@@ -80,10 +81,11 @@ impl AppView {
                 docs: vec!["test_doc.txt".into(), "notes.md".into()],
                 selected: 0,
             },
-            editor: EditorState {
-                text: text_cache,
-                cursor: 0,
-                max_width: 1500.0,
+            whiteboard: WhiteboardState {
+                image: egui::ColorImage::new([800, 600], vec![egui::Color32::WHITE; 800 * 600]),
+                texture: None,
+                stroke_color: egui::Color32::BLACK,
+                stroke_width: 5.0,
             },
             page: Page::Editor,
             livekit_events: Arc::new(Mutex::new(Vec::new())),
@@ -103,7 +105,7 @@ impl AppView {
         println!("Handling intent: {:?}", intent);
         let update = self.backend.apply_intent(intent);
         if let Some(new_text) = update.full_text {
-            self.editor.text = new_text;
+            // self.editor.text = new_text;
         }
     }
 
