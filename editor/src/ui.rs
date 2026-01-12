@@ -64,8 +64,6 @@ pub struct AppView {
 struct SidebarState {
     visible: bool,
     default_width: f32,
-    docs: Vec<String>,
-    selected: usize,
 }
 
 struct WhiteboardState {
@@ -102,8 +100,6 @@ impl AppView {
             sidebar: SidebarState {
                 visible: false,
                 default_width: 260.0,
-                docs: vec!["test_doc.txt".into(), "notes.md".into()],
-                selected: 0,
             },
             whiteboard: WhiteboardState {
                 image: egui::ColorImage::new([800, 600], vec![egui::Color32::WHITE; 800 * 600]),
@@ -213,7 +209,7 @@ impl AppView {
             .to_jwt()
     }
     // ...existing code...
-    pub fn connect_or_create_to_room(&mut self) {
+    pub fn connect_or_create_to_room(&mut self, ctx: egui::Context) {
        if self.livekit_connected {
             return;
         }
@@ -263,6 +259,7 @@ impl AppView {
         self.app_msg_receiver = Some(rx_msg);
 
         let tx_msg_clone = tx_msg.clone();
+        let ctx_clone = ctx.clone();
 
         std::thread::spawn(move || {
             let rt = tokio::runtime::Runtime::new().unwrap();
@@ -271,18 +268,21 @@ impl AppView {
                     Ok(res) => res,
                     Err(e) => {
                          let _ = tx_msg.send(AppMsg::Log(format!("Connection failed: {}", e)));
+                         ctx_clone.request_repaint();
                         return;
                     }
                 };
                 
                 let room = Arc::new(room);
                  let _ = tx_msg.send(AppMsg::Log("Connected to Room".to_string()));
+                 ctx_clone.request_repaint();
 
                 // Initial participants list
                 // We should probably send connection events for existing participants? 
                 // Or let the UI pull them? For now, we rely on events.
                 for (_, p) in room.remote_participants() {
                      let _ = tx_msg.send(AppMsg::ParticipantConnected(p.identity().to_string()));
+                     ctx_clone.request_repaint();
                 }
 
                 loop {
@@ -301,15 +301,19 @@ impl AppView {
                                             message: NetworkMessage::Chat(text) 
                                         });
                                      }
+                                     ctx_clone.request_repaint();
                                 }
                                 RoomEvent::ParticipantConnected(p) => {
                                     let _ = tx_msg.send(AppMsg::ParticipantConnected(p.identity().to_string()));
+                                    ctx_clone.request_repaint();
                                 }
                                 RoomEvent::ParticipantDisconnected(p) => {
                                     let _ = tx_msg.send(AppMsg::ParticipantDisconnected(p.identity().to_string()));
+                                    ctx_clone.request_repaint();
                                 }
                                 RoomEvent::Disconnected { reason } => {
                                      let _ = tx_msg.send(AppMsg::Log(format!("Disconnected: {:?}", reason)));
+                                     ctx_clone.request_repaint();
                                      break;
                                 }
                                 _ => {}

@@ -47,18 +47,9 @@ impl AppView {
             .resizable(true)
             .default_width(self.sidebar.default_width)
             .show(ctx, |ui| {
-                if ui.button("+ New").clicked() {
-                    self.handle_intent(crate::backend_api::Intent::Clear);
-                    self.status = "New whiteboard".into();
-                    self.sidebar.docs.push("untitled.png".into());
-                    self.sidebar.selected = self.sidebar.docs.len() - 1;
-                }
-                
-                ui.separator();
-                
                 if ui.button("Share").clicked() {
                     self.livekit_room = "".into(); // Force new name generation
-                    self.connect_or_create_to_room();
+                    self.connect_or_create_to_room(ctx.clone());
                     self.page = Page::LiveKit;
                 }
                 
@@ -68,7 +59,7 @@ impl AppView {
                 });
                 if !self.livekit_room.is_empty() {
                      if ui.button("Join Session").clicked() {
-                         self.connect_or_create_to_room();
+                         self.connect_or_create_to_room(ctx.clone());
                          self.page = Page::LiveKit;
                     }
                 }
@@ -78,14 +69,6 @@ impl AppView {
                 // new: open LiveKit page
                 if ui.button("Open LiveKit Console").clicked() {
                     self.page = Page::LiveKit;
-                }
-
-                for (i, name) in self.sidebar.docs.iter().enumerate() {
-                    let selected = self.sidebar.selected == i;
-                    if ui.selectable_label(selected, name).clicked() {
-                        self.sidebar.selected = i;
-                        // Hook up: load different doc later
-                    }
                 }
             });
     }
@@ -123,7 +106,7 @@ impl AppView {
                     }
                 } else {
                     if ui.button("Connect").clicked() {
-                        self.connect_or_create_to_room();
+                        self.connect_or_create_to_room(ctx.clone());
                     }
                 }
 
