@@ -19,6 +19,7 @@ use livekit::prelude::*;
 pub enum NetworkMessage {
     Sync(Vec<u8>),
     Chat(String),
+    Cursor { x: i32, y: i32 },
 }
 
 #[derive(Debug)]
@@ -58,6 +59,9 @@ pub struct AppView {
     livekit_message: String,
      // Channel to send messages to the background LiveKit task
     livekit_command_sender: Option<tokio::sync::mpsc::UnboundedSender<AppCommand>>,
+    
+    remote_cursors: std::collections::HashMap<String, crate::backend_api::Point>,
+    last_cursor_update: std::time::Instant,
     app_msg_receiver: Option<tokio::sync::mpsc::UnboundedReceiver<AppMsg>>,
 }
 
@@ -125,6 +129,8 @@ impl AppView {
             livekit_identity: "".into(),
             livekit_token: "".into(),
             livekit_room: "".into(),
+            remote_cursors: std::collections::HashMap::new(),
+            last_cursor_update: std::time::Instant::now(),
             livekit_message: "".into(),
             livekit_command_sender: None,
             app_msg_receiver: None,
@@ -455,6 +461,7 @@ impl eframe::App for AppView {
                         }
                          self.livekit_events.lock().unwrap().push(format!("Participant disconnected: {}", id));
                         self.backend.peer_disconnected(&id);
+                        self.remote_cursors.remove(&id);
                     }
                     AppMsg::NetworkMessage { sender, message } => {
                         match message {
@@ -465,6 +472,9 @@ impl eframe::App for AppView {
                                 let update = self.backend.receive_sync_message(&sender, data);
                                 self.apply_update(update);
                                 self.sync_with_all();
+                            }
+                            NetworkMessage::Cursor { x, y } => {
+                                self.remote_cursors.insert(sender, crate::backend_api::Point { x, y });
                             }
                         }
                     }

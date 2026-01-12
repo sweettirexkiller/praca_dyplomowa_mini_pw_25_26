@@ -199,6 +199,27 @@ impl AppView {
             let image_response = ui.add(egui::Image::new(&*texture).sense(egui::Sense::drag()));
 
             // Handle drawing
+            if image_response.hovered() || image_response.dragged() {
+                 if let Some(pointer_pos) = ui.input(|i| i.pointer.interact_pos()) {
+                     let rect = image_response.rect;
+                     if rect.contains(pointer_pos) {
+                         let rel_pos = pointer_pos - rect.min;
+                         let width = self.whiteboard.image.width();
+                         let height = self.whiteboard.image.height();
+                         let x = ((rel_pos.x / rect.width()) * width as f32) as i32;
+                         let y = ((rel_pos.y / rect.height()) * height as f32) as i32;
+                         
+                         // Broadcast cursor if time passed
+                         if self.livekit_connected && self.last_cursor_update.elapsed() > std::time::Duration::from_millis(50) {
+                             if let Some(sender) = &self.livekit_command_sender {
+                                 let _ = sender.send(AppCommand::Broadcast(NetworkMessage::Cursor { x, y }));
+                                 self.last_cursor_update = std::time::Instant::now();
+                             }
+                         }
+                     }
+                 }
+            }
+
             if image_response.dragged() || image_response.clicked() {
                 if let Some(pointer_pos) = ui.input(|i| i.pointer.interact_pos()) {
                     let rect = image_response.rect;
@@ -263,6 +284,21 @@ impl AppView {
                     self.handle_intent(crate::backend_api::Intent::Draw(stroke));
                     self.whiteboard.current_stroke.clear();
                  }
+            }
+
+            // Render remote cursors
+            let painter = ui.painter();
+            let rect = image_response.rect;
+            let width = self.whiteboard.image.width() as f32;
+            let height = self.whiteboard.image.height() as f32;
+            
+            for (user, point) in &self.remote_cursors {
+                let rx = (point.x as f32 / width) * rect.width();
+                let ry = (point.y as f32 / height) * rect.height();
+                let pos = rect.min + egui::Vec2::new(rx, ry);
+                
+                painter.circle_filled(pos, 5.0, egui::Color32::RED);
+                painter.text(pos + egui::Vec2::new(8.0, 8.0), egui::Align2::LEFT_TOP, user, egui::FontId::proportional(12.0), egui::Color32::RED);
             }
         });
     }
