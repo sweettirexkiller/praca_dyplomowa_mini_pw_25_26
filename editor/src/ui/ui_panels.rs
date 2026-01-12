@@ -32,9 +32,23 @@ impl AppView {
                     self.open_file();
                 }
 
-                // ui.with_layout(egui::Layout::right_to_left(egui::Align::Center), |ui| {
-                //     ui.label(format!("Cursor Position: {}", self.editor.cursor));
-                // });
+                ui.separator();
+                
+                ui.label("Tool:");
+                ui.radio_value(&mut self.whiteboard.tool, Tool::Pen, "✏ Pen");
+                ui.radio_value(&mut self.whiteboard.tool, Tool::Eraser, "🧹 Eraser");
+                
+                ui.separator();
+                
+                if self.whiteboard.tool == Tool::Pen {
+                    ui.label("Color:");
+                    ui.color_edit_button_srgba(&mut self.whiteboard.stroke_color);
+                }
+                
+                ui.separator();
+                
+                ui.label("Size:");
+                ui.add(egui::Slider::new(&mut self.whiteboard.stroke_width, 1.0..=50.0));
             });
         });
     }
@@ -201,7 +215,11 @@ impl AppView {
                         self.whiteboard.current_stroke.push(crate::backend_api::Point { x, y });
 
                         let brush_size = self.whiteboard.stroke_width as i32;
-                        let color = self.whiteboard.stroke_color;
+                        let color = if self.whiteboard.tool == Tool::Eraser {
+                            egui::Color32::WHITE
+                        } else {
+                            self.whiteboard.stroke_color
+                        };
 
                         let mut changed = false;
                         for dy in -brush_size..=brush_size {
@@ -231,9 +249,15 @@ impl AppView {
             
             if image_response.drag_stopped() {
                  if !self.whiteboard.current_stroke.is_empty() {
+                    let color = if self.whiteboard.tool == Tool::Eraser {
+                        egui::Color32::WHITE
+                    } else {
+                        self.whiteboard.stroke_color
+                    };
+
                     let stroke = crate::backend_api::Stroke {
                         points: self.whiteboard.current_stroke.clone(),
-                        color: self.whiteboard.stroke_color.to_array(),
+                        color: color.to_array(),
                         width: self.whiteboard.stroke_width,
                     };
                     self.handle_intent(crate::backend_api::Intent::Draw(stroke));

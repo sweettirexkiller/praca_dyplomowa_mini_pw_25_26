@@ -66,12 +66,19 @@ struct SidebarState {
     default_width: f32,
 }
 
+#[derive(PartialEq, Eq)]
+enum Tool {
+    Pen,
+    Eraser,
+}
+
 struct WhiteboardState {
     image: egui::ColorImage,
     texture: Option<egui::TextureHandle>,
     stroke_color: egui::Color32,
     stroke_width: f32,
     current_stroke: Vec<crate::backend_api::Point>,
+    tool: Tool,
 }
 
 #[derive(PartialEq, Eq)]
@@ -107,6 +114,7 @@ impl AppView {
                 stroke_color: egui::Color32::BLACK,
                 stroke_width: 5.0,
                 current_stroke: Vec::new(),
+                tool: Tool::Pen,
             },
             page: Page::Editor,
             livekit_events: Arc::new(Mutex::new(Vec::new())),
