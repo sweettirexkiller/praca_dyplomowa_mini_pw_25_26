@@ -1,3 +1,5 @@
+//! UI Module
+//! Defines the structure and logic for the application's user interface using `eframe` and `egui`.
 use std::{
     env,
     sync::{Arc, Mutex},
@@ -17,6 +19,11 @@ mod ui_panels;
 
 use livekit::prelude::*;
 
+/// Generates a consistent color for a user based on their username.
+/// Used to represent remote cursors.
+/// 
+/// # Arguments
+/// * `username` - The identity of the user.
 pub fn get_user_color(username: &str) -> egui::Color32 {
     let mut hasher = DefaultHasher::new();
     username.hash(&mut hasher);
@@ -27,64 +34,105 @@ pub fn get_user_color(username: &str) -> egui::Color32 {
     egui::Color32::from(egui::ecolor::Hsva::new(h, 0.8, 0.8, 1.0))
 }
 
+/// Represents a packet of data transferred over the network (via LiveKit Data API).
+/// Handles fragmentation for large messages.
 #[derive(Serialize, Deserialize, Debug)]
 pub enum TransportPacket {
+    /// A small message that fits in a single packet.
     Message(Vec<u8>), 
+    /// A chunk of a larger message.
     Chunk {
+        /// Unique ID for the message being fragmented.
         id: u64,
+        /// Index of this chunk.
         index: u32,
+        /// Total number of chunks.
         total: u32,
+        /// Payload data for this chunk.
         data: Vec<u8>
     }
 }
 
+/// High-level network message types used for application logic.
 #[derive(Serialize, Deserialize, Debug)]
 pub enum NetworkMessage {
+    /// CRDT synchronization data.
     Sync(Vec<u8>),
+    /// Chat message.
     Chat(String),
+    /// Remote cursor position.
     Cursor { x: i32, y: i32 },
 }
 
+/// Internal commands sent from the UI thread to the background network thread.
 #[derive(Debug)]
 pub enum AppCommand {
+    /// Disconnect from the current room.
     Disconnect,
+    /// Broadcast a message to all participants in the room.
     Broadcast(NetworkMessage),
+    /// Send a message to specific recipients.
     Send { recipients: Vec<String>, message: NetworkMessage },
 }
 
+/// Internal messages sent from the background network thread to the UI thread.
 #[derive(Debug)]
 pub enum AppMsg {
+    /// Log message to be displayed in the UI.
     Log(String),
+    /// Notification that a new participant connected.
     ParticipantConnected(String),
+    /// Notification that a participant disconnected.
     ParticipantDisconnected(String),
+    /// A network message received from a peer.
     NetworkMessage { sender: String, message: NetworkMessage },
 }
 
+/// Main application structure holding the state of the editor and UI.
+/// Implements `eframe::App`.
 pub struct AppView {
+    /// The document backend (CRDT logic).
     backend: Box<dyn DocBackend>,
+    /// Status message displayed in the status bar.
     status: String,
+    /// State of the sidebar.
     sidebar: SidebarState,
+    /// Current active page (Editor or LiveKit console).
     page: Page,
+    /// State of the collaborative whiteboard.
     whiteboard: WhiteboardState,
 
     // Connected LiveKit room state
+    /// Log of LiveKit events.
     livekit_events: Arc<Mutex<Vec<String>>>,
+    /// List of connected participants.
     livekit_participants: Arc<Mutex<Vec<String>>>,
+    /// Whether currently connected to a LiveKit room.
     livekit_connected: bool,
+    /// Whether currently attempting to connect.
     livekit_connecting: bool,
     // LiveKit panel inputs
+    /// URL of the LiveKit server.
     livekit_ws_url: String,
+    /// Identity of the local user.
     livekit_identity: String,
     // shared token storage so background threads can set the generated token for the UI/connection
     // editable token field for the UI (user can paste or modify)
+    /// Access token for LiveKit.
     livekit_token: String,
+    /// Name of the room to join.
     livekit_room: String,
+    /// Current chat message input buffer.
     livekit_message: String,
      // Channel to send messages to the background LiveKit task
+    /// Sender channel for communicating with the network thread.
     livekit_command_sender: Option<tokio::sync::mpsc::UnboundedSender<AppCommand>>,
     
+    /// Positions of remote cursors.
     remote_cursors: std::collections::HashMap<String, crate::backend_api::Point>,
+    /// Timestamp of last cursor update broadcast.
     last_cursor_update: std::time::Instant,
+    /// Receiver channel for messages from the network thread.
     app_msg_receiver: Option<tokio::sync::mpsc::UnboundedReceiver<AppMsg>>,
 }
 
@@ -116,6 +164,7 @@ pub enum Page {
 }
 
 impl AppView {
+    /// Initializes the application view with a given backend.
     pub fn new(backend: Box<dyn DocBackend>) -> Self {
         // let text_cache = backend.render_text(); // Removed, as we use get_strokes dynamically or on event
         let host = std::env::var("LIVEKIT_URL").unwrap_or_else(|_| "127.0.0.1:7880".to_string());
@@ -168,6 +217,7 @@ impl AppView {
         app
     }
 
+    /// Triggers synchronization with all connected peers.
     fn sync_with_all(&mut self) {
         let participants = self.livekit_participants.lock().unwrap().clone();
         for p in participants {
@@ -183,6 +233,8 @@ impl AppView {
         }
     }
 
+    /// Processes a local intent (e.g., user drawing).
+    /// Applies it to the backend and broadcasts updates.
     fn handle_intent(&mut self, intent: Intent) {
         println!("Handling intent: {:?}", intent);
         let update = self.backend.apply_intent(intent);
@@ -190,6 +242,8 @@ impl AppView {
         self.sync_with_all();
     }
     
+    /// Applies an update from the backend to the UI state.
+    /// This handles redrawing strokes and updating the background image.
     fn apply_update(&mut self, update: crate::backend_api::FrontendUpdate) {
         // Always try to sync background from backend if it might have changed.
         // For optimization, we could check a hash, but here we just check if backend has something 
@@ -283,6 +337,7 @@ impl AppView {
         }
     }
     
+    /// Helper to render a single stroke onto the whiteboard image.
     fn draw_stroke_on_image(&mut self, stroke: &crate::backend_api::Stroke) {
         let color = egui::Color32::from_rgba_premultiplied(
             stroke.color[0], stroke.color[1], stroke.color[2], stroke.color[3]
@@ -310,6 +365,7 @@ impl AppView {
         }
     }
 
+    /// Generates a LiveKit access token for joining a room.
     fn create_token(
         room_name: &str,
         identity: &str,
@@ -330,6 +386,8 @@ impl AppView {
             .to_jwt()
     }
     // ...existing code...
+    /// Connects to a LiveKit room or creates one if it doesn't exist (if configured on server).
+    /// Spawns a background thread to handle network events.
     pub fn connect_or_create_to_room(&mut self, ctx: egui::Context) {
        if self.livekit_connected {
             return;
@@ -568,6 +626,7 @@ impl AppView {
         self.livekit_participants.lock().unwrap().push(self.livekit_identity.clone());
     }
 
+    /// Sends a chat message to all participants in the room.
     pub fn send_livekit_message(&mut self, message: String) {
         if !self.livekit_connected {
             return;
@@ -579,6 +638,7 @@ impl AppView {
         }
     }
 
+    /// Disconnects from the current LiveKit room.
     pub fn disconnect_room(&mut self) {
         if let Some(sender) = &self.livekit_command_sender {
             let _ = sender.send(AppCommand::Disconnect);
@@ -593,10 +653,12 @@ impl AppView {
         // But maybe clear sync states?
     }
     
+    /// Checks if there's any content in the current whiteboard.
     fn has_unsaved_work(&self) -> bool {
         !self.backend.get_strokes().is_empty() || self.whiteboard.background.is_some()
     }
 
+    /// Clears the current document and starts a new one (optionally saving).
     pub fn new_document(&mut self) {
         if self.has_unsaved_work() {
              let result = rfd::MessageDialog::new()
@@ -621,6 +683,8 @@ impl AppView {
         self.handle_intent(Intent::Clear);
     }
 
+    /// Opens a save dialog to save the current document state or image.
+    /// Supports `.crdt` (state) and `.png` (image).
     pub fn save_file(&mut self) -> bool {
         if let Some(path) = rfd::FileDialog::new()
             .add_filter("CRDT State", &["crdt"])
@@ -660,6 +724,7 @@ impl AppView {
         }
     }
 
+    /// Opens a file dialog to load a document.
     pub fn open_file(&mut self) {
         // Ask used to save
         if self.has_unsaved_work() {

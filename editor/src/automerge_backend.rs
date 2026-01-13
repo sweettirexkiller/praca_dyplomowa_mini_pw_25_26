@@ -2,12 +2,22 @@ use std::collections::HashMap;
 use crate::backend_api::{DocBackend, FrontendUpdate, Intent, Stroke};
 use automerge::{AutoCommit, ReadDoc, transaction::Transactable, ObjType, Value, ScalarValue, ROOT, sync::{self, SyncDoc}};
 
+/// Backend implementation using Automerge CRDT.
+///
+/// This backend manages the document state using Automerge, allowing for
+/// conflict-free real-time collaboration. It handles document operations,
+/// synchronization with peers, and persistence.
 pub struct AutomergeBackend {
+    /// The Automerge document instance.
     doc: AutoCommit,
+    /// Map of sync states for each connected peer.
     sync_states: HashMap<String, sync::State>,
 }
 
 impl AutomergeBackend {
+    /// Creates a new, empty AutomergeBackend.
+    ///
+    /// Initializes the document with a "strokes" list.
     pub fn new() -> Self {
         let mut doc = AutoCommit::new();
         // Ensure "strokes" list exists

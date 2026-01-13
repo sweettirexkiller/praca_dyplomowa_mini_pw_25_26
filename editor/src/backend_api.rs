@@ -1,34 +1,50 @@
 //! Backend API - boundary between editor and CRDT logic.
+//! 
+//! Defines the core data structures (`Point`, `Stroke`, `Intent`, `FrontendUpdate`)
+//! and the `DocBackend` trait which abstracts the document synchronization logic.
 use serde::{Deserialize, Serialize};
 
+/// Represents a 2D point with integer coordinates.
+/// Used to define the path of a stroke.
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct Point {
+    /// X coordinate
     pub x: i32,
+    /// Y coordinate
     pub y: i32,
 }
 
+/// Represents a drawing stroke consisting of a sequence of points, color, and width.
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct Stroke {
+    /// Points defining the stroke path.
     pub points: Vec<Point>,
+    /// Color of the stroke in [R, G, B, A] format.
     pub color: [u8; 4],
+    /// Width (thickness) of the stroke.
     pub width: f32,
 }
 
-/// intencja uzytkownika w edytorze
+/// Represents a user's intent to modify the document.
+/// Passed from the UI to the backend.
 #[derive(Debug, Clone, PartialEq)]
 pub enum Intent {
+    /// Intent to add a new stroke.
     Draw(Stroke),
+    /// Intent to clear the document.
     Clear,
 }
 
-/// Aktualizacja dla frontendu - zwracana przez backend po zastosowaniu intencji
+/// Represents an update to be applied to the frontend/UI.
+/// Returned by the backend after processing an intent or receiving a sync message.
 #[derive(Debug, Clone, PartialEq)]
 pub struct FrontendUpdate {
+    /// Current list of strokes to render.
     pub strokes: Vec<Stroke>,
 }
 
-// pusta aktualizacja
 impl FrontendUpdate {
+    /// Creates an empty update with no strokes.
     pub fn empty() -> Self {
         Self {
             strokes: Vec::new(),
@@ -36,34 +52,82 @@ impl FrontendUpdate {
     }
 }
 
-///backend sluzy do zarzadzania dokumentem i synchronizacji
+/// Trait for document backend management and synchronization.
 ///
-/// Trait for document backend - to jest cos w stylu interfejsu, ktory musi byc zaimplementowany
-///  przez kazdy backend (narzucone jest ze to moze byc zaimplementowane tylko dla
-///  struktur ktore sa Send)
+/// Handles CRDT logic, persistence, and network synchronization messages.
+/// Implementations must be `Send` to allow usage across threads.
 pub trait DocBackend: Send {
-    // ta metoda dostaje "intencje" z edytora i zwraca aktualizacje dla edytora
+    /// Applies a user intent to the document and returns a frontend update.
+    ///
+    /// # Arguments
+    /// * `intent` - The user's intent (e.g., Draw or Clear).
     fn apply_intent(&mut self, intent: Intent) -> FrontendUpdate;
+
+    /// Retrieves the current state of strokes from the backend.
     fn get_strokes(&self) -> Vec<Stroke>;
     
     // Sync methods
+
+    /// Notification that a peer has connected.
+    ///
+    /// # Arguments
+    /// * `peer_id` - Unique identifier of the connected peer.
     fn peer_connected(&mut self, peer_id: &str);
+
+    /// Notification that a peer has disconnected.
+    ///
+    /// # Arguments
+    /// * `peer_id` - Unique identifier of the disconnected peer.
     fn peer_disconnected(&mut self, peer_id: &str);
+
+    /// Processes an incoming synchronization message from a peer.
+    ///
+    /// # Arguments
+    /// * `peer_id` - Identifier of the sender.
+    /// * `message` - The raw byte data of the message.
+    ///
+    /// # Returns
+    /// An update to reflect any changes in the document state.
     fn receive_sync_message(&mut self, peer_id: &str, message: Vec<u8>) -> FrontendUpdate;
+
+    /// Generates a synchronization message to be sent to a specific peer.
+    ///
+    /// # Arguments
+    /// * `peer_id` - Identifier of the target peer.
+    ///
+    /// # Returns
+    /// `Some(Vec<u8>)` if there is a message to send, or `None` otherwise.
     fn generate_sync_message(&mut self, peer_id: &str) -> Option<Vec<u8>>;
 
     // Persistence
+
+    /// Serializes the entire document state to bytes for saving.
     fn save(&mut self) -> Vec<u8>;
+
+    /// Loads the document state from serialized bytes.
+    ///
+    /// # Arguments
+    /// * `data` - The byte data to load.
     fn load(&mut self, data: Vec<u8>);
 
     // Background
+
+    /// Sets the background image data.
+    ///
+    /// # Arguments
+    /// * `data` - Raw bytes of the background image (e.g., PNG/JPEG data).
     fn set_background(&mut self, data: Vec<u8>);
+
+    /// Retrieves the current background image data.
     fn get_background(&self) -> Option<Vec<u8>>;
 }
 
+/// A simple, no-op backend implementation.
+/// Useful for testing or as a placeholder.
 pub struct SimpleBackend;
 
 impl SimpleBackend {
+    /// Creates a new instance of SimpleBackend.
     pub fn new() -> Self {
         SimpleBackend
     }
@@ -97,12 +161,12 @@ impl DocBackend for SimpleBackend {
     fn get_background(&self) -> Option<Vec<u8>> { None }
 }
 
-
+/// A mock backend implementation storing strokes in memory.
+/// useful for local testing without CRDT complexity.
 pub struct MockBackend {
     strokes: Vec<Stroke>,
 }
 
-// implementacja traitu Default dla MockBackend, ktory zmusza do implementacji metody default
 impl Default for MockBackend {
     fn default() -> Self {
         Self {
@@ -111,11 +175,7 @@ impl Default for MockBackend {
     }
 }
 
-// implementujaemy trait DocBackend dla MockBackend
-// backend bedzie musial byc w przyszlosci podmieniony
-// zmuszamy do implementacji apply_intent i render_text
 impl DocBackend for MockBackend {
-    // kiedy dostaniemy intencje, to zaktualizujemy tekst i zwrocimy aktualizacje
     fn apply_intent(&mut self, intent: Intent) -> FrontendUpdate {
 
         match intent {

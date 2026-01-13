@@ -3,6 +3,11 @@ use eframe::{egui, egui::Context};
 use egui::Key;
 
 impl AppView {
+    /// Handles keyboard shortcuts for the application.
+    ///
+    /// * `Cmd/Ctrl + \`: Toddle sidebar visibility.
+    /// * `Cmd/Ctrl + O`: Open file.
+    /// * `Cmd/Ctrl + S`: Save file.
     pub fn handle_shortcuts(&mut self, ctx: &egui::Context) {
         ctx.input(|i| {
             if i.modifiers.command && i.key_pressed(egui::Key::Backslash) {
@@ -17,6 +22,7 @@ impl AppView {
         });
     }
 
+    /// Renders the top menu bar containing action buttons and tool controls.
     pub fn top_bar(&mut self, ctx: &egui::Context) {
         egui::TopBottomPanel::top("topbar").show(ctx, |ui| {
             ui.horizontal(|ui| {
@@ -57,6 +63,7 @@ impl AppView {
         });
     }
 
+    /// Renders the retractable sidebar with session controls.
     pub fn sidebar_panel(&mut self, ctx: &egui::Context) {
         if !self.sidebar.visible {
             return;
@@ -98,6 +105,7 @@ impl AppView {
             });
     }
 
+    /// Renders the LiveKit connection and debugging panel.
     pub fn livekit_panel(&mut self, ctx: &egui::Context) {
         egui::CentralPanel::default().show(ctx, |ui| {
             ui.vertical(|ui| {
@@ -189,6 +197,9 @@ impl AppView {
             });
         });
     }
+
+    /// Renders the main editor area (canvas).
+    /// Handles user input for drawing and displays rendering artifacts.
     pub fn editor_center(&mut self, ctx: &egui::Context) {
         egui::CentralPanel::default().show(ctx, |ui| {
             // keep shortcuts here so they work even when sidebar hidden
@@ -315,6 +326,7 @@ impl AppView {
         });
     }
 
+    /// Renders the bottom status bar displaying connection status and participants.
     pub fn status_bar(&mut self, ctx: &egui::Context) {
         egui::TopBottomPanel::bottom("status").show(ctx, |ui| {
             ui.horizontal(|ui| {
