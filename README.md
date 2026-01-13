@@ -6,6 +6,19 @@ Mini PW Informatyka i Systemy informatyczne, 2025/26
 
 Promotor: dr. inz. Paweł Kotowski
 
+## Edytor
+
+Projekt kolaboratywnego whiteboard umozliwia: 
+- utworzenie pustego dokumentu
+- zaladowanie gotowego dokumentu .png / .crdt 
+- rysowania i scieranie tablicy 
+- zmiane koloru i wielkosci pęzla
+- utworzenie sesji kolaboracji 
+- dołaczenie do sesji kolaboracji 
+- odłaczenie się od sesji kolaboracji
+- pokazywanie kursowa kooperanta edycji 
+- zmiany kooperanta w czasie rzeczywistym
+
 ## Struktura folderów
 
 - editor: głowny element projektu, czyli edytor obrazu
@@ -30,6 +43,8 @@ LIVEKIT_API_KEY=devkey
 LIVEKIT_API_SECRET=devsecret
 LIVEKIT_URL=127.0.0.1:7880
 ```
+
+## Kompilacje i uruchomienie
 
 Aby uruchomić edytor trzeba skorzystac z flagi przy uruchamianiu kompilatora by 
 uzyc odpowiedniego kompliatora obiektowego c.
@@ -122,11 +137,6 @@ Using project [local-inzynierka]
 
 Po więcej koment odsyłam do dokumentacji lib `lk --help`.
 
-
-## Edytor
-
-Aktualnie edytor umozliwia tworzenie pokoju lub dolaczenie do pokoju. Logika synchronizacji danych jeszcze nie została zaimplementowana. Edytor w komunikacji korzysta z LiveKit RUST SDK.
-
 ## Dokumentacja
 
 Aby wygenerować dokumentację projektu z komentarzy w kodzie, należy skorzystać z narzędzia `cargo doc`. Poniższa komenda wygeneruje dokumentację i automatycznie otworzy ją w domyślnej przeglądarce:
@@ -136,3 +146,4 @@ RUSTFLAGS="-C link-arg=-ObjC" cargo doc --no-deps --open
 ```
 
 Opcja `--no-deps` powoduje wygenerowanie dokumentacji tylko dla kodu projektu (bez zależności zewnetrznych), co znacznie przyspiesza proces i czyni dokumentację bardziej czytelną.
+
