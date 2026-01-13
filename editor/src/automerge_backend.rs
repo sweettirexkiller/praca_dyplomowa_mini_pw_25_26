@@ -19,13 +19,8 @@ impl AutomergeBackend {
     ///
     /// Initializes the document with a "strokes" list.
     pub fn new() -> Self {
-        let mut doc = AutoCommit::new();
-        // Ensure "strokes" list exists
-        if doc.get(ROOT, "strokes").unwrap().is_none() {
-             doc.put_object(ROOT, "strokes", ObjType::List).ok();
-        }
         Self { 
-            doc,
+            doc: AutoCommit::new(),
             sync_states: HashMap::new(),
         }
     }
@@ -147,5 +142,111 @@ impl DocBackend for AutomergeBackend {
             }
              _ => None,
         }
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use crate::backend_api::{Point, Stroke, Intent};
+
+    fn create_test_stroke() -> Stroke {
+        Stroke {
+            points: vec![Point { x: 10, y: 10 }, Point { x: 20, y: 20 }],
+            color: [255, 0, 0, 255],
+            width: 5.0,
+        }
+    }
+
+    #[test]
+    fn test_new_backend_initialization() {
+        let backend = AutomergeBackend::new();
+        assert!(backend.get_strokes().is_empty());
+    }
+
+    #[test]
+    fn test_apply_draw_intent() {
+        let mut backend = AutomergeBackend::new();
+        let stroke = create_test_stroke();
+        
+        backend.apply_intent(Intent::Draw(stroke.clone()));
+        
+        let strokes = backend.get_strokes();
+        assert_eq!(strokes.len(), 1);
+        assert_eq!(strokes[0].width, 5.0);
+        assert_eq!(strokes[0].points.len(), 2);
+    }
+
+    #[test]
+    fn test_apply_clear_intent() {
+        let mut backend = AutomergeBackend::new();
+        let stroke = create_test_stroke();
+        
+        backend.apply_intent(Intent::Draw(stroke));
+        assert!(!backend.get_strokes().is_empty());
+        
+        backend.apply_intent(Intent::Clear);
+        assert!(backend.get_strokes().is_empty());
+    }
+
+    #[test]
+    fn test_save_and_load() {
+        let mut backend1 = AutomergeBackend::new();
+        let stroke = create_test_stroke();
+        backend1.apply_intent(Intent::Draw(stroke.clone()));
+        
+        let data = backend1.save();
+        
+        let mut backend2 = AutomergeBackend::new();
+        backend2.load(data);
+        
+        let strokes = backend2.get_strokes();
+        assert_eq!(strokes.len(), 1);
+        assert_eq!(strokes[0].points, stroke.points);
+    }
+
+    #[test]
+    fn test_sync_between_peers() {
+        // Imitate two clients
+        let mut client_a = AutomergeBackend::new();
+        let mut client_b = AutomergeBackend::new();
+
+        // A and B "connect" to each other (init sync states)
+        client_a.peer_connected("client_b");
+        client_b.peer_connected("client_a");
+
+        // Client A draws something
+        let stroke = create_test_stroke();
+        client_a.apply_intent(Intent::Draw(stroke));
+
+        // Generate sync message from A -> B
+        // In Automerge, we might need multiple rounds, but for a single change, one might suffice or loop until None.
+        
+        let mut max_rounds = 10;
+        let mut synced = false;
+
+        while max_rounds > 0 {
+            let msg_a_to_b = client_a.generate_sync_message("client_b");
+            let msg_b_to_a = client_b.generate_sync_message("client_a");
+
+            if msg_a_to_b.is_none() && msg_b_to_a.is_none() {
+                synced = true;
+                break;
+            }
+
+            if let Some(msg) = msg_a_to_b {
+                client_b.receive_sync_message("client_a", msg);
+            }
+
+            if let Some(msg) = msg_b_to_a {
+                client_a.receive_sync_message("client_b", msg);
+            }
+            
+            max_rounds -= 1;
+        }
+
+        // B should now have the stroke drawn by A
+        let strokes_b = client_b.get_strokes();
+        assert_eq!(strokes_b.len(), 1, "Client B should have received the stroke from Client A");
     }
 }
