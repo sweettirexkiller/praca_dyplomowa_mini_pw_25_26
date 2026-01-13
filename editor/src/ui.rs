@@ -24,6 +24,7 @@ use livekit::prelude::*;
 /// 
 /// # Arguments
 /// * `username` - The identity of the user.
+/// Generates a consistent user color based on the username hash.
 pub fn get_user_color(username: &str) -> egui::Color32 {
     let mut hasher = DefaultHasher::new();
     username.hash(&mut hasher);
@@ -136,30 +137,45 @@ pub struct AppView {
     app_msg_receiver: Option<tokio::sync::mpsc::UnboundedReceiver<AppMsg>>,
 }
 
+/// State for the collapsible sidebar configuration.
 struct SidebarState {
     visible: bool,
     default_width: f32,
 }
 
+/// Enumeration of available drawing tools.
 #[derive(PartialEq, Eq)]
 enum Tool {
+    /// Freehand pen.
     Pen,
+    /// Eraser.
     Eraser,
 }
 
+/// State of the whiteboard canvas.
 struct WhiteboardState {
+    /// The backing pixel buffer of the whiteboard.
     image: egui::ColorImage,
+    /// Texture handle for rendering the image on GPU.
     texture: Option<egui::TextureHandle>,
+    /// Currently selected stroke color.
     stroke_color: egui::Color32,
+    /// Currently selected stroke width (brush size).
     stroke_width: f32,
+    /// Points accumulated in the current stroke being drawn.
     current_stroke: Vec<crate::backend_api::Point>,
+    /// Currently selected tool.
     tool: Tool,
+    /// Optional background image loaded from a file.
     background: Option<egui::ColorImage>,
 }
 
+/// Enumeration of main application pages/views.
 #[derive(PartialEq, Eq)]
 pub enum Page {
+    /// The main whiteboard editor.
     Editor,
+    /// The LiveKit connection management screen.
     LiveKit,
 }
 
@@ -338,6 +354,10 @@ impl AppView {
     }
     
     /// Helper to render a single stroke onto the whiteboard image.
+    /// Renders a stroke onto the local whiteboard image.
+    ///
+    /// # Arguments
+    /// * `stroke` - The stroke to draw.
     fn draw_stroke_on_image(&mut self, stroke: &crate::backend_api::Stroke) {
         let color = egui::Color32::from_rgba_premultiplied(
             stroke.color[0], stroke.color[1], stroke.color[2], stroke.color[3]
@@ -366,6 +386,9 @@ impl AppView {
     }
 
     /// Generates a LiveKit access token for joining a room.
+    /// Generates a LiveKit access token for joining a room.
+    ///
+    /// Requires `LIVEKIT_API_KEY` and `LIVEKIT_API_SECRET` environment variables.
     fn create_token(
         room_name: &str,
         identity: &str,
@@ -387,6 +410,9 @@ impl AppView {
     }
     // ...existing code...
     /// Connects to a LiveKit room or creates one if it doesn't exist (if configured on server).
+    /// Spawns a background thread to handle network events.
+    /// Initiates a connection to the LiveKit room.
+    ///
     /// Spawns a background thread to handle network events.
     pub fn connect_or_create_to_room(&mut self, ctx: egui::Context) {
        if self.livekit_connected {
@@ -627,6 +653,7 @@ impl AppView {
     }
 
     /// Sends a chat message to all participants in the room.
+    /// Sends a chat message to all participants in the room.
     pub fn send_livekit_message(&mut self, message: String) {
         if !self.livekit_connected {
             return;
@@ -639,6 +666,7 @@ impl AppView {
     }
 
     /// Disconnects from the current LiveKit room.
+    /// Disconnects from the current LiveKit room and cleans up resources.
     pub fn disconnect_room(&mut self) {
         if let Some(sender) = &self.livekit_command_sender {
             let _ = sender.send(AppCommand::Disconnect);
@@ -654,11 +682,14 @@ impl AppView {
     }
     
     /// Checks if there's any content in the current whiteboard.
+    /// Checks if there are any strokes or background data that might need saving.
     fn has_unsaved_work(&self) -> bool {
         !self.backend.get_strokes().is_empty() || self.whiteboard.background.is_some()
     }
 
     /// Clears the current document and starts a new one (optionally saving).
+    /// Clears the current document and starts a new one.
+    /// Prompts the user to save if there are unsaved changes.
     pub fn new_document(&mut self) {
         if self.has_unsaved_work() {
              let result = rfd::MessageDialog::new()
@@ -685,6 +716,9 @@ impl AppView {
 
     /// Opens a save dialog to save the current document state or image.
     /// Supports `.crdt` (state) and `.png` (image).
+    /// Saves the current document state to a file.
+    /// Supports `.crdt` (CRDT state) and `.png` (image export).
+    /// Returns `true` if saved successfully, `false` otherwise.
     pub fn save_file(&mut self) -> bool {
         if let Some(path) = rfd::FileDialog::new()
             .add_filter("CRDT State", &["crdt"])
@@ -725,6 +759,9 @@ impl AppView {
     }
 
     /// Opens a file dialog to load a document.
+    /// Opens a document from a file.
+    /// Supports `.crdt` (CRDT state) and `.png` (load as background).
+    /// Prompts to save unsaved work before opening.
     pub fn open_file(&mut self) {
         // Ask used to save
         if self.has_unsaved_work() {

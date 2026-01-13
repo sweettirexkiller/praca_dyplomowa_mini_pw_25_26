@@ -8,11 +8,7 @@ Promotor: dr. inz. Paweł Kotowski
 
 ## Struktura folderów
 
-- editor: głowny element projektu, czyli edytor tekstu
-- sender-receiver: przykładowy projekt implementujący LiveKit SDK do łączności z serwerem
-- sender: przykładowy projekt implementujący LiveKit SDK 
-- receiver: przykładowy projekt implementujący LiveKit SDK 
-- diagrams: fodler z diagramami do dokumentacji / specyfikacji projektu
+- editor: głowny element projektu, czyli edytor obrazu
 
 ## Architekrura
 
@@ -130,3 +126,13 @@ Po więcej koment odsyłam do dokumentacji lib `lk --help`.
 ## Edytor
 
 Aktualnie edytor umozliwia tworzenie pokoju lub dolaczenie do pokoju. Logika synchronizacji danych jeszcze nie została zaimplementowana. Edytor w komunikacji korzysta z LiveKit RUST SDK.
+
+## Dokumentacja
+
+Aby wygenerować dokumentację projektu z komentarzy w kodzie, należy skorzystać z narzędzia `cargo doc`. Poniższa komenda wygeneruje dokumentację i automatycznie otworzy ją w domyślnej przeglądarce:
+
+```bash
+RUSTFLAGS="-C link-arg=-ObjC" cargo doc --no-deps --open
+```
+
+Opcja `--no-deps` powoduje wygenerowanie dokumentacji tylko dla kodu projektu (bez zależności zewnetrznych), co znacznie przyspiesza proces i czyni dokumentację bardziej czytelną.

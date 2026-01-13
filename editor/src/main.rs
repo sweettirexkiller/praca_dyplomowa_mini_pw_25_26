@@ -1,6 +1,6 @@
-//! Main entry point for the "Mac TextPad" collaborative text editor.
+//! Main entry point for the "Collaborative Whiteboard" collaborative.
 //!
-//! This crate implements a real-time collaborative whiteboard and text editor (currently focused on whiteboard)
+//! This crate implements a real-time collaborative whiteboard
 //! using [LiveKit](https://livekit.io/) for data transport and [Automerge](https://automerge.org/)
 //! for Conflict-Free Replicated Data Type (CRDT) state management.
 //!
@@ -9,6 +9,7 @@
 //! - `backend_api`: Defines the core document backend traits and data structures.
 //! - `automerge_backend`: Implements the `DocBackend` using Automerge.
 //! - `ui`: Contains the `eframe`/`egui` user interface and network handling logic.
+//! - `ui_panels`: Submodules for different UI panels (sidebar, editor, status_bar etc.).
 
 mod backend_api;
 mod automerge_backend;
@@ -27,7 +28,7 @@ use eframe::NativeOptions;
 ///
 /// * `eframe::Result<()>` - Result of the application execution.
 fn main() -> eframe::Result<()> {
-    println!("Starting Mac TextPad...");
+    println!("Starting Collaborative Whiteboard...");
     let mut native_options = NativeOptions::default();
     native_options.centered = true;
     dotenv::dotenv().ok();
@@ -36,7 +37,7 @@ fn main() -> eframe::Result<()> {
     // let local_replica_id = 1;
 
     eframe::run_native(
-        "Collaborative Text Editor",
+        "Collaborative Whiteboard - Automerge + LiveKit",
         native_options,
         Box::new(move |_cc| {
             Ok(Box::new(AppView::new(Box::new(AutomergeBackend::new()))))
