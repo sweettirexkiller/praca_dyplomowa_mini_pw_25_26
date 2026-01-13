@@ -61,20 +61,27 @@ impl AppView {
             .resizable(true)
             .default_width(self.sidebar.default_width)
             .show(ctx, |ui| {
-                if ui.button("Share").clicked() {
-                    self.livekit_room = "".into(); // Force new name generation
-                    self.connect_or_create_to_room(ctx.clone());
-                    self.page = Page::LiveKit;
-                }
-                
-                ui.horizontal(|ui| {
-                    ui.label("Room:");
-                    ui.text_edit_singleline(&mut self.livekit_room);
-                });
-                if !self.livekit_room.is_empty() {
-                     if ui.button("Join Session").clicked() {
-                         self.connect_or_create_to_room(ctx.clone());
-                         self.page = Page::LiveKit;
+                if self.livekit_connected {
+                    ui.colored_label(egui::Color32::GREEN, format!("Connected: {}", self.livekit_room));
+                    if ui.button("Disconnect from Session").clicked() {
+                        self.disconnect_room();
+                    }
+                } else {
+                    if ui.button("Share").clicked() {
+                        self.livekit_room = "".into(); // Force new name generation
+                        self.connect_or_create_to_room(ctx.clone());
+                        self.page = Page::LiveKit;
+                    }
+                    
+                    ui.horizontal(|ui| {
+                        ui.label("Room:");
+                        ui.text_edit_singleline(&mut self.livekit_room);
+                    });
+                    if !self.livekit_room.is_empty() {
+                         if ui.button("Join Session").clicked() {
+                             self.connect_or_create_to_room(ctx.clone());
+                             self.page = Page::LiveKit;
+                        }
                     }
                 }
                 
@@ -297,25 +304,35 @@ impl AppView {
                 let ry = (point.y as f32 / height) * rect.height();
                 let pos = rect.min + egui::Vec2::new(rx, ry);
                 
-                painter.circle_filled(pos, 5.0, egui::Color32::RED);
-                painter.text(pos + egui::Vec2::new(8.0, 8.0), egui::Align2::LEFT_TOP, user, egui::FontId::proportional(12.0), egui::Color32::RED);
+                let color = crate::ui::get_user_color(user);
+                painter.circle_filled(pos, 5.0, color);
+                painter.text(pos + egui::Vec2::new(8.0, 8.0), egui::Align2::LEFT_TOP, user, egui::FontId::proportional(12.0), color);
             }
         });
     }
 
     pub fn status_bar(&mut self, ctx: &egui::Context) {
         egui::TopBottomPanel::bottom("status").show(ctx, |ui| {
-            // ui.horizontal_wrapped(|ui| {
-            //     ui.label(&self.status);
-            //     ui.separator();
-            //     ui.label(format!("Length: {}", self.editor.text.chars().count()));
-            //     ui.separator();
-            //     ui.label(if self.sidebar.visible {
-            //         "Sidebar: visible"
-            //     } else {
-            //         "Sidebar: hidden"
-            //     });
-            // });
+            ui.horizontal(|ui| {
+                ui.label(&self.status);
+                
+                if self.livekit_connected {
+                    ui.separator();
+                    ui.label("Participants:");
+                    
+                    let participants = {
+                        let guard = self.livekit_participants.lock().unwrap();
+                        guard.clone()
+                    };
+
+                    for p in participants {
+                        let color = crate::ui::get_user_color(&p);
+                        let (rect, _) = ui.allocate_exact_size(egui::vec2(12.0, 12.0), egui::Sense::hover());
+                        ui.painter().circle_filled(rect.center(), 4.0, color);
+                        ui.label(&p);
+                    }
+                }
+            });
         });
     }
 }

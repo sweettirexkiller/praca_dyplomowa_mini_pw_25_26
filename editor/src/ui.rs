@@ -10,10 +10,22 @@ use livekit_api::access_token;
 use serde::{Deserialize, Serialize};
 use std::time::{SystemTime, UNIX_EPOCH};
 use rand::{distr::Alphanumeric, Rng};
+use std::collections::hash_map::DefaultHasher;
+use std::hash::{Hash, Hasher};
 
 mod ui_panels;
 
 use livekit::prelude::*;
+
+pub fn get_user_color(username: &str) -> egui::Color32 {
+    let mut hasher = DefaultHasher::new();
+    username.hash(&mut hasher);
+    let hash = hasher.finish();
+    
+    // Generate distinct, bright colors using HSV
+    let h = (hash as u32 % 360) as f32 / 360.0;
+    egui::Color32::from(egui::ecolor::Hsva::new(h, 0.8, 0.8, 1.0))
+}
 
 #[derive(Serialize, Deserialize, Debug)]
 pub enum NetworkMessage {
@@ -83,6 +95,7 @@ struct WhiteboardState {
     stroke_width: f32,
     current_stroke: Vec<crate::backend_api::Point>,
     tool: Tool,
+    background: Option<egui::ColorImage>,
 }
 
 #[derive(PartialEq, Eq)]
@@ -119,6 +132,7 @@ impl AppView {
                 stroke_width: 5.0,
                 current_stroke: Vec::new(),
                 tool: Tool::Pen,
+                background: None,
             },
             page: Page::Editor,
             livekit_events: Arc::new(Mutex::new(Vec::new())),
@@ -167,7 +181,12 @@ impl AppView {
     
     fn apply_update(&mut self, update: crate::backend_api::FrontendUpdate) {
         // Simple full redraw for now
-        self.whiteboard.image = egui::ColorImage::new([800, 600], vec![egui::Color32::WHITE; 800 * 600]);
+        if let Some(bg) = &self.whiteboard.background {
+            self.whiteboard.image = bg.clone();
+        } else {
+            self.whiteboard.image = egui::ColorImage::new([800, 600], vec![egui::Color32::WHITE; 800 * 600]);
+        }
+
         for stroke in update.strokes {
             self.draw_stroke_on_image(&stroke);
         }
@@ -402,26 +421,78 @@ impl AppView {
     }
     
     pub fn save_file(&mut self) {
-        if let Some(path) = rfd::FileDialog::new().save_file() {
-            let data = self.backend.save();
-            if let Err(e) = std::fs::write(&path, data) {
-                eprintln!("Failed to save file: {}", e);
-            } else {
-                 println!("Saved to {:?}", path);
+        if let Some(path) = rfd::FileDialog::new()
+            .add_filter("CRDT State", &["crdt"])
+            .add_filter("PNG Image", &["png"])
+            .save_file() 
+        {
+            if let Some(extension) = path.extension() {
+                if extension == "png" {
+                    let width = self.whiteboard.image.width() as u32;
+                    let height = self.whiteboard.image.height() as u32;
+                    let pixels: Vec<u8> = self.whiteboard.image.pixels.iter()
+                        .flat_map(|p| p.to_array())
+                        .collect();
+                    
+                    if let Some(image_buffer) = image::ImageBuffer::<image::Rgba<u8>, _>::from_raw(width, height, pixels) {
+                        if let Err(e) = image_buffer.save(&path) {
+                             eprintln!("Failed to save PNG: {}", e);
+                        } else {
+                             println!("Saved PNG to {:?}", path);
+                        }
+                    }
+                } else {
+                     // Default to CRDT save
+                    let data = self.backend.save();
+                    if let Err(e) = std::fs::write(&path, data) {
+                        eprintln!("Failed to save file: {}", e);
+                    } else {
+                         println!("Saved to {:?}", path);
+                    }
+                }
             }
         }
     }
 
     pub fn open_file(&mut self) {
-        if let Some(path) = rfd::FileDialog::new().pick_file() {
-            if let Ok(data) = std::fs::read(&path) {
-                self.backend.load(data);
-                // Refresh UI
-                let strokes = self.backend.get_strokes();
-                self.apply_update(crate::backend_api::FrontendUpdate { strokes });
-            } else {
-                 eprintln!("Failed to read file");
-            }
+        if let Some(path) = rfd::FileDialog::new()
+            .add_filter("CRDT State", &["crdt"])
+            .add_filter("PNG Image", &["png"])
+            .pick_file() 
+        {
+             if let Some(extension) = path.extension() {
+                if extension == "png" {
+                    if let Ok(img) = image::open(&path) {
+                        let img = img.to_rgba8();
+                        let size = [img.width() as usize, img.height() as usize];
+                        
+                        // We need the raw bytes.
+                        let pixels: Vec<u8> = img.as_flat_samples().as_slice().to_vec();
+                        
+                        let color_image = egui::ColorImage::from_rgba_unmultiplied(
+                            size,
+                            &pixels,
+                        );
+                        self.whiteboard.background = Some(color_image);
+                        
+                        // Refresh UI (redraw strokes over new background)
+                        let strokes = self.backend.get_strokes();
+                        self.apply_update(crate::backend_api::FrontendUpdate { strokes });
+                    } else {
+                        eprintln!("Failed to open PNG");
+                    }
+                } else {
+                    if let Ok(data) = std::fs::read(&path) {
+                        self.whiteboard.background = None;
+                        self.backend.load(data);
+                        // Refresh UI
+                        let strokes = self.backend.get_strokes();
+                        self.apply_update(crate::backend_api::FrontendUpdate { strokes });
+                    } else {
+                         eprintln!("Failed to read file");
+                    }
+                }
+             }
         }
     }
 }
