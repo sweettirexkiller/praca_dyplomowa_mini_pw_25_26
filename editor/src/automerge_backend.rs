@@ -119,4 +119,22 @@ impl DocBackend for AutomergeBackend {
             self.sync_states.clear();
         }
     }
+
+    fn set_background(&mut self, data: Vec<u8>) {
+        // Store as bytes
+        self.doc.put(ROOT, "background", ScalarValue::Bytes(data)).ok();
+    }
+
+    fn get_background(&self) -> Option<Vec<u8>> {
+        match self.doc.get(ROOT, "background") {
+            Ok(Some((Value::Scalar(s), _))) => {
+                if let ScalarValue::Bytes(b) = s.as_ref() {
+                    Some(b.clone())
+                } else {
+                    None
+                }
+            }
+             _ => None,
+        }
+    }
 }

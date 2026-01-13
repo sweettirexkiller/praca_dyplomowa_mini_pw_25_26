@@ -55,6 +55,10 @@ pub trait DocBackend: Send {
     // Persistence
     fn save(&mut self) -> Vec<u8>;
     fn load(&mut self, data: Vec<u8>);
+
+    // Background
+    fn set_background(&mut self, data: Vec<u8>);
+    fn get_background(&self) -> Option<Vec<u8>>;
 }
 
 pub struct SimpleBackend;
@@ -88,6 +92,9 @@ impl DocBackend for SimpleBackend {
     }
 
     fn load(&mut self, _data: Vec<u8>) {}
+
+    fn set_background(&mut self, _data: Vec<u8>) {}
+    fn get_background(&self) -> Option<Vec<u8>> { None }
 }
 
 
@@ -140,4 +147,7 @@ impl DocBackend for MockBackend {
     }
 
     fn load(&mut self, _data: Vec<u8>) {}
+
+    fn set_background(&mut self, _data: Vec<u8>) {}
+    fn get_background(&self) -> Option<Vec<u8>> { None }
 }

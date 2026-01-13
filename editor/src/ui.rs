@@ -180,6 +180,19 @@ impl AppView {
     }
     
     fn apply_update(&mut self, update: crate::backend_api::FrontendUpdate) {
+        // Sync background from backend if not set locally (or always?)
+        // In collaborative scenario, we probably want to fetch from backend on first load/sync
+        if self.whiteboard.background.is_none() {
+             if let Some(bg_bytes) = self.backend.get_background() {
+                 if let Ok(img) = image::load_from_memory(&bg_bytes) {
+                      let img = img.to_rgba8();
+                      let size = [img.width() as usize, img.height() as usize];
+                      let pixels = img.as_flat_samples().as_slice().to_vec();
+                      self.whiteboard.background = Some(egui::ColorImage::from_rgba_unmultiplied(size, &pixels));
+                 }
+             }
+        }
+
         // Simple full redraw for now
         if let Some(bg) = &self.whiteboard.background {
             self.whiteboard.image = bg.clone();
@@ -444,6 +457,7 @@ impl AppView {
         }
 
         self.whiteboard.background = None;
+        self.backend.set_background(Vec::new());
         self.handle_intent(Intent::Clear);
     }
 
@@ -529,6 +543,11 @@ impl AppView {
                         );
                         self.whiteboard.background = Some(color_image);
                         
+                        // Save background to backend for sync/persistence
+                        if let Ok(bytes) = std::fs::read(&path) {
+                             self.backend.set_background(bytes);
+                        }
+
                         // Refresh UI (redraw strokes over new background)
                         let strokes = self.backend.get_strokes();
                         self.apply_update(crate::backend_api::FrontendUpdate { strokes });
