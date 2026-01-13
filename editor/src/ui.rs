@@ -28,6 +28,17 @@ pub fn get_user_color(username: &str) -> egui::Color32 {
 }
 
 #[derive(Serialize, Deserialize, Debug)]
+pub enum TransportPacket {
+    Message(Vec<u8>), 
+    Chunk {
+        id: u64,
+        index: u32,
+        total: u32,
+        data: Vec<u8>
+    }
+}
+
+#[derive(Serialize, Deserialize, Debug)]
 pub enum NetworkMessage {
     Sync(Vec<u8>),
     Chat(String),
@@ -374,6 +385,8 @@ impl AppView {
         std::thread::spawn(move || {
             let rt = tokio::runtime::Runtime::new().unwrap();
             rt.block_on(async {
+                let mut incomplete_transfers: std::collections::HashMap<String, std::collections::HashMap<u64, (u32, Vec<Option<Vec<u8>>>)>> = std::collections::HashMap::new();
+
                 let (room, mut room_events) = match Room::connect(&url, &token, RoomOptions::default()).await {
                     Ok(res) => res,
                     Err(e) => {
@@ -402,17 +415,44 @@ impl AppView {
                                 RoomEvent::DataReceived { payload, participant, .. } => {
                                     if let Some(p) = participant {
                                         let sender = p.identity().to_string();
-                                         if let Ok(msg) = serde_json::from_slice::<NetworkMessage>(&payload) {
+                                        
+                                        // Try to parse as TransportPacket
+                                        if let Ok(packet) = serde_json::from_slice::<TransportPacket>(&payload) {
+                                            match packet {
+                                                TransportPacket::Message(data) => {
+                                                     if let Ok(msg) = serde_json::from_slice::<NetworkMessage>(&data) {
+                                                         let _ = tx_msg.send(AppMsg::NetworkMessage { sender, message: msg });
+                                                         ctx_clone.request_repaint();
+                                                     }
+                                                },
+                                                TransportPacket::Chunk { id, index, total, data } => {
+                                                    let entry = incomplete_transfers.entry(sender.clone()).or_default();
+                                                    let transfer = entry.entry(id).or_insert_with(|| (0, vec![None; total as usize]));
+                                                    
+                                                    if (index as usize) < transfer.1.len() {
+                                                        if transfer.1[index as usize].is_none() {
+                                                            transfer.1[index as usize] = Some(data);
+                                                            transfer.0 += 1;
+                                                        }
+
+                                                        if transfer.0 == total {
+                                                            // All chunks received
+                                                            let full_data: Vec<u8> = transfer.1.iter().flat_map(|c| c.as_ref().unwrap().clone()).collect();
+                                                            entry.remove(&id);
+                                                            
+                                                            if let Ok(msg) = serde_json::from_slice::<NetworkMessage>(&full_data) {
+                                                                let _ = tx_msg.send(AppMsg::NetworkMessage { sender, message: msg });
+                                                                ctx_clone.request_repaint();
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        } else if let Ok(msg) = serde_json::from_slice::<NetworkMessage>(&payload) {
+                                             // Backward compatibility or direct message
                                              let _ = tx_msg.send(AppMsg::NetworkMessage { sender, message: msg });
-                                         } else {
-                                            // Try as legacy chat string
-                                            let text = String::from_utf8_lossy(&payload).to_string();
-                                            let _ = tx_msg.send(AppMsg::NetworkMessage { 
-                                                sender: sender.clone(), 
-                                                message: NetworkMessage::Chat(text) 
-                                            });
+                                             ctx_clone.request_repaint();
                                          }
-                                         ctx_clone.request_repaint();
                                     }
                                 }
                                 RoomEvent::ParticipantConnected(p) => {
@@ -420,7 +460,9 @@ impl AppView {
                                     ctx_clone.request_repaint();
                                 }
                                 RoomEvent::ParticipantDisconnected(p) => {
-                                    let _ = tx_msg.send(AppMsg::ParticipantDisconnected(p.identity().to_string()));
+                                    let id = p.identity().to_string();
+                                    incomplete_transfers.remove(&id);
+                                    let _ = tx_msg.send(AppMsg::ParticipantDisconnected(id));
                                     ctx_clone.request_repaint();
                                 }
                                 RoomEvent::Disconnected { reason } => {
@@ -437,26 +479,78 @@ impl AppView {
                                     break; 
                                 }
                                 Some(AppCommand::Broadcast(msg)) => {
-                                    if let Ok(payload) = serde_json::to_vec(&msg) {
-                                        let _ = room.local_participant()
-                                            .publish_data(DataPacket {
-                                                payload,
-                                                reliable: true,
-                                                ..Default::default()
-                                            })
-                                            .await;
+                                    if let Ok(data) = serde_json::to_vec(&msg) {
+                                        let chunks_count = (data.len() + 14000 - 1) / 14000;
+                                        if chunks_count <= 1 {
+                                            let packet = TransportPacket::Message(data);
+                                            if let Ok(payload) = serde_json::to_vec(&packet) {
+                                                let _ = room.local_participant()
+                                                    .publish_data(DataPacket {
+                                                        payload,
+                                                        reliable: true,
+                                                        ..Default::default()
+                                                    })
+                                                    .await;
+                                            }
+                                        } else {
+                                            let id: u64 = rand::random();
+                                            for (i, chunk) in data.chunks(14000).enumerate() {
+                                                let packet = TransportPacket::Chunk {
+                                                    id,
+                                                    index: i as u32,
+                                                    total: chunks_count as u32,
+                                                    data: chunk.to_vec()
+                                                };
+                                                if let Ok(payload) = serde_json::to_vec(&packet) {
+                                                    let _ = room.local_participant()
+                                                        .publish_data(DataPacket {
+                                                            payload,
+                                                            reliable: true,
+                                                            ..Default::default()
+                                                        })
+                                                        .await;
+                                                }
+                                            }
+                                        }
                                     }
                                 }
                                 Some(AppCommand::Send { recipients, message }) => {
-                                     if let Ok(payload) = serde_json::to_vec(&message) {
-                                        let _ = room.local_participant()
-                                            .publish_data(DataPacket {
-                                                payload,
-                                                reliable: true,
-                                                destination_identities: recipients.into_iter().map(Into::into).collect(),
-                                                ..Default::default()
-                                            })
-                                            .await;
+                                     if let Ok(data) = serde_json::to_vec(&message) {
+                                        let chunks_count = (data.len() + 14000 - 1) / 14000;
+                                        if chunks_count <= 1 {
+                                             let packet = TransportPacket::Message(data);
+                                             if let Ok(payload) = serde_json::to_vec(&packet) {
+                                                let _ = room.local_participant()
+                                                    .publish_data(DataPacket {
+                                                        payload,
+                                                        reliable: true,
+                                                        destination_identities: recipients.into_iter().map(Into::into).collect(),
+                                                        ..Default::default()
+                                                    })
+                                                    .await;
+                                             }
+                                        } else {
+                                            let id: u64 = rand::random();
+                                            let dest: Vec<livekit::prelude::ParticipantIdentity> = recipients.into_iter().map(Into::into).collect();
+                                            for (i, chunk) in data.chunks(14000).enumerate() {
+                                                let packet = TransportPacket::Chunk {
+                                                    id,
+                                                    index: i as u32,
+                                                    total: chunks_count as u32,
+                                                    data: chunk.to_vec()
+                                                };
+                                                if let Ok(payload) = serde_json::to_vec(&packet) {
+                                                    let _ = room.local_participant()
+                                                        .publish_data(DataPacket {
+                                                            payload,
+                                                            reliable: true,
+                                                            destination_identities: dest.clone(),
+                                                            ..Default::default()
+                                                        })
+                                                        .await;
+                                                }
+                                            }
+                                        }
                                     }
                                 }
                                 None => break, 
@@ -674,6 +768,7 @@ impl eframe::App for AppView {
                         }
                          self.livekit_events.lock().unwrap().push(format!("Participant disconnected: {}", id));
                         self.backend.peer_disconnected(&id);
+                        println!("Cleaning up cursor for participant: {}", id);
                         self.remote_cursors.remove(&id);
                     }
                     AppMsg::NetworkMessage { sender, message } => {
@@ -687,7 +782,10 @@ impl eframe::App for AppView {
                                 self.sync_with_all();
                             }
                             NetworkMessage::Cursor { x, y } => {
-                                self.remote_cursors.insert(sender, crate::backend_api::Point { x, y });
+                                let participants = self.livekit_participants.lock().unwrap();
+                                if participants.contains(&sender) {
+                                    self.remote_cursors.insert(sender, crate::backend_api::Point { x, y });
+                                }
                             }
                         }
                     }
