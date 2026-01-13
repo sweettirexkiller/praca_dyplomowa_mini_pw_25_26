@@ -420,7 +420,34 @@ impl AppView {
         // But maybe clear sync states?
     }
     
-    pub fn save_file(&mut self) {
+    fn has_unsaved_work(&self) -> bool {
+        !self.backend.get_strokes().is_empty() || self.whiteboard.background.is_some()
+    }
+
+    pub fn new_document(&mut self) {
+        if self.has_unsaved_work() {
+             let result = rfd::MessageDialog::new()
+                .set_title("New Document")
+                .set_description("Do you want to save your current work?")
+                .set_buttons(rfd::MessageButtons::YesNoCancel)
+                .show();
+
+            match result {
+                rfd::MessageDialogResult::Yes => {
+                    if !self.save_file() {
+                        return;
+                    }
+                }
+                rfd::MessageDialogResult::No => {}
+                _ => return,
+            }
+        }
+
+        self.whiteboard.background = None;
+        self.handle_intent(Intent::Clear);
+    }
+
+    pub fn save_file(&mut self) -> bool {
         if let Some(path) = rfd::FileDialog::new()
             .add_filter("CRDT State", &["crdt"])
             .add_filter("PNG Image", &["png"])
@@ -437,6 +464,7 @@ impl AppView {
                     if let Some(image_buffer) = image::ImageBuffer::<image::Rgba<u8>, _>::from_raw(width, height, pixels) {
                         if let Err(e) = image_buffer.save(&path) {
                              eprintln!("Failed to save PNG: {}", e);
+                             return false;
                         } else {
                              println!("Saved PNG to {:?}", path);
                         }
@@ -446,15 +474,38 @@ impl AppView {
                     let data = self.backend.save();
                     if let Err(e) = std::fs::write(&path, data) {
                         eprintln!("Failed to save file: {}", e);
+                        return false;
                     } else {
                          println!("Saved to {:?}", path);
                     }
                 }
             }
+            true
+        } else {
+            false
         }
     }
 
     pub fn open_file(&mut self) {
+        // Ask used to save
+        if self.has_unsaved_work() {
+            let result = rfd::MessageDialog::new()
+                .set_title("Open File")
+                .set_description("Do you want to save your current work?")
+                .set_buttons(rfd::MessageButtons::YesNoCancel)
+                .show();
+
+            match result {
+                rfd::MessageDialogResult::Yes => {
+                    if !self.save_file() {
+                        return; 
+                    }
+                }
+                rfd::MessageDialogResult::No => {}
+                _ => return, 
+            }
+        }
+
         if let Some(path) = rfd::FileDialog::new()
             .add_filter("CRDT State", &["crdt"])
             .add_filter("PNG Image", &["png"])
@@ -463,6 +514,9 @@ impl AppView {
              if let Some(extension) = path.extension() {
                 if extension == "png" {
                     if let Ok(img) = image::open(&path) {
+                        // Clean the board
+                        self.handle_intent(Intent::Clear);
+
                         let img = img.to_rgba8();
                         let size = [img.width() as usize, img.height() as usize];
                         
@@ -485,6 +539,8 @@ impl AppView {
                     if let Ok(data) = std::fs::read(&path) {
                         self.whiteboard.background = None;
                         self.backend.load(data);
+                        self.sync_with_all();
+
                         // Refresh UI
                         let strokes = self.backend.get_strokes();
                         self.apply_update(crate::backend_api::FrontendUpdate { strokes });

@@ -24,6 +24,10 @@ impl AppView {
                     self.sidebar.visible = !self.sidebar.visible;
                 }
 
+                if ui.button("New").clicked() {
+                    self.new_document();
+                }
+
                 if ui.button("Save").clicked() {
                     self.save_file();
                 }
