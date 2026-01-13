@@ -92,11 +92,12 @@ impl DocBackend for AutomergeBackend {
     }
 
     fn receive_sync_message(&mut self, peer_id: &str, message: Vec<u8>) -> FrontendUpdate {
-        if let Some(sync_state) = self.sync_states.get_mut(peer_id) {
-            if let Ok(msg) = sync::Message::decode(&message) {
-                 self.doc.sync().receive_sync_message(sync_state, msg).ok();
-            }
+        let sync_state = self.sync_states.entry(peer_id.to_string()).or_insert_with(sync::State::new);
+        
+        if let Ok(msg) = sync::Message::decode(&message) {
+             self.doc.sync().receive_sync_message(sync_state, msg).ok();
         }
+
         FrontendUpdate { strokes: self.get_strokes() }
     }
 
