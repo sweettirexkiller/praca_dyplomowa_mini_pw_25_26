@@ -5,7 +5,7 @@
 
 ## 1. Wstęp
 
-Celem czwartego etapu (Lab 4) była weryfikacja poprawności działania modułów aplikacji "Mac TextPad" (Real-time Collaborative Whiteboard). Przetestowano kluczowe funkcjonalności edytora, mechanizmy zapisu i odczytu, oraz – symulacyjnie – mechanizmy synchronizacji CRDT.
+Celem czwartego etapu (Lab 4) była weryfikacja poprawności działania modułów aplikacji "Collaborative Whiteboard" (Real-time Collaborative Whiteboard). Przetestowano kluczowe funkcjonalności edytora, mechanizmy zapisu i odczytu, oraz – symulacyjnie – mechanizmy synchronizacji CRDT.
 
 ## 2. Testy Jednostkowe (Unit Tests)
 
