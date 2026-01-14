@@ -176,3 +176,10 @@ Potem mozna juz uruchomic kompilacje i uruchomienie programu:
 
 Jeśli program nadal się nie kompilje, bardzo mozliwe ze problem jest w starym msvc. Nalezy pobrac i zainstalowac najnowszy: 
 [Visual Studio Latest Release](https://visualstudio.microsoft.com/downloads/) - [zrodlo rozwiazania](https://github.com/livekit/rust-sdks/issues/249)
+
+
+Ostatecznie proponuje uzyc komendy: 
+
+```bash
+$env:Path += ";C:\Program Files\LLVM\bin"; $env:CC="clang-cl"; $env:CXX="clang-cl"; $env:CARGO_TARGET_DIR="C:\Users\piotr\rust_build"; $env:RUSTFLAGS="-C target-feature=+crt-static"; cargo clean; cargo build
+```
