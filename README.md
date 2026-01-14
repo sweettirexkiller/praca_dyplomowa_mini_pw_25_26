@@ -147,9 +147,27 @@ cargo doc --no-deps --open
 
 Opcja `--no-deps` powoduje wygenerowanie dokumentacji tylko dla kodu projektu (bez zależności zewnetrznych), co znacznie przyspiesza proces i czyni dokumentację bardziej czytelną.
 
-
+c
 ## Przydatne komendy na windows jesli sa problemy z kompilacja 
 
 ```bash
 winget install -e --id LLVM.LLVM --silent --accept-package-agreements --accept-source-agreements
+```
+
+dla weryfikacji instalacji nalezy sprawdzi czy clang-cl zostal dodany do PATH. 
+
+```bash 
+clang-cl --version
+```
+Jesli intalacja przebiegla pomyslnie ale program sie nie uruchomil nalezy dodac go do PATH: 
+
+```bash 
+$env:Path += ";C:\Program Files\LLVM\bin"
+$env:CC="clang-cl"; $env:CXX="clang-cl"; clang-cl --version
+```
+
+Potem mozna juz uruchomic kompilacje i uruchomienie programu: 
+
+```
+~ cargo run
 ```
