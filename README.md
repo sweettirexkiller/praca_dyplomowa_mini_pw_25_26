@@ -171,3 +171,8 @@ Potem mozna juz uruchomic kompilacje i uruchomienie programu:
 ```
 ~ cargo run
 ```
+
+# UWAGA 
+
+Jeśli program nadal się nie kompilje, bardzo mozliwe ze problem jest w starym msvc. Nalezy pobrac i zainstalowac najnowszy: 
+[Visual Studio Latest Release](https://visualstudio.microsoft.com/downloads/) - [zrodlo rozwiazania](https://github.com/livekit/rust-sdks/issues/249)
