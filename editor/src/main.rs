@@ -33,11 +33,8 @@ fn main() -> eframe::Result<()> {
     native_options.centered = true;
     dotenv::dotenv().ok();
 
-    // In a real app, this ID should be unique per client (e.g., random or assigned by server)
-    // let local_replica_id = 1;
-
     eframe::run_native(
-        "Collaborative Whiteboard - Automerge + LiveKit",
+        "Collaborative Whiteboard",
         native_options,
         Box::new(move |_cc| {
             Ok(Box::new(AppView::new(Box::new(AutomergeBackend::new()))))

@@ -26,6 +26,10 @@ impl AutomergeBackend {
     }
 }
 
+/// Provides a default way to create a new instance of `AutomergeBackend` by calling its `new` method.
+/// 
+/// This implementation allows `AutomergeBackend` to be used with constructs that require the `Default` trait,
+/// such as `Option::unwrap_or_default()` or `Vec::with_capacity()`.
 impl Default for AutomergeBackend {
     fn default() -> Self {
         Self::new()
