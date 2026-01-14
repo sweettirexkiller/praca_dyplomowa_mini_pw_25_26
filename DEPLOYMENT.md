@@ -7,7 +7,7 @@
 
 - zdalny serwer (mozliwosc testowania pracy zdalnej)
 - zbudowany gotowy plik do uruchomienia na macos i windows
-- nalezy rozpokowac odpowiednia paczke .zip w folderze /releases/ i uruchomic w terminalu program
+- nalezy rozpokowac odpowiednia paczke .zip w folderze glownym projekty i uruchomic w terminalu program
 
 
 ## 2. Uruchomienie Aplikacji w środowisku Deweloperskim
