@@ -50,7 +50,7 @@ Aby uruchomić edytor trzeba skorzystac z flagi przy uruchamianiu kompilatora by
 uzyc odpowiedniego kompliatora obiektowego c.
 
 ```
-~ RUSTFLAGS="-C link-arg=-ObjC" cargo run
+~ cargo run
 ```
 
 ### Jak uruchomić lokalny serwer SFU live kit i jak z niego korzystać w command line?
@@ -142,8 +142,14 @@ Po więcej koment odsyłam do dokumentacji lib `lk --help`.
 Aby wygenerować dokumentację projektu z komentarzy w kodzie, należy skorzystać z narzędzia `cargo doc`. Poniższa komenda wygeneruje dokumentację i automatycznie otworzy ją w domyślnej przeglądarce:
 
 ```bash
-RUSTFLAGS="-C link-arg=-ObjC" cargo doc --no-deps --open
+cargo doc --no-deps --open
 ```
 
 Opcja `--no-deps` powoduje wygenerowanie dokumentacji tylko dla kodu projektu (bez zależności zewnetrznych), co znacznie przyspiesza proces i czyni dokumentację bardziej czytelną.
 
+
+## Przydatne komendy na windows jesli sa problemy z kompilacja 
+
+```bash
+winget install -e --id LLVM.LLVM --silent --accept-package-agreements --accept-source-agreements
+```
