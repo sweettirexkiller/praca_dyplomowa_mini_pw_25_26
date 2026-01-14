@@ -3,13 +3,12 @@
 **Projekt:** Real-time Collaborative Whiteboard  
 **Technologia:** Rust, LinkKit, Automerge, egui  
 
-## 1. Wymagania Systemowe
+## 1. Uruchomienie Aplikacji w środowisku BETA
 
-Aby uruchomić aplikację w trybie deweloperskim lub produkcyjnym, wymagane są:
+a) Uruchomienie na systemie windows: 
+```bash
 
-*   **System Operacyjny:** macOS (zalecane ze względu na biblioteki graficzne Metal) lub Linux/Windows (wymaga innej konfiguracji flag kompilatora).
-*   **Rust Toolchain:** `stable` (zainstalowany przez `rustup`).
-*   **Docker:** Do uruchomienia lokalnego serwera LiveKit.
+```
 
 ## 2. Konfiguracja Serwera (LiveKit)
 

@@ -1,2 +1,6 @@
-[build]
+# [build]
+# rustflags = ["-C", "link-arg=-ObjC"]
+
+[target.'cfg(target_os = "macos")']
 rustflags = ["-C", "link-arg=-ObjC"]
+

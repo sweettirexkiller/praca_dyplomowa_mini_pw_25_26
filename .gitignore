@@ -32,3 +32,6 @@ target
 *.out
 
 **/.env
+editor/.env_lk
+editor/.env_vps
+editor/.env_local_docker
