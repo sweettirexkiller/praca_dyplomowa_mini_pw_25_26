@@ -181,5 +181,5 @@ Jeśli program nadal się nie kompilje, bardzo mozliwe ze problem jest w starym 
 Ostatecznie proponuje uzyc komendy: 
 
 ```bash
-$env:Path += ";C:\Program Files\LLVM\bin"; $env:CC="clang-cl"; $env:CXX="clang-cl"; $env:CARGO_TARGET_DIR="C:\Users\piotr\rust_build"; $env:RUSTFLAGS="-C target-feature=+crt-static"; cargo clean; cargo build
+$env:CC=$null; $env:CXX=$null; $env:CARGO_TARGET_DIR="C:\Users\piotr\rust_build"; $env:RUSTFLAGS="-C target-feature=+crt-static"; cargo clean; cargo run  
 ```
