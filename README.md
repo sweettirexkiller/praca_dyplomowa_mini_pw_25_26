@@ -50,7 +50,7 @@ Aby uruchomić edytor trzeba skorzystac z flagi przy uruchamianiu kompilatora by
 uzyc odpowiedniego kompliatora obiektowego c.
 
 ```
-~ RUSTFLAGS="-C link-arg=-ObjC" cargo run
+~ cargo run
 ```
 
 ### Jak uruchomić lokalny serwer SFU live kit i jak z niego korzystać w command line?
@@ -142,8 +142,37 @@ Po więcej koment odsyłam do dokumentacji lib `lk --help`.
 Aby wygenerować dokumentację projektu z komentarzy w kodzie, należy skorzystać z narzędzia `cargo doc`. Poniższa komenda wygeneruje dokumentację i automatycznie otworzy ją w domyślnej przeglądarce:
 
 ```bash
-RUSTFLAGS="-C link-arg=-ObjC" cargo doc --no-deps --open
+cargo doc --no-deps --open
 ```
 
 Opcja `--no-deps` powoduje wygenerowanie dokumentacji tylko dla kodu projektu (bez zależności zewnetrznych), co znacznie przyspiesza proces i czyni dokumentację bardziej czytelną.
 
+c
+## Przydatne komendy na windows jesli sa problemy z kompilacja 
+
+```bash
+winget install -e --id LLVM.LLVM --silent --accept-package-agreements --accept-source-agreements
+```
+
+dla weryfikacji instalacji nalezy sprawdzi czy clang-cl zostal dodany do PATH. 
+
+```bash 
+clang-cl --version
+```
+Jesli intalacja przebiegla pomyslnie ale program sie nie uruchomil nalezy dodac go do PATH: 
+
+```bash 
+$env:Path += ";C:\Program Files\LLVM\bin"
+$env:CC="clang-cl"; $env:CXX="clang-cl"; clang-cl --version
+```
+
+Potem mozna juz uruchomic kompilacje i uruchomienie programu: 
+
+```
+~ cargo run
+```
+
+# UWAGA 
+
+Jeśli program nadal się nie kompilje, bardzo mozliwe ze problem jest w starym msvc. Nalezy pobrac i zainstalowac najnowszy: 
+[Visual Studio Latest Release](https://visualstudio.microsoft.com/downloads/) - [zrodlo rozwiazania](https://github.com/livekit/rust-sdks/issues/249)
