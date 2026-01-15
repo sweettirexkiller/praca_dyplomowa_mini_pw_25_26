@@ -36,6 +36,54 @@ impl Default for AutomergeBackend {
     }
 }
 
+/// Implementation of the `DocBackend` trait for `AutomergeBackend`.
+///
+/// This backend uses [Automerge](https://automerge.org/) for real-time collaborative editing.
+/// Automerge is a CRDT (Conflict-free Replicated Data Type) library that enables multiple peers
+/// to concurrently modify shared data structures and automatically resolve conflicts.
+///
+/// # Methods
+///
+/// - `apply_intent`: Applies a user intent (drawing a stroke or clearing the canvas) to the document.
+///   - For `Intent::Draw`, serializes the stroke to JSON and inserts it into the "strokes" list.
+///   - For `Intent::Clear`, removes all strokes from the "strokes" list.
+///   - Ensures the "strokes" list exists, creating it if necessary.
+///   - Returns a `FrontendUpdate` containing the current strokes.
+///
+/// - `get_strokes`: Retrieves all strokes from the document.
+///   - Iterates over the "strokes" list, deserializing each JSON string into a `Stroke`.
+///   - Returns a vector of strokes.
+///
+/// - `peer_connected` / `peer_disconnected`: Handles peer connection events.
+///   - Maintains a sync state for each peer to track synchronization progress.
+///
+/// - `receive_sync_message`: Processes an incoming sync message from a peer.
+///   - Decodes the message and applies it to the document using Automerge's sync protocol.
+///   - Returns a `FrontendUpdate` with the latest strokes.
+///
+/// - `generate_sync_message`: Generates a sync message for a peer.
+///   - Uses Automerge's sync protocol to create a message containing document changes.
+///
+/// - `save` / `load`: Serializes and deserializes the Automerge document for persistence.
+///
+/// - `set_background` / `get_background`: Stores and retrieves background image data as bytes.
+///
+/// # Automerge Notes
+///
+/// - Automerge automatically merges changes from multiple peers without conflicts.
+/// - Data structures (like lists and maps) are identified by object IDs.
+/// - Changes are propagated via sync messages, which are exchanged between peers.
+/// - The backend maintains a sync state per peer to efficiently synchronize document changes.
+///
+/// # Error Handling
+///
+/// - Most operations use `unwrap` or `expect` for simplicity; production code should handle errors gracefully.
+/// - If the "strokes" list is missing, it is recreated automatically.
+///
+/// # Usage
+///
+/// This backend is suitable for collaborative drawing applications where multiple users
+/// can draw and erase strokes in real time, with changes seamlessly synchronized across peers.
 impl DocBackend for AutomergeBackend {
     fn apply_intent(&mut self, intent: Intent) -> FrontendUpdate {
         match intent {
