@@ -29,6 +29,8 @@ use eframe::NativeOptions;
 /// * `eframe::Result<()>` - Result of the application execution.
 fn main() -> eframe::Result<()> {
     println!("Starting Collaborative Whiteboard...");
+    /// Configuration options for the native window execution environment, initialized with default settings
+    /// such as window size, icon, and rendering context attributes.
     let mut native_options = NativeOptions::default();
     native_options.centered = true;
     dotenv::dotenv().ok();
