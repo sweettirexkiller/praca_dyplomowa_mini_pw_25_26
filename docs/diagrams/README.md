@@ -12,3 +12,5 @@ This directory contains UML diagrams documenting the architecture and flow of th
 - [UI Drawing Sequence](ui_drawing_sequence.md) - Detailed flow of user interaction.
 - [Backend Local Intent Sequence](automerge_backend_local_intent_sequence.md) - Internal backend handling of local actions.
 - [Backend Sync Sequence](automerge_backend_sync_sequence.md) - Internal backend handling of remote updates.
+- [UI Connection Sequence](ui_connection_sequence.md) - detailed flow of connecting to the room and initializing channels.
+- [UI Thread Communication Sequence](ui_thread_communication_sequence.md) - Detailed flow of the background network thread and LiveKit communication.
