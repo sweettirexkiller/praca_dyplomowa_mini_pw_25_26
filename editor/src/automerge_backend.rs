@@ -147,23 +147,32 @@ impl DocBackend for AutomergeBackend {
         println!("Peer disconnected: {}", peer_id);
         self.sync_states.remove(peer_id);
     }
-
+    /// Odbiera i przetwarza wiadomość synchronizacyjną od innego użytkownika.
     fn receive_sync_message(&mut self, peer_id: &str, message: Vec<u8>) -> FrontendUpdate {
+        // 1. Pobieramy "stan wiedzy" o tym koledze (sync_state).
         let sync_state = self.sync_states.entry(peer_id.to_string()).or_insert_with(sync::State::new);
         
+        // 2. Dekodujemy wiadomość (rozpakowujemy walizkę).
         if let Ok(msg) = sync::Message::decode(&message) {
+             // 3. "Wchłaniamy" zmiany do naszego dokumentu. To tutaj dzieje się łączenie (merge).
+             // Jednocześnie aktualizuje się sync_state, żebyśmy wiedzieli, że my też jesteśmy już "na bieżąco".
              self.doc.sync().receive_sync_message(sync_state, msg).ok();
         }
 
+        // Zwracamy nową listę kresek do odrysowania na ekranie.
         FrontendUpdate { strokes: self.get_strokes() }
     }
 
     fn generate_sync_message(&mut self, peer_id: &str) -> Option<Vec<u8>> {
         if let Some(sync_state) = self.sync_states.get_mut(peer_id) {
+            // Pytamy bibliotekę Automerge: "Hej, co nowego wydarzyło się od ostatniej synchronizacji?".
+            // Jeśli są nowe zmiany, Automerge pakuje je w binarną wiadomość.
             if let Some(msg) = self.doc.sync().generate_sync_message(sync_state) {
+                // Zwracamy pudełko z nowymi danymi.
                 return Some(msg.encode());
             }
         }
+        // Kolega jest już na bieżąco.
         None
     }
 
