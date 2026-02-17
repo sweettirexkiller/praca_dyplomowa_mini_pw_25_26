@@ -1,0 +1,38 @@
+# Fdb version 4
+["xdvipdfmx"] 1771353545.09977 "titlepage-bsc-en.xdv" "titlepage-bsc-en.pdf" "titlepage-bsc-en" 1771353546.36564 0
+  "titlepage-bsc-en.xdv" 1771353545.07435 3080 1495377b6308e04171b2f57d37a7f2dc "xelatex"
+  (generated)
+  "titlepage-bsc-en.pdf"
+  (rewritten before read)
+["xelatex"] 1771353544.83006 "titlepage-bsc-en.tex" "titlepage-bsc-en.xdv" "titlepage-bsc-en" 1771353546.3654 0
+  "/usr/local/texlive/2025/texmf-dist/tex/generic/iftex/iftex.sty" 1734129479 7984 7dbb9280f03c0a315425f1b4f35d43ee ""
+  "/usr/local/texlive/2025/texmf-dist/tex/generic/iftex/ifvtex.sty" 1572645307 1057 525c2192b5febbd8c1f662c9468335bb ""
+  "/usr/local/texlive/2025/texmf-dist/tex/latex/base/article.cls" 1738182759 20144 63d8bacaf52e5abf4db3bc322373e1d4 ""
+  "/usr/local/texlive/2025/texmf-dist/tex/latex/base/fontenc.sty" 1738182759 5275 0d62fb62162c7ab056e941ef18c5076d ""
+  "/usr/local/texlive/2025/texmf-dist/tex/latex/base/size12.clo" 1738182759 8449 ffe4ba2166a344827c3a832d1d5e0a91 ""
+  "/usr/local/texlive/2025/texmf-dist/tex/latex/fontspec/fontspec-xetex.sty" 1715459803 164981 148a15871e0e3c3101b8203733535af2 ""
+  "/usr/local/texlive/2025/texmf-dist/tex/latex/fontspec/fontspec.cfg" 1532898934 549 c4adac819276241fea8eb79c5ab7b99e ""
+  "/usr/local/texlive/2025/texmf-dist/tex/latex/fontspec/fontspec.sty" 1715459803 3755 4872b99d810c024f9c09bb1c62ffee3b ""
+  "/usr/local/texlive/2025/texmf-dist/tex/latex/geometry/geometry.sty" 1578002852 41601 9cf6c5257b1bc7af01a58859749dd37a ""
+  "/usr/local/texlive/2025/texmf-dist/tex/latex/graphics-cfg/graphics.cfg" 1465944070 1224 978390e9c2234eab29404bc21b268d1e ""
+  "/usr/local/texlive/2025/texmf-dist/tex/latex/graphics-def/xetex.def" 1663965824 14788 1dde73f396dd97d88c838bee2a352abe ""
+  "/usr/local/texlive/2025/texmf-dist/tex/latex/graphics/graphics.sty" 1730496337 18363 dee506cb8d56825d8a4d020f5d5f8704 ""
+  "/usr/local/texlive/2025/texmf-dist/tex/latex/graphics/graphicx.sty" 1717359999 8010 6f2ad8c2b2ffbd607af6475441c7b5e4 ""
+  "/usr/local/texlive/2025/texmf-dist/tex/latex/graphics/keyval.sty" 1717359999 2671 70891d50dac933918b827d326687c6e8 ""
+  "/usr/local/texlive/2025/texmf-dist/tex/latex/graphics/trig.sty" 1717359999 4023 2c9f39712cf7b43d3eb93a8bbd5c8f67 ""
+  "/usr/local/texlive/2025/texmf-dist/tex/latex/l3backend/l3backend-xetex.def" 1716410060 31593 96a7f07a08af85a2bbfee2e0a9cdbb50 ""
+  "/usr/local/texlive/2025/texmf-dist/tex/latex/l3kernel/expl3.sty" 1738271527 6565 f51d809db6193fae7b06c1bc26ca8f75 ""
+  "/usr/local/texlive/2025/texmf-dist/tex/latex/l3packages/xparse/xparse.sty" 1724879202 9783 ab4bee47700c04aadedb8da27591b0ab ""
+  "/usr/local/texlive/2025/texmf-dist/tex/latex/newunicodechar/newunicodechar.sty" 1523217988 4131 750798269645c90ec73b605fc5832add ""
+  "/usr/local/texlive/2025/texmf-dist/web2c/texmf.cnf" 1739380943 42148 61becc7c670cd061bb319c643c27fdd4 ""
+  "/usr/local/texlive/2025/texmf-var/web2c/xetex/xelatex.fmt" 1764425659 5639799 86b4914e182cf7474e217636c5d36c29 ""
+  "/usr/local/texlive/2025/texmf.cnf" 1741450484 577 418a7058ec8e006d8704f60ecd22c938 ""
+  "img/bachelor.png" 1643624536 63258 b38132a539725f51418de2ba57ceef0d ""
+  "img/wut.png" 1747220208 775093 6eac5d55a90c956e1a86eb61306759f4 ""
+  "titlepage-bsc-en.aux" 1771353545.07408 32 3985256e7290058c681f74d7a3565a19 "xelatex"
+  "titlepage-bsc-en.tex" 1771353535.09069 1580 468edd10b06344e98787939ad35bf59b ""
+  (generated)
+  "titlepage-bsc-en.aux"
+  "titlepage-bsc-en.log"
+  "titlepage-bsc-en.xdv"
+  (rewritten before read)
