@@ -9,6 +9,7 @@
 %\usepackage[MeX]{polski} % Not needed unless You have a name with polish symbols or sth
 \usepackage[T1]{fontenc}
 \usepackage[english, polish]{babel}
+\usepackage{float}           % Required for [H] placement specifier
 
 
 \usepackage{amsmath, amsfonts, amsthm, latexsym} % MOSTLY MATHEMATICAL SYMBOLS
@@ -280,18 +281,65 @@ Celem pracy inynierskiej jest zaprojektowanie i implementacja kolaboratywnej tab
 \section{Problem Description and Analysis}
 
 % Describe the problem and analyze its context here.
-Collaboratuve applications have not always been so popular as they are these days. You might not 
-even know that some of appliactions that we use every day are collaborative. In everyday life of a 
+Collaborative applications have not always been so popular as they are these days. You might not 
+even know that some of applications that we use every day are collaborative. In everyday life of a 
 software developer almost all of modern IDEs have collaborative work options, almost all project management 
-softare is also collaborative. There are examples close to software enginieers, but these applications do 
+software is also collaborative. There are examples close to software engineers, but these applications do 
 not limit themselves to software development. Google Docs, Microsoft 365, Figma, Miro and many more are examples of
 collaborative applications that are used by millions of people every day. These applications are not only used for work, 
 but also for education and entertainment. 
 
-It hasn't always been like this. The steep rise of collaborative applications began as the remote work becaome 
+It hasn't always been like this. The steep rise of collaborative applications began as the remote work became 
 more popular but also it owes its development to universality of fast network globally and increase of computing power
 of everyday devices. 
 
+Current collaborative apps couldn't exist 20 years ago. They haven't been simply invented yet. Typical 
+application of early days of online applications had a simple architecture. It was a client-server application. 
+The server was responsible for storing data and processing it, while the client was responsible for presenting the 
+data to the user and sending user input to the server. 
+This architecture had its advantages and disadvantages. It was simple and easy to implement, but it had a single point of
+failure.
+If the server went down, the entire application went down. It also had scalability issues, as the server had to handle all the requests from the clients.
+
+% Place image exactly here
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.3\textwidth]{./images/simple-architecture.png}
+	\caption{Simple client-server architecture of early internet era applications}
+	\label{fig:simple-architecture}
+\end{figure}
+
+These kind of application belong to ``cloud-first'' family. There was no
+need for ``local-first'' architectures yet and this term has not been popularized yet. Before even the 
+discussion on topic of ``local-first architectures'' the ``cloud-first'' approach had its own more than one 
+decade 
+of fast development. From simple client server architectures the system rose to more difficult forms of 
+large size client-side application with lots of layers and microservices. Picture below shows architectures 
+that emerged 
+on the market with rise of popularity of mobile and web apps from 2010.
+
+% Place image exactly here
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.3\textwidth]{./images/more-complicated-architecture.png}
+	\caption{More complicated architecture of modern mobile/web applications}
+	\label{fig:more-complicated-architecture}
+\end{figure}
+
+How far are these architectures from beeing good fit for collaboarative appliactions? Lets have a look on
+ typical modules that take part in standrd user interface interaction. Picure below shows typical modules of 
+ morden web/mobile/desktop cloud-application.
+
+% Place image exactly here
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1.0\textwidth]{./images/complicated-modules.png}
+	\caption{Typical modules of modern cloud-based applications}
+	\label{fig:complicated-modules}
+\end{figure}
+
+
+ 
 
 
 
