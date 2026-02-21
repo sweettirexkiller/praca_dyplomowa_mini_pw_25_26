@@ -382,12 +382,42 @@ local-first system look. The diagram below shows typical sequance in such system
 \end{figure}
 
 
+The distinction is clear. In local-first approach the user interaction with the system is not dependent 
+on connectivity with the database. Connectivity brings only messaging with other peers. Whole 
+synchronization of replicas of data between users happens on local machine. This is the reaseon 
+why we can call this system distributed. We can also notice that this approach requires much less
+modules across different serivces. Later, in the thesis, we will clearly how this concept allows
+us to bring true real time collaboration to the users.
+
+
+\section{Local-first vs Cloud-first}
+
+Lets have a look on the main differences between local-first and cloud-first approaches. 
+The table below shows the main differences between these two approaches when it comes to designing 
+collaborative application.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\textwidth]{./images/cloud-vs-local.png}
+	\caption{Cloud vs Local comparison}
+	\label{fig:complicated-modules}
+\end{figure}
+
+Clearly, the obvious choice for apprach when designing collaborative application would be Local-first. 
+Let's now try to  distinguish, what are boundaries of such system - what use cases are not applicable with 
+local-first apprach.
+
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1.0\textwidth]{./images/local-good-for.png}
+	\caption{Local-first approach use cases}
+	\label{fig:complicated-modules}
+\end{figure}
+
+
 
 \section{OT vs CRDTs}
-
-% Discuss other known solutions (corrected spelling from "knwon" to "known").s
-
-
 
 \section{Motivation}
 

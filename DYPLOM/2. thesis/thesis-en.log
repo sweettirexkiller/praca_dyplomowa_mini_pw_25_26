@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.11.29)  21 FEB 2026 18:53
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.11.29)  21 FEB 2026 19:35
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -389,6 +389,12 @@ LaTeX Warning: Label `fig:complicated-modules' multiply defined.
 
 LaTeX Warning: Label `fig:complicated-modules' multiply defined.
 
+
+LaTeX Warning: Label `fig:complicated-modules' multiply defined.
+
+
+LaTeX Warning: Label `fig:complicated-modules' multiply defined.
+
 )
 \openout1 = `thesis-en.aux'.
 
@@ -478,12 +484,12 @@ Package hyperref Info: Link coloring OFF on input line 171.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-<titlepage-en.pdf, id=71, 597.51233pt x 845.0471pt>
+<titlepage-en.pdf, id=75, 597.51233pt x 845.0471pt>
 File: titlepage-en.pdf Graphic file (type pdf)
 <use titlepage-en.pdf>
 Package pdftex.def Info: titlepage-en.pdf  used on input line 175.
 (pdftex.def)             Requested size: 597.51086pt x 845.04504pt.
-<titlepage-en.pdf, id=73, page=1, 597.51233pt x 845.0471pt>
+<titlepage-en.pdf, id=77, page=1, 597.51233pt x 845.0471pt>
 File: titlepage-en.pdf Graphic file (type pdf)
 <use titlepage-en.pdf, page 1>
 Package pdftex.def Info: titlepage-en.pdf , page1 used on input line 175.
@@ -573,7 +579,7 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.}) has be
 l.269 \null\thispagestyle{empty}\newpage
                                          [2]
 Chapter 1.
-<./images/simple-architecture.png, id=155, 499.8675pt x 851.18pt>
+<./images/simple-architecture.png, id=161, 499.8675pt x 851.18pt>
 File: ./images/simple-architecture.png Graphic file (type png)
 <use ./images/simple-architecture.png>
 Package pdftex.def Info: ./images/simple-architecture.png  used on input line 307.
@@ -586,7 +592,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 [11
 
 ]
-<./images/more-complicated-architecture.png, id=161, 633.36626pt x 1059.96pt>
+<./images/more-complicated-architecture.png, id=167, 633.36626pt x 1059.96pt>
 File: ./images/more-complicated-architecture.png Graphic file (type png)
 <use ./images/more-complicated-architecture.png>
 Package pdftex.def Info: ./images/more-complicated-architecture.png  used on input line 324.
@@ -601,12 +607,12 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [12 <./images/simple-architecture.png> <./images/more-complicated-architecture.png>]
-<./images/complicated-modules.png, id=170, 3468.96pt x 192.72pt>
+<./images/complicated-modules.png, id=176, 3468.96pt x 192.72pt>
 File: ./images/complicated-modules.png Graphic file (type png)
 <use ./images/complicated-modules.png>
 Package pdftex.def Info: ./images/complicated-modules.png  used on input line 336.
 (pdftex.def)             Requested size: 455.24413pt x 25.28972pt.
-<./images/typical-sequance.png, id=171, 4265.9375pt x 5199.425pt>
+<./images/typical-sequance.png, id=177, 4265.9375pt x 5199.425pt>
 File: ./images/typical-sequance.png Graphic file (type png)
 <use ./images/typical-sequance.png>
 Package pdftex.def Info: ./images/typical-sequance.png  used on input line 359.
@@ -624,7 +630,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [13 <./images/complicated-modules.png>]
-<./images/local-first-sequanec.png, id=179, 4265.9375pt x 3543.2375pt>
+<./images/local-first-sequanec.png, id=185, 4265.9375pt x 3543.2375pt>
 File: ./images/local-first-sequanec.png Graphic file (type png)
 <use ./images/local-first-sequanec.png>
 Package pdftex.def Info: ./images/local-first-sequanec.png  used on input line 379.
@@ -642,6 +648,15 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [14 <./images/typical-sequance.png>]
+<./images/cloud-vs-local.png, id=192, 3201.9625pt x 3392.675pt>
+File: ./images/cloud-vs-local.png Graphic file (type png)
+<use ./images/cloud-vs-local.png>
+Package pdftex.def Info: ./images/cloud-vs-local.png  used on input line 401.
+(pdftex.def)             Requested size: 318.6695pt x 337.6308pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -651,10 +666,37 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [15 <./images/local-first-sequanec.png>]
+<./images/local-good-for.png, id=201, 5994.395pt x 4035.075pt>
+File: ./images/local-good-for.png Graphic file (type png)
+<use ./images/local-good-for.png>
+Package pdftex.def Info: ./images/local-good-for.png  used on input line 413.
+(pdftex.def)             Requested size: 455.24413pt x 306.43492pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[16 <./images/cloud-vs-local.png>]
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[17 <./images/local-good-for.png>]
 Chapter 2.
 
 
-[16
+[18
 
 ]
 
@@ -669,22 +711,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[17]
-
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 13.59999pt, for example:
-(fancyhdr)                \setlength{\headheight}{13.59999pt}.
-(fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
-
-[18]
-Chapter 3.
-
-
-[19
-
-]
+[19]
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -694,12 +721,27 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [20]
+Chapter 3.
+
+
+[21
+
+]
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[22]
 
 
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.672 \chapter
+l.702 \chapter
               *{List of symbols and abbreviations} [1
 
 ]
@@ -708,7 +750,7 @@ l.672 \chapter
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.685 \listoffigures
+l.715 \listoffigures
                      [2
 
 ] (./thesis-en.lof)
@@ -721,7 +763,7 @@ l.685 \listoffigures
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.692 \listoftables
+l.722 \listoftables
                     [3
 
 ] (./thesis-en.lot)
@@ -734,7 +776,7 @@ l.692 \listoftables
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.697 \chapter
+l.727 \chapter
               *{List of appendices} [4
 
 ]
@@ -743,7 +785,7 @@ l.697 \chapter
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.706 \end{document}
+l.736 \end{document}
                      [5
 
 ] (./thesis-en.aux)
@@ -756,21 +798,21 @@ L3 programming layer <2025-01-18>
 LaTeX Warning: There were multiply-defined labels.
 
 Package rerunfilecheck Info: File `thesis-en.out' has not changed.
-(rerunfilecheck)             Checksum: B8C81C5AA3C1C4689E16785AFA6F39B1;2618.
+(rerunfilecheck)             Checksum: AA41FF794DF0B346DCB41614DF08C07C;2809.
  ) 
 Here is how much of TeX's memory you used:
- 13779 strings out of 473190
- 218019 string characters out of 5715799
- 647196 words of memory out of 5000000
- 36746 multiletter control sequences out of 15000+600000
+ 13799 strings out of 473190
+ 218551 string characters out of 5715799
+ 647153 words of memory out of 5000000
+ 36761 multiletter control sequences out of 15000+600000
  570881 words of font info for 67 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  75i,17n,79p,701b,640s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/latxfont/lcircle1.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfbx1095.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfcc1095.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfrm0800.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfti1095.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sftt1095.pfb>
-Output written on thesis-en.pdf (23 pages, 1807094 bytes).
+Output written on thesis-en.pdf (25 pages, 2814983 bytes).
 PDF statistics:
- 375 PDF objects out of 1000 (max. 8388607)
- 276 compressed objects within 3 object streams
- 62 named destinations out of 1000 (max. 500000)
- 177 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 399 PDF objects out of 1000 (max. 8388607)
+ 293 compressed objects within 3 object streams
+ 67 named destinations out of 1000 (max. 500000)
+ 195 words of extra memory for PDF output out of 10000 (max. 10000000)
 
