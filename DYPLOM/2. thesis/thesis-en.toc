@@ -6,14 +6,15 @@
 \contentsline {chapter}{Introduction}{11}{chapter.1}%
 \contentsline {section}{\numberline {1.1}Analysis and description of collaborative local-first applications}{11}{section.1.1}%
 \contentsline {section}{\numberline {1.2}Local-first vs Cloud-first}{15}{section.1.2}%
-\contentsline {section}{\numberline {1.3}OT vs CRDTs}{17}{section.1.3}%
-\contentsline {section}{\numberline {1.4}Motivation}{17}{section.1.4}%
-\contentsline {section}{\numberline {1.5}Examples}{17}{section.1.5}%
+\contentsline {section}{\numberline {1.3}Why would one implement own collaborative system ?}{17}{section.1.3}%
+\contentsline {section}{\numberline {1.4}Examples from industry}{17}{section.1.4}%
+\contentsline {section}{\numberline {1.5}Known architecture solutions for collaborative applications}{17}{section.1.5}%
 \contentsline {section}{\numberline {1.6}Vision of the System}{17}{section.1.6}%
-\contentsline {section}{\numberline {1.7}Requirements Specification}{17}{section.1.7}%
-\contentsline {subsection}{\numberline {1.7.1}Functional Requirements}{17}{subsection.1.7.1}%
-\contentsline {subsection}{\numberline {1.7.2}Non-Functional Requirements}{17}{subsection.1.7.2}%
-\contentsline {section}{\numberline {1.8}Business Cases}{17}{section.1.8}%
+\contentsline {section}{\numberline {1.7}OT vs CRDTs}{17}{section.1.7}%
+\contentsline {section}{\numberline {1.8}Requirements Specification}{17}{section.1.8}%
+\contentsline {subsection}{\numberline {1.8.1}Functional Requirements}{17}{subsection.1.8.1}%
+\contentsline {subsection}{\numberline {1.8.2}Non-Functional Requirements}{17}{subsection.1.8.2}%
+\contentsline {section}{\numberline {1.9}Business Cases}{17}{section.1.9}%
 \contentsline {chapter}{\numberline {2}Example chapter}{18}{chapter.2}%
 \contentsline {section}{\numberline {2.1}Example section}{18}{section.2.1}%
 \contentsline {subsection}{\numberline {2.1.1}Example subsection}{18}{subsection.2.1.1}%

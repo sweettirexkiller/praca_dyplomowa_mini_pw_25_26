@@ -358,7 +358,7 @@ interaction of a user with normal cloud-basen application.
 	\centering
 	\includegraphics[width=0.7\textwidth]{./images/typical-sequance.png}
 	\caption{Typical sequance of interaction with a user in a modern cloud-based applications}
-	\label{fig:complicated-modules}
+	\label{fig:typical-sequence}
 \end{figure}
 
 
@@ -378,7 +378,7 @@ local-first system look. The diagram below shows typical sequance in such system
 	\centering
 	\includegraphics[width=0.7\textwidth]{./images/local-first-sequanec.png}
 	\caption{Typical sequance of interaction with a user in a local-first applications}
-	\label{fig:complicated-modules}
+	\label{fig:local-first-sequence}
 \end{figure}
 
 
@@ -400,36 +400,66 @@ collaborative application.
 	\centering
 	\includegraphics[width=0.7\textwidth]{./images/cloud-vs-local.png}
 	\caption{Cloud vs Local comparison}
-	\label{fig:complicated-modules}
+	\label{fig:cloud-vs-local}
 \end{figure}
 
 Clearly, the obvious choice for apprach when designing collaborative application would be Local-first. 
 Let's now try to  distinguish, what are boundaries of such system - what use cases are not applicable with 
-local-first apprach.
+local-first apprach. The table below shows use cases that are not good fit for local-first approach.
 
-
-\begin{figure}[H]
+\begin{table}[H]
 	\centering
-	\includegraphics[width=1.0\textwidth]{./images/local-good-for.png}
-	\caption{Local-first approach use cases}
-	\label{fig:complicated-modules}
-\end{figure}
+	\caption{Use cases: Suitable and Unsuitable for Local-First Approach}
+	\begin{tabular}{|p{0.45\textwidth}|p{0.45\textwidth}|}
+		\hline
+		\textbf{Suitable for} & \textbf{Unsuitable for} \\
+		\hline
+		Real-time collaborative editing (documents, whiteboards) & Applications requiring strong centralized control \\
+		Offline-first mobile/desktop apps & Systems with strict regulatory or audit requirements \\
+		Peer-to-peer file sharing & Applications with massive global data aggregation \\
+		Personal productivity tools with sync & Centralized transactional systems (e.g., banking) \\
+		Small/medium team collaboration & Apps needing immediate global consistency \\
+		\hline
+	\end{tabular}
+\end{table}
 
 
 
-\section{OT vs CRDTs}
+\section{Why would one implement own collaborative system ?}
 
-\section{Motivation}
+Creating collaborative whiterboard is just an intriduction to the general topic of distrubuted conflict 
+free real time data storage with editable operations. Designign whiteboard is easy exaple for system that
+can be used to many use cases (distribited conflict free data) - it serves as a  great introduction to
+ this topic. 
 
-% Explain why this problem is interesting.
+ There are multiple use cases/possible usage of distrubuted systems. For example drone swarms - distributed replicas 
+ of formation among drones broadcasted between each other. Peer-to-peer file sharing -
+  distributed replicas of files among users. Real time collaborative editing - distributed
+   replicas of documents among users. 
 
-\section{Examples}
+\section{Examples from industry}
+
+Known examples of local-first applications are: Figma, Miro, Notion, Obsidian, Roam Research, Coda, Google
+ Docs (although it is not pure local-first application).
+ These applications are used by millions of people every day. They are used for work, education and 
+ entertainment.
+
+
+\section{Known architecture solutions for collaborative applications}
+
+
+
+
+
 
 % Provide motivating examples.
 
 \section{Vision of the System}
 
-% Present the vision of the system.
+1. rust 2. start topology
+
+\section{OT vs CRDTs}
+
 
 \section{Requirements Specification}
 
