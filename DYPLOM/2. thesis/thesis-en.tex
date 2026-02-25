@@ -445,12 +445,70 @@ Known examples of local-first applications are: Figma, Miro, Notion, Obsidian, R
  entertainment.
 
 
-\section{Known architecture solutions for collaborative applications}
+\section{Known architectures for collaborative applications}
 
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{./images/p2p-vs-start.png}
+	\caption{Comparison of Client-Server and Peer-to-Peer (P2P) Architectures}
+	\label{fig:client-server-vs-p2p}
+\end{figure}
+
+Connectivity among multiple users is always solved eigher by peer-to-peer or more "centered" relay 
+architecure for example start-topology. When designig a collaborative system each solution has its
+benefits and setbacks. In a table belowe there is simple analysis of pros and cons of choosing one or the ohter
+when designing local-first collaborative whiteboard.
 
 
+\begin{table}[H]
+	\centering
+	\caption{Comparison of Peer-to-Peer and Star Topology Architectures}
+	\begin{tabular}{|p{0.45\textwidth}|p{0.45\textwidth}|}
+		\hline
+		\textbf{Peer-to-Peer (P2P)} & \textbf{Star Topology} \\
+		\hline
+		No need to create a server for communication. Communication is direct - good. Clients manage their connections themselves - might be problematic.
+		& Central node relays communication. It requires support of server. Keeping servers running is expansive.\\
+		\hline
+		Communication might be faster because it is direct. Users might be close to each other. &
+		Clients sometimes might unnesesarry communicate via very distant server to both of them, which would cause delays. \\
+		\hline
+		High resilience to single node failure & Central node is a single point of failure \\
+		\hline
+		Complex synchronization and conflict resolution - corrdination of connections has to be implemented on client side. 
+		& Easier management and coordination - server keeps all informations on connectivity. Clients connect only to one server. \\
+		\hline
+		Scalability can be challenging - many users might have very low maximum of connections it could sustain. & 
+		Scalability depends on central node capacity, but server can easily be scaled hirizontlay or verticaly\\
+		\hline
+		Suitable for decentralized systems with limited numer of peers at the same time (for example 10) 
+		& Suitable for medium (up to 50) teams with central coordination - for example video conferance rooms \\
+		\hline
+	\end{tabular}
+\end{table}
 
+As we can see - each solution suits different applications.
+
+
+\section{OT vs CRDTs}
+
+One very important topic in the matter of conflict resolution and collaboration is data structures algorightms 
+that can be used. Local / remote inserts into data structures need to be \textbf{commutative}, \textbf{associative} and \textbf{idempotent}.
+These three properties are required to ensure that all replicas of data will be eventually consistent - assuming that all 
+operations (inserts/deletes) propagate properly. There are two main
+approaches to achieve this - OT (operational transformation) and CRDTs (conflict-free replicated data types).
+
+Historically well known solution is OT - operational transformations. The basic idea
+behind this approach is to transform operations in such a way that they can be applied in any order and still produce the same result.
+This approach was used in Google Docs and it is still used in some applications. However, it has some drawbacks. It is complex to implement and
+ it can lead to conflicts that are difficult to resolve.
+
+CRDTs - conflict-free replicated data types - are a more recent approach to achieve eventual consistency in distributed systems.
+The basic idea behind CRDTs is to design data structures in such a way that they can be updated independently and still converge
+ to the same state. The algorithms are implemented directly into data structures. This approach is simpler to implement and it can
+  handle conflicts more gracefully. It is used in many modern applications, including Figma, Miro, Notion, Obsidian, Roam Research, 
+  Coda and many more.
 
 % Provide motivating examples.
 
@@ -458,7 +516,6 @@ Known examples of local-first applications are: Figma, Miro, Notion, Obsidian, R
 
 1. rust 2. start topology
 
-\section{OT vs CRDTs}
 
 
 \section{Requirements Specification}
