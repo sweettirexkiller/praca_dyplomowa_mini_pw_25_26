@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.11.29)  26 FEB 2026 19:34
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.11.29)  26 FEB 2026 19:59
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -729,32 +729,32 @@ Underfull \hbox (badness 2556) in paragraph at lines 556--557
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 562--563
+Underfull \hbox (badness 10000) in paragraph at lines 574--575
 []\T1/cmr/m/n/10.95 differentiate be-tween el-e-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 572--573
+Underfull \hbox (badness 10000) in paragraph at lines 584--585
 []\T1/cmr/m/n/10.95 begin a fresh col-lab-o-ra-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 572--573
+Underfull \hbox (badness 10000) in paragraph at lines 584--585
 \T1/cmr/m/n/10.95 tive ses-sion or per-sonal
  []
 
 
-Underfull \hbox (badness 3271) in paragraph at lines 574--575
+Underfull \hbox (badness 3271) in paragraph at lines 586--587
 []\T1/cmr/m/n/10.95 work to-gether with other
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 582--583
+Underfull \hbox (badness 10000) in paragraph at lines 594--595
 []\T1/cmr/m/n/10.95 communicate tex-tu-ally
  []
 
 
-Underfull \hbox (badness 2961) in paragraph at lines 582--583
+Underfull \hbox (badness 2961) in paragraph at lines 594--595
 \T1/cmr/m/n/10.95 along-side vi-sual col-lab-o-ra-
  []
 
@@ -771,7 +771,97 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [20 <./images/architecture.png>]
-Overfull \vbox (60.76436pt too high) has occurred while \output is active []
+Overfull \hbox (0.71977pt too wide) in paragraph at lines 611--611
+[]\T1/cmr/m/n/10.95 Application| 
+ []
+
+
+Underfull \hbox (badness 5460) in paragraph at lines 611--612
+[]\T1/cmr/m/n/10.95 enable offline-capable and
+ []
+
+
+Overfull \hbox (0.71977pt too wide) in paragraph at lines 613--613
+[]\T1/cmr/m/n/10.95 Application| 
+ []
+
+
+Underfull \hbox (badness 2644) in paragraph at lines 613--613
+[]\T1/cmr/m/n/10.95 render all strokes stored in the
+ []
+
+
+Underfull \hbox (badness 1496) in paragraph at lines 613--614
+[]\T1/cmr/m/n/10.95 display the cur-rent white-
+ []
+
+
+Overfull \hbox (0.71977pt too wide) in paragraph at lines 615--615
+[]\T1/cmr/m/n/10.95 Application| 
+ []
+
+
+Overfull \hbox (0.71977pt too wide) in paragraph at lines 617--617
+[]\T1/cmr/m/n/10.95 Application| 
+ []
+
+
+Overfull \hbox (0.71977pt too wide) in paragraph at lines 619--619
+[]\T1/cmr/m/n/10.95 Application| 
+ []
+
+
+Underfull \hbox (badness 2384) in paragraph at lines 619--619
+[]\T1/cmr/m/n/10.95 establish a We-bRTC data chan-
+ []
+
+
+Overfull \hbox (0.71977pt too wide) in paragraph at lines 621--621
+[]\T1/cmr/m/n/10.95 Application| 
+ []
+
+
+Underfull \hbox (badness 4279) in paragraph at lines 621--622
+[]\T1/cmr/m/n/10.95 allow other users to see
+ []
+
+
+Overfull \hbox (0.71977pt too wide) in paragraph at lines 623--623
+[]\T1/cmr/m/n/10.95 Application| 
+ []
+
+
+Overfull \hbox (0.71977pt too wide) in paragraph at lines 625--625
+[]\T1/cmr/m/n/10.95 Application| 
+ []
+
+
+Underfull \hbox (badness 3439) in paragraph at lines 625--625
+\T1/cmr/m/n/10.95 chro-niza-tion on sep-a-rate threads
+ []
+
+
+Overfull \hbox (0.71977pt too wide) in paragraph at lines 627--627
+[]\T1/cmr/m/n/10.95 Application| 
+ []
+
+
+Overfull \hbox (0.71977pt too wide) in paragraph at lines 629--629
+[]\T1/cmr/m/n/10.95 Application| 
+ []
+
+
+Underfull \hbox (badness 1661) in paragraph at lines 629--630
+[]\T1/cmr/m/n/10.95 restore a pre-vi-ously saved
+ []
+
+
+Overfull \hbox (0.71977pt too wide) in paragraph at lines 631--631
+[]\T1/cmr/m/n/10.95 Application| 
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 
@@ -783,112 +873,22 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [21]
-Overfull \hbox (0.71977pt too wide) in paragraph at lines 599--599
+Overfull \hbox (0.71977pt too wide) in paragraph at lines 644--644
 []\T1/cmr/m/n/10.95 Application| 
  []
 
 
-Underfull \hbox (badness 5460) in paragraph at lines 599--600
-[]\T1/cmr/m/n/10.95 enable offline-capable and
- []
-
-
-Overfull \hbox (0.71977pt too wide) in paragraph at lines 601--601
-[]\T1/cmr/m/n/10.95 Application| 
- []
-
-
-Underfull \hbox (badness 2644) in paragraph at lines 601--601
-[]\T1/cmr/m/n/10.95 render all strokes stored in the
- []
-
-
-Underfull \hbox (badness 1496) in paragraph at lines 601--602
-[]\T1/cmr/m/n/10.95 display the cur-rent white-
- []
-
-
-Overfull \hbox (0.71977pt too wide) in paragraph at lines 603--603
-[]\T1/cmr/m/n/10.95 Application| 
- []
-
-
-Overfull \hbox (0.71977pt too wide) in paragraph at lines 605--605
-[]\T1/cmr/m/n/10.95 Application| 
- []
-
-
-Overfull \hbox (0.71977pt too wide) in paragraph at lines 607--607
-[]\T1/cmr/m/n/10.95 Application| 
- []
-
-
-Underfull \hbox (badness 2384) in paragraph at lines 607--607
-[]\T1/cmr/m/n/10.95 establish a We-bRTC data chan-
- []
-
-
-Overfull \hbox (0.71977pt too wide) in paragraph at lines 609--609
-[]\T1/cmr/m/n/10.95 Application| 
- []
-
-
-Underfull \hbox (badness 4279) in paragraph at lines 609--610
-[]\T1/cmr/m/n/10.95 allow other users to see
- []
-
-
-Overfull \hbox (0.71977pt too wide) in paragraph at lines 611--611
-[]\T1/cmr/m/n/10.95 Application| 
- []
-
-
-Overfull \hbox (0.71977pt too wide) in paragraph at lines 624--624
-[]\T1/cmr/m/n/10.95 Application| 
- []
-
-
-Underfull \hbox (badness 3439) in paragraph at lines 624--624
-\T1/cmr/m/n/10.95 chro-niza-tion on sep-a-rate threads
- []
-
-
-Overfull \hbox (0.71977pt too wide) in paragraph at lines 626--626
-[]\T1/cmr/m/n/10.95 Application| 
- []
-
-
-Overfull \hbox (0.71977pt too wide) in paragraph at lines 628--628
-[]\T1/cmr/m/n/10.95 Application| 
- []
-
-
-Underfull \hbox (badness 1661) in paragraph at lines 628--629
-[]\T1/cmr/m/n/10.95 restore a pre-vi-ously saved
- []
-
-
-Overfull \hbox (0.71977pt too wide) in paragraph at lines 630--630
-[]\T1/cmr/m/n/10.95 Application| 
- []
-
-
-Overfull \hbox (0.71977pt too wide) in paragraph at lines 632--632
-[]\T1/cmr/m/n/10.95 Application| 
- []
-
-
-Underfull \hbox (badness 3471) in paragraph at lines 632--633
+Underfull \hbox (badness 3471) in paragraph at lines 644--645
 []\T1/cmr/m/n/10.95 guarantee even-tual con-sis-
  []
 
 
-Overfull \hbox (0.71977pt too wide) in paragraph at lines 634--634
+Overfull \hbox (0.71977pt too wide) in paragraph at lines 646--646
 []\T1/cmr/m/n/10.95 Application| 
  []
 
 
-Overfull \hbox (0.71977pt too wide) in paragraph at lines 636--636
+Overfull \hbox (0.71977pt too wide) in paragraph at lines 648--648
 []\T1/cmr/m/n/10.95 Application| 
  []
 
@@ -905,32 +905,32 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [22]
-Underfull \hbox (badness 10000) in paragraph at lines 649--650
+Underfull \hbox (badness 10000) in paragraph at lines 661--662
 []\T1/cmr/m/n/10.95 group col-lab-o-rat-ing users
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 655--656
+Underfull \hbox (badness 10000) in paragraph at lines 667--668
 []\T1/cmr/m/n/10.95 allow clients to ini-ti-ate
  []
 
 
-Underfull \hbox (badness 4518) in paragraph at lines 657--658
+Underfull \hbox (badness 4518) in paragraph at lines 669--670
 \T1/cmr/m/n/10.95 dis-con-nected user's cur-sor
  []
 
 
-Underfull \hbox (badness 3514) in paragraph at lines 661--662
+Underfull \hbox (badness 3514) in paragraph at lines 673--674
 []\T1/cmr/m/n/10.95 allow sev-eral col-lab-o-ra-tive
  []
 
 
-Underfull \hbox (badness 1616) in paragraph at lines 661--662
+Underfull \hbox (badness 1616) in paragraph at lines 673--674
 \T1/cmr/m/n/10.95 ses-sions to run si-mul-ta-ne-
  []
 
 
-Underfull \hbox (badness 4156) in paragraph at lines 663--664
+Underfull \hbox (badness 4156) in paragraph at lines 675--676
 []\T1/cmr/m/n/10.95 support the real-time re-
  []
 
@@ -1004,7 +1004,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.933 \chapter
+l.945 \chapter
               *{List of symbols and abbreviations} [1
 
 ]
@@ -1013,7 +1013,7 @@ l.933 \chapter
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.946 \listoffigures
+l.958 \listoffigures
                      [2
 
 ] (./thesis-en.lof)
@@ -1026,7 +1026,7 @@ l.946 \listoffigures
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.953 \listoftables
+l.965 \listoftables
                     [3
 
 ] (./thesis-en.lot)
@@ -1039,7 +1039,7 @@ l.953 \listoftables
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.958 \chapter
+l.970 \chapter
               *{List of appendices} [4
 
 ]
@@ -1048,7 +1048,7 @@ l.958 \chapter
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.967 \end{document}
+l.979 \end{document}
                      [5
 
 ] (./thesis-en.aux)
@@ -1060,18 +1060,18 @@ Package rerunfilecheck Info: File `thesis-en.out' has not changed.
 (rerunfilecheck)             Checksum: 65804B462CDFE604179B870DFF49F236;3423.
  ) 
 Here is how much of TeX's memory you used:
- 13832 strings out of 473190
- 219130 string characters out of 5715799
- 655896 words of memory out of 5000000
- 36779 multiletter control sequences out of 15000+600000
+ 13834 strings out of 473190
+ 219166 string characters out of 5715799
+ 660989 words of memory out of 5000000
+ 36780 multiletter control sequences out of 15000+600000
  570881 words of font info for 67 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  75i,17n,79p,701b,640s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/latxfont/lcircle1.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfbx1095.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfcc1095.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfrm0800.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfti1095.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sftt1095.pfb>
-Output written on thesis-en.pdf (32 pages, 2320443 bytes).
+Output written on thesis-en.pdf (32 pages, 2320811 bytes).
 PDF statistics:
- 454 PDF objects out of 1000 (max. 8388607)
- 337 compressed objects within 4 object streams
- 82 named destinations out of 1000 (max. 500000)
+ 456 PDF objects out of 1000 (max. 8388607)
+ 339 compressed objects within 4 object streams
+ 83 named destinations out of 1000 (max. 500000)
  208 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -548,7 +548,7 @@ For real-time, multithreaded communication, the system uses the Tokio library, e
 Below you can see tables with user stories for each actor in the system: user, application, and server.
 \begin{table}[H]
 	\centering
-	\caption{Functional Requirements -- User Stories (Actor: User)}
+	\caption{Functional Requirements -- User Stories (Actor: User) Part 1}
 	\begin{tabular}{|c|p{0.12\textwidth}|p{0.38\textwidth}|p{0.3\textwidth}|}
 		\hline
 		\textbf{ID} & \textbf{As a...} & \textbf{I want to...} & \textbf{In order to...} \\
@@ -558,6 +558,18 @@ Below you can see tables with user stories for each actor in the system: user, a
 		US-02 & User & draw freehand strokes on the whiteboard using a pen tool & express my ideas visually \\
 		\hline
 		US-03 & User & erase previously drawn strokes & correct mistakes or modify drawings \\
+				\hline
+	\end{tabular}
+	\label{tab:user-stories-user-1}
+\end{table}
+
+\begin{table}[H]
+	\centering
+	\caption{Functional Requirements -- User Stories (Actor: User) Part 2}
+	\begin{tabular}{|c|p{0.12\textwidth}|p{0.38\textwidth}|p{0.3\textwidth}|}
+		\hline
+		\textbf{ID} & \textbf{As a...} & \textbf{I want to...} & \textbf{In order to...} \\
+		
 		\hline
 		US-04 & User & change the color of the pen & differentiate between elements and add visual clarity \\
 		\hline
@@ -586,7 +598,7 @@ Below you can see tables with user stories for each actor in the system: user, a
 		US-16 & User & join a session without creating an account (only room code needed) & minimize friction and start collaborating instantly \\
 		\hline
 	\end{tabular}
-	\label{tab:user-stories-user}
+	\label{tab:user-stories-user-2}
 \end{table}
 
 \begin{table}[H]
@@ -610,6 +622,14 @@ Below you can see tables with user stories for each actor in the system: user, a
 		\hline
 		AP-07 & Application & receive and render remote cursor positions on the whiteboard & display collaborators' cursors with distinguishing color and name \\
 		\hline
+		AP-08 & Application & run network I/O and CRDT synchronization on separate threads (Tokio) & keep the UI responsive and non-blocking during communication \\
+		\hline
+		AP-09 & Application & serialize the CRDT document to a byte vector for file export & allow the user to save the full document state \\
+		\hline
+		AP-10 & Application & deserialize a byte vector from a file into a CRDT document & restore a previously saved whiteboard with full edit history \\
+		\hline
+		AP-11 & Application & read LiveKit connection credentials from an .env file or environment variables & configure server connectivity without hardcoding secrets \\
+		\hline
 	\end{tabular}
 	\label{tab:user-stories-application-1}
 \end{table}
@@ -620,14 +640,6 @@ Below you can see tables with user stories for each actor in the system: user, a
 	\begin{tabular}{|c|p{0.12\textwidth}|p{0.38\textwidth}|p{0.3\textwidth}|}
 		\hline
 		\textbf{ID} & \textbf{As a...} & \textbf{I want to...} & \textbf{In order to...} \\
-		\hline
-		AP-08 & Application & run network I/O and CRDT synchronization on separate threads (Tokio) & keep the UI responsive and non-blocking during communication \\
-		\hline
-		AP-09 & Application & serialize the CRDT document to a byte vector for file export & allow the user to save the full document state \\
-		\hline
-		AP-10 & Application & deserialize a byte vector from a file into a CRDT document & restore a previously saved whiteboard with full edit history \\
-		\hline
-		AP-11 & Application & read LiveKit connection credentials from an .env file or environment variables & configure server connectivity without hardcoding secrets \\
 		\hline
 		AP-12 & Application & resolve conflicts between concurrent edits automatically via CRDT merge & guarantee eventual consistency without manual conflict resolution \\
 		\hline

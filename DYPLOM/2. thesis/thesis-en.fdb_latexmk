@@ -1,6 +1,6 @@
 # Fdb version 4
-["pdflatex"] 1772130872.20457 "/Users/piotrjankiewicz/Documents/PROJEKTY/PW/praca_dyplomowa/DYPLOM/2. thesis/thesis-en.tex" "thesis-en.pdf" "thesis-en" 1772130874.42532 0
-  "/Users/piotrjankiewicz/Documents/PROJEKTY/PW/praca_dyplomowa/DYPLOM/2. thesis/thesis-en.tex" 1772130869.75085 40105 d19ba28819242bcce5bff1a2eda83daf ""
+["pdflatex"] 1772132380.01698 "/Users/piotrjankiewicz/Documents/PROJEKTY/PW/praca_dyplomowa/DYPLOM/2. thesis/thesis-en.tex" "thesis-en.pdf" "thesis-en" 1772132382.24493 0
+  "/Users/piotrjankiewicz/Documents/PROJEKTY/PW/praca_dyplomowa/DYPLOM/2. thesis/thesis-en.tex" 1772132379.86054 40460 32e7690e0b47d09f0483b4f77ffc3d23 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc" 1136849721 2971 def0b6c1f0b107b3b936def894055589 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/tfm/jknappen/ec/ecbx1095.tfm" 1136768653 3584 21b378cca2e40816b0e6d74a4dc98f04 ""
@@ -141,12 +141,12 @@
   "images/p2p-vs-start.png" 1772042521.32993 98359 451a154c522c8e011381cd83ab21d0e1 ""
   "images/simple-architecture.png" 1771680125.09726 48160 21030a67c923775374afc35b6e588c7d ""
   "images/typical-sequance.png" 1771695113.98044 794911 fa5f9b089fbe639af03cb09d916d54e0 ""
-  "thesis-en.aux" 1772130874.34382 7509 af043246a16bab1f7bc6cf8e5948f9f2 "pdflatex"
-  "thesis-en.lof" 1772130874.34526 1390 df9e15c434b8c053023f2cf676c33c00 "pdflatex"
-  "thesis-en.lot" 1772130874.34528 1080 b2dcb224a51b0115a22b18c0ec7fc01d "pdflatex"
-  "thesis-en.out" 1772130874.34506 3423 65804b462cdfe604179b870dff49f236 "pdflatex"
-  "thesis-en.tex" 1772130869.75085 40105 d19ba28819242bcce5bff1a2eda83daf ""
-  "thesis-en.toc" 1772130874.34524 1752 831b29169c6055a72c03c449c356e6bd "pdflatex"
+  "thesis-en.aux" 1772132382.16183 7820 9da3db53339c91fd03a4455666bf532c "pdflatex"
+  "thesis-en.lof" 1772132382.16315 1390 df9e15c434b8c053023f2cf676c33c00 "pdflatex"
+  "thesis-en.lot" 1772132382.16317 1220 72b7d60a430ad1fb9c1440e54fb42ea8 "pdflatex"
+  "thesis-en.out" 1772132382.16298 3423 65804b462cdfe604179b870dff49f236 "pdflatex"
+  "thesis-en.tex" 1772132379.86054 40460 32e7690e0b47d09f0483b4f77ffc3d23 ""
+  "thesis-en.toc" 1772132382.16313 1752 831b29169c6055a72c03c449c356e6bd "pdflatex"
   "titlepage-en.pdf" 1771353546.35062 635553 a1957b8146f9ca75fa29296a0bcde4de ""
   (generated)
   "thesis-en.aux"
