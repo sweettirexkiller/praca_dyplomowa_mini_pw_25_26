@@ -591,7 +591,7 @@ Below you can see tables with user stories for each actor in the system: user, a
 
 \begin{table}[H]
 	\centering
-	\caption{Functional Requirements -- User Stories (Actor: Application)}
+	\caption{Functional Requirements -- User Stories (Actor: Application, Part 1)}
 	\begin{tabular}{|c|p{0.12\textwidth}|p{0.38\textwidth}|p{0.3\textwidth}|}
 		\hline
 		\textbf{ID} & \textbf{As a...} & \textbf{I want to...} & \textbf{In order to...} \\
@@ -610,6 +610,17 @@ Below you can see tables with user stories for each actor in the system: user, a
 		\hline
 		AP-07 & Application & receive and render remote cursor positions on the whiteboard & display collaborators' cursors with distinguishing color and name \\
 		\hline
+	\end{tabular}
+	\label{tab:user-stories-application-1}
+\end{table}
+
+\begin{table}[H]
+	\centering
+	\caption{Functional Requirements -- User Stories (Actor: Application, Part 2)}
+	\begin{tabular}{|c|p{0.12\textwidth}|p{0.38\textwidth}|p{0.3\textwidth}|}
+		\hline
+		\textbf{ID} & \textbf{As a...} & \textbf{I want to...} & \textbf{In order to...} \\
+		\hline
 		AP-08 & Application & run network I/O and CRDT synchronization on separate threads (Tokio) & keep the UI responsive and non-blocking during communication \\
 		\hline
 		AP-09 & Application & serialize the CRDT document to a byte vector for file export & allow the user to save the full document state \\
@@ -625,7 +636,7 @@ Below you can see tables with user stories for each actor in the system: user, a
 		AP-14 & Application & provide a modern responsive GUI via the egui library & deliver a native desktop experience on macOS and Windows \\
 		\hline
 	\end{tabular}
-	\label{tab:user-stories-application}
+	\label{tab:user-stories-application-2}
 \end{table}
 
 \begin{table}[H]
