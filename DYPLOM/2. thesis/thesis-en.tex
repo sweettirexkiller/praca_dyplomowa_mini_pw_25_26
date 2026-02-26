@@ -553,15 +553,37 @@ Below you can see tables with user stories for each actor in the system: user, a
 		\hline
 		\textbf{ID} & \textbf{As a...} & \textbf{I want to...} & \textbf{In order to...} \\
 		\hline
-		US-01 & User & launch the desktop app and see blank whiteboard &  start drawing immediately without any setup \\
+		US-01 & User & launch the desktop app and see a blank whiteboard & start drawing immediately without any setup \\
 		\hline
-		US-02 & User & draw strokes on whiteboard & \\
+		US-02 & User & draw freehand strokes on the whiteboard using a pen tool & express my ideas visually \\
 		\hline
-		US-03 & User & & \\
+		US-03 & User & erase previously drawn strokes & correct mistakes or modify drawings \\
 		\hline
-		US-04 & User & & \\
+		US-04 & User & change the color of the pen & differentiate between elements and add visual clarity \\
 		\hline
-		US-05 & User & & \\
+		US-05 & User & change the thickness (width) of the pen & draw both fine details and bold strokes \\
+		\hline
+		US-06 & User & clear the entire whiteboard & start drawing from an empty board again \\
+		\hline
+		US-07 & User & save the current whiteboard state to a file (.crdt/.png) & persist my work for later use \\
+		\hline
+		US-08 & User & load a previously saved whiteboard document (.crdt/.png) & continue working on a previous drawing \\
+		\hline
+		US-09 & User & create a new empty document & begin a fresh collaborative session or personal workspace \\
+		\hline
+		US-10 & User & enter a room name and connect to a collaborative session & work together with other users in real time \\
+		\hline
+		US-11 & User & disconnect from a collaborative session at any time & leave the room without closing the application \\
+		\hline
+		US-12 & User & see the cursors of other connected users on the whiteboard & know where collaborators are drawing and coordinate visually \\
+		\hline
+		US-13 & User & see strokes drawn by other users appear in real time & have a seamless collaborative experience \\
+		\hline
+		US-14 & User & send chat messages to other participants in the session & communicate textually alongside visual collaboration \\
+		\hline
+		US-15 & User & be notified when another participant joins or leaves the room & stay aware of who is currently collaborating \\
+		\hline
+		US-16 & User & join a session without creating an account (only room code needed) & minimize friction and start collaborating instantly \\
 		\hline
 	\end{tabular}
 	\label{tab:user-stories-user}
@@ -574,15 +596,33 @@ Below you can see tables with user stories for each actor in the system: user, a
 		\hline
 		\textbf{ID} & \textbf{As a...} & \textbf{I want to...} & \textbf{In order to...} \\
 		\hline
-		AP-01 & Application & & \\
+		AP-01 & Application & maintain a local CRDT document (Automerge) representing the whiteboard state & enable offline-capable and conflict-free editing \\
 		\hline
-		AP-02 & Application & & \\
+		AP-02 & Application & render all strokes stored in the CRDT as raster graphics on a canvas & display the current whiteboard state to the user \\
 		\hline
-		AP-03 & Application & & \\
+		AP-03 & Application & generate CRDT sync messages when local changes occur & propagate the user's drawing operations to all connected peers \\
 		\hline
-		AP-04 & Application & & \\
+		AP-04 & Application & receive and apply incoming CRDT sync messages from remote peers & update the local whiteboard with changes made by others \\
 		\hline
-		AP-05 & Application & & \\
+		AP-05 & Application & establish a WebRTC data channel connection through the LiveKit server & enable real-time, low-latency peer-to-peer communication \\
+		\hline
+		AP-06 & Application & broadcast the local user's cursor position to all connected peers & allow other users to see where the local user is pointing \\
+		\hline
+		AP-07 & Application & receive and render remote cursor positions on the whiteboard & display collaborators' cursors with distinguishing color and name \\
+		\hline
+		AP-08 & Application & run network I/O and CRDT synchronization on separate threads (Tokio) & keep the UI responsive and non-blocking during communication \\
+		\hline
+		AP-09 & Application & serialize the CRDT document to a byte vector for file export & allow the user to save the full document state \\
+		\hline
+		AP-10 & Application & deserialize a byte vector from a file into a CRDT document & restore a previously saved whiteboard with full edit history \\
+		\hline
+		AP-11 & Application & read LiveKit connection credentials from an .env file or environment variables & configure server connectivity without hardcoding secrets \\
+		\hline
+		AP-12 & Application & resolve conflicts between concurrent edits automatically via CRDT merge & guarantee eventual consistency without manual conflict resolution \\
+		\hline
+		AP-13 & Application & represent each stroke as a vector of points with associated width and color in the CRDT & faithfully reproduce strokes across all replicas \\
+		\hline
+		AP-14 & Application & provide a modern responsive GUI via the egui library & deliver a native desktop experience on macOS and Windows \\
 		\hline
 	\end{tabular}
 	\label{tab:user-stories-application}
@@ -595,15 +635,21 @@ Below you can see tables with user stories for each actor in the system: user, a
 		\hline
 		\textbf{ID} & \textbf{As a...} & \textbf{I want to...} & \textbf{In order to...} \\
 		\hline
-		SV-01 & Server & & \\
+		SV-01 & Server & manage rooms (channels) that users can join by name & group collaborating users into logical sessions \\
 		\hline
-		SV-02 & Server & & \\
+		SV-02 & Server & relay WebRTC data channel messages between all participants in a room (star topology) & ensure every client receives every peer's sync messages \\
 		\hline
-		SV-03 & Server & & \\
+		SV-03 & Server & authenticate incoming client connections using API key/secret token validation & prevent unauthorized access to collaboration rooms \\
 		\hline
-		SV-04 & Server & & \\
+		SV-04 & Server & notify all participants when a new user joins a room & allow clients to initiate CRDT sync with the newcomer \\
 		\hline
-		SV-05 & Server & & \\
+		SV-05 & Server & notify all participants when a user disconnects from a room & allow clients to remove the disconnected user's cursor and update UI \\
+		\hline
+		SV-06 & Server & automatically create a room when the first participant connects to a new room name & eliminate the need for manual room provisioning \\
+		\hline
+		SV-07 & Server & support multiple concurrent rooms with independent participant lists & allow several collaborative sessions to run simultaneously \\
+		\hline
+		SV-08 & Server & forward data channel packets with minimal latency & support the real-time requirements of collaborative whiteboard synchronization \\
 		\hline
 	\end{tabular}
 	\label{tab:user-stories-server}

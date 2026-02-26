@@ -13,12 +13,12 @@
 \contentsline {section}{\numberline {1.7}Vision of the System}{19}{section.1.7}%
 \contentsline {section}{\numberline {1.8}Requirements Specification}{20}{section.1.8}%
 \contentsline {subsection}{\numberline {1.8.1}Functional Requirements}{20}{subsection.1.8.1}%
-\contentsline {subsection}{\numberline {1.8.2}Non-Functional Requirements}{21}{subsection.1.8.2}%
-\contentsline {section}{\numberline {1.9}Business Cases}{21}{section.1.9}%
-\contentsline {chapter}{\numberline {2}Example chapter}{22}{chapter.2}%
-\contentsline {section}{\numberline {2.1}Example section}{22}{section.2.1}%
-\contentsline {subsection}{\numberline {2.1.1}Example subsection}{22}{subsection.2.1.1}%
-\contentsline {section}{\numberline {2.2}Floats -- tables and figures}{23}{section.2.2}%
-\contentsline {chapter}{\numberline {3}The next chapter}{25}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Matrices}{25}{section.3.1}%
+\contentsline {subsection}{\numberline {1.8.2}Non-Functional Requirements}{23}{subsection.1.8.2}%
+\contentsline {section}{\numberline {1.9}Business Cases}{23}{section.1.9}%
+\contentsline {chapter}{\numberline {2}Example chapter}{24}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Example section}{24}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1}Example subsection}{24}{subsection.2.1.1}%
+\contentsline {section}{\numberline {2.2}Floats -- tables and figures}{25}{section.2.2}%
+\contentsline {chapter}{\numberline {3}The next chapter}{27}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Matrices}{27}{section.3.1}%
 \contentsfinish 
