@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.11.29)  26 FEB 2026 19:59
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.11.29)  26 FEB 2026 20:24
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -62,9 +62,15 @@ Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \float@box=\box52
 \@float@everytoks=\toks20
 \@floatcapt=\box53
+) (/usr/local/texlive/2025/texmf-dist/tex/latex/multirow/multirow.sty
+Package: multirow 2024/11/12 v2.9 Span multiple rows of a table
+\multirow@colwidth=\skip51
+\multirow@cntb=\count274
+\multirow@dima=\skip52
+\bigstrutjot=\dimen143
 ) (/usr/local/texlive/2025/texmf-dist/tex/latex/amsmath/amsmath.sty
 Package: amsmath 2024/11/05 v2.17t AMS math features
-\@mathmargin=\skip51
+\@mathmargin=\skip53
 
 For additional information on amsmath, use the `?' option.
 (/usr/local/texlive/2025/texmf-dist/tex/latex/amsmath/amstext.sty
@@ -72,21 +78,21 @@ Package: amstext 2021/08/26 v2.01 AMS text
  (/usr/local/texlive/2025/texmf-dist/tex/latex/amsmath/amsgen.sty
 File: amsgen.sty 1999/11/30 v2.0 generic functions
 \@emptytoks=\toks21
-\ex@=\dimen143
+\ex@=\dimen144
 )) (/usr/local/texlive/2025/texmf-dist/tex/latex/amsmath/amsbsy.sty
 Package: amsbsy 1999/11/29 v1.2d Bold Symbols
-\pmbraise@=\dimen144
+\pmbraise@=\dimen145
 ) (/usr/local/texlive/2025/texmf-dist/tex/latex/amsmath/amsopn.sty
 Package: amsopn 2022/04/08 v2.04 operator names
 )
-\inf@bad=\count274
+\inf@bad=\count275
 LaTeX Info: Redefining \frac on input line 233.
-\uproot@=\count275
-\leftroot@=\count276
+\uproot@=\count276
+\leftroot@=\count277
 LaTeX Info: Redefining \overline on input line 398.
 LaTeX Info: Redefining \colon on input line 409.
-\classnum@=\count277
-\DOTSCASE@=\count278
+\classnum@=\count278
+\DOTSCASE@=\count279
 LaTeX Info: Redefining \ldots on input line 495.
 LaTeX Info: Redefining \dots on input line 498.
 LaTeX Info: Redefining \cdots on input line 619.
@@ -96,33 +102,33 @@ LaTeX Info: Redefining \big on input line 721.
 LaTeX Info: Redefining \Big on input line 722.
 LaTeX Info: Redefining \bigg on input line 723.
 LaTeX Info: Redefining \Bigg on input line 724.
-\big@size=\dimen145
+\big@size=\dimen146
 LaTeX Font Info:    Redeclaring font encoding OML on input line 742.
 LaTeX Font Info:    Redeclaring font encoding OMS on input line 743.
-\macc@depth=\count279
+\macc@depth=\count280
 LaTeX Info: Redefining \bmod on input line 904.
 LaTeX Info: Redefining \pmod on input line 909.
 LaTeX Info: Redefining \smash on input line 939.
 LaTeX Info: Redefining \relbar on input line 969.
 LaTeX Info: Redefining \Relbar on input line 970.
-\c@MaxMatrixCols=\count280
+\c@MaxMatrixCols=\count281
 \dotsspace@=\muskip17
-\c@parentequation=\count281
-\dspbrk@lvl=\count282
+\c@parentequation=\count282
+\dspbrk@lvl=\count283
 \tag@help=\toks22
-\row@=\count283
-\column@=\count284
-\maxfields@=\count285
+\row@=\count284
+\column@=\count285
+\maxfields@=\count286
 \andhelp@=\toks23
-\eqnshift@=\dimen146
-\alignsep@=\dimen147
-\tagshift@=\dimen148
-\tagwidth@=\dimen149
-\totwidth@=\dimen150
-\lineht@=\dimen151
+\eqnshift@=\dimen147
+\alignsep@=\dimen148
+\tagshift@=\dimen149
+\tagwidth@=\dimen150
+\totwidth@=\dimen151
+\lineht@=\dimen152
 \@envbody=\toks24
-\multlinegap=\skip52
-\multlinetaggap=\skip53
+\multlinegap=\skip54
+\multlinetaggap=\skip55
 \mathdisplay@stack=\toks25
 LaTeX Info: Redefining \[ on input line 2953.
 LaTeX Info: Redefining \] on input line 2954.
@@ -140,9 +146,9 @@ Package: amsthm 2020/05/29 v2.20.6
 \thm@headfont=\toks28
 \thm@notefont=\toks29
 \thm@headpunct=\toks30
-\thm@preskip=\skip54
-\thm@postskip=\skip55
-\thm@headsep=\skip56
+\thm@preskip=\skip56
+\thm@postskip=\skip57
+\thm@headsep=\skip58
 \dth@everypar=\toks31
 ) (/usr/local/texlive/2025/texmf-dist/tex/latex/base/latexsym.sty
 Package: latexsym 1998/08/17 v2.2e Standard LaTeX package (lasy symbols)
@@ -155,20 +161,20 @@ Package: pdfpages 2025/01/30 v0.6e Insert pages of external PDF documents (AM)
 Package: ifthen 2024/03/16 v1.1e Standard LaTeX ifthen package (DPC)
 ) (/usr/local/texlive/2025/texmf-dist/tex/latex/tools/calc.sty
 Package: calc 2023/07/08 v4.3 Infix arithmetic (KKT,FJ)
-\calc@Acount=\count286
-\calc@Bcount=\count287
-\calc@Adimen=\dimen152
-\calc@Bdimen=\dimen153
-\calc@Askip=\skip57
-\calc@Bskip=\skip58
+\calc@Acount=\count287
+\calc@Bcount=\count288
+\calc@Adimen=\dimen153
+\calc@Bdimen=\dimen154
+\calc@Askip=\skip59
+\calc@Bskip=\skip60
 LaTeX Info: Redefining \setlength on input line 80.
 LaTeX Info: Redefining \addtolength on input line 81.
-\calc@Ccount=\count288
-\calc@Cskip=\skip59
+\calc@Ccount=\count289
+\calc@Cskip=\skip61
 ) (/usr/local/texlive/2025/texmf-dist/tex/latex/eso-pic/eso-pic.sty
 Package: eso-pic 2023/05/03 v3.0c eso-pic (RN)
-\ESO@tempdima=\dimen154
-\ESO@tempdimb=\dimen155
+\ESO@tempdima=\dimen155
+\ESO@tempdimb=\dimen156
  (/usr/local/texlive/2025/texmf-dist/tex/latex/graphics/keyval.sty
 Package: keyval 2022/05/29 v1.15 key=value parser (DPC)
 \KV@toks@=\toks32
@@ -192,7 +198,7 @@ Package xcolor Info: Model `Gray' substituted by `gray' on input line 1371.
 Package xcolor Info: Model `wave' substituted by `hsb' on input line 1372.
 )) (/usr/local/texlive/2025/texmf-dist/tex/latex/etoolbox/etoolbox.sty
 Package: etoolbox 2025/02/11 v2.5l e-TeX tools for LaTeX (JAW)
-\etb@tempcnta=\count289
+\etb@tempcnta=\count290
 ) (/usr/local/texlive/2025/texmf-dist/tex/latex/graphics/graphicx.sty
 Package: graphicx 2021/09/16 v1.2d Enhanced LaTeX Graphics (DPC,SPQR)
  (/usr/local/texlive/2025/texmf-dist/tex/latex/graphics/graphics.sty
@@ -204,22 +210,22 @@ File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
 )
 Package graphics Info: Driver file: pdftex.def on input line 106.
 )
-\Gin@req@height=\dimen156
-\Gin@req@width=\dimen157
+\Gin@req@height=\dimen157
+\Gin@req@width=\dimen158
 )
-\AM@pagewidth=\dimen158
-\AM@pageheight=\dimen159
-\AM@fboxrule=\dimen160
+\AM@pagewidth=\dimen159
+\AM@pageheight=\dimen160
+\AM@fboxrule=\dimen161
  (/usr/local/texlive/2025/texmf-dist/tex/latex/pdfpages/pppdftex.def
 File: pppdftex.def 2025/01/30 v0.6e Pdfpages driver for pdfTeX (AM)
 )
-\pdfpages@includegraphics@status=\count290
+\pdfpages@includegraphics@status=\count291
 \AM@pagebox=\box56
 \AM@global@opts=\toks33
-\AM@pagecnt=\count291
+\AM@pagecnt=\count292
 \AM@toc@title=\toks34
 \AM@lof@heading=\toks35
-\c@AM@survey=\count292
+\c@AM@survey=\count293
 \AM@templatesizebox=\box57
 ) (/usr/local/texlive/2025/texmf-dist/tex/latex/commath/commath.sty) (/usr/local/texlive/2025/texmf-dist/tex/latex/hyperref/hyperref.sty
 Package: hyperref 2024-11-05 v7.01l Hypertext links for LaTeX
@@ -252,13 +258,13 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
  (/usr/local/texlive/2025/texmf-dist/tex/latex/kvoptions/kvoptions.sty
 Package: kvoptions 2022-06-15 v3.15 Key value format for package options (HO)
 ))
-\c@section@level=\count293
+\c@section@level=\count294
 ) (/usr/local/texlive/2025/texmf-dist/tex/generic/stringenc/stringenc.sty
 Package: stringenc 2019/11/29 v1.12 Convert strings between diff. encodings (HO)
 )
-\@linkdim=\dimen161
-\Hy@linkcounter=\count294
-\Hy@pagecounter=\count295
+\@linkdim=\dimen162
+\Hy@linkcounter=\count295
+\Hy@pagecounter=\count296
  (/usr/local/texlive/2025/texmf-dist/tex/latex/hyperref/pd1enc.def
 File: pd1enc.def 2024-11-05 v7.01l Hyperref: PDFDocEncoding definition (HO)
 Now handling font encoding PD1 ...
@@ -266,7 +272,7 @@ Now handling font encoding PD1 ...
 ) (/usr/local/texlive/2025/texmf-dist/tex/generic/intcalc/intcalc.sty
 Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
 )
-\Hy@SavedSpaceFactor=\count296
+\Hy@SavedSpaceFactor=\count297
  (/usr/local/texlive/2025/texmf-dist/tex/latex/hyperref/puenc.def
 File: puenc.def 2024-11-05 v7.01l Hyperref: PDF Unicode definition (HO)
 Now handling font encoding PU ...
@@ -279,21 +285,21 @@ Package hyperref Info: Plain pages OFF on input line 4172.
 Package hyperref Info: Backreferencing OFF on input line 4177.
 Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
 Package hyperref Info: Bookmarks ON on input line 4424.
-\c@Hy@tempcnt=\count297
+\c@Hy@tempcnt=\count298
  (/usr/local/texlive/2025/texmf-dist/tex/latex/url/url.sty
 \Urlmuskip=\muskip18
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 )
 LaTeX Info: Redefining \url on input line 4763.
-\XeTeXLinkMargin=\dimen162
+\XeTeXLinkMargin=\dimen163
  (/usr/local/texlive/2025/texmf-dist/tex/generic/bitset/bitset.sty
 Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
  (/usr/local/texlive/2025/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty
 Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO)
 ))
-\Fld@menulength=\count298
-\Field@Width=\dimen163
-\Fld@charsize=\dimen164
+\Fld@menulength=\count299
+\Field@Width=\dimen164
+\Fld@charsize=\dimen165
 Package hyperref Info: Hyper figures OFF on input line 6042.
 Package hyperref Info: Link nesting OFF on input line 6047.
 Package hyperref Info: Hyper index ON on input line 6050.
@@ -305,9 +311,9 @@ Package hyperref Info: PDF/A mode OFF on input line 6072.
 Package: atbegshi-ltx 2021/01/10 v1.0c Emulation of the original atbegshi
 package with kernel methods
 )
-\Hy@abspage=\count299
-\c@Item=\count300
-\c@Hfootnote=\count301
+\Hy@abspage=\count300
+\c@Item=\count301
+\c@Hfootnote=\count302
 )
 Package hyperref Info: Driver (autodetected): hpdftex.
  (/usr/local/texlive/2025/texmf-dist/tex/latex/hyperref/hpdftex.def
@@ -316,8 +322,8 @@ File: hpdftex.def 2024-11-05 v7.01l Hyperref driver for pdfTeX
 Package: atveryend-ltx 2020/08/19 v1.0a Emulation of the original atveryend package
 with kernel methods
 )
-\Fld@listcount=\count302
-\c@bookmark@seq@number=\count303
+\Fld@listcount=\count303
+\c@bookmark@seq@number=\count304
  (/usr/local/texlive/2025/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty
 Package: rerunfilecheck 2022-07-10 v1.10 Rerun checks for auxiliary files (HO)
  (/usr/local/texlive/2025/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty
@@ -325,96 +331,96 @@ Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
 )
 Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 285.
 )
-\Hy@SectionHShift=\skip60
+\Hy@SectionHShift=\skip62
 ) (/usr/local/texlive/2025/texmf-dist/tex/latex/geometry/geometry.sty
 Package: geometry 2020/01/02 v5.9 Page Geometry
  (/usr/local/texlive/2025/texmf-dist/tex/generic/iftex/ifvtex.sty
 Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
 )
-\Gm@cnth=\count304
-\Gm@cntv=\count305
-\c@Gm@tempcnt=\count306
-\Gm@bindingoffset=\dimen165
-\Gm@wd@mp=\dimen166
-\Gm@odd@mp=\dimen167
-\Gm@even@mp=\dimen168
-\Gm@layoutwidth=\dimen169
-\Gm@layoutheight=\dimen170
-\Gm@layouthoffset=\dimen171
-\Gm@layoutvoffset=\dimen172
+\Gm@cnth=\count305
+\Gm@cntv=\count306
+\c@Gm@tempcnt=\count307
+\Gm@bindingoffset=\dimen166
+\Gm@wd@mp=\dimen167
+\Gm@odd@mp=\dimen168
+\Gm@even@mp=\dimen169
+\Gm@layoutwidth=\dimen170
+\Gm@layoutheight=\dimen171
+\Gm@layouthoffset=\dimen172
+\Gm@layoutvoffset=\dimen173
 \Gm@dimlist=\toks36
 ) (/usr/local/texlive/2025/texmf-dist/tex/latex/tools/indentfirst.sty
 Package: indentfirst 2023/07/02 v1.03 Indent first paragraph (DPC)
 ) (/usr/local/texlive/2025/texmf-dist/tex/latex/fancyhdr/fancyhdr.sty
 Package: fancyhdr 2025/02/07 v5.2 Extensive control of page headers and footers
-\f@nch@headwidth=\skip61
-\f@nch@offset@elh=\skip62
-\f@nch@offset@erh=\skip63
-\f@nch@offset@olh=\skip64
-\f@nch@offset@orh=\skip65
-\f@nch@offset@elf=\skip66
-\f@nch@offset@erf=\skip67
-\f@nch@offset@olf=\skip68
-\f@nch@offset@orf=\skip69
-\f@nch@height=\skip70
-\f@nch@footalignment=\skip71
-\f@nch@widthL=\skip72
-\f@nch@widthC=\skip73
-\f@nch@widthR=\skip74
+\f@nch@headwidth=\skip63
+\f@nch@offset@elh=\skip64
+\f@nch@offset@erh=\skip65
+\f@nch@offset@olh=\skip66
+\f@nch@offset@orh=\skip67
+\f@nch@offset@elf=\skip68
+\f@nch@offset@erf=\skip69
+\f@nch@offset@olf=\skip70
+\f@nch@offset@orf=\skip71
+\f@nch@height=\skip72
+\f@nch@footalignment=\skip73
+\f@nch@widthL=\skip74
+\f@nch@widthC=\skip75
+\f@nch@widthR=\skip76
 \@temptokenb=\toks37
 ) (/usr/local/texlive/2025/texmf-dist/tex/latex/titlesec/titlesec.sty
 Package: titlesec 2025/01/04 v2.17 Sectioning titles
 \ttl@box=\box58
-\beforetitleunit=\skip75
-\aftertitleunit=\skip76
-\ttl@plus=\dimen173
-\ttl@minus=\dimen174
+\beforetitleunit=\skip77
+\aftertitleunit=\skip78
+\ttl@plus=\dimen174
+\ttl@minus=\dimen175
 \ttl@toksa=\toks38
-\titlewidth=\dimen175
-\titlewidthlast=\dimen176
-\titlewidthfirst=\dimen177
+\titlewidth=\dimen176
+\titlewidthlast=\dimen177
+\titlewidthfirst=\dimen178
 ) (/usr/local/texlive/2025/texmf-dist/tex/latex/titlesec/titletoc.sty
 Package: titletoc 2025/01/04 v2.17 TOC entries
-\ttl@leftsep=\dimen178
+\ttl@leftsep=\dimen179
 )
-\c@theorem=\count307
+\c@theorem=\count308
  (/usr/local/texlive/2025/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 File: l3backend-pdftex.def 2024-05-08 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count308
+\l__color_backend_stack_int=\count309
 \l__pdf_internal_box=\box59
 ) (./thesis-en.aux)
 \openout1 = `thesis-en.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 171.
-LaTeX Font Info:    ... okay on input line 171.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 171.
-LaTeX Font Info:    ... okay on input line 171.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 171.
-LaTeX Font Info:    ... okay on input line 171.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 171.
-LaTeX Font Info:    ... okay on input line 171.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 171.
-LaTeX Font Info:    ... okay on input line 171.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 171.
-LaTeX Font Info:    ... okay on input line 171.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 171.
-LaTeX Font Info:    ... okay on input line 171.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 171.
-LaTeX Font Info:    ... okay on input line 171.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 171.
-LaTeX Font Info:    ... okay on input line 171.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 172.
+LaTeX Font Info:    ... okay on input line 172.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 172.
+LaTeX Font Info:    ... okay on input line 172.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 172.
+LaTeX Font Info:    ... okay on input line 172.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 172.
+LaTeX Font Info:    ... okay on input line 172.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 172.
+LaTeX Font Info:    ... okay on input line 172.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 172.
+LaTeX Font Info:    ... okay on input line 172.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 172.
+LaTeX Font Info:    ... okay on input line 172.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 172.
+LaTeX Font Info:    ... okay on input line 172.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 172.
+LaTeX Font Info:    ... okay on input line 172.
  (/usr/local/texlive/2025/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count309
-\scratchdimen=\dimen179
+\scratchcounter=\count310
+\scratchdimen=\dimen180
 \scratchbox=\box60
-\nofMPsegments=\count310
-\nofMParguments=\count311
+\nofMPsegments=\count311
+\nofMParguments=\count312
 \everyMPshowfont=\toks39
-\MPscratchCnt=\count312
-\MPscratchDim=\dimen180
-\MPnumerator=\count313
-\makeMPintoPDFobject=\count314
+\MPscratchCnt=\count313
+\MPscratchDim=\dimen181
+\MPnumerator=\count314
+\makeMPintoPDFobject=\count315
 \everyMPtoPDFconversion=\toks40
 ) (/usr/local/texlive/2025/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
@@ -430,7 +436,7 @@ Package: lscape 2020/05/28 v3.02 Landscape Pages (DPC)
 )
 Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
 ))
-Package hyperref Info: Link coloring OFF on input line 171.
+Package hyperref Info: Link coloring OFF on input line 172.
  (./thesis-en.out) (./thesis-en.out)
 \@outlinefile=\write3
 \openout3 = `thesis-en.out'.
@@ -474,30 +480,30 @@ Package hyperref Info: Link coloring OFF on input line 171.
 <titlepage-en.pdf, id=79, 597.51233pt x 845.0471pt>
 File: titlepage-en.pdf Graphic file (type pdf)
 <use titlepage-en.pdf>
-Package pdftex.def Info: titlepage-en.pdf  used on input line 175.
+Package pdftex.def Info: titlepage-en.pdf  used on input line 176.
 (pdftex.def)             Requested size: 597.51086pt x 845.04504pt.
 <titlepage-en.pdf, id=81, page=1, 597.51233pt x 845.0471pt>
 File: titlepage-en.pdf Graphic file (type pdf)
 <use titlepage-en.pdf, page 1>
-Package pdftex.def Info: titlepage-en.pdf , page1 used on input line 175.
+Package pdftex.def Info: titlepage-en.pdf , page1 used on input line 176.
 (pdftex.def)             Requested size: 597.51086pt x 845.04504pt.
 File: titlepage-en.pdf Graphic file (type pdf)
 <use titlepage-en.pdf, page 1>
-Package pdftex.def Info: titlepage-en.pdf , page1 used on input line 175.
+Package pdftex.def Info: titlepage-en.pdf , page1 used on input line 176.
 (pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
 File: titlepage-en.pdf Graphic file (type pdf)
 <use titlepage-en.pdf, page 1>
-Package pdftex.def Info: titlepage-en.pdf , page1 used on input line 175.
+Package pdftex.def Info: titlepage-en.pdf , page1 used on input line 176.
 (pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
 File: titlepage-en.pdf Graphic file (type pdf)
 <use titlepage-en.pdf, page 1>
-Package pdftex.def Info: titlepage-en.pdf , page1 used on input line 175.
+Package pdftex.def Info: titlepage-en.pdf , page1 used on input line 176.
 (pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
 
 
 File: titlepage-en.pdf Graphic file (type pdf)
 <use titlepage-en.pdf, page 1>
-Package pdftex.def Info: titlepage-en.pdf , page1 used on input line 175.
+Package pdftex.def Info: titlepage-en.pdf , page1 used on input line 176.
 (pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
 [1
 
@@ -505,7 +511,7 @@ Package pdftex.def Info: titlepage-en.pdf , page1 used on input line 175.
  <./titlepage-en.pdf>]
 
 [2]
-Underfull \hbox (badness 10000) in paragraph at lines 203--213
+Underfull \hbox (badness 10000) in paragraph at lines 204--214
 
  []
 
@@ -515,28 +521,28 @@ Underfull \hbox (badness 10000) in paragraph at lines 203--213
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.213 \end{abstract}
+l.214 \end{abstract}
                      [1{/usr/local/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}]
 
 
 pdfTeX warning (ext4): destination with the same identifier (name{page.2}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.216 \null\thispagestyle{empty}\newpage
+l.217 \null\thispagestyle{empty}\newpage
                                          [2]
 
 
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.236 \end{abstract}
+l.237 \end{abstract}
                      [1]
 
 
 pdfTeX warning (ext4): destination with the same identifier (name{page.2}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.258 \null\thispagestyle{empty}\newpage
+l.259 \null\thispagestyle{empty}\newpage
                                          [2] (./thesis-en.toc
 LaTeX Font Info:    Trying to load font information for U+msa on input line 5.
  (/usr/local/texlive/2025/texmf-dist/tex/latex/amsfonts/umsa.fd
@@ -563,13 +569,13 @@ File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.269 \null\thispagestyle{empty}\newpage
+l.270 \null\thispagestyle{empty}\newpage
                                          [2]
 Chapter 1.
 <./images/simple-architecture.png, id=167, 499.8675pt x 851.18pt>
 File: ./images/simple-architecture.png Graphic file (type png)
 <use ./images/simple-architecture.png>
-Package pdftex.def Info: ./images/simple-architecture.png  used on input line 307.
+Package pdftex.def Info: ./images/simple-architecture.png  used on input line 308.
 (pdftex.def)             Requested size: 136.57462pt x 232.56212pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
@@ -582,7 +588,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 <./images/more-complicated-architecture.png, id=173, 633.36626pt x 1059.96pt>
 File: ./images/more-complicated-architecture.png Graphic file (type png)
 <use ./images/more-complicated-architecture.png>
-Package pdftex.def Info: ./images/more-complicated-architecture.png  used on input line 324.
+Package pdftex.def Info: ./images/more-complicated-architecture.png  used on input line 325.
 (pdftex.def)             Requested size: 136.57462pt x 228.55008pt.
 
 
@@ -597,12 +603,12 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 <./images/complicated-modules.png, id=182, 3468.96pt x 192.72pt>
 File: ./images/complicated-modules.png Graphic file (type png)
 <use ./images/complicated-modules.png>
-Package pdftex.def Info: ./images/complicated-modules.png  used on input line 336.
+Package pdftex.def Info: ./images/complicated-modules.png  used on input line 337.
 (pdftex.def)             Requested size: 455.24413pt x 25.28972pt.
 <./images/typical-sequance.png, id=183, 4265.9375pt x 5199.425pt>
 File: ./images/typical-sequance.png Graphic file (type png)
 <use ./images/typical-sequance.png>
-Package pdftex.def Info: ./images/typical-sequance.png  used on input line 359.
+Package pdftex.def Info: ./images/typical-sequance.png  used on input line 360.
 (pdftex.def)             Requested size: 318.6695pt x 388.35332pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
@@ -620,7 +626,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 <./images/local-first-sequanec.png, id=191, 4265.9375pt x 3543.2375pt>
 File: ./images/local-first-sequanec.png Graphic file (type png)
 <use ./images/local-first-sequanec.png>
-Package pdftex.def Info: ./images/local-first-sequanec.png  used on input line 379.
+Package pdftex.def Info: ./images/local-first-sequanec.png  used on input line 380.
 (pdftex.def)             Requested size: 318.6695pt x 264.65004pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
@@ -638,7 +644,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 <./images/cloud-vs-local.png, id=199, 3201.9625pt x 3392.675pt>
 File: ./images/cloud-vs-local.png Graphic file (type png)
 <use ./images/cloud-vs-local.png>
-Package pdftex.def Info: ./images/cloud-vs-local.png  used on input line 401.
+Package pdftex.def Info: ./images/cloud-vs-local.png  used on input line 402.
 (pdftex.def)             Requested size: 318.6695pt x 337.6308pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
@@ -653,12 +659,12 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [15 <./images/local-first-sequanec.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 417--417
+Underfull \hbox (badness 10000) in paragraph at lines 418--418
 []\T1/cmr/m/n/10.95 Real-time col-lab-o-ra-tive edit-ing (doc-u-
  []
 
 
-Underfull \hbox (badness 3428) in paragraph at lines 420--421
+Underfull \hbox (badness 3428) in paragraph at lines 421--422
 []\T1/cmr/m/n/10.95 Centralized trans-ac-tional sys-tems (e.g.,
  []
 
@@ -675,15 +681,15 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 <./images/p2p-vs-start.png, id=214, 755.82375pt x 355.3275pt>
 File: ./images/p2p-vs-start.png Graphic file (type png)
 <use ./images/p2p-vs-start.png>
-Package pdftex.def Info: ./images/p2p-vs-start.png  used on input line 453.
+Package pdftex.def Info: ./images/p2p-vs-start.png  used on input line 454.
 (pdftex.def)             Requested size: 364.19669pt x 171.21672pt.
 
-Underfull \hbox (badness 1009) in paragraph at lines 471--472
+Underfull \hbox (badness 1009) in paragraph at lines 472--473
 \T1/cmr/m/n/10.95 Clients man-age their con-nec-tions them-
  []
 
 
-Underfull \hbox (badness 2142) in paragraph at lines 480--481
+Underfull \hbox (badness 2142) in paragraph at lines 481--482
 []\T1/cmr/m/n/10.95 Easier man-age-ment and co-or-di-na-tion -
  []
 
@@ -709,7 +715,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 <./images/architecture.png, id=226, 338.26375pt x 232.87pt>
 File: ./images/architecture.png Graphic file (type png)
 <use ./images/architecture.png>
-Package pdftex.def Info: ./images/architecture.png  used on input line 537.
+Package pdftex.def Info: ./images/architecture.png  used on input line 538.
 (pdftex.def)             Requested size: 364.19669pt x 250.73187pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
@@ -724,37 +730,37 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [19]
-Underfull \hbox (badness 2556) in paragraph at lines 556--557
+Underfull \hbox (badness 2556) in paragraph at lines 557--558
 []\T1/cmr/m/n/10.95 start draw-ing im-me-di-ately
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 574--575
+Underfull \hbox (badness 10000) in paragraph at lines 575--576
 []\T1/cmr/m/n/10.95 differentiate be-tween el-e-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 584--585
+Underfull \hbox (badness 10000) in paragraph at lines 585--586
 []\T1/cmr/m/n/10.95 begin a fresh col-lab-o-ra-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 584--585
+Underfull \hbox (badness 10000) in paragraph at lines 585--586
 \T1/cmr/m/n/10.95 tive ses-sion or per-sonal
  []
 
 
-Underfull \hbox (badness 3271) in paragraph at lines 586--587
+Underfull \hbox (badness 3271) in paragraph at lines 587--588
 []\T1/cmr/m/n/10.95 work to-gether with other
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 594--595
+Underfull \hbox (badness 10000) in paragraph at lines 595--596
 []\T1/cmr/m/n/10.95 communicate tex-tu-ally
  []
 
 
-Underfull \hbox (badness 2961) in paragraph at lines 594--595
+Underfull \hbox (badness 2961) in paragraph at lines 595--596
 \T1/cmr/m/n/10.95 along-side vi-sual col-lab-o-ra-
  []
 
@@ -771,92 +777,92 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [20 <./images/architecture.png>]
-Overfull \hbox (0.71977pt too wide) in paragraph at lines 611--611
+Overfull \hbox (0.71977pt too wide) in paragraph at lines 612--612
 []\T1/cmr/m/n/10.95 Application| 
  []
 
 
-Underfull \hbox (badness 5460) in paragraph at lines 611--612
+Underfull \hbox (badness 5460) in paragraph at lines 612--613
 []\T1/cmr/m/n/10.95 enable offline-capable and
  []
 
 
-Overfull \hbox (0.71977pt too wide) in paragraph at lines 613--613
+Overfull \hbox (0.71977pt too wide) in paragraph at lines 614--614
 []\T1/cmr/m/n/10.95 Application| 
  []
 
 
-Underfull \hbox (badness 2644) in paragraph at lines 613--613
+Underfull \hbox (badness 2644) in paragraph at lines 614--614
 []\T1/cmr/m/n/10.95 render all strokes stored in the
  []
 
 
-Underfull \hbox (badness 1496) in paragraph at lines 613--614
+Underfull \hbox (badness 1496) in paragraph at lines 614--615
 []\T1/cmr/m/n/10.95 display the cur-rent white-
  []
 
 
-Overfull \hbox (0.71977pt too wide) in paragraph at lines 615--615
+Overfull \hbox (0.71977pt too wide) in paragraph at lines 616--616
 []\T1/cmr/m/n/10.95 Application| 
  []
 
 
-Overfull \hbox (0.71977pt too wide) in paragraph at lines 617--617
+Overfull \hbox (0.71977pt too wide) in paragraph at lines 618--618
 []\T1/cmr/m/n/10.95 Application| 
  []
 
 
-Overfull \hbox (0.71977pt too wide) in paragraph at lines 619--619
+Overfull \hbox (0.71977pt too wide) in paragraph at lines 620--620
 []\T1/cmr/m/n/10.95 Application| 
  []
 
 
-Underfull \hbox (badness 2384) in paragraph at lines 619--619
+Underfull \hbox (badness 2384) in paragraph at lines 620--620
 []\T1/cmr/m/n/10.95 establish a We-bRTC data chan-
  []
 
 
-Overfull \hbox (0.71977pt too wide) in paragraph at lines 621--621
+Overfull \hbox (0.71977pt too wide) in paragraph at lines 622--622
 []\T1/cmr/m/n/10.95 Application| 
  []
 
 
-Underfull \hbox (badness 4279) in paragraph at lines 621--622
+Underfull \hbox (badness 4279) in paragraph at lines 622--623
 []\T1/cmr/m/n/10.95 allow other users to see
  []
 
 
-Overfull \hbox (0.71977pt too wide) in paragraph at lines 623--623
+Overfull \hbox (0.71977pt too wide) in paragraph at lines 624--624
 []\T1/cmr/m/n/10.95 Application| 
  []
 
 
-Overfull \hbox (0.71977pt too wide) in paragraph at lines 625--625
+Overfull \hbox (0.71977pt too wide) in paragraph at lines 626--626
 []\T1/cmr/m/n/10.95 Application| 
  []
 
 
-Underfull \hbox (badness 3439) in paragraph at lines 625--625
+Underfull \hbox (badness 3439) in paragraph at lines 626--626
 \T1/cmr/m/n/10.95 chro-niza-tion on sep-a-rate threads
  []
 
 
-Overfull \hbox (0.71977pt too wide) in paragraph at lines 627--627
+Overfull \hbox (0.71977pt too wide) in paragraph at lines 628--628
 []\T1/cmr/m/n/10.95 Application| 
  []
 
 
-Overfull \hbox (0.71977pt too wide) in paragraph at lines 629--629
+Overfull \hbox (0.71977pt too wide) in paragraph at lines 630--630
 []\T1/cmr/m/n/10.95 Application| 
  []
 
 
-Underfull \hbox (badness 1661) in paragraph at lines 629--630
+Underfull \hbox (badness 1661) in paragraph at lines 630--631
 []\T1/cmr/m/n/10.95 restore a pre-vi-ously saved
  []
 
 
-Overfull \hbox (0.71977pt too wide) in paragraph at lines 631--631
+Overfull \hbox (0.71977pt too wide) in paragraph at lines 632--632
 []\T1/cmr/m/n/10.95 Application| 
  []
 
@@ -873,22 +879,22 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [21]
-Overfull \hbox (0.71977pt too wide) in paragraph at lines 644--644
+Overfull \hbox (0.71977pt too wide) in paragraph at lines 645--645
 []\T1/cmr/m/n/10.95 Application| 
  []
 
 
-Underfull \hbox (badness 3471) in paragraph at lines 644--645
+Underfull \hbox (badness 3471) in paragraph at lines 645--646
 []\T1/cmr/m/n/10.95 guarantee even-tual con-sis-
  []
 
 
-Overfull \hbox (0.71977pt too wide) in paragraph at lines 646--646
+Overfull \hbox (0.71977pt too wide) in paragraph at lines 647--647
 []\T1/cmr/m/n/10.95 Application| 
  []
 
 
-Overfull \hbox (0.71977pt too wide) in paragraph at lines 648--648
+Overfull \hbox (0.71977pt too wide) in paragraph at lines 649--649
 []\T1/cmr/m/n/10.95 Application| 
  []
 
@@ -905,32 +911,32 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [22]
-Underfull \hbox (badness 10000) in paragraph at lines 661--662
+Underfull \hbox (badness 10000) in paragraph at lines 662--663
 []\T1/cmr/m/n/10.95 group col-lab-o-rat-ing users
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 667--668
+Underfull \hbox (badness 10000) in paragraph at lines 668--669
 []\T1/cmr/m/n/10.95 allow clients to ini-ti-ate
  []
 
 
-Underfull \hbox (badness 4518) in paragraph at lines 669--670
+Underfull \hbox (badness 4518) in paragraph at lines 670--671
 \T1/cmr/m/n/10.95 dis-con-nected user's cur-sor
  []
 
 
-Underfull \hbox (badness 3514) in paragraph at lines 673--674
+Underfull \hbox (badness 3514) in paragraph at lines 674--675
 []\T1/cmr/m/n/10.95 allow sev-eral col-lab-o-ra-tive
  []
 
 
-Underfull \hbox (badness 1616) in paragraph at lines 673--674
+Underfull \hbox (badness 1616) in paragraph at lines 674--675
 \T1/cmr/m/n/10.95 ses-sions to run si-mul-ta-ne-
  []
 
 
-Underfull \hbox (badness 4156) in paragraph at lines 675--676
+Underfull \hbox (badness 4156) in paragraph at lines 676--677
 []\T1/cmr/m/n/10.95 support the real-time re-
  []
 
@@ -947,6 +953,14 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [23]
+Underfull \hbox (badness 10000) in paragraph at lines 722--722
+[]\T1/cmr/bx/n/10.95 Constraints
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -956,10 +970,31 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [24]
+Overfull \vbox (55.0871pt too high) has occurred while \output is active []
+
+
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[25]
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[26]
 Chapter 2.
 
 
-[25
+[27
 
 ]
 
@@ -974,22 +1009,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[26]
-
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 13.59999pt, for example:
-(fancyhdr)                \setlength{\headheight}{13.59999pt}.
-(fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
-
-[27]
-Chapter 3.
-
-
-[28
-
-]
+[28]
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -999,12 +1019,27 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [29]
+Chapter 3.
+
+
+[30
+
+]
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[31]
 
 
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.945 \chapter
+l.992 \chapter
               *{List of symbols and abbreviations} [1
 
 ]
@@ -1013,8 +1048,8 @@ l.945 \chapter
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.958 \listoffigures
-                     [2
+l.1005 \listoffigures
+                      [2
 
 ] (./thesis-en.lof)
 \tf@lof=\write5
@@ -1026,8 +1061,8 @@ l.958 \listoffigures
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.965 \listoftables
-                    [3
+l.1012 \listoftables
+                     [3
 
 ] (./thesis-en.lot)
 \tf@lot=\write6
@@ -1039,8 +1074,8 @@ l.965 \listoftables
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.970 \chapter
-              *{List of appendices} [4
+l.1017 \chapter
+               *{List of appendices} [4
 
 ]
 
@@ -1048,8 +1083,8 @@ l.970 \chapter
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.979 \end{document}
-                     [5
+l.1026 \end{document}
+                      [5
 
 ] (./thesis-en.aux)
  ***********
@@ -1060,18 +1095,18 @@ Package rerunfilecheck Info: File `thesis-en.out' has not changed.
 (rerunfilecheck)             Checksum: 65804B462CDFE604179B870DFF49F236;3423.
  ) 
 Here is how much of TeX's memory you used:
- 13834 strings out of 473190
- 219166 string characters out of 5715799
- 660989 words of memory out of 5000000
- 36780 multiletter control sequences out of 15000+600000
+ 13906 strings out of 473190
+ 220414 string characters out of 5715799
+ 661687 words of memory out of 5000000
+ 36845 multiletter control sequences out of 15000+600000
  570881 words of font info for 67 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  75i,17n,79p,701b,640s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/latxfont/lcircle1.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfbx1095.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfcc1095.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfrm0800.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfti1095.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sftt1095.pfb>
-Output written on thesis-en.pdf (32 pages, 2320811 bytes).
+Output written on thesis-en.pdf (34 pages, 2324964 bytes).
 PDF statistics:
- 456 PDF objects out of 1000 (max. 8388607)
- 339 compressed objects within 4 object streams
- 83 named destinations out of 1000 (max. 500000)
+ 467 PDF objects out of 1000 (max. 8388607)
+ 348 compressed objects within 4 object streams
+ 86 named destinations out of 1000 (max. 500000)
  208 words of extra memory for PDF output out of 10000 (max. 10000000)
 

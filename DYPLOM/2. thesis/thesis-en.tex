@@ -10,6 +10,7 @@
 \usepackage[T1]{fontenc}
 \usepackage[english, polish]{babel}
 \usepackage{float}           % Required for [H] placement specifier
+\usepackage{multirow}        % Required for multirow cells in tables
 
 
 \usepackage{amsmath, amsfonts, amsthm, latexsym} % MOSTLY MATHEMATICAL SYMBOLS
@@ -680,6 +681,52 @@ Below you can see tables with user stories for each actor in the system: user, a
 
 % List and describe the functional requirements of the system.
 \subsection{Non-Functional Requirements}
+
+Non-functional requirements define the quality attributes of the system. The FURPS+ model is used to categorize them into Functionality, Usability, Reliability, Performance, and Supportability. The table below presents the non-functional requirements of the collaborative whiteboard application.
+
+\begin{table}[H]
+	\centering
+	\caption{Non-Functional Requirements -- FURPS+ Analysis}
+	\begin{tabular}{|p{0.18\textwidth}|c|p{0.62\textwidth}|}
+		\hline
+		\textbf{Category} & \textbf{ID} & \textbf{Description} \\
+		\hline
+		\multirow{4}{*}{\parbox{0.18\textwidth}{\textbf{Usability}}}
+		& NF-01 & The user interface shall be simple and intuitive, allowing basic operations (drawing, erasing, connecting to a session) without the need for training. \\
+		\cline{2-3}
+		& NF-02 & The system shall clearly display the synchronization status (online/offline) and inform the user about connection state changes. \\
+		\cline{2-3}
+		& NF-03 & The editor shall provide visual indication of collaborators' cursors in real time. \\
+		\cline{2-3}
+		& NF-04 & The application interface shall be in English. \\
+		\hline
+		\multirow{2}{*}{\parbox{0.18\textwidth}{\textbf{Reliability}}}
+		& NF-05 & The system shall ensure continuity of work in offline mode through local CRDT state, with automatic synchronization upon reconnecting to the session. \\
+		\cline{2-3}
+		& NF-06 & The CRDT-based data model shall guarantee that no data is lost during concurrent edits -- all user operations shall be preserved after merge. \\
+		\hline
+		\multirow{4}{*}{\parbox{0.18\textwidth}{\textbf{Performance}}}
+		& NF-07 & The synchronization time of changes between users shall not exceed 2 seconds on a connection with bandwidth $\geq$10~Mb/s. \\
+		\cline{2-3}
+		& NF-08 & Loading a document from local storage (.crdt file) shall not exceed 1 second. \\
+		\cline{2-3}
+		& NF-09 & The application shall support simultaneous editing by at least 3 users on one document without noticeable delays in the interface. \\
+		\cline{2-3}
+		& NF-10 & The drawing canvas shall maintain a responsive frame rate ($\geq$30 FPS) during normal drawing operations. \\
+		\hline
+		\multirow{2}{*}{\parbox{0.18\textwidth}{\textbf{Supportability}}}
+		& NF-11 & The system documentation shall include installation and configuration instructions (README) to enable returning to the project after an extended period. \\
+		\cline{2-3}
+		& NF-12 & The application shall be buildable and runnable on macOS and windows. \\
+		\hline
+		\multirow{2}{*}{\parbox{0.18\textwidth}{\textbf{Constraints (+)}}}
+		& NF-13 & The application shall be implemented in Rust, using egui for the GUI, Automerge for CRDTs, Tokio for async runtime, and LiveKit for WebRTC signaling. \\
+		\cline{2-3}
+		& NF-14 & The application shall not persist any data by default -- all state is lost when the app is closed unless explicitly exported by the user. \\
+		\hline
+	\end{tabular}
+	\label{tab:furps-analysis}
+\end{table}
 
 % List and describe the non-functional requirements of the system.
 
