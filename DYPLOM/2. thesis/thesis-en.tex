@@ -524,18 +524,90 @@ The envisioned system is a desktop application designed for real-time collaborat
 The application employs CRDTs (Conflict-Free Replicated Data Types) from the Automerge library to ensure 
 seamless synchronization of whiteboard state across all participants. This approach enables users to draw
  and erase simultaneously, with changes instantly reflected for everyone in the room. The cursors of other
-   users are visible, enhancing the collaborative experience.
+   users are visible, enhancing the collaborative experience. The whiteboard will be represented as a canvas 
+   with raster graphics of strokes from users as vector of points with certain width and color.
 
 For real-time, multithreaded communication, the system uses the Tokio library, ensuring efficient handling
  of concurrent operations. Notably, the application does not persist data by default; once the app is 
  closed, all data is lost unless explicitly exported to a file by the user. The focus is on desktop
   environments, with no mobile version planned.
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{./images/architecture.png}
+	\caption{Architecture of the envisioned system}
+	\label{fig:architecture}
+\end{figure}
 
 
 \section{Requirements Specification}
 
+
 \subsection{Functional Requirements}
+
+Below you can see tables with user stories for each actor in the system: user, application, and server.
+\begin{table}[H]
+	\centering
+	\caption{Functional Requirements -- User Stories (Actor: User)}
+	\begin{tabular}{|c|p{0.12\textwidth}|p{0.38\textwidth}|p{0.3\textwidth}|}
+		\hline
+		\textbf{ID} & \textbf{As a...} & \textbf{I want to...} & \textbf{In order to...} \\
+		\hline
+		US-01 & User & launch the desktop app and see blank whiteboard &  start drawing immediately without any setup \\
+		\hline
+		US-02 & User & draw strokes on whiteboard & \\
+		\hline
+		US-03 & User & & \\
+		\hline
+		US-04 & User & & \\
+		\hline
+		US-05 & User & & \\
+		\hline
+	\end{tabular}
+	\label{tab:user-stories-user}
+\end{table}
+
+\begin{table}[H]
+	\centering
+	\caption{Functional Requirements -- User Stories (Actor: Application)}
+	\begin{tabular}{|c|p{0.12\textwidth}|p{0.38\textwidth}|p{0.3\textwidth}|}
+		\hline
+		\textbf{ID} & \textbf{As a...} & \textbf{I want to...} & \textbf{In order to...} \\
+		\hline
+		AP-01 & Application & & \\
+		\hline
+		AP-02 & Application & & \\
+		\hline
+		AP-03 & Application & & \\
+		\hline
+		AP-04 & Application & & \\
+		\hline
+		AP-05 & Application & & \\
+		\hline
+	\end{tabular}
+	\label{tab:user-stories-application}
+\end{table}
+
+\begin{table}[H]
+	\centering
+	\caption{Functional Requirements -- User Stories (Actor: Server)}
+	\begin{tabular}{|c|p{0.12\textwidth}|p{0.38\textwidth}|p{0.3\textwidth}|}
+		\hline
+		\textbf{ID} & \textbf{As a...} & \textbf{I want to...} & \textbf{In order to...} \\
+		\hline
+		SV-01 & Server & & \\
+		\hline
+		SV-02 & Server & & \\
+		\hline
+		SV-03 & Server & & \\
+		\hline
+		SV-04 & Server & & \\
+		\hline
+		SV-05 & Server & & \\
+		\hline
+	\end{tabular}
+	\label{tab:user-stories-server}
+\end{table}
 
 % List and describe the functional requirements of the system.
 \subsection{Non-Functional Requirements}
