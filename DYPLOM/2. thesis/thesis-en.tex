@@ -514,7 +514,22 @@ The basic idea behind CRDTs is to design data structures in such a way that they
 
 \section{Vision of the System}
 
-1. rust 2. start topology
+The envisioned system is a desktop application designed for real-time collaborative drawing on a whiteboard.
+ It leverages the Rust programming language for performance and reliability, and utilizes the egui library 
+ to provide a modern, responsive user interface. Communication between users is achieved through WebRTC,
+  with the Livekit open-source server facilitating room-based connections. Each room acts as a channel 
+  or document, allowing users to join by simply entering a room code or name, without the need for user 
+  accounts, authentication, or authorization.
+
+The application employs CRDTs (Conflict-Free Replicated Data Types) from the Automerge library to ensure 
+seamless synchronization of whiteboard state across all participants. This approach enables users to draw
+ and erase simultaneously, with changes instantly reflected for everyone in the room. The cursors of other
+   users are visible, enhancing the collaborative experience.
+
+For real-time, multithreaded communication, the system uses the Tokio library, ensuring efficient handling
+ of concurrent operations. Notably, the application does not persist data by default; once the app is 
+ closed, all data is lost unless explicitly exported to a file by the user. The focus is on desktop
+  environments, with no mobile version planned.
 
 
 
