@@ -762,12 +762,45 @@ assumptions were met. The first design is shown in the picture below.
 
 \chapter{Description of the solution}
 
-\section{Architecture, Design, Data Flow}
+% Architecture, Design, Data flow
+\section{System Architecture}
+- start topology, livekit SFU, client-side CRDT, WebRTC data channels, 
+- detailes diagrams of architecture
+- component diagram, egui - automerge - livekit/tokio networking
 
-\section{New Ideas / Novel Solutions}
+\section{Technology Stack}
+- why rust, gui, automerge, tokio, livekit, brief description of each
 
-\chapter{The next chapter}
+% Novel solutions
+\section{CRDTS Data Model}
+- how strokes are represented in CRDT (vectors of points, color, wifth)
 
+- Intent::Draw, Intent::Clear
+- serialization / deserialization of CRDT document to file
+
+\section{Communication Layer}
+- livekit room connection, data channel publishing/subscribing, broadcasting of messages/cursor positions,
+- usage of Tokio.
+
+\section{Synchronization Protocol}
+
+automerge sync messages, how they are generated and applied, how conflicts are resolved, how cursors are synchronized, how new users synchronize with existing state
+ when joining a room.
+ ``generate\_sync\_message'', ``receive\_sync\_message''
+	
+\section{Application Modules}
+
+- main.rs... etc - as in slides
+- dependencies diagrams, 
+
+\section{User Interface Implementation}
+
+final screenshots, comparison etc
+
+\chapter{Analysis of the solution}
+
+
+\chapter{Conclusions}
 
 
 % ------------------------------- BIBLIOGRAPHY ---------------------------
