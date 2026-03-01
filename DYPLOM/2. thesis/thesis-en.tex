@@ -732,242 +732,41 @@ Non-functional requirements define the quality attributes of the system. The FUR
 
 \section{Business Cases}
 
-% Describe business cases and the added value.
-
-\chapter{Example chapter}
-
-This \TeX~file is to be compiled with pdfLaTeX (it's just quick build in TeXMaker).
-
-
-\section{Example section}
-
-\begin{definition}[Definition]
-	%
-	A \emph{definition} is a statement of the meaning of a term (a word, phrase, or other set of symbols).
-	%
-\end{definition}
-
-\subsection{Example subsection}
-
-It's the deepest deph of sectioning allowed by rector.
-
-\begin{definition}[Equation]
-	%
-	In mathematics, an \emph{equation} is a statement of an equality containing one or more variables.
-	%
-\end{definition}
-%
-\begin{example}
-This is an example of an equation:
-\begin{equation}
-	%
-	2+2=4.
-	%
-\end{equation}
-%
-Equation without a number:
-\begin{equation*}
-	%
-	2+2=4,
-	%
-\end{equation*}
-or:
-\[
-2+2=4.
-\]
-
-It is worthwhile to peruse other mathematical environments like  \emph{multline}, \emph{align} and their versions with a star (, i.e. without numeration). The description of their use can be found at  \url{https://texdoc.org/serve/amsldoc.pdf/0} starting from the end of the third page.
-
-Equation \eqref{equation} is false. References (and some other things) work properly after compliling \TeX ~ file twice.
-
-\begin{equation}\label{equation}
-	%
-	\int \limits_{0}^{1} x \; dx = \frac{3}{2}.
-	%
-\end{equation}
-
-\end{example}
-
-Theorem \ref{Pitagoras} is a very interensting result.
-
-\begin{theorem}[Pythagoras' Theorem]\label{Pitagoras}
-	%
-	Let $c$ represent the length of the hypotenuse and $a$ and $b$ the lengths of the triangle's other two sides. Then:
-	%
-\begin{equation*}
-	%
-	a^2 + b^2 = c^2.
-	%
-\end{equation*}
-%
-\end{theorem}
-
-\begin{proof}
-	%
-	The proof has been presented in \cite{Ktos} and \cite{Innyktos}. We can write then \cite{Ktos, Innyktos}.
-	%
-\end{proof}
-
-\begin{corollary}
-	%
-	The use of the term \emph{corollary}, rather than \emph{proposition} or \emph{theorem}, is intrinsically subjective.
-	%
-\end{corollary}
+Collaboration is neccecary in any business. Companies are build on collaboration and division of work. 
+It is a common effort to build something greater togheter. Therefore having tools that brings real time 
+collaboration is neccecary.  The most exiting tools that I think will emarge on the market in coming years 
+are collaborative CAD/CAM applications for engineers. CRDTs might have its best years ahead of them. 
 
 
+\section{User Interface vision}
 
+The assumptions for the user interface are as follows: whiteboard canvas takes up the majority of the screen, with a 
+toolbar in the top bar  containing pen and eraser tools, color and thickness selectors, and buttons for 
+creating new documents, saving/loading and menu botton.
 
-\begin{remark}
-	%
-	You can find a rather comprehensive list of available symbols at \url{https://www3.nd.edu/~nmark/UsefulFacts/LaTeX_symbols.pdf}.
-	
-	If you want to find a symbol by its shape, you can use the following site: \url{https://detexify.kirelabs.org/classify.html}. 
-	%
-\end{remark}
+The menu side panel on the left can be toggled to show connectivity options, including a text field for entering a
+room/opening connection panel with information on other users and chat. Cursors of other users are shown as colored
+ circles with their ids next to them at the bottom bar. The design is clean and minimalistic, focusing on ease of use and real-time collaboration.
 
-\begin{lemma}[Someone's Lemma]
-	%
-	Ten lemat jest nie na temat.
-	%
-\end{lemma}
-\begin{proof} Dowód przez indukcję.
-\end{proof}
+Although the final version of the user interface differs from the initial vision, the main 
+assumptions were met. The first design is shown in the picture below.
 
-
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumyeirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diamvoluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumyeirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diamvoluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-
-
-
-\section{Floats -- tables and figures}
-
-\begin{table}% label has to be after caption, otherwise numeration is wrong
-\caption[Short caption]{Additional options}
-\label{opcje}
-\centering
-\begin{tabular}{|c|p{0.8\textwidth}|}
-\hline
-symbol & effect \\ \hline
-\texttt{h} & Place the float here, i.e., approximately at the same point it occurs in the source text (however, not exactly at the spot) \\
-\texttt{t} & Position at the top of the page \\
-\texttt{b} & Position at the bottom of the page \\
-\texttt{p} & Put on a special page for floats only \\
-\texttt{!} & Override internal parameters LaTeX uses for determining "good" float positions \\ 
-\texttt{H} & Places the float at precisely the location in the \LaTeX ~ code. Requires the float package,[1] i.e., \texttt{\textbackslash usepackage\{float\}}. This is somewhat equivalent to !ht.\\ \hline
-\end{tabular}
-\end{table}
-
-Place labels after captions or you get the wrong labelling.
-
-In Table \ref{opcje} there are additional options for \texttt{table} and \texttt{figure} environments.
-
-\begin{figure}[h!]
-
-\begin{center}
-    \setlength{\unitlength}{1mm}
-
-    \begin{picture}(40, 30)
-        \put(20,1){\line(0,1){20}} % line
-
-        % bottom
-        \put(20,1){\circle*{2}}
-        \put(25,1){0}
-
-        % top
-        \put(20,21){\circle*{2}}
-        \put(25,21){1}
-    \end{picture}
-
-\end{center}
-\caption{Example figure -- it has been drawn by \LaTeX ~default tools}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{./images/initial-ui.png}
+	\caption{Initial vision of the user interface}
+	\label{fig:ui-vision}
 \end{figure}
 
 
-Lorem ipsum dolor sit amet, consetetur sadipscing elit, sed diam nonumyeirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diamvoluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumyeirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diamvoluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
 
+\chapter{Description of the solution}
 
+\section{Architecture, Design, Data Flow}
 
+\section{New Ideas / Novel Solutions}
 
 \chapter{The next chapter}
-
-Lorem ipsum dolor sit amet, consetetur sadipscing elit, sed diam nonumyeirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diamvoluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumyeirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diamvoluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-
-
-\section{Matrices}
-
-Simple matrix:
-\begin{equation*}
-	\begin{matrix}
-	a & b & c & d \\
-	d & e & f & g \\
-	1 & 1 & 1 & 1
-	\end{matrix}
-\end{equation*}
-%
-Matrix with parentheses:
-%
-\begin{equation*}
-	A = 
-	\begin{pmatrix}
-	a & b & c & d \\
-	d & e & f & g \\
-	1 & 1 & 1 & 1
-	\end{pmatrix}
-\end{equation*}
-%
-Matrix with brackets:
-%
-\begin{equation*}
-	\begin{bmatrix}
-	a & b & c & d \\
-	d & e & f & g \\
-	1 & 1 & 1 & 1
-	\end{bmatrix}
-\end{equation*}
-%
-You can also use more general environment:
-%
-\begin{equation*}
-	\renewcommand{\arraystretch}{0.8}
-	\begin{array}{ccc}
-	1 & 0 & 0 \\
-	0 & 1 & 0 \\
-	0 & 0 & 1 \\
-	\end{array}
-\end{equation*}
-%
-Matrix with braces:
-%
-\begin{equation*}
-	\left\{
-	\renewcommand{\arraystretch}{0.8}
-	\begin{array}{ccc}
-	1 & 0 & 0 \\
-	0 & 1 & 0 \\
-	0 & 0 & 1 \\
-	\end{array}\right\}
-\end{equation*}
-
-\begin{definition}
-	%
-	Let $A\neq \emptyset$, $n \in \mathbb{N}$. Every function $f\colon A^n \to A$ is called an \emph{$n$-ary operation} or \emph{działaniem} określonym na $A$.
-	$0$-ary operations are constant functions.
-	%
-\end{definition}
-
-
-\begin{definition}[Algebra]
-	%
-	The ordered pair $(A,F)$, where $A\neq \emptyset$ is a set and $F$ is a family of operations defined on $A$, shall be called an \emph{algebra} (or \emph{$F$-algebra}). The set $A$ is called \emph{the set of elements}, \emph{support} or \emph{universe} of an algebra $(A,F)$ and $F$ is called \emph{the set of elementary operations}.
-	%
-\end{definition}
-
-\begin{proposition}
-	%
-	I state that, having passed to the limit, the only thing left me me is to camp at said limit or return, or, maybe, search for a pass or an exit to other areas.
-	%
-\end{proposition}
-
-
 
 
 
