@@ -533,14 +533,6 @@ For real-time, multithreaded communication, the system uses the Tokio library, e
  closed, all data is lost unless explicitly exported to a file by the user. The focus is on desktop
   environments, with no mobile version planned.
 
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.8\textwidth]{./images/architecture.png}
-	\caption{Architecture of the envisioned system}
-	\label{fig:architecture}
-\end{figure}
-
-
 \section{Requirements Specification}
 
 
@@ -780,7 +772,6 @@ state and UX interaction methods, \texttt{backend\_api.rs} -- a module of abstra
  a implementation  of \texttt{backend\_api.rs} with a little bit of extra methods.
 
 \section{Technology Stack}
-automerge, tokio, livekit, brief description of each
 
 The stack I decided to implement the solution in is mostly based on my intuition of current trends on software 
 engineering market, therefore I decided to use RUST language - a modern and unusual language, which has gained 
@@ -798,7 +789,102 @@ Becasue the application is a desktop application, I decided to use egui library 
   of CRDTs, more specifically a RGA - Replicated Growable Array and keep strokes as pixels in a matrix (array of arrays), 
   but during the research, I stumbled upon a very highly regarded and industry wide accepted library developed 
   by Cambride Cumputer Scientist - Martin Kleppmann. The library is Automerge and it implements most of
-  basic data structures as CRDTS. In my case I would use 
+  basic data structures as CRDTS. In my case I would use mostly use only few of them, 
+  but the library still provides a lot of useful methods for merging, generating sync messages, applying sync messages and so on.
+
+While doing research on how to implement the communication layer, I found out that
+ there is a very good open 
+source project called LiveKit, which is a WebRTC SFU (Selective Forwarding Unit) 
+server. Moreover - the LiveKit provides a Rust SDK. 
+It provides a simple API for creating rooms and managing connections between
+ clients. It also supports data channels, which are perfect for our use case of
+  synchronizing CRDT documents. 
+ Therefore, I decided to use LiveKit as the communication layer for the application - 
+ both on client side with usage of Rust livekit SDK and on server side with LiveKit SFU as 
+ a docker container, which might be easly scaled if needed horizontaly with usage of Kubernetes 
+ and load balancers.
+
+ The communication needs to be efficient and non-blocking, therefore I decided to use Tokio 
+ - a Rust library for asynchronous programming. It provides a runtime for executing asynchronous 
+ tasks and allows for efficient handling of I/O operations, which is crucial for real-time
+  communication in a collaborative application.
+
+
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{./images/architecture.png}
+	\caption{Architecture of the envisioned system}
+	\label{fig:architecture}
+\end{figure}
+
+\section{Application Modules}
+
+\subsection{User Interface Module}
+
+
+Most of applicaiton state is kept in AppView struct. As we can see on the diagram below, it is a struct
+ which holds all information about the state of the application: backend state, status bar state, sidebar state, 
+ current page state, whiteboard state, livekit connection state, remote cursors state, and so on. 
+ It also holds methods for interaction with the user interface, for example methods for rendering 
+ the UI (enforced by egui), handling user input, and so on.
+ 
+ The main method of this struct is \texttt{update}, which is called in a loop and is responsible for
+  rendering the UI and handling user input.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.9\textwidth]{./images/ui-modules-1.png}
+	\caption{User Interface Modules 1}
+	\label{fig:ui-modules-1}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.95\textwidth]{./images/ui-modules-2.png}
+	\caption{User Interface Modules 2}
+	\label{fig:ui-modules-2}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\begin{minipage}{0.3\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{./images/ui-modules-3.png}
+	\end{minipage}%
+	\hfill
+	\begin{minipage}{0.18\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{./images/ui-modules-4.png}
+	\end{minipage}%
+	\hfill
+	\begin{minipage}{0.43\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{./images/ui-modules-5.png}
+	\end{minipage}
+	\caption{User Interface Modules 3, 4, and 5}
+	\label{fig:ui-modules-3-4-5}
+\end{figure}
+
+
+
+
+
+
+\subsection{Backend Module}
+
+
+\section{User Interface Implementation}
+
+
+\section{Synchronization Protocol}
+
+automerge sync messages, how they are generated and applied, how conflicts are resolved, how cursors are synchronized, how new users synchronize with existing state
+ when joining a room.
+ ``generate\_sync\_message'', ``receive\_sync\_message''
+	
+
+
+
 
 
 % Novel solutions
@@ -812,18 +898,6 @@ Becasue the application is a desktop application, I decided to use egui library 
 - livekit room connection, data channel publishing/subscribing, broadcasting of messages/cursor positions,
 - usage of Tokio.
 
-\section{Synchronization Protocol}
-
-automerge sync messages, how they are generated and applied, how conflicts are resolved, how cursors are synchronized, how new users synchronize with existing state
- when joining a room.
- ``generate\_sync\_message'', ``receive\_sync\_message''
-	
-\section{Application Modules}
-
-- main.rs... etc - as in slides
-- dependencies diagrams, 
-
-\section{User Interface Implementation}
 
 final screenshots, comparison etc
 
