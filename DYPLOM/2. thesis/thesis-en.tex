@@ -764,12 +764,42 @@ assumptions were met. The first design is shown in the picture below.
 
 % Architecture, Design, Data flow
 \section{System Architecture}
-- start topology, livekit SFU, client-side CRDT, WebRTC data channels, 
-- detailes diagrams of architecture
-- component diagram, egui - automerge - livekit/tokio networking
+
+As mentioned in the introduction, the system is designed with a star topology architecture, where a central 
+server (open source LiveKit SFU) facilitates communication between clients. Each client maintains a local
+ CRDT document representing the whiteboard state, and synchronization occurs through WebRTC data channels.
+  The architecture is modular, with clear separation of concerns between the user interface (egui), the 
+  CRDT data model (Automerge), and the networking layer (LiveKit/Tokio).
+
+The program is devided mostly into three main modules: \texttt{ui.rs} which holds most of the application interface
+state and UX interaction methods, \texttt{backend\_api.rs} -- a module of abstraction which defines connection points 
+ of canvas/CRDT and networking, becasue what user sees on the screen is not just a matrix of pixeels from 
+ persistent storage, but a result of rendering of CRDT document.
+ 
+ \texttt{automerge\_backend.rs} -- a module which defines the CRDT document and methods of interaction with it. It is 
+ a implementation  of \texttt{backend\_api.rs} with a little bit of extra methods.
 
 \section{Technology Stack}
-- why rust, gui, automerge, tokio, livekit, brief description of each
+automerge, tokio, livekit, brief description of each
+
+The stack I decided to implement the solution in is mostly based on my intuition of current trends on software 
+engineering market, therefore I decided to use RUST language - a modern and unusual language, which has gained 
+some popularity in recent years, mostly due to its great implementation of memory safety / ownership of variables. 
+Rust is a language which has a promise of solving approximately 60-70\% of vulnerabilities in C/C++ systems, which 
+are memory safety vulnerabilities.
+
+Becasue the application is a desktop application, I decided to use egui library for the user interface. It
+ is a modern and responsive GUI library for Rust, which allows to create native desktop applications with ease. 
+ It is also cross-platform, which means that the application can be run on both macOS and Windows without 
+ any changes. Possibly it could also be compiled to webassembly and run in the browser, but it is not a goal of
+  this project.
+
+  When deciding on how to implement / use CRDTs in the project, the first idea was to use own implementation 
+  of CRDTs, more specifically a RGA - Replicated Growable Array and keep strokes as pixels in a matrix (array of arrays), 
+  but during the research, I stumbled upon a very highly regarded and industry wide accepted library developed 
+  by Cambride Cumputer Scientist - Martin Kleppmann. The library is Automerge and it implements most of
+  basic data structures as CRDTS. In my case I would use 
+
 
 % Novel solutions
 \section{CRDTS Data Model}

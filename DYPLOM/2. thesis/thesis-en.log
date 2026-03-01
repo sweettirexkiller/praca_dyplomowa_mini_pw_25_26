@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.11.29)  1 MAR 2026 14:44
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.11.29)  1 MAR 2026 18:17
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1011,18 +1011,18 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 [27 <./images/initial-ui.png>]
 Chapter 2.
 
-Underfull \hbox (badness 1057) in paragraph at lines 782--784
-[]\T1/cmr/m/n/10.95 - livekit room con-nec-tion, data chan-nel pub-lish-ing/subscribing, broad-cast-ing of mes-
- []
-
-
-Underfull \vbox (badness 4582) has occurred while \output is active []
-
-
 
 [28
 
 ]
+Underfull \hbox (badness 1057) in paragraph at lines 812--814
+[]\T1/cmr/m/n/10.95 - livekit room con-nec-tion, data chan-nel pub-lish-ing/subscribing, broad-cast-ing of mes-
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1032,16 +1032,25 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [29]
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[30]
 Chapter 3.
 
 
-[30
+[31
 
 ]
 Chapter 4.
 
 
-[31
+[32
 
 ]
 
@@ -1049,7 +1058,7 @@ Chapter 4.
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.824 \chapter
+l.854 \chapter
               *{List of symbols and abbreviations} [1
 
 ]
@@ -1058,7 +1067,7 @@ l.824 \chapter
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.837 \listoffigures
+l.867 \listoffigures
                      [2
 
 ] (./thesis-en.lof)
@@ -1071,7 +1080,7 @@ l.837 \listoffigures
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.844 \listoftables
+l.874 \listoftables
                     [3
 
 ] (./thesis-en.lot)
@@ -1084,7 +1093,7 @@ l.844 \listoftables
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.849 \chapter
+l.879 \chapter
               *{List of appendices} [4
 
 ]
@@ -1093,7 +1102,7 @@ l.849 \chapter
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.858 \end{document}
+l.888 \end{document}
                      [5
 
 ] (./thesis-en.aux)
@@ -1105,18 +1114,18 @@ Package rerunfilecheck Info: File `thesis-en.out' has not changed.
 (rerunfilecheck)             Checksum: 01D35EC73A4A6405C9361DA13F4C3856;4332.
  ) 
 Here is how much of TeX's memory you used:
- 13864 strings out of 473190
- 219282 string characters out of 5715799
+ 13868 strings out of 473190
+ 219323 string characters out of 5715799
  661635 words of memory out of 5000000
- 36813 multiletter control sequences out of 15000+600000
- 569803 words of font info for 65 fonts, out of 8000000 for 9000
+ 36815 multiletter control sequences out of 15000+600000
+ 570117 words of font info for 66 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  75i,17n,79p,665b,640s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfbx1095.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfcc1095.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfti1095.pfb>
-Output written on thesis-en.pdf (34 pages, 2551904 bytes).
+</usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfbx1095.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfcc1095.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfti1095.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sftt1095.pfb>
+Output written on thesis-en.pdf (35 pages, 2577376 bytes).
 PDF statistics:
- 431 PDF objects out of 1000 (max. 8388607)
- 321 compressed objects within 4 object streams
- 78 named destinations out of 1000 (max. 500000)
+ 441 PDF objects out of 1000 (max. 8388607)
+ 328 compressed objects within 4 object streams
+ 79 named destinations out of 1000 (max. 500000)
  253 words of extra memory for PDF output out of 10000 (max. 10000000)
 
