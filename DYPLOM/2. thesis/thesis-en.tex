@@ -861,16 +861,13 @@ the strokes stored in the CRDT document, converted into a texture, and displayed
 of \texttt{current\_stroke} from the committed strokes allows for smooth real-time drawing, as the in-progress 
 stroke is rendered locally before being finalized and synchronized with remote peers.
 
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.99\textwidth]{./images/ui-modules-2.png}
-	\caption{User Interface Modules 2}
-	\label{fig:ui-modules-2}
-\end{figure}
 
 \begin{figure}[H]
-	\centering
-	\begin{minipage}{0.3\textwidth}
+	\begin{minipage}{0.16\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{./images/ui-modules-2.png}
+	\end{minipage}%
+	\begin{minipage}{0.24\textwidth}
 		\centering
 		\includegraphics[width=\textwidth]{./images/ui-modules-3.png}
 	\end{minipage}%
@@ -880,20 +877,62 @@ stroke is rendered locally before being finalized and synchronized with remote p
 		\includegraphics[width=\textwidth]{./images/ui-modules-4.png}
 	\end{minipage}%
 	\hfill
-	\begin{minipage}{0.43\textwidth}
+	\begin{minipage}{0.41\textwidth}
 		\centering
 		\includegraphics[width=\textwidth]{./images/ui-modules-5.png}
 	\end{minipage}
-	\caption{User Interface Modules 3, 4, and 5}
+	\caption{User Interface Modules}
 	\label{fig:ui-modules-3-4-5}
 \end{figure}
 
 
 
-
-
-
 \subsection{Backend Module}
+
+The backend module defines the boundary between the user interface and the CRDT synchronization logic.
+At its core lies the \texttt{DocBackend} trait (interface), which abstracts all document operations
+behind a unified API. This separation ensures that the UI layer does not depend on any specific CRDT
+implementation and can work with any backend that satisfies the trait contract.
+
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\textwidth]{./images/backend-interface.png}
+	\caption{Backend Interface}
+	\label{fig:backend-interface}
+\end{figure}
+
+
+As shown in Figure~\ref{fig:backend-interface}, the \texttt{DocBackend} interface exposes methods
+grouped into three categories:
+
+\begin{itemize}
+	\item \textbf{Document manipulation} -- The \texttt{apply\_intent} method accepts an \texttt{Intent}
+		  (either \texttt{Draw} or \texttt{Clear}) and returns a \texttt{FrontendUpdate} containing the
+		  current list of strokes to render. The \texttt{get\_strokes} method allows the UI to retrieve
+		  the full set of strokes at any time.
+
+	\item \textbf{Synchronization} -- The \texttt{peer\_connected} and \texttt{peer\_disconnected} methods
+		  notify the backend when remote peers join or leave. The \texttt{receive\_sync\_message} method
+		  processes incoming binary sync messages from a peer and returns a \texttt{FrontendUpdate}
+		  reflecting any changes. Conversely, \texttt{generate\_sync\_message} produces an outgoing
+		  binary message destined for a specific peer, returning \texttt{None} when there is nothing
+		  to send.
+
+	\item \textbf{Persistence} -- The \texttt{save} method serializes the entire document state into
+		  a byte vector, while \texttt{load} restores the document from previously saved bytes. These
+		  methods enable explicit file export and import without requiring any default persistence.
+\end{itemize}
+
+The communication data types are also defined in this module. \texttt{Point} represents a 2D coordinate,
+\texttt{Stroke} groups a sequence of points with a color (RGBA) and width, \texttt{Intent} encodes
+user actions, and \texttt{FrontendUpdate} carries the resulting list of strokes back to the UI.
+By keeping these types in a shared module, both the UI and any backend implementation can reference
+them without circular dependencies.
+
+This trait-based design makes the backend easily testable and replaceable -- one could swap Automerge
+for a different CRDT library (or even a simple in-memory store for testing) without modifying the
+user interface code.
 
 
 \section{User Interface Implementation}
