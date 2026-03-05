@@ -820,7 +820,7 @@ It provides a simple API for creating rooms and managing connections between
 
 \section{Application Modules}
 
-\subsection{User Interface Module}
+\subsection{User Interface Modules and Implementation}
 
 Most of application state is kept in \texttt{AppView} struct. As we can see on the diagram below, it is a struct
  which holds all information about the state of the application: backend state (\texttt{backend}), status bar state (\texttt{status}),
@@ -934,19 +934,12 @@ This trait-based design makes the backend easily testable and replaceable -- one
 for a different CRDT library (or even a simple in-memory store for testing) without modifying the
 user interface code.
 
-
-\section{User Interface Implementation}
-
-
 \section{Synchronization Protocol}
 
 automerge sync messages, how they are generated and applied, how conflicts are resolved, how cursors are synchronized, how new users synchronize with existing state
  when joining a room.
  ``generate\_sync\_message'', ``receive\_sync\_message''
 	
-
-
-
 
 
 % Novel solutions
