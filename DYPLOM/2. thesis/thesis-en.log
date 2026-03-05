@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.11.29)  5 MAR 2026 17:32
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.11.29)  5 MAR 2026 17:44
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1042,30 +1042,6 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [30 <./images/architecture.png>]
-<./images/ui-modules-2.png, id=334, 820.06375pt x 192.72pt>
-File: ./images/ui-modules-2.png Graphic file (type png)
-<use ./images/ui-modules-2.png>
-Package pdftex.def Info: ./images/ui-modules-2.png  used on input line 851.
-(pdftex.def)             Requested size: 450.69418pt x 105.91692pt.
-<./images/ui-modules-3.png, id=335, 140.525pt x 115.43124pt>
-File: ./images/ui-modules-3.png Graphic file (type png)
-<use ./images/ui-modules-3.png>
-Package pdftex.def Info: ./images/ui-modules-3.png  used on input line 860.
-(pdftex.def)             Requested size: 136.57462pt x 112.19185pt.
-<./images/ui-modules-4.png, id=336, 92.345pt x 122.4575pt>
-File: ./images/ui-modules-4.png Graphic file (type png)
-<use ./images/ui-modules-4.png>
-Package pdftex.def Info: ./images/ui-modules-4.png  used on input line 865.
-(pdftex.def)             Requested size: 81.9406pt x 108.65982pt.
-<./images/ui-modules-5.png, id=337, 240.9pt x 175.65625pt>
-File: ./images/ui-modules-5.png Graphic file (type png)
-<use ./images/ui-modules-5.png>
-Package pdftex.def Info: ./images/ui-modules-5.png  used on input line 870.
-(pdftex.def)             Requested size: 195.75163pt x 142.7391pt.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1074,8 +1050,29 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[31 <./images/ui-modules-1.png> <./images/ui-modules-2.png>]
-Underfull \hbox (badness 1057) in paragraph at lines 906--908
+[31 <./images/ui-modules-1.png>]
+<./images/ui-modules-2.png, id=340, 820.06375pt x 192.72pt>
+File: ./images/ui-modules-2.png Graphic file (type png)
+<use ./images/ui-modules-2.png>
+Package pdftex.def Info: ./images/ui-modules-2.png  used on input line 866.
+(pdftex.def)             Requested size: 450.69418pt x 105.91692pt.
+<./images/ui-modules-3.png, id=341, 140.525pt x 115.43124pt>
+File: ./images/ui-modules-3.png Graphic file (type png)
+<use ./images/ui-modules-3.png>
+Package pdftex.def Info: ./images/ui-modules-3.png  used on input line 875.
+(pdftex.def)             Requested size: 136.57462pt x 112.19185pt.
+<./images/ui-modules-4.png, id=342, 92.345pt x 122.4575pt>
+File: ./images/ui-modules-4.png Graphic file (type png)
+<use ./images/ui-modules-4.png>
+Package pdftex.def Info: ./images/ui-modules-4.png  used on input line 880.
+(pdftex.def)             Requested size: 81.9406pt x 108.65982pt.
+<./images/ui-modules-5.png, id=343, 240.9pt x 175.65625pt>
+File: ./images/ui-modules-5.png Graphic file (type png)
+<use ./images/ui-modules-5.png>
+Package pdftex.def Info: ./images/ui-modules-5.png  used on input line 885.
+(pdftex.def)             Requested size: 195.75163pt x 142.7391pt.
+
+Underfull \hbox (badness 1057) in paragraph at lines 921--923
 []\T1/cmr/m/n/10.95 - livekit room con-nec-tion, data chan-nel pub-lish-ing/subscribing, broad-cast-ing of mes-
  []
 
@@ -1088,17 +1085,26 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[32 <./images/ui-modules-3.png> <./images/ui-modules-4.png> <./images/ui-modules-5.png>]
+[32 <./images/ui-modules-2.png> <./images/ui-modules-3.png> <./images/ui-modules-4.png> <./images/ui-modules-5.png>]
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[33]
 Chapter 3.
 
 
-[33
+[34
 
 ]
 Chapter 4.
 
 
-[34
+[35
 
 ]
 
@@ -1106,7 +1112,7 @@ Chapter 4.
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.936 \chapter
+l.951 \chapter
               *{List of symbols and abbreviations} [1
 
 ]
@@ -1115,7 +1121,7 @@ l.936 \chapter
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.949 \listoffigures
+l.964 \listoffigures
                      [2
 
 ] (./thesis-en.lof)
@@ -1128,7 +1134,7 @@ l.949 \listoffigures
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.956 \listoftables
+l.971 \listoftables
                     [3
 
 ] (./thesis-en.lot)
@@ -1141,7 +1147,7 @@ l.956 \listoftables
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.961 \chapter
+l.976 \chapter
               *{List of appendices} [4
 
 ]
@@ -1150,7 +1156,7 @@ l.961 \chapter
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.970 \end{document}
+l.985 \end{document}
                      [5
 
 ] (./thesis-en.aux)
@@ -1162,18 +1168,18 @@ Package rerunfilecheck Info: File `thesis-en.out' has not changed.
 (rerunfilecheck)             Checksum: AA9643058DA8670B0B2EED5A436DFA61;4640.
  ) 
 Here is how much of TeX's memory you used:
- 13917 strings out of 473190
- 220668 string characters out of 5715799
+ 13918 strings out of 473190
+ 220675 string characters out of 5715799
  661798 words of memory out of 5000000
  36857 multiletter control sequences out of 15000+600000
  570117 words of font info for 66 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  75i,17n,79p,665b,640s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfbx1095.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfcc1095.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfti1095.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sftt1095.pfb>
-Output written on thesis-en.pdf (37 pages, 2908221 bytes).
+Output written on thesis-en.pdf (38 pages, 2913054 bytes).
 PDF statistics:
- 481 PDF objects out of 1000 (max. 8388607)
- 354 compressed objects within 4 object streams
- 86 named destinations out of 1000 (max. 500000)
+ 485 PDF objects out of 1000 (max. 8388607)
+ 357 compressed objects within 4 object streams
+ 87 named destinations out of 1000 (max. 500000)
  294 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -831,8 +831,8 @@ Most of application state is kept in \texttt{AppView} struct. As we can see on t
  the UI (enforced by \texttt{egui}), handling user input, and so on. The main method of this struct is \texttt{update}, which is called in a loop and is responsible for
   rendering the UI and handling user input. The outline of the struct is shown in the diagram below. 
   The main point of this struct is to be a single source of truth for the state of the application
-   and to provide methods for interaction with the UI.
- 
+and to provide methods for interaction with the UI. 
+	 
 
 \begin{figure}[H]
 	\centering
@@ -844,7 +844,22 @@ Most of application state is kept in \texttt{AppView} struct. As we can see on t
 Below you can see more precise diagrams of submodules of the user interface module. \texttt{Page} enum defines
  the current page of the application, which can be either \texttt{Editor} (whiteboard) or \texttt{LiveKit}
  (connection panel). \texttt{SidebarState} struct defines the state of the sidebar, which can be either
-  \texttt{visible} or not and have \texttt{default\_width}.
+  \texttt{visible} or not and have \texttt{default\_width}. Another important enum is \texttt{Tool}, which defines 
+	the current tool selected by the user -- either \texttt{Pen} or \texttt{Eraser}. 
+	
+The \texttt{WhiteboardState} struct, shown in the diagram below, encapsulates the entire state of the drawing canvas. 
+It contains the following fields: \texttt{image} of type \texttt{ColorImage}, which stores the current raster 
+representation of the whiteboard; \texttt{texture} of type \texttt{Option<TextureHandle>}, which holds the GPU 
+texture used by egui for rendering the canvas; \texttt{stroke\_color} of type \texttt{Color32}, representing 
+the currently selected drawing color; \texttt{stroke\_width} of type \texttt{f32}, defining the thickness of 
+the pen stroke; \texttt{current\_stroke} of type \texttt{Vec<Point>}, which accumulates the points of the 
+stroke currently being drawn by the user before it is committed to the CRDT document; \texttt{tool} of type 
+\texttt{Tool}, indicating whether the user is currently using the pen or eraser; and \texttt{background} of 
+type \texttt{Option<ColorImage>}, which optionally stores a background image loaded from a file. 
+This struct is central to the rendering pipeline -- on each frame, the \texttt{image} is updated based on 
+the strokes stored in the CRDT document, converted into a texture, and displayed on the canvas. The separation 
+of \texttt{current\_stroke} from the committed strokes allows for smooth real-time drawing, as the in-progress 
+stroke is rendered locally before being finalized and synchronized with remote peers.
 
 \begin{figure}[H]
 	\centering
