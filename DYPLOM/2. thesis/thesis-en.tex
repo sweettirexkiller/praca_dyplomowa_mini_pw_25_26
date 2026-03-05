@@ -822,25 +822,33 @@ It provides a simple API for creating rooms and managing connections between
 
 \subsection{User Interface Module}
 
-
-Most of applicaiton state is kept in AppView struct. As we can see on the diagram below, it is a struct
- which holds all information about the state of the application: backend state, status bar state, sidebar state, 
- current page state, whiteboard state, livekit connection state, remote cursors state, and so on. 
+Most of application state is kept in \texttt{AppView} struct. As we can see on the diagram below, it is a struct
+ which holds all information about the state of the application: backend state (\texttt{backend}), status bar state (\texttt{status}),
+  sidebar state (\texttt{SidebatState}), 
+ current page state (\texttt{page}), whiteboard state (\texttt{whiteboard}), LiveKit connection state (\texttt{livekit\_}), 
+ remote cursors state (\texttt{remote\_cursors}), and so on. 
  It also holds methods for interaction with the user interface, for example methods for rendering 
- the UI (enforced by egui), handling user input, and so on.
+ the UI (enforced by \texttt{egui}), handling user input, and so on. The main method of this struct is \texttt{update}, which is called in a loop and is responsible for
+  rendering the UI and handling user input. The outline of the struct is shown in the diagram below. 
+  The main point of this struct is to be a single source of truth for the state of the application
+   and to provide methods for interaction with the UI.
  
- The main method of this struct is \texttt{update}, which is called in a loop and is responsible for
-  rendering the UI and handling user input.
+
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.9\textwidth]{./images/ui-modules-1.png}
+	\includegraphics[width=0.5\textwidth]{./images/ui-modules-1.png}
 	\caption{User Interface Modules 1}
 	\label{fig:ui-modules-1}
 \end{figure}
 
+Below you can see more precise diagrams of submodules of the user interface module. \texttt{Page} enum defines
+ the current page of the application, which can be either \texttt{Editor} (whiteboard) or \texttt{LiveKit}
+ (connection panel). \texttt{SidebarState} struct defines the state of the sidebar, which can be either
+  \texttt{visible} or not and have \texttt{default\_width}.
+
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.95\textwidth]{./images/ui-modules-2.png}
+	\includegraphics[width=0.99\textwidth]{./images/ui-modules-2.png}
 	\caption{User Interface Modules 2}
 	\label{fig:ui-modules-2}
 \end{figure}
