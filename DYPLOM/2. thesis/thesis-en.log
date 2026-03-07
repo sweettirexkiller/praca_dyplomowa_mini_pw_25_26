@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.11.29)  7 MAR 2026 17:04
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.11.29)  7 MAR 2026 17:48
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1105,7 +1105,9 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [33{/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc} <./images/backend-interface.png>]
-Underfull \vbox (badness 4024) has occurred while \output is active []
+Underfull \hbox (badness 4072) in paragraph at lines 965--968
+[]\T1/cmr/bx/n/10.95 Delta up-dates\T1/cmr/m/n/10.95 : in-stead of send-ing the en-tire doc-u-ment, the back-end uses
+ []
 
 
 
@@ -1117,6 +1119,16 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [34]
+Underfull \hbox (badness 5345) in paragraph at lines 968--971
+[]\T1/cmr/bx/n/10.95 Convergence through merg-ing\T1/cmr/m/n/10.95 : when a peer re-ceives this mes-sage, the
+ []
+
+<./images/automerge-sequance.png, id=437, 2526.43875pt x 2148.025pt>
+File: ./images/automerge-sequance.png Graphic file (type png)
+<use ./images/automerge-sequance.png>
+Package pdftex.def Info: ./images/automerge-sequance.png  used on input line 975.
+(pdftex.def)             Requested size: 450.69418pt x 383.18633pt.
+
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1125,7 +1137,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[35]
+[35 <./images/automerge-sequance.png>]
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1135,16 +1147,25 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [36]
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[37]
 Chapter 3.
 
 
-[37
+[38
 
 ]
 Chapter 4.
 
 
-[38
+[39
 
 ]
 
@@ -1152,7 +1173,7 @@ Chapter 4.
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.1038 \chapter
+l.1060 \chapter
                *{List of symbols and abbreviations} [1
 
 ]
@@ -1161,7 +1182,7 @@ l.1038 \chapter
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.1051 \listoffigures
+l.1073 \listoffigures
                       [2
 
 ] (./thesis-en.lof)
@@ -1174,7 +1195,7 @@ l.1051 \listoffigures
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.1058 \listoftables
+l.1080 \listoftables
                      [3
 
 ] (./thesis-en.lot)
@@ -1187,7 +1208,7 @@ l.1058 \listoftables
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.1063 \chapter
+l.1085 \chapter
                *{List of appendices} [4
 
 ]
@@ -1196,7 +1217,7 @@ l.1063 \chapter
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.1072 \end{document}
+l.1094 \end{document}
                       [5
 
 ] (./thesis-en.aux)
@@ -1208,18 +1229,18 @@ Package rerunfilecheck Info: File `thesis-en.out' has not changed.
 (rerunfilecheck)             Checksum: 911A06739B0D07AA8ECDC53E5EF0F162;7383.
  ) 
 Here is how much of TeX's memory you used:
- 13956 strings out of 473190
- 221455 string characters out of 5715799
- 661779 words of memory out of 5000000
- 36879 multiletter control sequences out of 15000+600000
+ 13966 strings out of 473190
+ 221761 string characters out of 5715799
+ 661858 words of memory out of 5000000
+ 36887 multiletter control sequences out of 15000+600000
  570458 words of font info for 67 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  75i,17n,79p,665b,640s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfbx1095.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfcc1095.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfti1095.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sftt1095.pfb>
-Output written on thesis-en.pdf (42 pages, 3012875 bytes).
+Output written on thesis-en.pdf (43 pages, 3209075 bytes).
 PDF statistics:
- 576 PDF objects out of 1000 (max. 8388607)
- 429 compressed objects within 5 object streams
- 101 named destinations out of 1000 (max. 500000)
- 387 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 586 PDF objects out of 1000 (max. 8388607)
+ 436 compressed objects within 5 object streams
+ 103 named destinations out of 1000 (max. 500000)
+ 392 words of extra memory for PDF output out of 10000 (max. 10000000)
 

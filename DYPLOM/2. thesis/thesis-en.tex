@@ -953,8 +953,30 @@ synchronized, and \emph{where} do the bytes travel.
 
 %  CONCEPTS
 \subsection{State-based vs Operation-based synchronization}
- brief theoretical background, position Automerge as as state-based CRDT 
- with operation-log hisotry
+%  brief theoretical background, position Automerge as as state-based CRDT 
+%  with operation-log hisotry
+
+Automerge library is positioned as a state-based CRDT because it uses a specialised 
+synchronization protocol to find differences between peers.
+
+\begin{itemize}
+	\item \textbf{Sync States}: each peer maintains a \texttt{sync::State} for every other connected peer.
+	This acts as a tracker for what the remote peer already knows about the document.
+	\item \textbf{Delta updates}: instead of sending the entire document, the backend uses 
+	\texttt{generate\_sync\_message()} to produce a compact binary blob containing only the changes 
+	(deltas) the specific remote peer has not seen yet.
+	\item \textbf{Convergence through merging}: when a peer receives this message, the \texttt{receive\_sync\_message}
+	function decodes the data and automatically merges the remote changes into a local 
+	document.
+\end{itemize}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.99\textwidth]{./images/automerge-sequance.png}
+	\caption{Automerge synchronization sequence between two peers}
+	\label{fig:automerge-sequence}
+\end{figure}
+
 \subsection{Automerge sync protocol}
 explain the \texttt{generate\_sync\_message} / \texttt{receive\_sync\_message} handshake, the role of 
 	the bloom filters for tracking ``what does the peer already know'', and why multiple rounds may be needed

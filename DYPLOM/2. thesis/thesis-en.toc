@@ -25,18 +25,18 @@
 \contentsline {section}{\numberline {2.4}Synchronization Protocol -- How consistency is achieved}{34}{section.2.4}%
 \contentsline {subsection}{\numberline {2.4.1}State-based vs Operation-based synchronization}{34}{subsection.2.4.1}%
 \contentsline {subsection}{\numberline {2.4.2}Automerge sync protocol}{35}{subsection.2.4.2}%
-\contentsline {subsection}{\numberline {2.4.3}Conflict resolution and guarantees}{35}{subsection.2.4.3}%
-\contentsline {subsection}{\numberline {2.4.4}Initial synchronization of new peer}{35}{subsection.2.4.4}%
-\contentsline {section}{\numberline {2.5}CRDTS Data Model - What is beeing synchronised ?}{35}{section.2.5}%
-\contentsline {subsection}{\numberline {2.5.1}Document schema}{35}{subsection.2.5.1}%
-\contentsline {subsection}{\numberline {2.5.2}Stroke representation}{35}{subsection.2.5.2}%
-\contentsline {subsection}{\numberline {2.5.3}Intent abstraction}{35}{subsection.2.5.3}%
-\contentsline {subsection}{\numberline {2.5.4}File persistence}{35}{subsection.2.5.4}%
+\contentsline {subsection}{\numberline {2.4.3}Conflict resolution and guarantees}{36}{subsection.2.4.3}%
+\contentsline {subsection}{\numberline {2.4.4}Initial synchronization of new peer}{36}{subsection.2.4.4}%
+\contentsline {section}{\numberline {2.5}CRDTS Data Model - What is beeing synchronised ?}{36}{section.2.5}%
+\contentsline {subsection}{\numberline {2.5.1}Document schema}{36}{subsection.2.5.1}%
+\contentsline {subsection}{\numberline {2.5.2}Stroke representation}{36}{subsection.2.5.2}%
+\contentsline {subsection}{\numberline {2.5.3}Intent abstraction}{36}{subsection.2.5.3}%
+\contentsline {subsection}{\numberline {2.5.4}File persistence}{36}{subsection.2.5.4}%
 \contentsline {section}{\numberline {2.6}Communication Layer - Where the messages travel ?}{36}{section.2.6}%
 \contentsline {subsection}{\numberline {2.6.1}LiveKit and WebRTC data channels}{36}{subsection.2.6.1}%
-\contentsline {subsection}{\numberline {2.6.2}Thread modeling}{36}{subsection.2.6.2}%
-\contentsline {subsection}{\numberline {2.6.3}Message flow and chunking}{36}{subsection.2.6.3}%
-\contentsline {subsection}{\numberline {2.6.4}Cursor synchronization}{36}{subsection.2.6.4}%
-\contentsline {chapter}{\numberline {3}Analysis of the solution}{37}{chapter.3}%
-\contentsline {chapter}{\numberline {4}Conclusions}{38}{chapter.4}%
+\contentsline {subsection}{\numberline {2.6.2}Thread modeling}{37}{subsection.2.6.2}%
+\contentsline {subsection}{\numberline {2.6.3}Message flow and chunking}{37}{subsection.2.6.3}%
+\contentsline {subsection}{\numberline {2.6.4}Cursor synchronization}{37}{subsection.2.6.4}%
+\contentsline {chapter}{\numberline {3}Analysis of the solution}{38}{chapter.3}%
+\contentsline {chapter}{\numberline {4}Conclusions}{39}{chapter.4}%
 \contentsfinish 

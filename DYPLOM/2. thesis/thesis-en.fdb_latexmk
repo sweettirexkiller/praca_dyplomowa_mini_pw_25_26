@@ -1,6 +1,6 @@
 # Fdb version 4
-["pdflatex"] 1772899491.96085 "/Users/piotrjankiewicz/Documents/PROJEKTY/PW/praca_dyplomowa/DYPLOM/2. thesis/thesis-en.tex" "thesis-en.pdf" "thesis-en" 1772899494.57128 0
-  "/Users/piotrjankiewicz/Documents/PROJEKTY/PW/praca_dyplomowa/DYPLOM/2. thesis/thesis-en.tex" 1772899489.14734 51935 a838b2287b692cdce0d45ac90bd423e4 ""
+["pdflatex"] 1772902081.04731 "/Users/piotrjankiewicz/Documents/PROJEKTY/PW/praca_dyplomowa/DYPLOM/2. thesis/thesis-en.tex" "thesis-en.pdf" "thesis-en" 1772902083.85922 0
+  "/Users/piotrjankiewicz/Documents/PROJEKTY/PW/praca_dyplomowa/DYPLOM/2. thesis/thesis-en.tex" 1772902078.05409 52969 65eb65b1c1b651bbdf8660c0407c371b ""
   "/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc" 1136849721 2971 def0b6c1f0b107b3b936def894055589 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1136849721 2900 1537cc8184ad1792082cd229ecc269f4 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
@@ -129,6 +129,7 @@
   "/usr/local/texlive/2025/texmf-var/web2c/pdftex/pdflatex.fmt" 1764425717 3345744 6b656ef26b1b821fdd7c1e49b384f185 ""
   "/usr/local/texlive/2025/texmf.cnf" 1741450484 577 418a7058ec8e006d8704f60ecd22c938 ""
   "images/architecture.png" 1772129004.2634 71535 403a8febe2faef8f438c38395b61cb0b ""
+  "images/automerge-sequance.png" 1772902025.47218 323995 936468ecb426ea1422a3cac2cff72866 ""
   "images/backend-interface.png" 1772733490.38553 303806 b4ed3c402bb6b67d94d1548f240b4042 ""
   "images/cloud-vs-local.png" 1771698023.74045 539141 ad95a31b653a05799ed8b8a6d88e857b ""
   "images/complicated-modules.png" 1771682055.86668 121574 d51003f1cc990063625487f45c77712c ""
@@ -143,12 +144,12 @@
   "images/ui-modules-3.png" 1772387166.05247 17007 a1b5572a865ab7a0dea1aff03fee962b ""
   "images/ui-modules-4.png" 1772387181.09868 11013 4eaf1151986422482361462af6050e28 ""
   "images/ui-modules-5.png" 1772387195.50174 59601 9fc68211e612c78733ccf3ec7af94289 ""
-  "thesis-en.aux" 1772899494.49426 11007 25883bf0f7c63ced910773b90e4251e3 "pdflatex"
-  "thesis-en.lof" 1772899494.49584 1674 25e3dda20d86acbcf530de703e3a081e "pdflatex"
-  "thesis-en.lot" 1772899494.49586 1273 a36f995ea127741dd2f3cef57bc7f108 "pdflatex"
-  "thesis-en.out" 1772899494.49558 7383 911a06739b0d07aa8ecdc53e5ef0f162 "pdflatex"
-  "thesis-en.tex" 1772899489.14734 51935 a838b2287b692cdce0d45ac90bd423e4 ""
-  "thesis-en.toc" 1772899494.49581 3524 9590985dd73881bc7af14691b2b144ed "pdflatex"
+  "thesis-en.aux" 1772902083.7694 11288 5a26bfc46569e6e7252f84b75ab1afba "pdflatex"
+  "thesis-en.lof" 1772902083.771 1801 d4856fb954e7d9ae63dba16c1f05c019 "pdflatex"
+  "thesis-en.lot" 1772902083.77102 1273 a36f995ea127741dd2f3cef57bc7f108 "pdflatex"
+  "thesis-en.out" 1772902083.77076 7383 911a06739b0d07aa8ecdc53e5ef0f162 "pdflatex"
+  "thesis-en.tex" 1772902078.05409 52969 65eb65b1c1b651bbdf8660c0407c371b ""
+  "thesis-en.toc" 1772902083.77097 3524 c96abe5cdb657a3724ad0ada55823e76 "pdflatex"
   "titlepage-en.pdf" 1771353546.35062 635553 a1957b8146f9ca75fa29296a0bcde4de ""
   (generated)
   "thesis-en.aux"
