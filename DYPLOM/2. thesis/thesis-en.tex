@@ -915,20 +915,19 @@ grouped into three categories:
 	\item \textbf{Synchronization} -- The \texttt{peer\_connected} and \texttt{peer\_disconnected} methods
 		  notify the backend when remote peers join or leave. The \texttt{receive\_sync\_message} method
 		  processes incoming binary sync messages from a peer and returns a \texttt{FrontendUpdate}
-		  reflecting any changes. Conversely, \texttt{generate\_sync\_message} produces an outgoing
-		  binary message destined for a specific peer, returning \texttt{None} when there is nothing
+		  reflecting any changes. On the other hand, \texttt{generate\_sync\_message} produces an outgoing
+		  binary message broadcasted to all peers, returning \texttt{None} when there is nothing
 		  to send.
 
 	\item \textbf{Persistence} -- The \texttt{save} method serializes the entire document state into
-		  a byte vector, while \texttt{load} restores the document from previously saved bytes. These
+		  a byte vector, while \texttt{load} restores the document from previously saved bytes. The 1.0.0+1 
+		  version of the applicaiton in ALFA environment enables two file types persistence: .crdt and .png. These
 		  methods enable explicit file export and import without requiring any default persistence.
 \end{itemize}
 
-The communication data types are also defined in this module. \texttt{Point} represents a 2D coordinate,
+The raster graphics data types are also defined in this module. \texttt{Point} represents a 2D coordinate,
 \texttt{Stroke} groups a sequence of points with a color (RGBA) and width, \texttt{Intent} encodes
 user actions, and \texttt{FrontendUpdate} carries the resulting list of strokes back to the UI.
-By keeping these types in a shared module, both the UI and any backend implementation can reference
-them without circular dependencies.
 
 This trait-based design makes the backend easily testable and replaceable -- one could swap Automerge
 for a different CRDT library (or even a simple in-memory store for testing) without modifying the
@@ -936,22 +935,35 @@ user interface code.
 
 \section{Synchronization Protocol}
 
-automerge sync messages, how they are generated and applied, how conflicts are resolved, how cursors are synchronized, how new users synchronize with existing state
- when joining a room.
- ``generate\_sync\_message'', ``receive\_sync\_message''
+% automerge sync messages, how they are generated and applied, how conflicts are resolved, how cursors are synchronized, how new users synchronize with existing state
+%  when joining a room.
+%  ``generate\_sync\_message'', ``receive\_sync\_message''
 	
-
+\subsection{State-based vs Operation-based synchronization}
+\subsection{Automerge sync protocol}
+\subsection{Conflict resolution and guarantees}
+\subsection{Initial synchronization of new peer}
 
 % Novel solutions
 \section{CRDTS Data Model}
-- how strokes are represented in CRDT (vectors of points, color, wifth)
+% - how strokes are represented in CRDT (vectors of points, color, wifth)
 
-- Intent::Draw, Intent::Clear
-- serialization / deserialization of CRDT document to file
+% - Intent::Draw, Intent::Clear
+% - serialization / deserialization of CRDT document to file
+
+\subsection{Document schema}
+\subsection{Stroke representation}
+\subsection{Intent abstraction}
+\subsection{File persistence}
+
 
 \section{Communication Layer}
-- livekit room connection, data channel publishing/subscribing, broadcasting of messages/cursor positions,
-- usage of Tokio.
+% - livekit room connection, data channel publishing/subscribing, broadcasting of messages/cursor positions,
+% - usage of Tokio.
+\subsection{LiveKit and WebRTC data channels}
+\subsection{Thread modeling}
+\subsection{Message flow and chunking}
+\subsection{Cursor synchronization}
 
 
 final screenshots, comparison etc
