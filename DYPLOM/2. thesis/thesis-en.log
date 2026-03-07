@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.11.29)  7 MAR 2026 16:34
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.11.29)  7 MAR 2026 17:04
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1081,7 +1081,7 @@ Package pdftex.def Info: ./images/ui-modules-5.png  used on input line 882.
 <./images/backend-interface.png, id=413, 1267.73625pt x 2176.13pt>
 File: ./images/backend-interface.png Graphic file (type png)
 <use ./images/backend-interface.png>
-Package pdftex.def Info: ./images/backend-interface.png  used on input line 900.
+Package pdftex.def Info: ./images/backend-interface.png  used on input line 902.
 (pdftex.def)             Requested size: 318.6695pt x 546.98642pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
@@ -1105,7 +1105,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [33{/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc} <./images/backend-interface.png>]
-Underfull \vbox (badness 10000) has occurred while \output is active []
+Underfull \vbox (badness 4024) has occurred while \output is active []
 
 
 
@@ -1126,25 +1126,25 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [35]
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[36]
 Chapter 3.
-
-
-[36
-
-]
-Chapter 4.
 
 
 [37
 
 ]
+Chapter 4.
 
 
-pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.995 \chapter
-              *{List of symbols and abbreviations} [1
+[38
 
 ]
 
@@ -1152,7 +1152,16 @@ l.995 \chapter
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.1008 \listoffigures
+l.1038 \chapter
+               *{List of symbols and abbreviations} [1
+
+]
+
+
+pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.1051 \listoffigures
                       [2
 
 ] (./thesis-en.lof)
@@ -1165,7 +1174,7 @@ l.1008 \listoffigures
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.1015 \listoftables
+l.1058 \listoftables
                      [3
 
 ] (./thesis-en.lot)
@@ -1178,7 +1187,7 @@ l.1015 \listoftables
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.1020 \chapter
+l.1063 \chapter
                *{List of appendices} [4
 
 ]
@@ -1187,7 +1196,7 @@ l.1020 \chapter
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.1029 \end{document}
+l.1072 \end{document}
                       [5
 
 ] (./thesis-en.aux)
@@ -1196,21 +1205,21 @@ LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
  ***********
 Package rerunfilecheck Info: File `thesis-en.out' has not changed.
-(rerunfilecheck)             Checksum: 9706AFF77B6E0AD53B8E6F43846334DC;6869.
+(rerunfilecheck)             Checksum: 911A06739B0D07AA8ECDC53E5EF0F162;7383.
  ) 
 Here is how much of TeX's memory you used:
- 13955 strings out of 473190
- 221448 string characters out of 5715799
+ 13956 strings out of 473190
+ 221455 string characters out of 5715799
  661779 words of memory out of 5000000
  36879 multiletter control sequences out of 15000+600000
  570458 words of font info for 67 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  75i,17n,79p,665b,640s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfbx1095.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfcc1095.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfti1095.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sftt1095.pfb>
-Output written on thesis-en.pdf (41 pages, 3009669 bytes).
+Output written on thesis-en.pdf (42 pages, 3012875 bytes).
 PDF statistics:
- 572 PDF objects out of 1000 (max. 8388607)
- 426 compressed objects within 5 object streams
- 100 named destinations out of 1000 (max. 500000)
+ 576 PDF objects out of 1000 (max. 8388607)
+ 429 compressed objects within 5 object streams
+ 101 named destinations out of 1000 (max. 500000)
  387 words of extra memory for PDF output out of 10000 (max. 10000000)
 

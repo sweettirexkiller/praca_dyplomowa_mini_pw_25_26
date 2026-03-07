@@ -765,11 +765,11 @@ server (open source LiveKit SFU) facilitates communication between clients. Each
 
 The program is devided mostly into three main modules: \texttt{ui.rs} which holds most of the application interface
 state and UX interaction methods, \texttt{backend\_api.rs} -- a module of abstraction which defines connection points 
- of canvas/CRDT and networking, becasue what user sees on the screen is not just a matrix of pixeels from 
- persistent storage, but a result of rendering of CRDT document.
- 
- \texttt{automerge\_backend.rs} -- a module which defines the CRDT document and methods of interaction with it. It is 
- a implementation  of \texttt{backend\_api.rs} with a little bit of extra methods.
+of canvas/CRDT and networking, because what user sees on the screen is not just a matrix of pixels from 
+persistent storage, but a result of rendering of the CRDT document.
+
+\texttt{automerge\_backend.rs} -- a module which defines the CRDT document and methods of interaction with it. It is 
+an implementation of \texttt{backend\_api.rs} with a little bit of extra methods.
 
 \section{Technology Stack}
 
@@ -894,6 +894,8 @@ At its core lies the \texttt{DocBackend} trait (interface), which abstracts all 
 behind a unified API. This separation ensures that the UI layer does not depend on any specific CRDT
 implementation and can work with any backend that satisfies the trait contract.
 
+% If you need to show underscores in text, use \texttt{backend\_api.rs} or \verb|backend_api.rs| to avoid math mode errors.
+
 
 \begin{figure}[H]
 	\centering
@@ -933,37 +935,78 @@ This trait-based design makes the backend easily testable and replaceable -- one
 for a different CRDT library (or even a simple in-memory store for testing) without modifying the
 user interface code.
 
-\section{Synchronization Protocol}
+\section{Synchronization Protocol -- How consistency is achieved}
 
 % automerge sync messages, how they are generated and applied, how conflicts are resolved, how cursors are synchronized, how new users synchronize with existing state
 %  when joining a room.
 %  ``generate\_sync\_message'', ``receive\_sync\_message''
-	
+
+The synchronization architecture of the collaborative whiteboard can be understood in three layers.
+First, Section~2.4 introduces the theoretical foundations of the sync protocol -- how Automerge
+ensures that all replicas converge to the same state without a central coordinator.
+Second, Section~2.5 describes the CRDT data model -- the concrete document schema and data structures
+that the protocol operates on.
+Finally, Section~2.6 covers the communication layer -- the transport infrastructure (LiveKit, WebRTC,
+Tokio) that carries sync messages between peers.
+Each layer answers one question in sequence: \emph{how} is consistency achieved, \emph{what} is being
+synchronized, and \emph{where} do the bytes travel.
+
+%  CONCEPTS
 \subsection{State-based vs Operation-based synchronization}
+ brief theoretical background, position Automerge as as state-based CRDT 
+ with operation-log hisotry
 \subsection{Automerge sync protocol}
+explain the \texttt{generate\_sync\_message} / \texttt{receive\_sync\_message} handshake, the role of 
+	the bloom filters for tracking ``what does the peer already know'', and why multiple rounds may be needed
 \subsection{Conflict resolution and guarantees}
+commutativity, casual ordering, eventual converganve, concrete example, two users draw 
+simultaneously, both strokes appear, two users clea and drat result is deterministic merge
 \subsection{Initial synchronization of new peer}
+what happens when a user joins midsession, the full sync handshake converges the newcomer to 
+the current document state
+
+% automerge_backend_cyns_sequance.md
+% app_general_flow_sequance.md
 
 % Novel solutions
-\section{CRDTS Data Model}
+\section{CRDTS Data Model - What is beeing synchronised ?}
 % - how strokes are represented in CRDT (vectors of points, color, wifth)
 
 % - Intent::Draw, Intent::Clear
 % - serialization / deserialization of CRDT document to file
 
 \subsection{Document schema}
+the automerge document structure, root and strokes (list of json strings) and root background (bytes)
+exaplain the choice to store strokes as serialized 
+JSON inside an automerge list
 \subsection{Stroke representation}
+point x,y Stroke points color width, why vector of points rather than pixels, 
 \subsection{Intent abstraction}
+indent draw (append to list) and intent clear (splice / remove all), how each maps to specifig 
+automerge CRDT options (insert splice)
 \subsection{File persistence}
+save - binary serialization of entire automerge doc (with hisotry) 
+load - reconstruction, two export formats .crdt (full state) and png (raster snapshot)
+
+% automerge_backend_local_intent_sequance.md
+% automerge_backend-class_diagram.md
 
 
-\section{Communication Layer}
+\section{Communication Layer - Where the messages travel ?}
 % - livekit room connection, data channel publishing/subscribing, broadcasting of messages/cursor positions,
 % - usage of Tokio.
 \subsection{LiveKit and WebRTC data channels}
+star topology via livekit SFU, room-basen sessions, why webRTC data channels
+ (low latency, NAT traversal)
 \subsection{Thread modeling}
+tokio runtime on a background thread, MPSC channels between ui thread and networkj thread, 
+why the ui must nnever block on I/O
 \subsection{Message flow and chunking}
+how sync messages are published/bradcasted, the chunking mechanism for messages exceeding 
+14KB - livekit limit, reassembky in the receiving side
 \subsection{Cursor synchronization}
+cursor positions are broadcasted separetly from CRDT sync (lightweight, high-frequancy)
+not part of a CRDT document
 
 
 final screenshots, comparison etc
