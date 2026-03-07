@@ -970,6 +970,12 @@ synchronization protocol to find differences between peers.
 	document.
 \end{itemize}
 
+Figure below illustrates the synchronization sequance between two peers - A and B.
+ When A makes a local change, it generates a sync message containing only the new
+ operations that B has not seen yet. This message is sent to B, which applies it 
+ to its local document. If B has made concurrent changes, the merge process ensures 
+ that both A and B converge to the same final state without conflicts.
+
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.99\textwidth]{./images/automerge-sequance.png}
@@ -978,8 +984,51 @@ synchronization protocol to find differences between peers.
 \end{figure}
 
 \subsection{Automerge sync protocol}
-explain the \texttt{generate\_sync\_message} / \texttt{receive\_sync\_message} handshake, the role of 
-	the bloom filters for tracking ``what does the peer already know'', and why multiple rounds may be needed
+
+The synchronization process in Automerge is a state-based handshake designed to bring two peers
+into the same identical state by exchanging only the necessary data. This is managed 
+through a pair of functions: \texttt{generate\_sync\_message} and 
+\texttt{receive\_sync\_message}. 
+
+% https://arxiv.org/abs/2012.00472
+\begin{enumerate}
+	\item \textbf{The Handshake: \texttt{generate\_sync\_message} and \texttt{receive\_sync\_message} }
+		\\ The handshake functions as a continuous conversation between peers until they are fully 
+		synchronized.
+		\begin{itemize}
+			\item \verb|generate_sync_message(peer_id)|: This function asks Automerge 
+			to identify what has changed since the last time this specific peer was updated. 
+			It uses a peer-peer \verb|sync::State| to track progress. If there are new 
+			changes (deltas), they are packed into a binary blob; if the peer is already 
+			up to date, it returns \verb|None|.
+			\item \verb|receive_sync_message(peer_id, message)|: When a peer receives this 
+			binary blob, it "unpacks" the changes and merges them into its own document.
+			This function also updates the local \verb|sync::State| for that sender, marking 
+			those specific changes as "received" so they aren't requested again. 
+		\end{itemize}
+	\item \textbf{The role of bloom filters} \\
+		Automerge uses Bloom filters to efficiently track "what the peer already knows"
+		without having to send a massive list of every operation ever performed. 
+		\begin{itemize}
+			\item Efficient summarization: Instead of sending full history, a peer sends
+			a compact Bloom filter---a probabilistic data structure---that represents the set 
+			of operations (changes) it currently holds in its document. 
+			\item Identify gaps: when receiving, the peer compares its own document against 
+			this bloom filter, it can quickly identify which operations it has that are not 
+			represented in the filter. These missing pieces are then bundled into the next 
+			sync message.
+		\end{itemize}
+	\item \textbf{Why multiple rounds may be needed} \\
+		While a single change might sync in one go, a full synchronization often requires 
+		two to three rounds to reach convergence.
+		\begin{itemize}
+			\item \textbf{Round 1 (Discovery):} Peer A sends a sync message containing its current "heads" (hashes of recent changes) and a Bloom filter summarizing all the changes it has.
+			\item \textbf{Round 2 (Response):} Peer B receives this, uses the Bloom filter to identify which of its own changes Peer A is missing, and sends those changes back. Peer B also sends its own Bloom filter.
+			\item \textbf{Round 3 (Convergence):} Peer A applies the changes from Peer B. It now knows if it is still missing anything based on Peer B's Bloom filter. It sends any remaining changes Peer B might need.
+			\item \textbf{Round 4 (Finalization):} Peer B applies those changes. At this point, Peer B generates a final "empty" sync message to confirm to Peer A that they are now in identical states.
+		\end{itemize}
+\end{enumerate}
+
 \subsection{Conflict resolution and guarantees}
 commutativity, casual ordering, eventual converganve, concrete example, two users draw 
 simultaneously, both strokes appear, two users clea and drat result is deterministic merge
