@@ -1067,34 +1067,84 @@ or dependency resolution), subsequent messages will complete the synchronization
 
 \subsection{Conflict resolution and guarantees}
 
-The core value proposition of using a CRDT like Automerge is the mathematical guarantee of data 
-consistency without central arbitration. The system ensures three key properties:
+In Automerge (and most CRDTs), conflict resolution is governed by the principle of 
+\textbf{strong eventual consistency}. This means that if two peers perform different actions 
+on the same piece of data at the same time, they must both arrive at the exact same result 
+without a central server deciding the outcome. Automerge achieves this through deterministic 
+rules embedded directly into the data structure operations.
+
+\subsubsection*{The ``Clear'' operation (Delete vs.\ Edit)}
+
+In Automerge, a delete operation (such as clearing a list or removing an element) specifically 
+targets the set of \emph{visible Change IDs} that the peer has observed at the moment the 
+operation is issued.
 
 \begin{itemize}
-    \item \textbf{Commutativity}: The order in which concurrent operations are applied does not 
-    affect the final document state. \texttt{apply(A) then apply(B)} yields the same result as 
-    \texttt{apply(B) then apply(A)}.
-    \item \textbf{Causal Ordering}: If operation B depends on operation A (e.g., a reply to a 
-    comment), the system ensures A is applied before B across all replicas.
-    \item \textbf{Eventual Convergence}: Provided all clients eventually receive all messages, 
-    every client will see the exact same whiteboard state.
+    \item \textbf{Scenario}: Peer~A clears the canvas (deletes all strokes from the list). 
+    Simultaneously, Peer~B draws a new stroke.
+    \item \textbf{Logic}: Peer~A's ``Clear'' command only knows about the strokes that existed 
+    at the moment Peer~A clicked clear. It has no knowledge of the new stroke Peer~B is 
+    currently creating, because that stroke has not yet been synchronized.
+    \item \textbf{Result}: The new stroke from Peer~B \emph{survives}. The old strokes are 
+    deleted (since both A and B agree they existed), but the new stroke remains because 
+    Peer~A's delete operation did not ``reach'' it. This is the \textbf{Add wins} semantics 
+    --- insertions that a peer has not observed cannot be removed by that peer's concurrent 
+    delete.
 \end{itemize}
 
-\paragraph{Concrete Examples:}
-\begin{enumerate}
-    \item \textbf{Concurrent Drawing}: If User A and User B draw a stroke simultaneously, Automerge 
-    treats these as two independent insertions into the \texttt{strokes} list. Since CRDT lists allow 
-    concurrent insertions, both strokes will be preserved and rendered on the canvas. The relative 
-    order of these strokes is determined deterministically (typically by peer ID), ensuring both 
-    users see the strokes in the same Z-order.
-    
-    \item \textbf{Clear vs. Draw}: Consider a scenario where User A clears the whiteboard (removing 
-    all strokes) while User B simultaneously draws a new stroke. Automerge resolves this by executing 
-    the removal of the known set of strokes and the insertion of the new stroke. If User B's stroke 
-    is logically new and not part of the set User A removed, the result is typically a cleared board 
-    containing only User B's new stroke. This behavior provides a predictable and non-destructive 
-    conflict resolution strategy.
-\end{enumerate}
+\subsubsection*{The ``Draw'' operation (Concurrent edits to the same property)}
+
+If both peers modify the same property concurrently (for example, changing the color of the 
+same stroke at the same time - hypothetically, because 1.0.0 version of application does not allow 
+such operations), Automerge must deterministically choose which value to display.
+
+\begin{itemize}
+    \item \textbf{Scenario}: Peer~A sets a stroke color to Red. Peer~B sets the same stroke 
+    color to Blue.
+    \item \textbf{Logic}: Automerge performs a deterministic \textbf{Last Write Wins (LWW)} 
+    tie-break based on a lexicographical comparison of the internal Change IDs (hashes).
+    \item \textbf{Result}: If Peer~A's change hash is \texttt{0xabc...} and Peer~B's is 
+    \texttt{0xdef...}, Peer~B wins because its hash is lexicographically higher. Crucially, 
+    both peers will see the same winner. No data is actually lost in the operation history 
+    --- Automerge preserves the full history --- but only one value is displayed as the 
+    ``current'' state.
+\end{itemize}
+
+The following table summarizes the conflict resolution strategies:
+
+\begin{table}[H]
+    \centering
+    \caption{Conflict resolution strategies in Automerge}
+    \begin{tabular}{|p{0.12\textwidth}|p{0.25\textwidth}|p{0.50\textwidth}|}
+        \hline
+        \textbf{Action} & \textbf{Conflict Type} & \textbf{Resolution} \\
+        \hline
+        Clear & Add vs.\ Remove & Add wins. Deletes only affect elements the peer 
+        observed at the time of deletion. \\
+        \hline
+        Draw & Value vs.\ Value & Deterministic tie-break. The change with the higher 
+        lexicographical hash becomes the visible value. \\
+        \hline
+    \end{tabular}
+    \label{tab:conflict-resolution}
+\end{table}
+
+\subsubsection*{Implications for the whiteboard application}
+
+In the implemented Rust application, strokes are stored in an Automerge \texttt{List}. 
+Calling \texttt{splice} to clear the list or \texttt{insert} to add a stroke is inherently 
+safe under concurrent usage. If one user clears the whiteboard while another draws a new 
+stroke, that new stroke will appear on both screens after the sync loop finishes, while the 
+old ``cleared'' strokes will vanish. This prevents the ``lost update'' problem where one 
+user's work is accidentally wiped out by another's cleanup action.
+
+If the application-level intent is that ``Clear'' should mean ``wipe everything, including 
+things I have not yet seen,'' this must be handled at the application layer --- for example, 
+by storing a \texttt{last\_cleared\_timestamp} and filtering out any strokes created before 
+that time. In the current implementation, the simpler CRDT-native semantics (add wins) are 
+used, which is the safer and more predictable default for collaborative drawing.
+
+
 \subsection{Initial synchronization of a new peer}
 
 A critical aspect of the collaborative experience is the ability for a new user to join an 
