@@ -1164,26 +1164,177 @@ they arrived.
 
 % Novel solutions
 \section{CRDT Data Model -- What is being synchronized?}
-% - how strokes are represented in CRDT (vectors of points, color, wifth)
 
-% - Intent::Draw, Intent::Clear
-% - serialization / deserialization of CRDT document to file
+Having described \emph{how} the synchronization protocol achieves consistency, this section 
+focuses on \emph{what} is being synchronized --- the concrete data structures stored inside 
+the Automerge document. The data model defines how user-visible whiteboard elements (strokes, 
+background) are represented as CRDT objects, how user actions map to CRDT operations, and how 
+the entire document can be persisted to and restored from disk.
 
 \subsection{Document schema}
-the automerge document structure, root and strokes (list of json strings) and root background (bytes)
-exaplain the choice to store strokes as serialized 
-JSON inside an automerge list
-\subsection{Stroke representation}
-point x,y Stroke points color width, why vector of points rather than pixels, 
-\subsection{Intent abstraction}
-indent draw (append to list) and intent clear (splice / remove all), how each maps to specifig 
-automerge CRDT options (insert splice)
-\subsection{File persistence}
-save - binary serialization of entire automerge doc (with hisotry) 
-load - reconstruction, two export formats .crdt (full state) and png (raster snapshot)
 
-% automerge_backend_local_intent_sequance.md
-% automerge_backend-class_diagram.md
+The Automerge document follows a simple, flat schema with two top-level keys stored under the 
+document root (\texttt{ROOT}):
+
+\begin{verbatim}
+ROOT
+ +-- "strokes"    : List<String>       // JSON-serialized strokes
+ +-- "background" : Bytes              // optional background image
+\end{verbatim}
+
+\begin{itemize}
+    \item \textbf{\texttt{strokes}} --- an Automerge \texttt{List} where each element is a JSON 
+    string representing a single \texttt{Stroke} object. The list is created lazily: if it does 
+    not exist when a stroke is drawn, the backend creates it with 
+    \texttt{put\_object(ROOT, "strokes", ObjType::List)}.
+    
+    \item \textbf{\texttt{background}} --- an optional \texttt{Bytes} scalar stored directly at 
+    the root. It holds the raw binary data (e.g., PNG) of a background image, if one has been 
+    loaded by the user.
+\end{itemize}
+
+\paragraph{Why JSON strings inside a List?}
+An alternative design would be to use native Automerge maps and nested lists to represent each 
+stroke's points, color, and width. However, storing strokes as opaque JSON strings offers 
+several practical advantages:
+
+\begin{enumerate}
+    \item \textbf{Simplicity}: Serialization and deserialization are handled by \texttt{serde\_json}, 
+    avoiding the complexity of managing deeply nested Automerge objects with multiple object IDs.
+    \item \textbf{Atomicity}: Each stroke is inserted or removed as a single list element. There is 
+    no risk of partially synchronized strokes (e.g., points arriving without their color).
+    \item \textbf{Performance}: Fewer CRDT metadata objects are created, reducing memory overhead 
+    and sync message size.
+    \item \textbf{Trade-off}: The downside is that individual stroke properties (e.g., color) cannot 
+    be edited in-place without replacing the entire JSON string. For the whiteboard use case, where 
+    strokes are immutable once drawn, this trade-off is acceptable.
+\end{enumerate}
+
+\subsection{Stroke representation}
+
+The data types that model a stroke are defined in the \texttt{backend\_api} module. 
+A \texttt{Stroke} consists of three fields:
+
+\begin{verbatim}
+pub struct Point {
+    pub x: i32,
+    pub y: i32,
+}
+
+pub struct Stroke {
+    pub points: Vec<Point>,    // ordered sequence of coordinates
+    pub color: [u8; 4],        // RGBA color
+    pub width: f32,            // line thickness in pixels
+}
+\end{verbatim}
+
+\paragraph{Why a vector of points rather than pixels?}
+Two approaches exist for representing drawn content: storing raw pixel data (a bitmap) or 
+storing geometric primitives (vectors of points). The vector approach was chosen for several 
+reasons:
+
+\begin{itemize}
+    \item \textbf{Compactness}: A stroke of 200 sampled points requires approximately 
+    $200 \times 8 = 1600$~bytes plus color and width metadata. A rasterized equivalent on a 
+    $1920 \times 1080$ canvas would require megabytes.
+    \item \textbf{Resolution independence}: Strokes can be re-rendered at any zoom level or 
+    canvas size without loss of quality.
+    \item \textbf{CRDT friendliness}: Each stroke is a self-contained, serializable unit that 
+    can be inserted into or removed from the Automerge list atomically. Bitmap-based approaches 
+    would require pixel-level conflict resolution, which is far more complex.
+    \item \textbf{Undo granularity}: Removing a stroke means deleting one list element rather 
+    than restoring thousands of pixels.
+\end{itemize}
+
+\subsection{Intent abstraction}
+
+User actions are abstracted through the \texttt{Intent} enum, which decouples the UI from 
+the CRDT operations:
+
+\begin{verbatim}
+pub enum Intent {
+    Draw(Stroke),   // add a new stroke to the document
+    Clear,          // remove all strokes from the document
+}
+\end{verbatim}
+
+Each intent maps directly to specific Automerge CRDT operations:
+
+\begin{table}[H]
+    \centering
+    \caption{Mapping of user intents to Automerge CRDT operations}
+    \begin{tabular}{|p{0.15\textwidth}|p{0.35\textwidth}|p{0.38\textwidth}|}
+        \hline
+        \textbf{Intent} & \textbf{Action} & \textbf{Automerge operation} \\
+        \hline
+        \texttt{Draw} & Serialize stroke to JSON, append to end of list & 
+        \texttt{insert(\&list\_id, len, ScalarValue::Str(json))} \\
+        \hline
+        \texttt{Clear} & Remove all elements from the strokes list & 
+        \texttt{splice(\&list\_id, 0, len, empty)} \\
+        \hline
+    \end{tabular}
+    \label{tab:intent-to-crdt}
+\end{table}
+
+The sequence of operations triggered by \texttt{Intent::Draw} is illustrated in 
+Figure~\ref{fig:automerge-local-intent}. The backend first serializes the \texttt{Stroke} to 
+JSON, then looks up (or creates) the \texttt{"strokes"} list in the document, inserts the JSON 
+string at the end, and finally reads back all strokes to produce a \texttt{FrontendUpdate} for 
+the UI.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{./images/automerge-local-intent.png}
+    \caption{Sequence diagram of a local \texttt{Intent::Draw} operation}
+    \label{fig:automerge-local-intent}
+\end{figure}
+
+For \texttt{Intent::Clear}, the backend retrieves the list and calls \texttt{splice} with a 
+delete count equal to the list length and an empty iterator for replacements. This removes all 
+elements in a single CRDT operation. As discussed in Section~2.4.3, this delete only affects 
+strokes that the local peer has observed --- any concurrently inserted strokes from remote 
+peers will survive the clear.
+
+\subsection{File persistence}
+
+The application does not persist data by default. However, the user can explicitly save and 
+load documents through the \texttt{save} and \texttt{load} methods of the \texttt{DocBackend} 
+trait. Two export formats are supported:
+
+\begin{itemize}
+    \item \textbf{\texttt{.crdt} (full state)}: The \texttt{save()} method calls 
+    \texttt{self.doc.save()}, which serializes the entire Automerge document --- including all 
+    operation history, actor IDs, and the current state --- into a compact binary format. 
+    Loading this file with \texttt{AutoCommit::load(\&data)} fully reconstructs the document, 
+    preserving the ability to merge with other peers' documents. After loading, all sync states 
+    are cleared because the relationship with previously connected peers is no longer valid.
+    
+    \item \textbf{\texttt{.png} (raster snapshot)}: The UI layer can also export the current 
+    canvas as a PNG image. This is a one-way export --- the raster image cannot be loaded back 
+    into the CRDT --- but it is useful for sharing the whiteboard content outside the 
+    application.
+\end{itemize}
+
+\begin{verbatim}
+// Saving: serialize the full CRDT document to bytes
+fn save(&mut self) -> Vec<u8> {
+    self.doc.save()
+}
+
+// Loading: reconstruct document from bytes, reset sync states
+fn load(&mut self, data: Vec<u8>) {
+    if let Ok(doc) = AutoCommit::load(&data) {
+        self.doc = doc;
+        self.sync_states.clear();
+    }
+}
+\end{verbatim}
+
+The \texttt{.crdt} format preserves the full operation history, which means that a loaded 
+document can be taken into a new collaborative session and merged with other peers' changes 
+seamlessly. This is a direct benefit of the CRDT architecture --- the document carries its 
+own synchronization context.
 
 
 \section{Communication Layer - Where the messages travel ?}
