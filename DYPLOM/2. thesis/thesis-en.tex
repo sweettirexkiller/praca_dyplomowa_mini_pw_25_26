@@ -1029,9 +1029,72 @@ through a pair of functions: \texttt{generate\_sync\_message} and
 		\end{itemize}
 \end{enumerate}
 
+Synchronization often requires multiple round-trips to reach convergence, especially if the 
+divergence between peers is significant. The process mimics a conversation where peers exchange 
+what they know until no new information remains. The following Rust code snippet illustrates this 
+iterative negotiation pattern used during a sync session:
+
+\begin{verbatim}
+let mut peer1_state = sync::State::new();
+let mut peer2_state = sync::State::new();
+
+loop {
+    // 1. Peer 1 generates a message for Peer 2
+    let msg1 = doc1.sync().generate_sync_message(&mut peer1_state);
+    
+    if let Some(m) = msg1 {
+        // Peer 2 applies changes from Peer 1
+        doc2.sync().receive_sync_message(&mut peer2_state, m)?;
+    }
+
+    // 2. Peer 2 generates a message for Peer 1
+    let msg2 = doc2.sync().generate_sync_message(&mut peer2_state);
+    
+    if let Some(m) = msg2 {
+        // Peer 1 applies changes from Peer 2
+        doc1.sync().receive_sync_message(&mut peer1_state, m)?;
+    }
+
+    // Stop when both sides have nothing left to send (convergence reached)
+    if msg1.is_none() && msg2.is_none() {
+        break;
+    }
+}
+\end{verbatim}
+
+This loop ensures that even if one message doesn't carry all necessary changes (due to size limits 
+or dependency resolution), subsequent messages will complete the synchronization.
+
 \subsection{Conflict resolution and guarantees}
-commutativity, casual ordering, eventual converganve, concrete example, two users draw 
-simultaneously, both strokes appear, two users clea and drat result is deterministic merge
+
+The core value proposition of using a CRDT like Automerge is the mathematical guarantee of data 
+consistency without central arbitration. The system ensures three key properties:
+
+\begin{itemize}
+    \item \textbf{Commutativity}: The order in which concurrent operations are applied does not 
+    affect the final document state. \texttt{apply(A) then apply(B)} yields the same result as 
+    \texttt{apply(B) then apply(A)}.
+    \item \textbf{Causal Ordering}: If operation B depends on operation A (e.g., a reply to a 
+    comment), the system ensures A is applied before B across all replicas.
+    \item \textbf{Eventual Convergence}: Provided all clients eventually receive all messages, 
+    every client will see the exact same whiteboard state.
+\end{itemize}
+
+\paragraph{Concrete Examples:}
+\begin{enumerate}
+    \item \textbf{Concurrent Drawing}: If User A and User B draw a stroke simultaneously, Automerge 
+    treats these as two independent insertions into the \texttt{strokes} list. Since CRDT lists allow 
+    concurrent insertions, both strokes will be preserved and rendered on the canvas. The relative 
+    order of these strokes is determined deterministically (typically by peer ID), ensuring both 
+    users see the strokes in the same Z-order.
+    
+    \item \textbf{Clear vs. Draw}: Consider a scenario where User A clears the whiteboard (removing 
+    all strokes) while User B simultaneously draws a new stroke. Automerge resolves this by executing 
+    the removal of the known set of strokes and the insertion of the new stroke. If User B's stroke 
+    is logically new and not part of the set User A removed, the result is typically a cleared board 
+    containing only User B's new stroke. This behavior provides a predictable and non-destructive 
+    conflict resolution strategy.
+\end{enumerate}
 \subsection{Initial synchronization of new peer}
 what happens when a user joins midsession, the full sync handshake converges the newcomer to 
 the current document state
