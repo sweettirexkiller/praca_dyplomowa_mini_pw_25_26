@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.11.29)  8 MAR 2026 12:33
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.11.29)  10 MAR 2026 18:38
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1198,16 +1198,77 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [41]
+Underfull \hbox (badness 10000) in paragraph at lines 1275--1276
+[]\T1/cmtt/m/n/10.95 insert(&list_id, len,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1278--1279
+[]\T1/cmtt/m/n/10.95 insert(&list_id, len,
+ []
+
+
+Underfull \hbox (badness 1496) in paragraph at lines 1280--1280
+[]\T1/cmr/m/n/10.95 Remove all el-e-ments from the
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1281--1282
+[]\T1/cmtt/m/n/10.95 splice(&list_id, 0, len,
+ []
+
+<./images/automerge-local-intent.png, id=479, 2264.46pt x 1696.3375pt>
+File: ./images/automerge-local-intent.png Graphic file (type png)
+<use ./images/automerge-local-intent.png>
+Package pdftex.def Info: ./images/automerge-local-intent.png  used on input line 1295.
+(pdftex.def)             Requested size: 386.96028pt x 289.87483pt.
+
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[42]
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[43 <./images/automerge-local-intent.png>]
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[44]
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[45]
 Chapter 3.
 
 
-[42
+[46
 
 ]
 Chapter 4.
 
 
-[43
+[47
 
 ]
 
@@ -1215,7 +1276,7 @@ Chapter 4.
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.1232 \chapter
+l.1427 \chapter
                *{List of symbols and abbreviations} [1
 
 ]
@@ -1224,7 +1285,7 @@ l.1232 \chapter
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.1245 \listoffigures
+l.1440 \listoffigures
                       [2
 
 ] (./thesis-en.lof)
@@ -1237,7 +1298,7 @@ l.1245 \listoffigures
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.1252 \listoftables
+l.1447 \listoftables
                      [3
 
 ] (./thesis-en.lot)
@@ -1250,7 +1311,7 @@ l.1252 \listoftables
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.1257 \chapter
+l.1452 \chapter
                *{List of appendices} [4
 
 ]
@@ -1259,7 +1320,7 @@ l.1257 \chapter
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.1266 \end{document}
+l.1461 \end{document}
                       [5
 
 ] (./thesis-en.aux)
@@ -1271,18 +1332,18 @@ Package rerunfilecheck Info: File `thesis-en.out' has not changed.
 (rerunfilecheck)             Checksum: 7CC78F659BA78215684A69BE4E347C60;7381.
  ) 
 Here is how much of TeX's memory you used:
- 13978 strings out of 473190
- 221919 string characters out of 5715799
- 661927 words of memory out of 5000000
- 36891 multiletter control sequences out of 15000+600000
+ 13999 strings out of 473190
+ 222366 string characters out of 5715799
+ 662085 words of memory out of 5000000
+ 36902 multiletter control sequences out of 15000+600000
  570458 words of font info for 67 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  75i,17n,79p,665b,640s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfbx1095.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfcc1095.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfti1095.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sftt1095.pfb>
-Output written on thesis-en.pdf (47 pages, 3222228 bytes).
+</usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfbx1095.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfcc1095.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfti1095.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sftt1095.pfb>
+Output written on thesis-en.pdf (51 pages, 3373071 bytes).
 PDF statistics:
- 609 PDF objects out of 1000 (max. 8388607)
- 455 compressed objects within 5 object streams
- 111 named destinations out of 1000 (max. 500000)
- 392 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 644 PDF objects out of 1000 (max. 8388607)
+ 482 compressed objects within 5 object streams
+ 121 named destinations out of 1000 (max. 500000)
+ 397 words of extra memory for PDF output out of 10000 (max. 10000000)
 

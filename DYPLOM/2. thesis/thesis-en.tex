@@ -1207,7 +1207,11 @@ several practical advantages:
     and sync message size.
     \item \textbf{Trade-off}: The downside is that individual stroke properties (e.g., color) cannot 
     be edited in-place without replacing the entire JSON string. For the whiteboard use case, where 
-    strokes are immutable once drawn, this trade-off is acceptable.
+    strokes are immutable once drawn, this trade-off is acceptable. A notable consequence of this 
+    design is the eraser implementation: rather than removing or modifying existing strokes, the 
+    eraser tool works by drawing new strokes with a white color (\texttt{[255, 255, 255, 255]}), 
+    effectively painting over previous content. This approach is discussed further in the 
+    ``Eraser implementation'' paragraph below.
 \end{enumerate}
 
 \subsection{Stroke representation}
@@ -1270,6 +1274,9 @@ Each intent maps directly to specific Automerge CRDT operations:
         \texttt{Draw} & Serialize stroke to JSON, append to end of list & 
         \texttt{insert(\&list\_id, len, ScalarValue::Str(json))} \\
         \hline
+        \texttt{Draw} (eraser) & Serialize white stroke to JSON, append to end of list & 
+        \texttt{insert(\&list\_id, len, ScalarValue::Str(json))} \\
+        \hline
         \texttt{Clear} & Remove all elements from the strokes list & 
         \texttt{splice(\&list\_id, 0, len, empty)} \\
         \hline
@@ -1296,6 +1303,42 @@ elements in a single CRDT operation. As discussed in Section~2.4.3, this delete 
 strokes that the local peer has observed --- any concurrently inserted strokes from remote 
 peers will survive the clear.
 
+\paragraph{Eraser implementation}
+Although the user interface presents the eraser as a distinct tool alongside the pen, the 
+eraser does not correspond to a separate \texttt{Intent} variant. Instead, the eraser is 
+implemented entirely at the UI layer by substituting the user-selected color with opaque white 
+(\texttt{Color32::WHITE}, i.e.\ RGBA \texttt{[255,\,255,\,255,\,255]}). When the user 
+releases the eraser stroke, the UI commits it through the same \texttt{Intent::Draw} path as 
+a regular pen stroke. From the CRDT's perspective, an eraser action is indistinguishable from 
+drawing a white line --- it is simply another entry appended to the \texttt{"strokes"} list.
+
+This design has several implications:
+
+\begin{itemize}
+    \item \textbf{Simplicity}: No additional CRDT operation or intent type is needed. The 
+    backend remains unaware of the eraser concept entirely, keeping the synchronization logic 
+    minimal.
+    \item \textbf{Additive nature}: Eraser strokes are additive --- they increase the size of 
+    the stroke list rather than removing elements. Over extended drawing sessions, this can 
+    lead to a growing document even when the user is ``erasing'' content.
+    \item \textbf{Background limitation}: Because the eraser paints white pixels, it only 
+    produces the expected visual effect on a white canvas. If a background image has been 
+    loaded, the eraser will paint opaque white over the background rather than restoring the 
+    underlying image.
+    \item \textbf{No structural removal}: Individual strokes beneath the eraser path are not 
+    removed from the CRDT document. They remain in the operation history and continue to be 
+    synchronized with peers. The ``erasure'' is purely visual --- the white stroke is rendered 
+    on top during the rasterization pass, hiding the strokes underneath.
+\end{itemize}
+
+An alternative approach would be to introduce an \texttt{Intent::Erase} variant that performs 
+hit-testing against existing strokes and removes intersecting entries from the Automerge list 
+using \texttt{splice}. This would produce true structural deletion and reduce document growth. 
+However, it would require geometric intersection logic (testing whether the eraser brush 
+overlaps each stroke's point sequence) and introduce more complex CRDT operations. For the 
+current version of the application, the simpler white-stroke approach was chosen as a 
+conscious trade-off favoring implementation simplicity over document efficiency.
+
 \subsection{File persistence}
 
 The application does not persist data by default. However, the user can explicitly save and 
@@ -1315,6 +1358,7 @@ trait. Two export formats are supported:
     into the CRDT --- but it is useful for sharing the whiteboard content outside the 
     application.
 \end{itemize}
+
 
 \begin{verbatim}
 // Saving: serialize the full CRDT document to bytes

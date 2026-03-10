@@ -1,6 +1,6 @@
 # Fdb version 4
-["pdflatex"] 1772969613.15048 "/Users/piotrjankiewicz/Documents/PROJEKTY/PW/praca_dyplomowa/DYPLOM/2. thesis/thesis-en.tex" "thesis-en.pdf" "thesis-en" 1772969615.98823 0
-  "/Users/piotrjankiewicz/Documents/PROJEKTY/PW/praca_dyplomowa/DYPLOM/2. thesis/thesis-en.tex" 1772969612.9388 62567 821ed88383761bdbb22636ccf08ac552 ""
+["pdflatex"] 1773164303.99282 "/Users/piotrjankiewicz/Documents/PROJEKTY/PW/praca_dyplomowa/DYPLOM/2. thesis/thesis-en.tex" "thesis-en.pdf" "thesis-en" 1773164307.01922 0
+  "/Users/piotrjankiewicz/Documents/PROJEKTY/PW/praca_dyplomowa/DYPLOM/2. thesis/thesis-en.tex" 1773164300.89907 72454 3695e14da6218349be4ba20565b6cd92 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc" 1136849721 2971 def0b6c1f0b107b3b936def894055589 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1136849721 2900 1537cc8184ad1792082cd229ecc269f4 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
@@ -34,6 +34,7 @@
   "/usr/local/texlive/2025/texmf-dist/fonts/tfm/public/latex-fonts/lasy6.tfm" 1136768653 520 4889cce2180234b97cad636b6039c722 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/tfm/public/latex-fonts/lasy8.tfm" 1136768653 520 7bb3abb160b19e0ed6ac404bb59052b7 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb" 1248133631 30251 6afa5cb1d0204815a708a080681d4674 ""
+  "/usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb" 1248133631 35752 024fb6c41858982481f6968b5fc26508 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb" 1248133631 32569 5e5ddc8df908dea60932f3c484a54c0d ""
   "/usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfbx1095.pfb" 1215737283 154600 ea54091d31de803b613ba9e80ca51709 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb" 1215737283 140176 d4962f948b4cc0adf4d3dde77a128c95 ""
@@ -129,6 +130,7 @@
   "/usr/local/texlive/2025/texmf-var/web2c/pdftex/pdflatex.fmt" 1764425717 3345744 6b656ef26b1b821fdd7c1e49b384f185 ""
   "/usr/local/texlive/2025/texmf.cnf" 1741450484 577 418a7058ec8e006d8704f60ecd22c938 ""
   "images/architecture.png" 1772129004.2634 71535 403a8febe2faef8f438c38395b61cb0b ""
+  "images/automerge-local-intent.png" 1772970418.84545 216941 7132cc4ec6969c68c5a3c95c2c853aa9 ""
   "images/automerge-sequance.png" 1772902025.47218 323995 936468ecb426ea1422a3cac2cff72866 ""
   "images/backend-interface.png" 1772733490.38553 303806 b4ed3c402bb6b67d94d1548f240b4042 ""
   "images/cloud-vs-local.png" 1771698023.74045 539141 ad95a31b653a05799ed8b8a6d88e857b ""
@@ -144,12 +146,12 @@
   "images/ui-modules-3.png" 1772387166.05247 17007 a1b5572a865ab7a0dea1aff03fee962b ""
   "images/ui-modules-4.png" 1772387181.09868 11013 4eaf1151986422482361462af6050e28 ""
   "images/ui-modules-5.png" 1772387195.50174 59601 9fc68211e612c78733ccf3ec7af94289 ""
-  "thesis-en.aux" 1772969615.90994 11549 4836b7c46109b3d569cf979feea7ddec "pdflatex"
-  "thesis-en.lof" 1772969615.91132 1801 d4856fb954e7d9ae63dba16c1f05c019 "pdflatex"
-  "thesis-en.lot" 1772969615.91134 1389 c2df83d28e94cf4fdbc12804bb4e06d6 "pdflatex"
-  "thesis-en.out" 1772969615.91109 7381 7cc78f659ba78215684a69be4e347c60 "pdflatex"
-  "thesis-en.tex" 1772969612.9388 62567 821ed88383761bdbb22636ccf08ac552 ""
-  "thesis-en.toc" 1772969615.91129 3524 c56b30b75bbcef52726268097a21b995 "pdflatex"
+  "thesis-en.aux" 1773164306.93677 12489 9c521253db79f35d63471aff2025b7c1 "pdflatex"
+  "thesis-en.lof" 1773164306.93825 1936 5e90edd4acf4d5834d3dacc8917d57d4 "pdflatex"
+  "thesis-en.lot" 1773164306.93827 1514 3c97b3ae8d6bd2c06a152d8c3abfc42f "pdflatex"
+  "thesis-en.out" 1773164306.93803 7381 7cc78f659ba78215684a69be4e347c60 "pdflatex"
+  "thesis-en.tex" 1773164300.89907 72454 3695e14da6218349be4ba20565b6cd92 ""
+  "thesis-en.toc" 1773164306.93822 3765 4d5f778a3ba415b7e17be45a13cb77c2 "pdflatex"
   "titlepage-en.pdf" 1771353546.35062 635553 a1957b8146f9ca75fa29296a0bcde4de ""
   (generated)
   "thesis-en.aux"
