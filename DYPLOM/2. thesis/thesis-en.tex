@@ -1382,17 +1382,56 @@ own synchronization context.
 
 
 \section{Communication Layer - Where the messages travel ?}
+
+In previous sections, we have established \emph{how} the synchronization protocol achieves consistency and \emph{what} 
+data structures are being synchronized. This section focuses on the \emph{communication layer} --- the transport
+ infrastructure that carries sync messages and other real-time updates between peers in a collaborative session.
 % - livekit room connection, data channel publishing/subscribing, broadcasting of messages/cursor positions,
 % - usage of Tokio.
 \subsection{LiveKit and WebRTC data channels}
-star topology via livekit SFU, room-basen sessions, why webRTC data channels
- (low latency, NAT traversal)
+% star topology via livekit SFU, room-basen sessions, why webRTC data channels
+The application uses LiveKit as the underlying real-time communication platform. 
+LiveKit provides a scalable SFU (Selective Forwarding Unit) architecture that 
+allows multiple peers to connect to a shared room and exchange media and 
+data streams efficiently. It is an open-source alternative to services like 
+Twilio or Agora, offering low-latency connectivity and built-in support for 
+WebRTC data channels, which are ideal for real-time synchronization of CRDT 
+messages and cursor positions in a collaborative whiteboard application.
+This solution uses a start topology where each peer connects to the LiveKit server,
+ which forwards messages to all other participants in the room. The pros and 
+ cons of this approach were discussed in the introduction chapter.
+
+
+WebRTC data channels provide a low-latency, peer-to-peer communication
+ mechanism that is ideal for transmitting arbitrary binary data between 
+ clients in real time. Unlike traditional client-server HTTP APIs, data 
+ channels are bidirectional and support both reliable and unreliable delivery 
+ modes, making them suitable for collaborative applications where timely 
+ updates are critical.
+
+In this system, each client establishes a WebRTC data channel through the LiveKit 
+server upon joining a room. All CRDT synchronization messages, cursor updates, and 
+chat messages are serialized into binary form and sent over this channel. 
+
+LiveKit abstracts the complexity of WebRTC signaling and connection management, 
+so the application code can focus on encoding and decoding messages for 
+synchronization. This approach provides a robust foundation for building scalable,
+ responsive collaborative tools.
+
+
 \subsection{Thread modeling}
 tokio runtime on a background thread, MPSC channels between ui thread and networkj thread, 
 why the ui must nnever block on I/O
 \subsection{Message flow and chunking}
-how sync messages are published/bradcasted, the chunking mechanism for messages exceeding 
+how sync messages are published/broadcasted, the chunking mechanism for messages exceeding 
 14KB - livekit limit, reassembky in the receiving side
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.99\textwidth]{./images/connectivity-classes.png}
+	\caption{Classes of connectivity in collaborative applications}
+	\label{fig:connectivity-classes}
+\end{figure}
 \subsection{Cursor synchronization}
 cursor positions are broadcasted separetly from CRDT sync (lightweight, high-frequancy)
 not part of a CRDT document

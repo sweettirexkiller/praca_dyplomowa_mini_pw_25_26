@@ -37,9 +37,9 @@
 \contentsline {subsection}{\numberline {2.5.4}File persistence}{44}{subsection.2.5.4}%
 \contentsline {section}{\numberline {2.6}Communication Layer - Where the messages travel ?}{45}{section.2.6}%
 \contentsline {subsection}{\numberline {2.6.1}LiveKit and WebRTC data channels}{45}{subsection.2.6.1}%
-\contentsline {subsection}{\numberline {2.6.2}Thread modeling}{45}{subsection.2.6.2}%
-\contentsline {subsection}{\numberline {2.6.3}Message flow and chunking}{45}{subsection.2.6.3}%
-\contentsline {subsection}{\numberline {2.6.4}Cursor synchronization}{45}{subsection.2.6.4}%
-\contentsline {chapter}{\numberline {3}Analysis of the solution}{46}{chapter.3}%
-\contentsline {chapter}{\numberline {4}Conclusions}{47}{chapter.4}%
+\contentsline {subsection}{\numberline {2.6.2}Thread modeling}{46}{subsection.2.6.2}%
+\contentsline {subsection}{\numberline {2.6.3}Message flow and chunking}{46}{subsection.2.6.3}%
+\contentsline {subsection}{\numberline {2.6.4}Cursor synchronization}{46}{subsection.2.6.4}%
+\contentsline {chapter}{\numberline {3}Analysis of the solution}{47}{chapter.3}%
+\contentsline {chapter}{\numberline {4}Conclusions}{48}{chapter.4}%
 \contentsfinish 
