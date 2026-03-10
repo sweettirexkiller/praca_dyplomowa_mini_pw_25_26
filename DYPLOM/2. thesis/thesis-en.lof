@@ -18,7 +18,8 @@
 \contentsline {figure}{\numberline {2.4}{\ignorespaces Backend Interface}}{33}{figure.2.4}%
 \contentsline {figure}{\numberline {2.5}{\ignorespaces Automerge synchronization sequence between two peers}}{35}{figure.2.5}%
 \contentsline {figure}{\numberline {2.6}{\ignorespaces Sequence diagram of a local \texttt {Intent::Draw} operation}}{43}{figure.2.6}%
-\contentsline {figure}{\numberline {2.7}{\ignorespaces Classes of connectivity in collaborative applications}}{46}{figure.2.7}%
+\contentsline {figure}{\numberline {2.7}{\ignorespaces Threaded connection sequence: UI thread and Tokio background thread during LiveKit room connection}}{47}{figure.2.7}%
+\contentsline {figure}{\numberline {2.8}{\ignorespaces Classes of connectivity in collaborative applications}}{47}{figure.2.8}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \contentsfinish 

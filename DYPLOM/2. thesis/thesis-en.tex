@@ -1420,7 +1420,38 @@ synchronization. This approach provides a robust foundation for building scalabl
 
 
 \subsection{Thread modeling}
-tokio runtime on a background thread, MPSC channels between ui thread and networkj thread, 
+% tokio runtime on a background thread, MPSC channels between 
+% ui thread and networkj thread, 
+Application in its sourcecode uses Tokio runtime library which enables 
+convinient usage of threads in application. The UI runs on the main thread, 
+while all network communication and CRDT synchronization logic is executed 
+on a separate background thread managed by Tokio. T
+his separation ensures that the user interface remains responsive and
+ does not block while waiting for network messages or performing 
+ potentially expensive CRDT operations.
+
+ In rust communication between threads is handled using MPSC 
+ (multi-producer, single-consumer) one-way channels. In this application, 
+ the UI thread sends user intents (e.g., drawing a stroke) to the 
+ backend thread via an MPSC channel. The backend processes these intents, 
+ updates the CRDT document, and generates frontend updates 
+ (e.g., the new list of strokes) that are sent back to the UI 
+ thread through another MPSC channel. This asynchronous message-passing 
+ architecture allows for smooth interaction without freezing the UI, 
+ even during intensive synchronization tasks. But before this happens, 
+ client needs to connect to the LiveKit room, which is also done on the 
+ background thread to avoid blocking the UI during connection setup. 
+ Below you can see a sequence diagram illustrating connection of client 
+ to LiveKit room.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.95\textwidth]{./images/connecting-sequance.png}
+	\caption{Threaded connection sequence: UI thread and Tokio background thread during LiveKit room connection}
+	\label{fig:connection-sequence-thread}
+\end{figure}
+
+//
 why the ui must nnever block on I/O
 \subsection{Message flow and chunking}
 how sync messages are published/broadcasted, the chunking mechanism for messages exceeding 
