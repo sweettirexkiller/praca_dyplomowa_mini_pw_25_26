@@ -19,8 +19,10 @@
 \contentsline {figure}{\numberline {2.5}{\ignorespaces Automerge synchronization sequence between two peers}}{35}{figure.2.5}%
 \contentsline {figure}{\numberline {2.6}{\ignorespaces Sequence diagram of a local \texttt {Intent::Draw} operation}}{43}{figure.2.6}%
 \contentsline {figure}{\numberline {2.7}{\ignorespaces Threaded connection sequence: UI thread and Tokio background thread during LiveKit room connection}}{47}{figure.2.7}%
-\contentsline {figure}{\numberline {2.8}{\ignorespaces Classes of connectivity in collaborative applications}}{47}{figure.2.8}%
-\contentsline {figure}{\numberline {2.9}{\ignorespaces Classes of connectivity in collaborative applications}}{48}{figure.2.9}%
+\contentsline {figure}{\numberline {2.8}{\ignorespaces Sequence diagram: Receiving and reassembling chunked data messages}}{48}{figure.2.8}%
+\contentsline {figure}{\numberline {2.9}{\ignorespaces Classes of connectivity in collaborative applications}}{49}{figure.2.9}%
+\contentsline {figure}{\numberline {2.10}{\ignorespaces Classes of connectivity in collaborative applications}}{49}{figure.2.10}%
+\contentsline {figure}{\numberline {2.11}{\ignorespaces Broadcasting and rendering of remote cursor positions}}{49}{figure.2.11}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \contentsfinish 

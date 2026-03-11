@@ -1460,8 +1460,33 @@ conencts to the room and starts a listener to events from livekit data channel.
 
 
 \subsection{Message flow and chunking}
-how sync messages are published/broadcasted, the chunking mechanism for messages exceeding 
-14KB - livekit limit, reassembky in the receiving side
+
+
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.99\textwidth]{./images/data-receiving-seq.png}
+	\caption{Sequence diagram: Receiving and reassembling chunked data messages}
+	\label{fig:data-receiving-seq}
+\end{figure}
+
+ LiveKit imposes a maximum message size limit of 14KB for data 
+channel packets. To accommodate this constraint, the application implements a 
+chunking mechanism: if a sync message exceeds the 14KB threshold, it is 
+split into smaller chunks before transmission. Each chunk is tagged 
+with metadata indicating its position and the total number of chunks, allowing
+ the receiving side to correctly reassemble the original message.
+
+On the receiving end, incoming chunks are buffered until all parts of a message 
+have been received. Once the full message is reconstructed, it is passed to the
+ CRDT backend for processing and merging into the local document state. This 
+ approach ensures reliable delivery of large sync messages without exceeding
+  LiveKit's packet size limitations, maintaining seamless real-time 
+  collaboration even as the document grows.
+
+The diagrams below show only 4 classes that were created to handle the flow of messages 
+between the UI and the network layer. There was no need for more classes the solution
+ mostly uses structs created by livekit SDK. 
 
 \begin{figure}[H]
 	\centering
@@ -1469,6 +1494,8 @@ how sync messages are published/broadcasted, the chunking mechanism for messages
 	\caption{Classes of connectivity in collaborative applications}
 	\label{fig:connectivity-classes}
 \end{figure}
+
+
 
 
 \begin{figure}[H]
@@ -1480,6 +1507,13 @@ how sync messages are published/broadcasted, the chunking mechanism for messages
 \subsection{Cursor synchronization}
 cursor positions are broadcasted separetly from CRDT sync (lightweight, high-frequancy)
 not part of a CRDT document
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.99\textwidth]{./images/cursor-broadcasting.png}
+	\caption{Broadcasting and rendering of remote cursor positions}
+	\label{fig:cursor-broadcasting}
+\end{figure}
 
 
 final screenshots, comparison etc

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.11.29)  11 MAR 2026 18:45
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.11.29)  11 MAR 2026 19:44
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1281,16 +1281,11 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [46]
-<./images/connectivity-classes-1.png, id=506, 1543.7675pt x 429.605pt>
-File: ./images/connectivity-classes-1.png Graphic file (type png)
-<use ./images/connectivity-classes-1.png>
-Package pdftex.def Info: ./images/connectivity-classes-1.png  used on input line 1468.
-(pdftex.def)             Requested size: 364.19669pt x 101.3505pt.
-<./images/connectivity-classes-2.png, id=507, 2132.96875pt x 477.785pt>
-File: ./images/connectivity-classes-2.png Graphic file (type png)
-<use ./images/connectivity-classes-2.png>
-Package pdftex.def Info: ./images/connectivity-classes-2.png  used on input line 1476.
-(pdftex.def)             Requested size: 364.19669pt x 81.5796pt.
+<./images/data-receiving-seq.png, id=506, 4095.3pt x 3344.495pt>
+File: ./images/data-receiving-seq.png Graphic file (type png)
+<use ./images/data-receiving-seq.png>
+Package pdftex.def Info: ./images/data-receiving-seq.png  used on input line 1468.
+(pdftex.def)             Requested size: 450.69418pt x 368.04869pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
@@ -1303,7 +1298,13 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[47 <./images/connecting-sequance.png> <./images/connectivity-classes-1.png>]
+[47 <./images/connecting-sequance.png>]
+<./images/connectivity-classes-1.png, id=513, 1543.7675pt x 429.605pt>
+File: ./images/connectivity-classes-1.png Graphic file (type png)
+<use ./images/connectivity-classes-1.png>
+Package pdftex.def Info: ./images/connectivity-classes-1.png  used on input line 1493.
+(pdftex.def)             Requested size: 364.19669pt x 101.3505pt.
+
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1312,17 +1313,37 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[48 <./images/connectivity-classes-2.png>]
+[48 <./images/data-receiving-seq.png>]
+<./images/connectivity-classes-2.png, id=520, 2132.96875pt x 477.785pt>
+File: ./images/connectivity-classes-2.png Graphic file (type png)
+<use ./images/connectivity-classes-2.png>
+Package pdftex.def Info: ./images/connectivity-classes-2.png  used on input line 1503.
+(pdftex.def)             Requested size: 364.19669pt x 81.5796pt.
+<./images/cursor-broadcasting.png, id=521, 4623.2725pt x 1078.0275pt>
+File: ./images/cursor-broadcasting.png Graphic file (type png)
+<use ./images/cursor-broadcasting.png>
+Package pdftex.def Info: ./images/cursor-broadcasting.png  used on input line 1513.
+(pdftex.def)             Requested size: 450.69418pt x 105.07846pt.
+
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[49 <./images/connectivity-classes-1.png> <./images/connectivity-classes-2.png> <./images/cursor-broadcasting.png>]
 Chapter 3.
 
 
-[49
+[50
 
 ]
 Chapter 4.
 
 
-[50
+[51
 
 ]
 
@@ -1330,7 +1351,7 @@ Chapter 4.
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.1511 \chapter
+l.1545 \chapter
                *{List of symbols and abbreviations} [1
 
 ]
@@ -1339,7 +1360,7 @@ l.1511 \chapter
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.1524 \listoffigures
+l.1558 \listoffigures
                       [2
 
 ] (./thesis-en.lof)
@@ -1352,7 +1373,7 @@ l.1524 \listoffigures
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.1531 \listoftables
+l.1565 \listoftables
                      [3
 
 ] (./thesis-en.lot)
@@ -1365,7 +1386,7 @@ l.1531 \listoftables
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.1536 \chapter
+l.1570 \chapter
                *{List of appendices} [4
 
 ]
@@ -1374,7 +1395,7 @@ l.1536 \chapter
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.1545 \end{document}
+l.1579 \end{document}
                       [5
 
 ] (./thesis-en.aux)
@@ -1390,18 +1411,18 @@ Package rerunfilecheck Info: File `thesis-en.out' has not changed.
 (rerunfilecheck)             Checksum: 7CC78F659BA78215684A69BE4E347C60;7381.
  ) 
 Here is how much of TeX's memory you used:
- 14028 strings out of 473190
- 223333 string characters out of 5715799
- 662329 words of memory out of 5000000
- 36925 multiletter control sequences out of 15000+600000
+ 14047 strings out of 473190
+ 223948 string characters out of 5715799
+ 662506 words of memory out of 5000000
+ 36941 multiletter control sequences out of 15000+600000
  570458 words of font info for 67 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  75i,17n,79p,665b,640s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfbx1095.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfcc1095.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfti1095.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sftt1095.pfb>
-Output written on thesis-en.pdf (54 pages, 3790006 bytes).
+Output written on thesis-en.pdf (55 pages, 4282597 bytes).
 PDF statistics:
- 670 PDF objects out of 1000 (max. 8388607)
- 499 compressed objects within 5 object streams
- 127 named destinations out of 1000 (max. 500000)
- 412 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 684 PDF objects out of 1000 (max. 8388607)
+ 507 compressed objects within 6 object streams
+ 130 named destinations out of 1000 (max. 500000)
+ 422 words of extra memory for PDF output out of 10000 (max. 10000000)
 

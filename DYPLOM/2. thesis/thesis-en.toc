@@ -38,8 +38,8 @@
 \contentsline {section}{\numberline {2.6}Communication Layer - Where the messages travel ?}{45}{section.2.6}%
 \contentsline {subsection}{\numberline {2.6.1}LiveKit and WebRTC data channels}{45}{subsection.2.6.1}%
 \contentsline {subsection}{\numberline {2.6.2}Thread modeling}{46}{subsection.2.6.2}%
-\contentsline {subsection}{\numberline {2.6.3}Message flow and chunking}{47}{subsection.2.6.3}%
-\contentsline {subsection}{\numberline {2.6.4}Cursor synchronization}{48}{subsection.2.6.4}%
-\contentsline {chapter}{\numberline {3}Analysis of the solution}{49}{chapter.3}%
-\contentsline {chapter}{\numberline {4}Conclusions}{50}{chapter.4}%
+\contentsline {subsection}{\numberline {2.6.3}Message flow and chunking}{48}{subsection.2.6.3}%
+\contentsline {subsection}{\numberline {2.6.4}Cursor synchronization}{49}{subsection.2.6.4}%
+\contentsline {chapter}{\numberline {3}Analysis of the solution}{50}{chapter.3}%
+\contentsline {chapter}{\numberline {4}Conclusions}{51}{chapter.4}%
 \contentsfinish 
