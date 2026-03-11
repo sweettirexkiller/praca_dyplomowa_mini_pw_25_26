@@ -1461,7 +1461,7 @@ conencts to the room and starts a listener to events from livekit data channel.
 
 \subsection{Message flow and chunking}
 
-
+Figure~\ref{fig:data-receiving-seq} illustrates the complete lifecycle of an incoming message, from the moment a remote peer publishes data on the LiveKit data channel to the point where the local UI reacts to it. The flow traverses six participants that correspond to distinct runtime components: the remote peer, the LiveKit room (server-side), the background Tokio thread, the two ends of the MPSC channel (\texttt{UnboundedSender<AppMsg>} and \texttt{UnboundedReceiver<AppMsg>}), and the UI thread.
 
 \begin{figure}[H]
 	\centering
@@ -1470,43 +1470,41 @@ conencts to the room and starts a listener to events from livekit data channel.
 	\label{fig:data-receiving-seq}
 \end{figure}
 
- LiveKit imposes a maximum message size limit of 14KB for data 
-channel packets. To accommodate this constraint, the application implements a 
-chunking mechanism: if a sync message exceeds the 14KB threshold, it is 
-split into smaller chunks before transmission. Each chunk is tagged 
-with metadata indicating its position and the total number of chunks, allowing
- the receiving side to correctly reassemble the original message.
+The process begins when a remote peer calls \texttt{publish\_data(payload)} on its local LiveKit participant. The LiveKit SFU forwards the payload to all other participants in the room, which triggers a \texttt{RoomEvent::DataReceived\{payload, participant\}} event on the background thread's event loop. The background thread immediately attempts to deserialize the raw bytes into a \texttt{TransportPacket} --- the wire-level envelope described earlier in this section.
 
-On the receiving end, incoming chunks are buffered until all parts of a message 
-have been received. Once the full message is reconstructed, it is passed to the
- CRDT backend for processing and merging into the local document state. This 
- approach ensures reliable delivery of large sync messages without exceeding
-  LiveKit's packet size limitations, maintaining seamless real-time 
-  collaboration even as the document grows.
+At this point, the flow branches depending on the packet variant. If the packet is a \texttt{TransportPacket::Message}, the payload is small enough to have been sent in a single frame. The background thread deserializes the inner bytes directly into a \texttt{NetworkMessage} and forwards it to the UI thread by sending an \texttt{AppMsg::NetworkMessage\{sender, message\}} through the MPSC channel. If, however, the packet is a \texttt{TransportPacket::Chunk}, the message was too large for a single LiveKit frame and was split by the sender into multiple chunks. Each chunk carries a unique transfer identifier, its index within the sequence, and the total number of expected chunks. The background thread stores the incoming chunk in a per-peer \texttt{incomplete\_transfers} buffer --- a hash map keyed by the transfer identifier. After each chunk is stored, the thread checks whether all chunks for that transfer have arrived. If chunks are still missing, the thread simply returns to the event loop and waits for the next packet. Once the final chunk arrives and the buffer is complete, the thread concatenates all chunks in index order, reconstructs the full byte sequence, deserializes it into a \texttt{NetworkMessage}, and sends the result to the UI thread through the same MPSC channel path.
 
-The diagrams below show only 4 classes that were created to handle the flow of messages 
-between the UI and the network layer. There was no need for more classes the solution
- mostly uses structs created by livekit SDK. 
+LiveKit imposes a maximum message size limit of approximately 14\,KB for data channel packets. To accommodate this constraint, the sending side implements a symmetric chunking mechanism: before publishing, it checks the serialized size of the \texttt{NetworkMessage}. If the payload fits within the 14\,KB threshold, it is wrapped in a \texttt{TransportPacket::Message} and sent as a single packet. Otherwise, the payload is divided into 14\,KB segments, each wrapped in a \texttt{TransportPacket::Chunk} with the appropriate metadata, and sent sequentially. A randomly generated 64-bit identifier ties all chunks of the same logical message together, ensuring that concurrent transfers from different peers or even from the same peer do not interfere with each other.
+
+After the \texttt{AppMsg} is placed on the channel, the background thread calls \texttt{ctx.request\_repaint()} to wake up the egui rendering loop. On the next frame, the \texttt{update()} method of \texttt{AppView} polls the receiver with \texttt{try\_recv()} and retrieves the pending \texttt{AppMsg::NetworkMessage}. The UI then inspects the inner \texttt{NetworkMessage} variant and dispatches accordingly: a \texttt{Sync} message is forwarded to the CRDT backend via \texttt{receive\_sync\_message()}, which merges the remote changes and returns a \texttt{FrontendUpdate} that triggers a canvas redraw followed by a \texttt{sync\_with\_all()} call to propagate any resulting state to other peers; a \texttt{Chat} message is appended to the event log displayed in the LiveKit panel; and a \texttt{Cursor} message updates the sender's entry in the \texttt{remote\_cursors} map so that the next rendering pass draws the remote pointer at the correct position.
+
+The entire message flow between the UI and the network layer is handled by four custom enum types, shown in the diagrams below. No additional classes were needed, as the remaining transport infrastructure is provided by the LiveKit SDK itself.
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.8\textwidth]{./images/connectivity-classes-1.png}
-	\caption{Classes of connectivity in collaborative applications}
-	\label{fig:connectivity-classes}
+	\caption{Transport and application-level message types: \texttt{TransportPacket} and \texttt{NetworkMessage}}
+	\label{fig:connectivity-classes-1}
 \end{figure}
-
-
-
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.8\textwidth]{./images/connectivity-classes-2.png}
-	\caption{Classes of connectivity in collaborative applications}
-	\label{fig:connectivity-classes}
+	\caption{Inter-thread command and event types: \texttt{AppCommand} and \texttt{AppMsg}}
+	\label{fig:connectivity-classes-2}
 \end{figure}
+
+The first pair of types operates at the wire level. \texttt{TransportPacket} is a serializable envelope that wraps outgoing data before it is published to the LiveKit data channel. Its \texttt{Message} variant carries a small payload that fits within the 14\,KB limit in a single packet, while the \texttt{Chunk} variant carries a fragment of a larger message along with metadata --- a unique transfer identifier, the chunk index, and the total number of chunks --- so that the receiver can reassemble the original payload. \texttt{NetworkMessage} represents the application-level content inside each packet and has three variants: \texttt{Sync}, which carries raw Automerge synchronization bytes; \texttt{Chat}, which carries a plain-text chat string; and \texttt{Cursor}, which carries an $(x, y)$ coordinate pair for remote cursor rendering.
+
+The second pair of types bridges the two application threads. \texttt{AppCommand} is sent from the UI thread to the background network thread through an MPSC channel. It can instruct the network thread to broadcast a \texttt{NetworkMessage} to all room participants (\texttt{Broadcast}), send a message to a specific subset of recipients (\texttt{Send}), or terminate the connection (\texttt{Disconnect}). Conversely, \texttt{AppMsg} is sent from the background thread back to the UI thread. It delivers incoming network messages (\texttt{NetworkMessage} variant with the sender identity attached), participant lifecycle events (\texttt{ParticipantConnected}, \texttt{ParticipantDisconnected}), and general log entries (\texttt{Log}). Together, these four types form a clean, minimal communication contract that decouples the UI rendering loop from all asynchronous network I/O.
+
 \subsection{Cursor synchronization}
-cursor positions are broadcasted separetly from CRDT sync (lightweight, high-frequancy)
-not part of a CRDT document
+
+Remote cursor positions are synchronized separately from the CRDT document state. Unlike strokes, which are permanent drawing artifacts stored in the Automerge document and persist across sessions, cursor positions are ephemeral --- they represent a momentary state that is only meaningful while the user is actively interacting with the canvas. For this reason, cursors are not part of the CRDT data model and are instead transmitted as lightweight, fire-and-forget messages over the LiveKit data channel.
+
+When the local user moves the mouse over the whiteboard canvas, the application checks whether at least 50 milliseconds have elapsed since the last cursor broadcast. This throttling mechanism prevents flooding the network with redundant updates during rapid mouse movements while still providing a smooth real-time experience for remote observers. If the throttle interval has passed, the current pointer coordinates are wrapped in a \texttt{NetworkMessage::Cursor\{x, y\}} and sent via \texttt{AppCommand::Broadcast} to all participants in the room.
+
+On the receiving side, incoming cursor messages are stored in a \texttt{HashMap<String, Point>} keyed by the sender's identity. During each rendering frame, the UI iterates over this map and draws a colored circle at each remote user's last known position, accompanied by a label showing the user's identity. The color assigned to each remote cursor is deterministic --- it is derived by hashing the user's identity string --- so that the same user always appears with the same color across all peers' screens. When a participant disconnects, their entry is removed from the cursor map, and the indicator disappears from the canvas immediately.
 
 \begin{figure}[H]
 	\centering
@@ -1515,10 +1513,95 @@ not part of a CRDT document
 	\label{fig:cursor-broadcasting}
 \end{figure}
 
-
-final screenshots, comparison etc
+This design keeps cursor synchronization simple and performant. Because cursor data is not persisted in the CRDT document, it adds no overhead to the Automerge sync protocol and does not increase the document size over time. The trade-off is that cursor positions are lost if a message is dropped, but given the high update frequency (up to 20 updates per second per user), any lost position is quickly replaced by a newer one, making occasional packet loss visually imperceptible.
 
 \chapter{Analysis of the solution}
+
+% =============================================================================
+% CHAPTER OUTLINE — to be filled in after performing the tests described below
+% =============================================================================
+%
+% This chapter answers: Does the solution meet the requirements?
+% It must contain ONLY measured/observed results — no design descriptions.
+%
+% Structure:
+%
+% 3.1  Testing environment
+%      - Hardware: CPU, RAM, OS version, display resolution
+%      - Network: LAN/Wi-Fi bandwidth, latency (use iperf3 / ping)
+%      - LiveKit server: version, where deployed (local Docker / remote)
+%      - Rust toolchain version, build mode (release)
+%
+% 3.2  Unit testing
+%      - Summary of existing 5 unit tests (automerge_backend.rs)
+%      - Results table: test name | what it verifies | pass/fail
+%      - Screenshot of `cargo test` output
+%
+% 3.3  Manual acceptance testing
+%      - Reference to TESTING_MANUAL.md (10 scenarios)
+%      - Results table: MAN-01..MAN-10 | expected | actual | pass/fail
+%      - Representative screenshots (app launch, drawing, sync, cursors, chat)
+%
+% 3.4  Performance analysis
+%
+%   3.4.1  Synchronization latency (NF-07: sync ≤ 2 s on ≥ 10 Mb/s)
+%          - Test design: Client A draws a stroke, measure time until it
+%            appears on Client B. Use timestamps logged at send/receive.
+%          - Run 50 trials, report: min, max, mean, p95, std dev
+%          - Table + histogram of latency distribution
+%
+%   3.4.2  File load time (NF-08: .crdt load ≤ 1 s)
+%          - Generate .crdt files of increasing size (100, 500, 1000, 5000 strokes)
+%          - Measure wall-clock time of `backend.load(data)` using std::time::Instant
+%          - Table: stroke count | file size (KB) | load time (ms)
+%          - Line chart: file size vs. load time
+%
+%   3.4.3  Multi-user scalability (NF-09: ≥ 3 users without noticeable delay)
+%          - Connect 2, 3, 4, 5 clients to the same room
+%          - Each client draws continuously for 30 s
+%          - Measure: sync latency per pair, CPU usage, memory usage
+%          - Table: num clients | avg latency | max latency | CPU % | RAM (MB)
+%
+%   3.4.4  Rendering frame rate (NF-10: ≥ 30 FPS during drawing)
+%          - Use egui's built-in frame time or insert Instant::now() around update()
+%          - Measure FPS while drawing locally with 0, 100, 500, 1000 existing strokes
+%          - Table: stroke count | avg FPS | min FPS
+%          - Confirm ≥ 30 FPS threshold
+%
+%   3.4.5  Chunking overhead
+%          - Send messages of 1 KB, 10 KB, 50 KB, 200 KB
+%          - Measure end-to-end delivery time for each size
+%          - Verify chunking activates above 14 KB, compare latency small vs chunked
+%
+% 3.5  Reliability analysis
+%
+%   3.5.1  CRDT convergence (NF-06: no data loss during concurrent edits)
+%          - Two clients draw simultaneously for 60 s
+%          - After sync settles, compare stroke lists: assert identical sets
+%          - Repeat with "Clear" during concurrent drawing (add-wins semantics)
+%
+%   3.5.2  Offline continuity (NF-05)
+%          - Client draws while disconnected (kill LiveKit server or network)
+%          - Reconnect; verify all offline strokes sync to peers
+%          - Document whether current implementation supports this or note limitation
+%
+% 3.6  Usability assessment
+%      - Brief qualitative evaluation against NF-01..NF-04
+%      - Screenshots of UI showing status indicators, cursor labels, tool switching
+%      - Optionally: short user study (2-3 people) with a task + questionnaire
+%
+% 3.7  Non-functional requirements fulfillment summary
+%      - Table: NF-ID | requirement | measured value | pass/fail
+%      - One row per NF requirement from Section 1.8.2
+%
+% 3.8  Identified limitations and known issues
+%      - Eraser paints white (doesn't restore background)
+%      - Document growth from eraser strokes
+%      - No undo/redo
+%      - Canvas fixed at 800x600
+%      - Any bugs discovered during testing
+%
+% =============================================================================
 
 
 \chapter{Conclusions}
