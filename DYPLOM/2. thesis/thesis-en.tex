@@ -1451,15 +1451,29 @@ his separation ensures that the user interface remains responsive and
 	\label{fig:connection-sequence-thread}
 \end{figure}
 
-//
-why the ui must nnever block on I/O
+% why the ui must nnever block on I/O
+
+The diagram above is very complcated, but it illustrates the key steps involved in connecting to a LiveKit room 
+without blocking the UI thread. The user initiates the connection by clicking a button, which 
+initializes MPSC channels in both directions. Then thread is spawned. The proccess inside the thread
+conencts to the room and starts a listener to events from livekit data channel.
+
+
 \subsection{Message flow and chunking}
 how sync messages are published/broadcasted, the chunking mechanism for messages exceeding 
 14KB - livekit limit, reassembky in the receiving side
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.99\textwidth]{./images/connectivity-classes.png}
+	\includegraphics[width=0.8\textwidth]{./images/connectivity-classes-1.png}
+	\caption{Classes of connectivity in collaborative applications}
+	\label{fig:connectivity-classes}
+\end{figure}
+
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{./images/connectivity-classes-2.png}
 	\caption{Classes of connectivity in collaborative applications}
 	\label{fig:connectivity-classes}
 \end{figure}
