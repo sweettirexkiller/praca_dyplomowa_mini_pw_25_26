@@ -1484,9 +1484,9 @@ application. The structs are: TransportPacket, NetworkMessage,
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.8\textwidth]{./images/connectivity-classes-2.png}
-	\caption{Inter-thread command and event types: \texttt{AppCommand} and \texttt{AppMsg}}
-	\label{fig:connectivity-classes-2}
+	\includegraphics[width=0.99\textwidth]{./images/communication-enums.png}
+	\caption{Inter-thread command and event types: \texttt{AppCommand} and \texttt{AppMsg} and \texttt{RoomEvent}}
+	\label{fig:communication-enums}
 \end{figure}
 
 Figure~\ref{fig:data-receiving-seq} illustrates the complete lifecycle of an incoming message, from the moment a remote peer publishes data on the LiveKit data channel to the point where the local UI reacts to it. The flow traverses six participants that correspond to distinct runtime components: the remote peer, the LiveKit room (server-side), the background Tokio thread, the two ends of the MPSC channel (\texttt{UnboundedSender<AppMsg>} and \texttt{UnboundedReceiver<AppMsg>}), and the UI thread.
@@ -1498,7 +1498,7 @@ Figure~\ref{fig:data-receiving-seq} illustrates the complete lifecycle of an inc
 	\label{fig:data-receiving-seq}
 \end{figure}
 
-The process begins when a remote peer calls \texttt{publish\_data(payload)} on its local LiveKit participant. The LiveKit SFU forwards the payload to all other participants in the room, which triggers a \texttt{RoomEvent::DataReceived\{payload, participant\}} event on the background thread's event loop. The background thread immediately attempts to deserialize the raw bytes into a \texttt{TransportPacket} --- the wire-level envelope described earlier in this section.
+Knowing the data types we can now describe the message flow in detail. The process begins when a remote peer calls \texttt{publish\_data(payload)} on its local LiveKit participant. The LiveKit SFU forwards the payload to all other participants in the room, which triggers a \texttt{RoomEvent::DataReceived\{payload, participant\}} event on the background thread's event loop. The background thread immediately attempts to deserialize the raw bytes into a \texttt{TransportPacket} --- the wire-level envelope described earlier in this section.
 
 At this point, the flow branches depending on the packet variant. If the packet is a \texttt{TransportPacket::Message}, the payload is small enough to have been sent in a single frame. The background thread deserializes the inner bytes directly into a \texttt{NetworkMessage} and forwards it to the UI thread by sending an \texttt{AppMsg::NetworkMessage\{sender, message\}} through the MPSC channel. If, however, the packet is a \texttt{TransportPacket::Chunk}, the message was too large for a single LiveKit frame and was split by the sender into multiple chunks. Each chunk carries a unique transfer identifier, its index within the sequence, and the total number of expected chunks. The background thread stores the incoming chunk in a per-peer \texttt{incomplete\_transfers} buffer --- a hash map keyed by the transfer identifier. After each chunk is stored, the thread checks whether all chunks for that transfer have arrived. If chunks are still missing, the thread simply returns to the event loop and waits for the next packet. Once the final chunk arrives and the buffer is complete, the thread concatenates all chunks in index order, reconstructs the full byte sequence, deserializes it into a \texttt{NetworkMessage}, and sends the result to the UI thread through the same MPSC channel path.
 

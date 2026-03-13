@@ -20,7 +20,7 @@
 \contentsline {figure}{\numberline {2.6}{\ignorespaces Sequence diagram of a local \texttt {Intent::Draw} operation}}{43}{figure.2.6}%
 \contentsline {figure}{\numberline {2.7}{\ignorespaces Threaded connection sequence: UI thread and Tokio background thread during LiveKit room connection}}{47}{figure.2.7}%
 \contentsline {figure}{\numberline {2.8}{\ignorespaces Transport and application-level message types: \texttt {TransportPacket} and \texttt {NetworkMessage}}}{48}{figure.2.8}%
-\contentsline {figure}{\numberline {2.9}{\ignorespaces Inter-thread command and event types: \texttt {AppCommand} and \texttt {AppMsg}}}{48}{figure.2.9}%
+\contentsline {figure}{\numberline {2.9}{\ignorespaces Inter-thread command and event types: \texttt {AppCommand} and \texttt {AppMsg} and \texttt {RoomEvent}}}{48}{figure.2.9}%
 \contentsline {figure}{\numberline {2.10}{\ignorespaces Sequence diagram: Receiving and reassembling chunked data messages}}{49}{figure.2.10}%
 \contentsline {figure}{\numberline {2.11}{\ignorespaces Broadcasting and rendering of remote cursor positions}}{52}{figure.2.11}%
 \addvspace {10\p@ }

@@ -21,16 +21,10 @@ classDiagram
         NetworkMessage(sender: String, message: NetworkMessage)
     }
 
-    class TransportPacket {
+    class AppCommand {
         <<enumeration>>
-        Message(Vec~u8~)
-        Chunk(id: u64, index: u32, total: u32, data: Vec~u8~)
-    }
-
-    class NetworkMessage {
-        <<enumeration>>
-        Sync(Vec~u8~)
-        Chat(String)
-        Cursor(x: i32, y: i32)
+        SendMessage(recipient: String, message: NetworkMessage)
+        Disconnect(reason: String)
+        Connect(roomId: String)
     }
 ```

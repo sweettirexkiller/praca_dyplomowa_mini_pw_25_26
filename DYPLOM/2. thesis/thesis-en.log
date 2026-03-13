@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.11.29)  13 MAR 2026 18:00
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.11.29)  13 MAR 2026 18:18
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1300,11 +1300,11 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [47 <./images/connecting-sequance.png>]
-<./images/connectivity-classes-2.png, id=513, 2132.96875pt x 477.785pt>
-File: ./images/connectivity-classes-2.png Graphic file (type png)
-<use ./images/connectivity-classes-2.png>
-Package pdftex.def Info: ./images/connectivity-classes-2.png  used on input line 1487.
-(pdftex.def)             Requested size: 364.19669pt x 81.5796pt.
+<./images/communication-enums.png, id=513, 3478.9975pt x 477.785pt>
+File: ./images/communication-enums.png Graphic file (type png)
+<use ./images/communication-enums.png>
+Package pdftex.def Info: ./images/communication-enums.png  used on input line 1487.
+(pdftex.def)             Requested size: 450.69418pt x 61.89551pt.
 <./images/data-receiving-seq.png, id=515, 4095.3pt x 3344.495pt>
 File: ./images/data-receiving-seq.png Graphic file (type png)
 <use ./images/data-receiving-seq.png>
@@ -1322,7 +1322,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[48 <./images/connectivity-classes-1.png> <./images/connectivity-classes-2.png>]
+[48 <./images/connectivity-classes-1.png> <./images/communication-enums.png>]
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1360,7 +1360,7 @@ File: ./images/cursor-broadcasting.png Graphic file (type png)
 Package pdftex.def Info: ./images/cursor-broadcasting.png  used on input line 1527.
 (pdftex.def)             Requested size: 450.69418pt x 105.07846pt.
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
+Underfull \vbox (badness 4181) has occurred while \output is active []
 
 
 
@@ -1460,14 +1460,14 @@ Package rerunfilecheck Info: File `thesis-en.out' has not changed.
  ) 
 Here is how much of TeX's memory you used:
  14051 strings out of 473190
- 223999 string characters out of 5715799
- 662593 words of memory out of 5000000
+ 223975 string characters out of 5715799
+ 662610 words of memory out of 5000000
  36942 multiletter control sequences out of 15000+600000
  570458 words of font info for 67 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  75i,17n,79p,1426b,640s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfbx1095.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfcc1095.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfti1095.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sftt1095.pfb>
-Output written on thesis-en.pdf (58 pages, 4299172 bytes).
+Output written on thesis-en.pdf (58 pages, 4361680 bytes).
 PDF statistics:
  704 PDF objects out of 1000 (max. 8388607)
  522 compressed objects within 6 object streams
