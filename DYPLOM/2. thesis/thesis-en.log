@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.11.29)  11 MAR 2026 19:59
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.11.29)  13 MAR 2026 18:00
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1277,11 +1277,16 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [46]
-<./images/data-receiving-seq.png, id=507, 4095.3pt x 3344.495pt>
-File: ./images/data-receiving-seq.png Graphic file (type png)
-<use ./images/data-receiving-seq.png>
-Package pdftex.def Info: ./images/data-receiving-seq.png  used on input line 1468.
-(pdftex.def)             Requested size: 450.69418pt x 368.04869pt.
+<./images/connectivity-classes-1.png, id=506, 1543.7675pt x 429.605pt>
+File: ./images/connectivity-classes-1.png Graphic file (type png)
+<use ./images/connectivity-classes-1.png>
+Package pdftex.def Info: ./images/connectivity-classes-1.png  used on input line 1480.
+(pdftex.def)             Requested size: 364.19669pt x 101.3505pt.
+
+Underfull \hbox (badness 4621) in paragraph at lines 1481--1481
+[]\T1/cmr/m/n/10.95 Figure 2.8: []Transport and application-level mes-sage types: \T1/cmtt/m/n/10.95 TransportPacket \T1/cmr/m/n/10.95 and
+ []
+
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
@@ -1295,6 +1300,20 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [47 <./images/connecting-sequance.png>]
+<./images/connectivity-classes-2.png, id=513, 2132.96875pt x 477.785pt>
+File: ./images/connectivity-classes-2.png Graphic file (type png)
+<use ./images/connectivity-classes-2.png>
+Package pdftex.def Info: ./images/connectivity-classes-2.png  used on input line 1487.
+(pdftex.def)             Requested size: 364.19669pt x 81.5796pt.
+<./images/data-receiving-seq.png, id=515, 4095.3pt x 3344.495pt>
+File: ./images/data-receiving-seq.png Graphic file (type png)
+<use ./images/data-receiving-seq.png>
+Package pdftex.def Info: ./images/data-receiving-seq.png  used on input line 1496.
+(pdftex.def)             Requested size: 450.69418pt x 368.04869pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1303,24 +1322,23 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[48 <./images/data-receiving-seq.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 1479--1480
+[48 <./images/connectivity-classes-1.png> <./images/connectivity-classes-2.png>]
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[49 <./images/data-receiving-seq.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 1507--1508
 []\T1/cmr/m/n/10.95 After the \T1/cmtt/m/n/10.95 AppMsg \T1/cmr/m/n/10.95 is placed on the chan-nel, the back-ground thread calls
  []
 
 
-Underfull \hbox (badness 1496) in paragraph at lines 1479--1480
+Underfull \hbox (badness 1496) in paragraph at lines 1507--1508
 \T1/cmr/m/n/10.95 ing \T1/cmtt/m/n/10.95 AppMsg::NetworkMessage\T1/cmr/m/n/10.95 . The UI then in-spects the in-ner \T1/cmtt/m/n/10.95 NetworkMessage \T1/cmr/m/n/10.95 vari-
- []
-
-<./images/connectivity-classes-1.png, id=520, 1543.7675pt x 429.605pt>
-File: ./images/connectivity-classes-1.png Graphic file (type png)
-<use ./images/connectivity-classes-1.png>
-Package pdftex.def Info: ./images/connectivity-classes-1.png  used on input line 1485.
-(pdftex.def)             Requested size: 364.19669pt x 101.3505pt.
-
-Underfull \hbox (badness 4621) in paragraph at lines 1486--1486
-[]\T1/cmr/m/n/10.95 Figure 2.9: []Transport and application-level mes-sage types: \T1/cmtt/m/n/10.95 TransportPacket \T1/cmr/m/n/10.95 and
  []
 
 
@@ -1335,30 +1353,15 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[49]
-<./images/connectivity-classes-2.png, id=525, 2132.96875pt x 477.785pt>
-File: ./images/connectivity-classes-2.png Graphic file (type png)
-<use ./images/connectivity-classes-2.png>
-Package pdftex.def Info: ./images/connectivity-classes-2.png  used on input line 1492.
-(pdftex.def)             Requested size: 364.19669pt x 81.5796pt.
-
-Underfull \vbox (badness 5050) has occurred while \output is active []
-
-
-
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 13.59999pt, for example:
-(fancyhdr)                \setlength{\headheight}{13.59999pt}.
-(fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
-
-[50 <./images/connectivity-classes-1.png> <./images/connectivity-classes-2.png>]
-<./images/cursor-broadcasting.png, id=536, 4623.2725pt x 1078.0275pt>
+[50]
+<./images/cursor-broadcasting.png, id=535, 4623.2725pt x 1078.0275pt>
 File: ./images/cursor-broadcasting.png Graphic file (type png)
 <use ./images/cursor-broadcasting.png>
-Package pdftex.def Info: ./images/cursor-broadcasting.png  used on input line 1511.
+Package pdftex.def Info: ./images/cursor-broadcasting.png  used on input line 1527.
 (pdftex.def)             Requested size: 450.69418pt x 105.07846pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
 
 
 
@@ -1368,17 +1371,26 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[51 <./images/cursor-broadcasting.png>]
+[51]
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[52 <./images/cursor-broadcasting.png>]
 Chapter 3.
 
 
-[52
+[53
 
 ]
 Chapter 4.
 
 
-[53
+[54
 
 ]
 
@@ -1386,7 +1398,7 @@ Chapter 4.
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.1628 \chapter
+l.1644 \chapter
                *{List of symbols and abbreviations} [1
 
 ]
@@ -1395,11 +1407,11 @@ l.1628 \chapter
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.1641 \listoffigures
+l.1657 \listoffigures
                       [2
 
 ] (./thesis-en.lof
-Underfull \hbox (badness 6893) in paragraph at lines 23--23
+Underfull \hbox (badness 6893) in paragraph at lines 22--22
  [][] [][]\T1/cmr/m/n/10.95 Transport and application-level mes-sage types: \T1/cmtt/m/n/10.95 TransportPacket \T1/cmr/m/n/10.95 and 
  []
 
@@ -1413,7 +1425,7 @@ Underfull \hbox (badness 6893) in paragraph at lines 23--23
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.1648 \listoftables
+l.1664 \listoftables
                      [3
 
 ] (./thesis-en.lot)
@@ -1426,7 +1438,7 @@ l.1648 \listoftables
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.1653 \chapter
+l.1669 \chapter
                *{List of appendices} [4
 
 ]
@@ -1435,7 +1447,7 @@ l.1653 \chapter
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.1662 \end{document}
+l.1678 \end{document}
                       [5
 
 ] (./thesis-en.aux)
@@ -1447,18 +1459,18 @@ Package rerunfilecheck Info: File `thesis-en.out' has not changed.
 (rerunfilecheck)             Checksum: 7CC78F659BA78215684A69BE4E347C60;7381.
  ) 
 Here is how much of TeX's memory you used:
- 14050 strings out of 473190
- 223992 string characters out of 5715799
+ 14051 strings out of 473190
+ 223999 string characters out of 5715799
  662593 words of memory out of 5000000
  36942 multiletter control sequences out of 15000+600000
  570458 words of font info for 67 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  75i,17n,79p,1426b,640s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfbx1095.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfcc1095.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfti1095.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sftt1095.pfb>
-Output written on thesis-en.pdf (57 pages, 4298138 bytes).
+Output written on thesis-en.pdf (58 pages, 4299172 bytes).
 PDF statistics:
- 699 PDF objects out of 1000 (max. 8388607)
- 518 compressed objects within 6 object streams
- 132 named destinations out of 1000 (max. 500000)
+ 704 PDF objects out of 1000 (max. 8388607)
+ 522 compressed objects within 6 object streams
+ 133 named destinations out of 1000 (max. 500000)
  422 words of extra memory for PDF output out of 10000 (max. 10000000)
 

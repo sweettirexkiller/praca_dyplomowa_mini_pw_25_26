@@ -1461,6 +1461,34 @@ conencts to the room and starts a listener to events from livekit data channel.
 
 \subsection{Message flow and chunking}
 
+Before we dive deep into how messages are sent and received, it's important to 
+understand all data types that are involved in the process. Below you can see a 
+diagram of all structs and enums that are used in the transport layer of the 
+application. The structs are: TransportPacket, NetworkMessage,
+ AppCommand, RoomEvent and AppMsg. The first two are used for
+  serializing and deserializing messages that are sent, while 
+  AppCommand and AppMsg are used for communication between
+   the UI thread and the background thread. RoomEvent is a
+    LiveKit-specific enum that represents events received
+	 from the LiveKit room, such as incoming messages or 
+	 participant updates. The background thread listens for 
+	 these events and translates them into AppMsg instances 
+	 that are sent to the UI thread for processing and 
+	 rendering.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{./images/connectivity-classes-1.png}
+	\caption{Transport and application-level message types: \texttt{TransportPacket} and \texttt{NetworkMessage}}
+	\label{fig:connectivity-classes-1}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{./images/connectivity-classes-2.png}
+	\caption{Inter-thread command and event types: \texttt{AppCommand} and \texttt{AppMsg}}
+	\label{fig:connectivity-classes-2}
+\end{figure}
+
 Figure~\ref{fig:data-receiving-seq} illustrates the complete lifecycle of an incoming message, from the moment a remote peer publishes data on the LiveKit data channel to the point where the local UI reacts to it. The flow traverses six participants that correspond to distinct runtime components: the remote peer, the LiveKit room (server-side), the background Tokio thread, the two ends of the MPSC channel (\texttt{UnboundedSender<AppMsg>} and \texttt{UnboundedReceiver<AppMsg>}), and the UI thread.
 
 \begin{figure}[H]
@@ -1480,19 +1508,7 @@ After the \texttt{AppMsg} is placed on the channel, the background thread calls 
 
 The entire message flow between the UI and the network layer is handled by four custom enum types, shown in the diagrams below. No additional classes were needed, as the remaining transport infrastructure is provided by the LiveKit SDK itself.
 
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.8\textwidth]{./images/connectivity-classes-1.png}
-	\caption{Transport and application-level message types: \texttt{TransportPacket} and \texttt{NetworkMessage}}
-	\label{fig:connectivity-classes-1}
-\end{figure}
 
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.8\textwidth]{./images/connectivity-classes-2.png}
-	\caption{Inter-thread command and event types: \texttt{AppCommand} and \texttt{AppMsg}}
-	\label{fig:connectivity-classes-2}
-\end{figure}
 
 The first pair of types operates at the wire level. \texttt{TransportPacket} is a serializable envelope that wraps outgoing data before it is published to the LiveKit data channel. Its \texttt{Message} variant carries a small payload that fits within the 14\,KB limit in a single packet, while the \texttt{Chunk} variant carries a fragment of a larger message along with metadata --- a unique transfer identifier, the chunk index, and the total number of chunks --- so that the receiver can reassemble the original payload. \texttt{NetworkMessage} represents the application-level content inside each packet and has three variants: \texttt{Sync}, which carries raw Automerge synchronization bytes; \texttt{Chat}, which carries a plain-text chat string; and \texttt{Cursor}, which carries an $(x, y)$ coordinate pair for remote cursor rendering.
 

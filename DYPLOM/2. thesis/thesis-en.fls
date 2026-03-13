@@ -332,11 +332,6 @@ INPUT ./images/connecting-sequance.png
 INPUT ./images/connecting-sequance.png
 INPUT ./images/connecting-sequance.png
 INPUT ./images/connecting-sequance.png
-INPUT ./images/data-receiving-seq.png
-INPUT ./images/data-receiving-seq.png
-INPUT ./images/data-receiving-seq.png
-INPUT ./images/data-receiving-seq.png
-INPUT ./images/data-receiving-seq.png
 INPUT ./images/connectivity-classes-1.png
 INPUT ./images/connectivity-classes-1.png
 INPUT ./images/connectivity-classes-1.png
@@ -347,6 +342,11 @@ INPUT ./images/connectivity-classes-2.png
 INPUT ./images/connectivity-classes-2.png
 INPUT ./images/connectivity-classes-2.png
 INPUT ./images/connectivity-classes-2.png
+INPUT ./images/data-receiving-seq.png
+INPUT ./images/data-receiving-seq.png
+INPUT ./images/data-receiving-seq.png
+INPUT ./images/data-receiving-seq.png
+INPUT ./images/data-receiving-seq.png
 INPUT ./images/cursor-broadcasting.png
 INPUT ./images/cursor-broadcasting.png
 INPUT ./images/cursor-broadcasting.png
