@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.11.29)  13 MAR 2026 18:18
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.11.29)  15 MAR 2026 16:49
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1105,11 +1105,6 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [33{/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc} <./images/backend-interface.png>]
-Underfull \hbox (badness 4072) in paragraph at lines 965--968
-[]\T1/cmr/bx/n/10.95 Delta up-dates\T1/cmr/m/n/10.95 : in-stead of send-ing the en-tire doc-u-ment, the back-end uses
- []
-
-
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1119,18 +1114,20 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [34]
-Underfull \hbox (badness 5345) in paragraph at lines 968--971
+Underfull \hbox (badness 4072) in paragraph at lines 968--971
+[]\T1/cmr/bx/n/10.95 Delta up-dates\T1/cmr/m/n/10.95 : in-stead of send-ing the en-tire doc-u-ment, the back-end uses
+ []
+
+
+Underfull \hbox (badness 5345) in paragraph at lines 971--974
 []\T1/cmr/bx/n/10.95 Convergence through merg-ing\T1/cmr/m/n/10.95 : when a peer re-ceives this mes-sage, the
  []
 
 <./images/automerge-sequance.png, id=437, 2526.43875pt x 2148.025pt>
 File: ./images/automerge-sequance.png Graphic file (type png)
 <use ./images/automerge-sequance.png>
-Package pdftex.def Info: ./images/automerge-sequance.png  used on input line 981.
+Package pdftex.def Info: ./images/automerge-sequance.png  used on input line 984.
 (pdftex.def)             Requested size: 450.69418pt x 383.18633pt.
-
-Underfull \vbox (badness 4132) has occurred while \output is active []
-
 
 
 
@@ -1142,7 +1139,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 [35 <./images/automerge-sequance.png>]
 LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <10.95> not available
-(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 995.
+(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 998.
 
 
 
@@ -1198,29 +1195,29 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [41]
-Underfull \hbox (badness 10000) in paragraph at lines 1275--1276
-[]\T1/cmtt/m/n/10.95 insert(&list_id, len,
- []
-
-
 Underfull \hbox (badness 10000) in paragraph at lines 1278--1279
 []\T1/cmtt/m/n/10.95 insert(&list_id, len,
  []
 
 
-Underfull \hbox (badness 1496) in paragraph at lines 1280--1280
+Underfull \hbox (badness 10000) in paragraph at lines 1281--1282
+[]\T1/cmtt/m/n/10.95 insert(&list_id, len,
+ []
+
+
+Underfull \hbox (badness 1496) in paragraph at lines 1283--1283
 []\T1/cmr/m/n/10.95 Remove all el-e-ments from the
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1281--1282
+Underfull \hbox (badness 10000) in paragraph at lines 1284--1285
 []\T1/cmtt/m/n/10.95 splice(&list_id, 0, len,
  []
 
 <./images/automerge-local-intent.png, id=479, 2264.46pt x 1696.3375pt>
 File: ./images/automerge-local-intent.png Graphic file (type png)
 <use ./images/automerge-local-intent.png>
-Package pdftex.def Info: ./images/automerge-local-intent.png  used on input line 1295.
+Package pdftex.def Info: ./images/automerge-local-intent.png  used on input line 1298.
 (pdftex.def)             Requested size: 386.96028pt x 289.87483pt.
 
 
@@ -1262,7 +1259,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 <./images/connecting-sequance.png, id=501, 4587.1375pt x 2505.36pt>
 File: ./images/connecting-sequance.png Graphic file (type png)
 <use ./images/connecting-sequance.png>
-Package pdftex.def Info: ./images/connecting-sequance.png  used on input line 1449.
+Package pdftex.def Info: ./images/connecting-sequance.png  used on input line 1452.
 (pdftex.def)             Requested size: 432.48053pt x 236.1767pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
@@ -1280,10 +1277,10 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 <./images/connectivity-classes-1.png, id=506, 1543.7675pt x 429.605pt>
 File: ./images/connectivity-classes-1.png Graphic file (type png)
 <use ./images/connectivity-classes-1.png>
-Package pdftex.def Info: ./images/connectivity-classes-1.png  used on input line 1480.
+Package pdftex.def Info: ./images/connectivity-classes-1.png  used on input line 1483.
 (pdftex.def)             Requested size: 364.19669pt x 101.3505pt.
 
-Underfull \hbox (badness 4621) in paragraph at lines 1481--1481
+Underfull \hbox (badness 4621) in paragraph at lines 1484--1484
 []\T1/cmr/m/n/10.95 Figure 2.8: []Transport and application-level mes-sage types: \T1/cmtt/m/n/10.95 TransportPacket \T1/cmr/m/n/10.95 and
  []
 
@@ -1303,12 +1300,12 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 <./images/communication-enums.png, id=513, 3478.9975pt x 477.785pt>
 File: ./images/communication-enums.png Graphic file (type png)
 <use ./images/communication-enums.png>
-Package pdftex.def Info: ./images/communication-enums.png  used on input line 1487.
+Package pdftex.def Info: ./images/communication-enums.png  used on input line 1490.
 (pdftex.def)             Requested size: 450.69418pt x 61.89551pt.
 <./images/data-receiving-seq.png, id=515, 4095.3pt x 3344.495pt>
 File: ./images/data-receiving-seq.png Graphic file (type png)
 <use ./images/data-receiving-seq.png>
-Package pdftex.def Info: ./images/data-receiving-seq.png  used on input line 1496.
+Package pdftex.def Info: ./images/data-receiving-seq.png  used on input line 1499.
 (pdftex.def)             Requested size: 450.69418pt x 368.04869pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
@@ -1332,12 +1329,12 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [49 <./images/data-receiving-seq.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 1507--1508
+Underfull \hbox (badness 10000) in paragraph at lines 1510--1511
 []\T1/cmr/m/n/10.95 After the \T1/cmtt/m/n/10.95 AppMsg \T1/cmr/m/n/10.95 is placed on the chan-nel, the back-ground thread calls
  []
 
 
-Underfull \hbox (badness 1496) in paragraph at lines 1507--1508
+Underfull \hbox (badness 1496) in paragraph at lines 1510--1511
 \T1/cmr/m/n/10.95 ing \T1/cmtt/m/n/10.95 AppMsg::NetworkMessage\T1/cmr/m/n/10.95 . The UI then in-spects the in-ner \T1/cmtt/m/n/10.95 NetworkMessage \T1/cmr/m/n/10.95 vari-
  []
 
@@ -1357,7 +1354,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 <./images/cursor-broadcasting.png, id=535, 4623.2725pt x 1078.0275pt>
 File: ./images/cursor-broadcasting.png Graphic file (type png)
 <use ./images/cursor-broadcasting.png>
-Package pdftex.def Info: ./images/cursor-broadcasting.png  used on input line 1527.
+Package pdftex.def Info: ./images/cursor-broadcasting.png  used on input line 1530.
 (pdftex.def)             Requested size: 450.69418pt x 105.07846pt.
 
 Underfull \vbox (badness 4181) has occurred while \output is active []
@@ -1398,7 +1395,7 @@ Chapter 4.
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.1644 \chapter
+l.1647 \chapter
                *{List of symbols and abbreviations} [1
 
 ]
@@ -1407,7 +1404,7 @@ l.1644 \chapter
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.1657 \listoffigures
+l.1660 \listoffigures
                       [2
 
 ] (./thesis-en.lof
@@ -1425,7 +1422,7 @@ Underfull \hbox (badness 6893) in paragraph at lines 22--22
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.1664 \listoftables
+l.1667 \listoftables
                      [3
 
 ] (./thesis-en.lot)
@@ -1438,7 +1435,7 @@ l.1664 \listoftables
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.1669 \chapter
+l.1672 \chapter
                *{List of appendices} [4
 
 ]
@@ -1447,7 +1444,7 @@ l.1669 \chapter
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.1678 \end{document}
+l.1681 \end{document}
                       [5
 
 ] (./thesis-en.aux)
@@ -1467,7 +1464,7 @@ Here is how much of TeX's memory you used:
  1141 hyphenation exceptions out of 8191
  75i,17n,79p,1426b,640s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfbx1095.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfcc1095.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfti1095.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sftt1095.pfb>
-Output written on thesis-en.pdf (58 pages, 4361680 bytes).
+Output written on thesis-en.pdf (58 pages, 4361875 bytes).
 PDF statistics:
  704 PDF objects out of 1000 (max. 8388607)
  522 compressed objects within 6 object streams

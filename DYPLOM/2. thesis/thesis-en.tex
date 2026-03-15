@@ -352,7 +352,7 @@ good example of usage of cloud-first approach, in this thesis I decided to focus
 as they have proved to be more broadly used in the industry and it offers way more possibilities of different 
 kind of applications. 
 
-There are also my other reasons to avoid cloud-first architectures when designing collaborative applications. 
+There are also other reasons to avoid cloud-first architectures when designing collaborative applications. 
 Lets take a look at simple sequance of user interaction with the system. Below we can see general asynchronous 
 interaction of a user with normal cloud-basen application. 
 \begin{figure}[H]
@@ -387,7 +387,7 @@ The distinction is clear. In local-first approach the user interaction with the 
 on connectivity with the database. Connectivity brings only messaging with other peers. Whole 
 synchronization of replicas of data between users happens on local machine. This is the reaseon 
 why we can call this system distributed. We can also notice that this approach requires much less
-modules across different serivces. Later, in the thesis, we will clearly how this concept allows
+modules across different serivces. Later, in the thesis, we will clearly show that this concept allows
 us to bring true real time collaboration to the users.
 
 
@@ -406,7 +406,7 @@ collaborative application.
 
 Clearly, the obvious choice for apprach when designing collaborative application would be Local-first. 
 Let's now try to  distinguish, what are boundaries of such system - what use cases are not applicable with 
-local-first apprach. The table below shows use cases that are not good fit for local-first approach.
+local-first apprach. The table below shows use cases that are and are not good fit for local-first approach.
 
 \begin{table}[H]
 	\centering
@@ -940,6 +940,9 @@ user interface code.
 % automerge sync messages, how they are generated and applied, how conflicts are resolved, how cursors are synchronized, how new users synchronize with existing state
 %  when joining a room.
 %  ``generate\_sync\_message'', ``receive\_sync\_message''
+
+Having discuussed ui.rs and backend\_api.rs modules, we can now dive into the core of 
+the synchronization logic -- the automerge\_backend.rs module.
 
 The synchronization architecture of the collaborative whiteboard can be understood in three layers.
 First, Section~2.4 introduces the theoretical foundations of the sync protocol -- how Automerge
