@@ -1428,8 +1428,7 @@ synchronization. This approach provides a robust foundation for building scalabl
 Application in its sourcecode uses Tokio runtime library which enables 
 convinient usage of threads in application. The UI runs on the main thread, 
 while all network communication and CRDT synchronization logic is executed 
-on a separate background thread managed by Tokio. T
-his separation ensures that the user interface remains responsive and
+on a separate background thread managed by Tokio. This separation ensures that the user interface remains responsive and
  does not block while waiting for network messages or performing 
  potentially expensive CRDT operations.
 
@@ -1534,6 +1533,25 @@ On the receiving side, incoming cursor messages are stored in a \texttt{HashMap<
 
 This design keeps cursor synchronization simple and performant. Because cursor data is not persisted in the CRDT document, it adds no overhead to the Automerge sync protocol and does not increase the document size over time. The trade-off is that cursor positions are lost if a message is dropped, but given the high update frequency (up to 20 updates per second per user), any lost position is quickly replaced by a newer one, making occasional packet loss visually imperceptible.
 
+\section{Final design}
+
+The images below illustrate the final UI design of the application.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{./images/ui-final-1.png}
+	\caption{Final UI design of the application}
+	\label{fig:final-ui-design}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{./images/ui-final-2.png}
+	\caption{Final UI design of the application}
+	\label{fig:final-ui-design-2}
+\end{figure}
+
+
+
 \chapter{Analysis of the solution}
 
 % =============================================================================
@@ -1631,12 +1649,24 @@ This design keeps cursor synchronization simple and performant. Because cursor d
 % FOR AMBITIOUS ONES - USE BIBTEX
 
 
-\begin{thebibliography}{20} % IF YOU HAVE MORE REFERENCES, WRITE THE BIGGER NUMBER
+\begin{thebibliography}{20}
 
-\bibitem[1]{Ktos} A. Author, \emph{Title of a book}, Publisher, year, page--page.
-\bibitem[2]{Innyktos} J. Bobkowski, S. Dobkowski, Title of an article, \emph{Magazine X, No. 7}, year, PAGE--PAGE.
-\bibitem[3]{B} C. Brink, Power structures, \emph{Algebra Universalis 30(2)}, 1993, 177--216.
-\bibitem[4]{H} F. Burris, H. P. Sankappanavar, \emph{A Course of Universal Algebra}, Springer-Verlag, New York, 1981.
+\bibitem[1]{automerge-docs} Automerge Contributors, \emph{Automerge -- Rust Documentation}, \url{https://docs.rs/automerge/latest/automerge/}, accessed March 2026.
+
+\bibitem[2]{conclave} Conclave Team, \emph{Conclave: A Peer-to-Peer Collaborative Text Editor}, \url{https://conclave-team.github.io/conclave-site/}, accessed March 2026.
+
+\bibitem[3]{inkandswitch-localfirst} M.~Kleppmann, A.~Wiggins, P.~van Hardenberg, M.~McGranaghan, \emph{Local-First Software: You Own Your Data, in Spite of the Cloud}, Ink \& Switch, 2019, \url{https://www.inkandswitch.com/essay/local-first/}.
+
+\bibitem[4]{kleppmann-localfirst-talk} M.~Kleppmann, \emph{Local-First Cooperation}, Onward! 2019, \url{https://martin.kleppmann.com/2019/10/23/local-first-at-onward.html}.
+
+\bibitem[5]{kleppmann-egwalker} M.~Kleppmann, \emph{Eg-Walker: Efficient Collaborative Text Editing}, 2025, \url{https://martin.kleppmann.com/2025/04/02/eg-walker-collaborative-text.html}.
+
+\bibitem[6]{livekit-deployment} LiveKit Inc., \emph{LiveKit Self-Hosting and Deployment Guide}, \url{https://docs.livekit.io/home/self-hosting/deployment/}, accessed March 2026.
+
+\bibitem[7]{livekit-sfu} LiveKit Inc., \emph{LiveKit SFU Internals}, \url{https://docs.livekit.io/reference/internals/livekit-sfu/}, accessed March 2026.
+
+\bibitem[8]{mdn-webrtc} Mozilla Contributors, \emph{WebRTC Connectivity -- MDN Web Docs}, \url{https://developer.mozilla.org/en-US/docs/Web/API/WebRTC_API/Connectivity}, accessed March 2026.
+
 \end{thebibliography}
 \pagenumbering{gobble}
 \thispagestyle{empty}
@@ -1670,6 +1700,7 @@ If you don't need it, delete it.
 
 % -----------------------------  LIST OF APPENDICES ---------------------------
 \chapter*{List of appendices}
+
 \begin{enumerate}
 \item Appendix 1
 \item Appendix 2

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.11.29)  15 MAR 2026 16:49
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.11.29)  15 MAR 2026 17:29
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -477,12 +477,12 @@ Package hyperref Info: Link coloring OFF on input line 172.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-<titlepage-en.pdf, id=151, 597.51233pt x 845.0471pt>
+<titlepage-en.pdf, id=155, 597.51233pt x 845.0471pt>
 File: titlepage-en.pdf Graphic file (type pdf)
 <use titlepage-en.pdf>
 Package pdftex.def Info: titlepage-en.pdf  used on input line 176.
 (pdftex.def)             Requested size: 597.51086pt x 845.04504pt.
-<titlepage-en.pdf, id=153, page=1, 597.51233pt x 845.0471pt>
+<titlepage-en.pdf, id=157, page=1, 597.51233pt x 845.0471pt>
 File: titlepage-en.pdf Graphic file (type pdf)
 <use titlepage-en.pdf, page 1>
 Package pdftex.def Info: titlepage-en.pdf , page1 used on input line 176.
@@ -579,7 +579,7 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.}) has be
 l.270 \null\thispagestyle{empty}\newpage
                                          [3]
 Chapter 1.
-<./images/simple-architecture.png, id=279, 499.8675pt x 851.18pt>
+<./images/simple-architecture.png, id=285, 499.8675pt x 851.18pt>
 File: ./images/simple-architecture.png Graphic file (type png)
 <use ./images/simple-architecture.png>
 Package pdftex.def Info: ./images/simple-architecture.png  used on input line 308.
@@ -592,7 +592,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 [11
 
 ]
-<./images/more-complicated-architecture.png, id=285, 633.36626pt x 1059.96pt>
+<./images/more-complicated-architecture.png, id=291, 633.36626pt x 1059.96pt>
 File: ./images/more-complicated-architecture.png Graphic file (type png)
 <use ./images/more-complicated-architecture.png>
 Package pdftex.def Info: ./images/more-complicated-architecture.png  used on input line 325.
@@ -607,12 +607,12 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [12 <./images/simple-architecture.png> <./images/more-complicated-architecture.png>]
-<./images/complicated-modules.png, id=294, 3468.96pt x 192.72pt>
+<./images/complicated-modules.png, id=300, 3468.96pt x 192.72pt>
 File: ./images/complicated-modules.png Graphic file (type png)
 <use ./images/complicated-modules.png>
 Package pdftex.def Info: ./images/complicated-modules.png  used on input line 337.
 (pdftex.def)             Requested size: 455.24413pt x 25.28972pt.
-<./images/typical-sequance.png, id=295, 4265.9375pt x 5199.425pt>
+<./images/typical-sequance.png, id=301, 4265.9375pt x 5199.425pt>
 File: ./images/typical-sequance.png Graphic file (type png)
 <use ./images/typical-sequance.png>
 Package pdftex.def Info: ./images/typical-sequance.png  used on input line 360.
@@ -630,7 +630,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [13 <./images/complicated-modules.png>]
-<./images/local-first-sequanec.png, id=303, 4265.9375pt x 3543.2375pt>
+<./images/local-first-sequanec.png, id=309, 4265.9375pt x 3543.2375pt>
 File: ./images/local-first-sequanec.png Graphic file (type png)
 <use ./images/local-first-sequanec.png>
 Package pdftex.def Info: ./images/local-first-sequanec.png  used on input line 380.
@@ -648,7 +648,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [14 <./images/typical-sequance.png>]
-<./images/cloud-vs-local.png, id=311, 3201.9625pt x 3392.675pt>
+<./images/cloud-vs-local.png, id=317, 3201.9625pt x 3392.675pt>
 File: ./images/cloud-vs-local.png Graphic file (type png)
 <use ./images/cloud-vs-local.png>
 Package pdftex.def Info: ./images/cloud-vs-local.png  used on input line 402.
@@ -685,7 +685,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [16 <./images/cloud-vs-local.png>]
-<./images/p2p-vs-start.png, id=325, 755.82375pt x 355.3275pt>
+<./images/p2p-vs-start.png, id=331, 755.82375pt x 355.3275pt>
 File: ./images/p2p-vs-start.png Graphic file (type png)
 <use ./images/p2p-vs-start.png>
 Package pdftex.def Info: ./images/p2p-vs-start.png  used on input line 454.
@@ -980,7 +980,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [25]
-<./images/initial-ui.png, id=374, 483.8075pt x 433.62pt>
+<./images/initial-ui.png, id=380, 483.8075pt x 433.62pt>
 File: ./images/initial-ui.png Graphic file (type png)
 <use ./images/initial-ui.png>
 Package pdftex.def Info: ./images/initial-ui.png  used on input line 748.
@@ -1013,7 +1013,7 @@ Chapter 2.
 [28
 
 ]
-<./images/architecture.png, id=391, 338.26375pt x 232.87pt>
+<./images/architecture.png, id=397, 338.26375pt x 232.87pt>
 File: ./images/architecture.png Graphic file (type png)
 <use ./images/architecture.png>
 Package pdftex.def Info: ./images/architecture.png  used on input line 816.
@@ -1031,7 +1031,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [29]
-<./images/ui-modules-1.png, id=396, 233.37187pt x 316.68312pt>
+<./images/ui-modules-1.png, id=402, 233.37187pt x 316.68312pt>
 File: ./images/ui-modules-1.png Graphic file (type png)
 <use ./images/ui-modules-1.png>
 Package pdftex.def Info: ./images/ui-modules-1.png  used on input line 839.
@@ -1058,27 +1058,27 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [31 <./images/ui-modules-1.png>]
-<./images/ui-modules-2.png, id=409, 95.85812pt x 126.4725pt>
+<./images/ui-modules-2.png, id=415, 95.85812pt x 126.4725pt>
 File: ./images/ui-modules-2.png Graphic file (type png)
 <use ./images/ui-modules-2.png>
 Package pdftex.def Info: ./images/ui-modules-2.png  used on input line 868.
 (pdftex.def)             Requested size: 72.84071pt x 96.1085pt.
-<./images/ui-modules-3.png, id=410, 140.525pt x 115.43124pt>
+<./images/ui-modules-3.png, id=416, 140.525pt x 115.43124pt>
 File: ./images/ui-modules-3.png Graphic file (type png)
 <use ./images/ui-modules-3.png>
 Package pdftex.def Info: ./images/ui-modules-3.png  used on input line 872.
 (pdftex.def)             Requested size: 109.26108pt x 89.75066pt.
-<./images/ui-modules-4.png, id=411, 92.345pt x 122.4575pt>
+<./images/ui-modules-4.png, id=417, 92.345pt x 122.4575pt>
 File: ./images/ui-modules-4.png Graphic file (type png)
 <use ./images/ui-modules-4.png>
 Package pdftex.def Info: ./images/ui-modules-4.png  used on input line 877.
 (pdftex.def)             Requested size: 81.9406pt x 108.65982pt.
-<./images/ui-modules-5.png, id=412, 240.9pt x 175.65625pt>
+<./images/ui-modules-5.png, id=418, 240.9pt x 175.65625pt>
 File: ./images/ui-modules-5.png Graphic file (type png)
 <use ./images/ui-modules-5.png>
 Package pdftex.def Info: ./images/ui-modules-5.png  used on input line 882.
 (pdftex.def)             Requested size: 186.65175pt x 136.10269pt.
-<./images/backend-interface.png, id=413, 1267.73625pt x 2176.13pt>
+<./images/backend-interface.png, id=419, 1267.73625pt x 2176.13pt>
 File: ./images/backend-interface.png Graphic file (type png)
 <use ./images/backend-interface.png>
 Package pdftex.def Info: ./images/backend-interface.png  used on input line 902.
@@ -1123,7 +1123,7 @@ Underfull \hbox (badness 5345) in paragraph at lines 971--974
 []\T1/cmr/bx/n/10.95 Convergence through merg-ing\T1/cmr/m/n/10.95 : when a peer re-ceives this mes-sage, the
  []
 
-<./images/automerge-sequance.png, id=437, 2526.43875pt x 2148.025pt>
+<./images/automerge-sequance.png, id=443, 2526.43875pt x 2148.025pt>
 File: ./images/automerge-sequance.png Graphic file (type png)
 <use ./images/automerge-sequance.png>
 Package pdftex.def Info: ./images/automerge-sequance.png  used on input line 984.
@@ -1214,7 +1214,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 1284--1285
 []\T1/cmtt/m/n/10.95 splice(&list_id, 0, len,
  []
 
-<./images/automerge-local-intent.png, id=479, 2264.46pt x 1696.3375pt>
+<./images/automerge-local-intent.png, id=485, 2264.46pt x 1696.3375pt>
 File: ./images/automerge-local-intent.png Graphic file (type png)
 <use ./images/automerge-local-intent.png>
 Package pdftex.def Info: ./images/automerge-local-intent.png  used on input line 1298.
@@ -1256,10 +1256,10 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [45]
-<./images/connecting-sequance.png, id=501, 4587.1375pt x 2505.36pt>
+<./images/connecting-sequance.png, id=507, 4587.1375pt x 2505.36pt>
 File: ./images/connecting-sequance.png Graphic file (type png)
 <use ./images/connecting-sequance.png>
-Package pdftex.def Info: ./images/connecting-sequance.png  used on input line 1452.
+Package pdftex.def Info: ./images/connecting-sequance.png  used on input line 1451.
 (pdftex.def)             Requested size: 432.48053pt x 236.1767pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
@@ -1274,13 +1274,13 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [46]
-<./images/connectivity-classes-1.png, id=506, 1543.7675pt x 429.605pt>
+<./images/connectivity-classes-1.png, id=512, 1543.7675pt x 429.605pt>
 File: ./images/connectivity-classes-1.png Graphic file (type png)
 <use ./images/connectivity-classes-1.png>
-Package pdftex.def Info: ./images/connectivity-classes-1.png  used on input line 1483.
+Package pdftex.def Info: ./images/connectivity-classes-1.png  used on input line 1482.
 (pdftex.def)             Requested size: 364.19669pt x 101.3505pt.
 
-Underfull \hbox (badness 4621) in paragraph at lines 1484--1484
+Underfull \hbox (badness 4621) in paragraph at lines 1483--1483
 []\T1/cmr/m/n/10.95 Figure 2.8: []Transport and application-level mes-sage types: \T1/cmtt/m/n/10.95 TransportPacket \T1/cmr/m/n/10.95 and
  []
 
@@ -1297,15 +1297,15 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [47 <./images/connecting-sequance.png>]
-<./images/communication-enums.png, id=513, 3478.9975pt x 477.785pt>
+<./images/communication-enums.png, id=519, 3478.9975pt x 477.785pt>
 File: ./images/communication-enums.png Graphic file (type png)
 <use ./images/communication-enums.png>
-Package pdftex.def Info: ./images/communication-enums.png  used on input line 1490.
+Package pdftex.def Info: ./images/communication-enums.png  used on input line 1489.
 (pdftex.def)             Requested size: 450.69418pt x 61.89551pt.
-<./images/data-receiving-seq.png, id=515, 4095.3pt x 3344.495pt>
+<./images/data-receiving-seq.png, id=521, 4095.3pt x 3344.495pt>
 File: ./images/data-receiving-seq.png Graphic file (type png)
 <use ./images/data-receiving-seq.png>
-Package pdftex.def Info: ./images/data-receiving-seq.png  used on input line 1499.
+Package pdftex.def Info: ./images/data-receiving-seq.png  used on input line 1498.
 (pdftex.def)             Requested size: 450.69418pt x 368.04869pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
@@ -1329,12 +1329,12 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [49 <./images/data-receiving-seq.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 1510--1511
+Underfull \hbox (badness 10000) in paragraph at lines 1509--1510
 []\T1/cmr/m/n/10.95 After the \T1/cmtt/m/n/10.95 AppMsg \T1/cmr/m/n/10.95 is placed on the chan-nel, the back-ground thread calls
  []
 
 
-Underfull \hbox (badness 1496) in paragraph at lines 1510--1511
+Underfull \hbox (badness 1496) in paragraph at lines 1509--1510
 \T1/cmr/m/n/10.95 ing \T1/cmtt/m/n/10.95 AppMsg::NetworkMessage\T1/cmr/m/n/10.95 . The UI then in-spects the in-ner \T1/cmtt/m/n/10.95 NetworkMessage \T1/cmr/m/n/10.95 vari-
  []
 
@@ -1351,10 +1351,10 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [50]
-<./images/cursor-broadcasting.png, id=535, 4623.2725pt x 1078.0275pt>
+<./images/cursor-broadcasting.png, id=541, 4623.2725pt x 1078.0275pt>
 File: ./images/cursor-broadcasting.png Graphic file (type png)
 <use ./images/cursor-broadcasting.png>
-Package pdftex.def Info: ./images/cursor-broadcasting.png  used on input line 1530.
+Package pdftex.def Info: ./images/cursor-broadcasting.png  used on input line 1529.
 (pdftex.def)             Requested size: 450.69418pt x 105.07846pt.
 
 Underfull \vbox (badness 4181) has occurred while \output is active []
@@ -1369,6 +1369,17 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [51]
+<./images/ui-final-1.png, id=547, 616.3025pt x 485.815pt>
+File: ./images/ui-final-1.png Graphic file (type png)
+<use ./images/ui-final-1.png>
+Package pdftex.def Info: ./images/ui-final-1.png  used on input line 1541.
+(pdftex.def)             Requested size: 364.19669pt x 287.09538pt.
+<./images/ui-final-2.png, id=548, 628.3475pt x 491.8375pt>
+File: ./images/ui-final-2.png Graphic file (type png)
+<use ./images/ui-final-2.png>
+Package pdftex.def Info: ./images/ui-final-2.png  used on input line 1548.
+(pdftex.def)             Requested size: 364.19669pt x 285.07082pt.
+
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1377,25 +1388,39 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[52 <./images/cursor-broadcasting.png>]
+[52 <./images/cursor-broadcasting.png> <./images/ui-final-1.png>]
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[53 <./images/ui-final-2.png>]
 Chapter 3.
-
-
-[53
-
-]
-Chapter 4.
 
 
 [54
 
 ]
+Chapter 4.
+
+
+[55
+
+]
+Underfull \hbox (badness 3849) in paragraph at lines 1656--1657
+[]\T1/cmr/m/n/10.95 Conclave Team, \T1/cmr/m/it/10.95 Con-clave: A Peer-to-Peer Col-lab-o-ra-tive Text Ed-i-tor\T1/cmr/m/n/10.95 , []$\T1/cmtt/m/n/10.95 https : / /
+ []
+
+
 
 
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.1647 \chapter
+l.1677 \chapter
                *{List of symbols and abbreviations} [1
 
 ]
@@ -1404,7 +1429,7 @@ l.1647 \chapter
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.1660 \listoffigures
+l.1690 \listoffigures
                       [2
 
 ] (./thesis-en.lof
@@ -1422,7 +1447,7 @@ Underfull \hbox (badness 6893) in paragraph at lines 22--22
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.1667 \listoftables
+l.1697 \listoftables
                      [3
 
 ] (./thesis-en.lot)
@@ -1435,7 +1460,7 @@ l.1667 \listoftables
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.1672 \chapter
+l.1702 \chapter
                *{List of appendices} [4
 
 ]
@@ -1444,7 +1469,7 @@ l.1672 \chapter
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.1681 \end{document}
+l.1712 \end{document}
                       [5
 
 ] (./thesis-en.aux)
@@ -1453,21 +1478,21 @@ LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
  ***********
 Package rerunfilecheck Info: File `thesis-en.out' has not changed.
-(rerunfilecheck)             Checksum: 7CC78F659BA78215684A69BE4E347C60;7381.
+(rerunfilecheck)             Checksum: 84CBED36525D12E38076D80B92D9F5B8;7499.
  ) 
 Here is how much of TeX's memory you used:
- 14051 strings out of 473190
- 223975 string characters out of 5715799
- 662610 words of memory out of 5000000
- 36942 multiletter control sequences out of 15000+600000
+ 14080 strings out of 473190
+ 224744 string characters out of 5715799
+ 662937 words of memory out of 5000000
+ 36963 multiletter control sequences out of 15000+600000
  570458 words of font info for 67 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  75i,17n,79p,1426b,640s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfbx1095.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfcc1095.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfti1095.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sftt1095.pfb>
-Output written on thesis-en.pdf (58 pages, 4361875 bytes).
+Output written on thesis-en.pdf (59 pages, 4509542 bytes).
 PDF statistics:
- 704 PDF objects out of 1000 (max. 8388607)
- 522 compressed objects within 6 object streams
- 133 named destinations out of 1000 (max. 500000)
- 422 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 743 PDF objects out of 1000 (max. 8388607)
+ 555 compressed objects within 6 object streams
+ 141 named destinations out of 1000 (max. 500000)
+ 440 words of extra memory for PDF output out of 10000 (max. 10000000)
 
