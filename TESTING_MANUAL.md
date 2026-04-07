@@ -26,6 +26,14 @@ cargo test
 | `test_apply_clear_intent` | Weryfikuje czyszczenie tablicy (Intent::Clear). | Dokument jest pusty po operacji. |
 | `test_save_and_load` | Sprawdza persistencję danych (zapis do wektora bajtów i odtworzenie). | Odtworzony backend zawiera te same dane co oryginał. |
 | `test_sync_between_peers` | Symuluje wymianę wiadomości synchronizacyjnych między dwoma instancjami backendu (Peer A i Peer B). | Peer B "widzi" pociągnięcia narysowane przez Peer A po zakończeniu wymiany komunikatów. |
+| `test_concurrent_draw_both_strokes_survive` | Dwa peery rysują jednocześnie (bez synchronizacji), a następnie synchronizują się. | Oba pociągnięcia przeżywają — po synchronizacji oba peery widzą 3 elementy (seed + 2 współbieżne). NF-06. |
+| `test_clear_vs_concurrent_draw_add_wins` | Peer A czyści tablicę, podczas gdy Peer B jednocześnie rysuje nowe pociągnięcie — semantyka „add-wins". | Stare pociągnięcie znika, nowe pociągnięcie Peer B przeżywa czyszczenie. NF-06. |
+| `test_load_invalid_bytes_does_not_panic` | Podanie niepoprawnych (losowych) bajtów do metody `load()`. | Brak paniki — dokument pozostaje niezmieniony. |
+| `test_load_empty_bytes_does_not_panic` | Podanie pustego wektora bajtów do metody `load()`. | Brak paniki — zachowanie zdefiniowane przez implementację. |
+| `test_strokes_preserve_insertion_order` | Dodanie 5 pociągnięć sekwencyjnie, sprawdzenie kolejności. | Pociągnięcia zwracane w kolejności wstawiania. |
+| `test_three_peer_sync_convergence` | Topologia gwiazdy A↔B↔C — A i C rysują współbieżnie, synchronizacja przez hub B. | Wszystkie 3 peery konwergują do tego samego stanu (3 pociągnięcia). NF-06/NF-09. |
+| `test_set_and_get_background` | Ustawienie i odczytanie danych tła (bajty). | Dane tła przechodzą round-trip bez zmian. |
+| `test_peer_disconnect_removes_sync_state` | Połączenie peera, następnie rozłączenie. | Po rozłączeniu `generate_sync_message` zwraca `None`. |
 
 ## 3. Protokół Testów Manualnych (User Acceptance Tests)
 
