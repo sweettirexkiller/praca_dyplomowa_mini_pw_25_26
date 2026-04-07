@@ -1,6 +1,5 @@
 use super::*;
-use eframe::{egui, egui::Context};
-use egui::Key;
+use eframe::egui;
 
 impl AppView {
     /// Handles keyboard shortcuts for the application.

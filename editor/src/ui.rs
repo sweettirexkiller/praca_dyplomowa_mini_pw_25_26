@@ -7,10 +7,8 @@ use std::{
 
 use crate::backend_api::{DocBackend, Intent};
 use eframe::{egui, egui::Context};
-use jsonwebtoken::{encode, EncodingKey, Header};
 use livekit_api::access_token;
 use serde::{Deserialize, Serialize};
-use std::time::{SystemTime, UNIX_EPOCH};
 use rand::{distr::Alphanumeric, Rng};
 use std::collections::hash_map::DefaultHasher;
 use std::hash::{Hash, Hasher};
@@ -267,9 +265,9 @@ impl AppView {
         // Let's assume for now that if we receive an update, we should check availability.
         
         let backend_bg = self.backend.get_background();
-        let should_reload = match (&self.whiteboard.background, &backend_bg) {
+        let _should_reload = match (&self.whiteboard.background, &backend_bg) {
             (None, Some(_)) => true,
-            (Some(bg), Some(data)) => {
+            (Some(_bg), Some(_data)) => {
                  // Should compare. length check is cheap.
                  // This is imperfect but better than nothing.
                  // A proper way would be to store the hash of the source data in WhiteboardState.
@@ -463,7 +461,7 @@ impl AppView {
         let (tx_msg, rx_msg) = tokio::sync::mpsc::unbounded_channel::<AppMsg>();
         self.app_msg_receiver = Some(rx_msg);
 
-        let tx_msg_clone = tx_msg.clone();
+        let _tx_msg_clone = tx_msg.clone();
         let ctx_clone = ctx.clone();
 
         std::thread::spawn(move || {
