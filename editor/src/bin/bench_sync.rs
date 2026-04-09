@@ -11,7 +11,7 @@ use collaboratite_editor::automerge_backend::AutomergeBackend;
 use collaboratite_editor::backend_api::{DocBackend, Intent, Point, Stroke};
 use std::time::Instant;
 
-const TRIALS: usize = 50;
+const TRIALS: usize = 1000;
 
 fn generate_stroke(i: usize) -> Stroke {
     Stroke {
@@ -59,9 +59,12 @@ fn main() {
     peer_a.apply_intent(Intent::Draw(generate_stroke(0)));
     sync_loop(&mut peer_a, &mut peer_b);
 
-    println!("trial,draw_us,sync_us,total_us,rounds,strokes_after");
+    // println!("trial,draw_us,sync_us,total_us,rounds,strokes_after");
 
     let mut all_total = Vec::with_capacity(TRIALS);
+
+    // print information on how many trials will be run and the parameters of the benchmark
+    println!("Running {} trials with i stroke each...", TRIALS);
 
     for i in 1..=TRIALS {
         let stroke = generate_stroke(i);
@@ -73,24 +76,25 @@ fn main() {
 
         // Measure: sync A → B until convergence
         let t1 = Instant::now();
-        let rounds = sync_loop(&mut peer_a, &mut peer_b);
+        let _rounds = sync_loop(&mut peer_a, &mut peer_b);
         let sync_time = t1.elapsed();
 
         let total = draw_time + sync_time;
         all_total.push(total.as_secs_f64() * 1_000_000.0); // microseconds
 
-        let strokes_b = peer_b.get_strokes().len();
+        let _strokes_b = peer_b.get_strokes().len();
 
-        println!(
-            "{},{:.1},{:.1},{:.1},{},{}",
-            i,
-            draw_time.as_secs_f64() * 1_000_000.0,
-            sync_time.as_secs_f64() * 1_000_000.0,
-            total.as_secs_f64() * 1_000_000.0,
-            rounds,
-            strokes_b,
-        );
+        // println!(
+        //     "{},{:.1},{:.1},{:.1},{},{}",
+        //     i,
+        //     draw_time.as_secs_f64() * 1_000_000.0,
+        //     sync_time.as_secs_f64() * 1_000_000.0,
+        //     total.as_secs_f64() * 1_000_000.0,
+        //     rounds,
+        //     strokes_b,
+        // );
     }
+
 
     println!();
 
