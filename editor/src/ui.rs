@@ -901,6 +901,15 @@ impl eframe::App for AppView {
         } else {
             self.livekit_panel(ctx);
         }
+
+        // FPS overlay
+        egui::Area::new(egui::Id::new("fps_overlay"))
+            .fixed_pos(egui::pos2(20.0, 20.0))
+            .show(ctx, |ui| {
+                let dt = ui.input(|i| i.stable_dt);
+                ui.label(format!("FPS: {:.0}", 1.0 / dt));
+            });
+
         self.status_bar(ctx);
     }
 }
