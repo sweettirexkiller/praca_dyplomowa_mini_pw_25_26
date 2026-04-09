@@ -1,25 +1,19 @@
 //! End-to-end sync latency benchmark over a real LiveKit SFU.
 //!
-//! Connects N headless clients (1 sender + receivers) to a LiveKit room,
-//! then measures the time from "sender draws a stroke and publishes CRDT
-//! sync data" to "receiver receives, applies, and has the new stroke".
+//! Two-process design: run a **sender** and a **receiver** in separate terminals,
+//! each with a single LiveKit connection (mirrors the real GUI app exactly).
 //!
-//! The measurement includes: CRDT diff generation + JSON serialization +
-//! LiveKit data-channel transport (WebRTC via SFU) + deserialization +
-//! CRDT merge on receiver.
+//! Latency is measured using wall-clock timestamps (both processes on the same machine).
+//! The sender embeds `SystemTime` in a Chat message alongside each CRDT sync.
+//! The receiver records when the stroke actually appears in its local document.
 //!
-//! Architecture:
-//!   - Each client runs in its own std::thread with a dedicated tokio Runtime
-//!     (matching the GUI app's approach — required by LiveKit's WebRTC internals).
-//!   - Sender draws, generates per-peer sync messages, publishes via LiveKit.
-//!   - Receivers apply incoming sync data, send replies (multi-round sync).
-//!   - Latency = Instant::now() at sender draw → receiver confirms new stroke count.
+//! Terminal 1 (receiver — start first):
+//!   cargo run --release --bin bench_e2e -- receiver <room_name>
+//!
+//! Terminal 2 (sender — start after receiver is connected):
+//!   cargo run --release --bin bench_e2e -- sender <room_name> [trials] [delay_ms]
 //!
 //! Requires .env with LIVEKIT_URL, LIVEKIT_API_KEY, LIVEKIT_API_SECRET.
-//!
-//! Usage:
-//!   cargo run --release --bin bench_e2e             # 1 receiver, 30 trials
-//!   cargo run --release --bin bench_e2e -- 2 50     # 2 receivers, 50 trials
 
 use collaboratite_editor::automerge_backend::AutomergeBackend;
 use collaboratite_editor::backend_api::{DocBackend, Intent, Point, Stroke};
@@ -29,8 +23,7 @@ use livekit_api::access_token;
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 use std::sync::Arc;
-use std::time::Instant;
-use tokio::sync::{mpsc, Mutex, Notify};
+use std::time::{SystemTime, UNIX_EPOCH};
 
 // ---- protocol types (mirrors ui.rs) ----------------------------------------
 
@@ -50,14 +43,6 @@ enum NetworkMessage {
     Sync(Vec<u8>),
     Chat(String),
     Cursor { x: i32, y: i32 },
-}
-
-/// Commands from main thread → sender thread.
-enum SenderCmd {
-    /// Draw a stroke and publish sync to all peers.
-    DrawAndSync { stroke: Stroke },
-    /// Shut down.
-    Stop,
 }
 
 // ---- helpers ---------------------------------------------------------------
@@ -92,6 +77,13 @@ fn livekit_url() -> String {
     }
 }
 
+fn now_us() -> u64 {
+    SystemTime::now()
+        .duration_since(UNIX_EPOCH)
+        .unwrap()
+        .as_micros() as u64
+}
+
 fn generate_stroke(i: usize) -> Stroke {
     Stroke {
         points: vec![
@@ -118,8 +110,7 @@ fn generate_stroke(i: usize) -> Stroke {
     }
 }
 
-/// Publish a NetworkMessage through the LiveKit data channel, with chunking
-/// for payloads above 14 KB (matches the app's chunking logic in ui.rs).
+/// Publish a NetworkMessage via LiveKit data channel, with chunking for >14KB.
 async fn publish_msg(room: &Room, msg: &NetworkMessage) {
     let data = serde_json::to_vec(msg).unwrap();
     let chunk_size = 14_000;
@@ -158,8 +149,7 @@ async fn publish_msg(room: &Room, msg: &NetworkMessage) {
     }
 }
 
-/// Extract a NetworkMessage from a raw LiveKit payload, handling both
-/// TransportPacket-wrapped and direct formats.
+/// Decode a raw LiveKit payload into a NetworkMessage (handles chunking).
 fn decode_payload(
     transfers: &mut HashMap<u64, (u32, Vec<Option<Vec<u8>>>)>,
     payload: &[u8],
@@ -195,433 +185,306 @@ fn decode_payload(
     }
 }
 
-// ---- receiver (runs in its own std::thread + tokio runtime) ----------------
+// ---- SENDER MODE -----------------------------------------------------------
 
-/// Spawn a receiver in a dedicated OS thread with its own tokio runtime.
-/// This matches how the GUI app connects to LiveKit (required by WebRTC internals).
-fn spawn_receiver(
-    identity: String,
-    room_name: String,
-    url: String,
-    ready: Arc<Notify>,
-    stop: Arc<Notify>,
-    result_tx: mpsc::UnboundedSender<f64>,
-    timestamp_rx: Arc<Mutex<mpsc::UnboundedReceiver<Instant>>>,
-) -> std::thread::JoinHandle<()> {
-    std::thread::spawn(move || {
-        let rt = tokio::runtime::Runtime::new().expect("Failed to create receiver runtime");
-        rt.block_on(async move {
-            let token = create_token(&room_name, &identity);
-            println!("[{}] Connecting to room '{}'...", identity, room_name);
-
-            let (room, mut events) = match Room::connect(&url, &token, RoomOptions::default()).await
-            {
-                Ok(res) => res,
-                Err(e) => {
-                    eprintln!("[{}] Connection error: {}", identity, e);
-                    ready.notify_one();
-                    return;
-                }
-            };
-            let room = Arc::new(room);
-            println!("[{}] Connected", identity);
-
-            let mut backend = AutomergeBackend::new();
-            let mut transfers_by_sender: HashMap<
-                String,
-                HashMap<u64, (u32, Vec<Option<Vec<u8>>>)>,
-            > = HashMap::new();
-
-            // Register participants already in the room
-            for (_, p) in room.remote_participants() {
-                let pid = p.identity().to_string();
-                backend.peer_connected(&pid);
-                println!("[{}] Pre-existing peer: {}", identity, pid);
-            }
-
-            let mut last_stroke_count = backend.get_strokes().len();
-
-            // Signal ready AFTER successful connect
-            ready.notify_one();
-
-            loop {
-                tokio::select! {
-                    _ = stop.notified() => break,
-                    Some(event) = events.recv() => {
-                        match event {
-                            RoomEvent::ParticipantConnected(p) => {
-                                let pid = p.identity().to_string();
-                                println!("[{}] Peer joined: {}", identity, pid);
-                                backend.peer_connected(&pid);
-                            }
-                            RoomEvent::ParticipantDisconnected(p) => {
-                                let pid = p.identity().to_string();
-                                transfers_by_sender.remove(&pid);
-                                backend.peer_disconnected(&pid);
-                            }
-                            RoomEvent::DataReceived { payload, participant, .. } => {
-                                if let Some(p) = participant {
-                                    let sender_id = p.identity().to_string();
-                                    let transfers = transfers_by_sender
-                                        .entry(sender_id.clone())
-                                        .or_default();
-
-                                    if let Some(NetworkMessage::Sync(sync_data)) =
-                                        decode_payload(transfers, &payload)
-                                    {
-                                        backend.receive_sync_message(&sender_id, sync_data);
-
-                                        let current = backend.get_strokes().len();
-                                        if current > last_stroke_count {
-                                            last_stroke_count = current;
-                                            if let Ok(sent_at) =
-                                                timestamp_rx.lock().await.try_recv()
-                                            {
-                                                let latency_us =
-                                                    sent_at.elapsed().as_secs_f64() * 1_000_000.0;
-                                                let _ = result_tx.send(latency_us);
-                                            }
-                                        }
-
-                                        if let Some(reply) =
-                                            backend.generate_sync_message(&sender_id)
-                                        {
-                                            publish_msg(&room, &NetworkMessage::Sync(reply)).await;
-                                        }
-                                    }
-                                }
-                            }
-                            RoomEvent::Disconnected { reason } => {
-                                eprintln!("[{}] Disconnected: {:?}", identity, reason);
-                                break;
-                            }
-                            _ => {}
-                        }
-                    }
-                }
-            }
-
-            room.close().await.ok();
-            println!(
-                "[{}] Final stroke count: {}",
-                identity,
-                backend.get_strokes().len()
-            );
-        });
-    })
-}
-
-// ---- sender (runs in its own std::thread + tokio runtime) ------------------
-
-/// Spawn the sender in a dedicated OS thread with its own tokio runtime.
-fn spawn_sender(
-    room_name: String,
-    url: String,
-    num_receivers: usize,
-    ready: Arc<Notify>,
-    _stop: Arc<Notify>,
-    cmd_rx: Arc<Mutex<mpsc::UnboundedReceiver<SenderCmd>>>,
-    _result_tx: mpsc::UnboundedSender<f64>,
-) -> std::thread::JoinHandle<()> {
-    std::thread::spawn(move || {
-        let rt = tokio::runtime::Runtime::new().expect("Failed to create sender runtime");
-        rt.block_on(async move {
-            let sender_identity = "sender_0";
-            let token = create_token(&room_name, sender_identity);
-            println!("[sender] Connecting...");
-
-            let (room, mut events) = match Room::connect(&url, &token, RoomOptions::default()).await
-            {
-                Ok(res) => res,
-                Err(e) => {
-                    eprintln!("[sender] Connection error: {}", e);
-                    ready.notify_one();
-                    return;
-                }
-            };
-            let room = Arc::new(room);
-            println!("[sender] Connected");
-
-            let mut backend = AutomergeBackend::new();
-            let mut seen_peers = 0usize;
-
-            // Register peers already present
-            for (_, p) in room.remote_participants() {
-                let pid = p.identity().to_string();
-                println!("[sender] Pre-existing peer: {}", pid);
-                backend.peer_connected(&pid);
-                seen_peers += 1;
-            }
-
-            // Wait for remaining peers via events
-            while seen_peers < num_receivers {
-                match events.recv().await {
-                    Some(RoomEvent::ParticipantConnected(p)) => {
-                        let pid = p.identity().to_string();
-                        println!("[sender] Peer joined: {}", pid);
-                        backend.peer_connected(&pid);
-                        seen_peers += 1;
-                    }
-                    Some(_) => {}
-                    None => {
-                        eprintln!("[sender] Event stream ended while waiting for peers");
-                        ready.notify_one();
-                        return;
-                    }
-                }
-            }
-            println!("[sender] All {} receivers visible", num_receivers);
-
-            // Seed shared strokes list
-            backend.apply_intent(Intent::Draw(generate_stroke(0)));
-            for (_, p) in room.remote_participants() {
-                let pid = p.identity().to_string();
-                if let Some(msg) = backend.generate_sync_message(&pid) {
-                    publish_msg(&room, &NetworkMessage::Sync(msg)).await;
-                }
-            }
-
-            // Process initial sync replies for a few seconds
-            let deadline =
-                tokio::time::Instant::now() + std::time::Duration::from_secs(3);
-            let mut transfers: HashMap<String, HashMap<u64, (u32, Vec<Option<Vec<u8>>>)>> =
-                HashMap::new();
-            loop {
-                tokio::select! {
-                    _ = tokio::time::sleep_until(deadline) => break,
-                    event = events.recv() => {
-                        match event {
-                            Some(RoomEvent::DataReceived { payload, participant, .. }) => {
-                                if let Some(p) = participant {
-                                    let sid = p.identity().to_string();
-                                    let t = transfers.entry(sid.clone()).or_default();
-                                    if let Some(NetworkMessage::Sync(data)) = decode_payload(t, &payload) {
-                                        backend.receive_sync_message(&sid, data);
-                                        if let Some(reply) = backend.generate_sync_message(&sid) {
-                                            publish_msg(&room, &NetworkMessage::Sync(reply)).await;
-                                        }
-                                    }
-                                }
-                            }
-                            Some(RoomEvent::ParticipantConnected(p)) => {
-                                backend.peer_connected(&p.identity().to_string());
-                            }
-                            None => break,
-                            _ => {}
-                        }
-                    }
-                }
-            }
-
-            println!(
-                "[sender] Initial sync complete, seed strokes: {}",
-                backend.get_strokes().len()
-            );
-
-            // Signal ready
-            ready.notify_one();
-
-            // Main loop: handle commands from main thread + incoming events
-            let mut cmd_rx = cmd_rx.lock().await;
-            loop {
-                tokio::select! {
-                    Some(event) = events.recv() => {
-                        match event {
-                            RoomEvent::DataReceived { payload, participant, .. } => {
-                                if let Some(p) = participant {
-                                    let sid = p.identity().to_string();
-                                    let t = transfers.entry(sid.clone()).or_default();
-                                    if let Some(NetworkMessage::Sync(data)) = decode_payload(t, &payload) {
-                                        backend.receive_sync_message(&sid, data);
-                                        if let Some(reply) = backend.generate_sync_message(&sid) {
-                                            publish_msg(&room, &NetworkMessage::Sync(reply)).await;
-                                        }
-                                    }
-                                }
-                            }
-                            RoomEvent::ParticipantConnected(p) => {
-                                backend.peer_connected(&p.identity().to_string());
-                            }
-                            RoomEvent::Disconnected { .. } => break,
-                            _ => {}
-                        }
-                    }
-                    cmd = cmd_rx.recv() => {
-                        match cmd {
-                            Some(SenderCmd::DrawAndSync { stroke }) => {
-                                backend.apply_intent(Intent::Draw(stroke));
-                                for (_, p) in room.remote_participants() {
-                                    let pid = p.identity().to_string();
-                                    if let Some(msg) = backend.generate_sync_message(&pid) {
-                                        publish_msg(&room, &NetworkMessage::Sync(msg)).await;
-                                    }
-                                }
-                            }
-                            Some(SenderCmd::Stop) | None => break,
-                        }
-                    }
-                }
-            }
-
-            room.close().await.ok();
-            println!(
-                "[sender] Final stroke count: {}",
-                backend.get_strokes().len()
-            );
-        });
-    })
-}
-
-// ---- main ------------------------------------------------------------------
-
-fn main() {
-    dotenv::dotenv().ok();
-
-    let args: Vec<String> = std::env::args().collect();
-    let num_receivers: usize = args.get(1).and_then(|s| s.parse().ok()).unwrap_or(1);
-    let trials: usize = args.get(2).and_then(|s| s.parse().ok()).unwrap_or(30);
-
-    let total_peers = num_receivers + 1;
-    let room_name = format!("bench_{}", rand::random::<u32>() % 100_000);
+async fn run_sender(room_name: &str, trials: usize, delay_ms: u64) {
     let url = livekit_url();
+    let identity = "bench_sender";
+    let token = create_token(room_name, identity);
 
-    println!("=== End-to-End LiveKit Sync Benchmark ===");
-    println!("  Server:    {}", url);
-    println!("  Room:      {}", room_name);
-    println!(
-        "  Peers:     {} (1 sender + {} receivers)",
-        total_peers, num_receivers
-    );
-    println!("  Trials:    {}", trials);
+    println!("=== E2E Benchmark — SENDER ===");
+    println!("  Server:  {}", url);
+    println!("  Room:    {}", room_name);
+    println!("  Trials:  {}", trials);
+    println!("  Delay:   {} ms", delay_ms);
     println!();
+    println!("[sender] Connecting...");
 
-    // Use a small coordinator runtime on the main thread for mpsc/notify coordination
-    let coord_rt = tokio::runtime::Runtime::new().expect("Failed to create coordinator runtime");
-
-    // Shared stop signal
-    let stop = Arc::new(Notify::new());
-
-    // Result channel: receivers → main
-    let (result_tx, result_rx) = mpsc::unbounded_channel::<f64>();
-    let result_rx = Arc::new(Mutex::new(result_rx));
-
-    // Timestamp channels: main → each receiver
-    let mut ts_txs: Vec<mpsc::UnboundedSender<Instant>> = Vec::new();
-    let mut receiver_handles = Vec::new();
-
-    // --- Spawn receivers (one at a time, each in its own OS thread) ---
-    for i in 0..num_receivers {
-        let identity = format!("receiver_{}", i);
-        let ready = Arc::new(Notify::new());
-        let (ts_tx, ts_rx) = mpsc::unbounded_channel::<Instant>();
-        ts_txs.push(ts_tx);
-
-        let handle = spawn_receiver(
-            identity,
-            room_name.clone(),
-            url.clone(),
-            ready.clone(),
-            stop.clone(),
-            result_tx.clone(),
-            Arc::new(Mutex::new(ts_rx)),
-        );
-        receiver_handles.push(handle);
-
-        // Wait for this receiver to be connected before spawning the next
-        let connected = coord_rt.block_on(async {
-            tokio::time::timeout(std::time::Duration::from_secs(30), ready.notified()).await
-        });
-        if connected.is_err() {
-            eprintln!("Receiver {} failed to connect within 30s, aborting.", i);
+    let (room, mut events) = match Room::connect(&url, &token, RoomOptions::default()).await {
+        Ok(res) => res,
+        Err(e) => {
+            eprintln!("[sender] Connection error: {}", e);
             return;
         }
-        println!("Receiver {} ready.", i);
-        std::thread::sleep(std::time::Duration::from_secs(1));
+    };
+    let room = Arc::new(room);
+    println!("[sender] Connected!");
+
+    let mut backend = AutomergeBackend::new();
+    let mut transfers: HashMap<String, HashMap<u64, (u32, Vec<Option<Vec<u8>>>)>> = HashMap::new();
+
+    // Register already-present peers
+    for (_, p) in room.remote_participants() {
+        let pid = p.identity().to_string();
+        println!("[sender] Pre-existing peer: {}", pid);
+        backend.peer_connected(&pid);
     }
 
-    // Extra settle time for WebRTC data channels
-    std::thread::sleep(std::time::Duration::from_secs(2));
+    // Wait for at least one receiver
+    if room.remote_participants().is_empty() {
+        println!("[sender] Waiting for receiver to join...");
+        loop {
+            match events.recv().await {
+                Some(RoomEvent::ParticipantConnected(p)) => {
+                    let pid = p.identity().to_string();
+                    println!("[sender] Peer joined: {}", pid);
+                    backend.peer_connected(&pid);
+                    break;
+                }
+                Some(_) => {}
+                None => {
+                    eprintln!("[sender] Event stream closed");
+                    return;
+                }
+            }
+        }
+    }
 
-    // --- Spawn sender in its own OS thread ---
-    let sender_ready = Arc::new(Notify::new());
-    let (cmd_tx, cmd_rx) = mpsc::unbounded_channel::<SenderCmd>();
+    // Seed shared strokes list + initial sync
+    println!("[sender] Seeding initial stroke...");
+    backend.apply_intent(Intent::Draw(generate_stroke(0)));
+    for (_, p) in room.remote_participants() {
+        let pid = p.identity().to_string();
+        if let Some(msg) = backend.generate_sync_message(&pid) {
+            publish_msg(&room, &NetworkMessage::Sync(msg)).await;
+        }
+    }
 
-    let sender_handle = spawn_sender(
-        room_name.clone(),
-        url.clone(),
-        num_receivers,
-        sender_ready.clone(),
-        stop.clone(),
-        Arc::new(Mutex::new(cmd_rx)),
-        result_tx.clone(),
+    // Process sync replies for a few seconds
+    let deadline = tokio::time::Instant::now() + std::time::Duration::from_secs(3);
+    loop {
+        tokio::select! {
+            _ = tokio::time::sleep_until(deadline) => break,
+            event = events.recv() => {
+                match event {
+                    Some(RoomEvent::DataReceived { payload, participant, .. }) => {
+                        if let Some(p) = participant {
+                            let sid = p.identity().to_string();
+                            let t = transfers.entry(sid.clone()).or_default();
+                            if let Some(NetworkMessage::Sync(data)) = decode_payload(t, &payload) {
+                                backend.receive_sync_message(&sid, data);
+                                if let Some(reply) = backend.generate_sync_message(&sid) {
+                                    publish_msg(&room, &NetworkMessage::Sync(reply)).await;
+                                }
+                            }
+                        }
+                    }
+                    Some(RoomEvent::ParticipantConnected(p)) => {
+                        backend.peer_connected(&p.identity().to_string());
+                    }
+                    None => break,
+                    _ => {}
+                }
+            }
+        }
+    }
+    println!(
+        "[sender] Initial sync done (strokes: {}). Starting trials...",
+        backend.get_strokes().len()
     );
-
-    // Wait for sender to be connected and initial sync done
-    let sender_ok = coord_rt.block_on(async {
-        tokio::time::timeout(
-            std::time::Duration::from_secs(30),
-            sender_ready.notified(),
-        )
-        .await
-    });
-    if sender_ok.is_err() {
-        eprintln!("Sender failed to connect within 30s, aborting.");
-        return;
-    }
-    println!("[main] Sender ready, starting trials...");
     println!();
-    println!("trial,latency_us");
 
     // --- Run trials ---
-    let mut all_latencies: Vec<f64> = Vec::new();
-
-    // Drain any latencies from initial sync
-    coord_rt.block_on(async {
-        let mut rx = result_rx.lock().await;
-        while rx.try_recv().is_ok() {}
-    });
-
     for trial in 1..=trials {
         let stroke = generate_stroke(trial);
-        let now = Instant::now();
+        let send_us = now_us();
 
-        // Send timestamp to each receiver
-        for ts_tx in &ts_txs {
-            let _ = ts_tx.send(now);
+        // Draw + sync + send timestamp via Chat
+        backend.apply_intent(Intent::Draw(stroke));
+        for (_, p) in room.remote_participants() {
+            let pid = p.identity().to_string();
+            if let Some(msg) = backend.generate_sync_message(&pid) {
+                publish_msg(&room, &NetworkMessage::Sync(msg)).await;
+            }
         }
+        // Send timestamp beacon so receiver can compute latency
+        publish_msg(
+            &room,
+            &NetworkMessage::Chat(format!("BENCH:{}:{}", trial, send_us)),
+        )
+        .await;
 
-        // Tell sender to draw + publish
-        let _ = cmd_tx.send(SenderCmd::DrawAndSync { stroke });
+        println!("[sender] trial {} sent (stroke count: {})", trial, backend.get_strokes().len());
 
-        // Wait for latency reports from all receivers
-        let latencies = coord_rt.block_on(async {
-            let mut rx = result_rx.lock().await;
-            let mut received = 0;
-            let mut trial_latencies = Vec::new();
-            let deadline = tokio::time::Instant::now() + std::time::Duration::from_secs(5);
-
-            while received < num_receivers {
-                tokio::select! {
-                    Some(latency) = rx.recv() => {
-                        trial_latencies.push(latency);
-                        received += 1;
-                    }
-                    _ = tokio::time::sleep_until(deadline) => {
-                        eprintln!("  trial {} TIMEOUT: {}/{} receivers responded", trial, received, num_receivers);
-                        break;
+        // Process any incoming sync replies while waiting
+        let wait_until =
+            tokio::time::Instant::now() + std::time::Duration::from_millis(delay_ms);
+        loop {
+            tokio::select! {
+                _ = tokio::time::sleep_until(wait_until) => break,
+                event = events.recv() => {
+                    match event {
+                        Some(RoomEvent::DataReceived { payload, participant, .. }) => {
+                            if let Some(p) = participant {
+                                let sid = p.identity().to_string();
+                                let t = transfers.entry(sid.clone()).or_default();
+                                if let Some(NetworkMessage::Sync(data)) = decode_payload(t, &payload) {
+                                    backend.receive_sync_message(&sid, data);
+                                    if let Some(reply) = backend.generate_sync_message(&sid) {
+                                        publish_msg(&room, &NetworkMessage::Sync(reply)).await;
+                                    }
+                                }
+                            }
+                        }
+                        Some(RoomEvent::ParticipantConnected(p)) => {
+                            backend.peer_connected(&p.identity().to_string());
+                        }
+                        Some(RoomEvent::Disconnected { .. }) | None => {
+                            eprintln!("[sender] Disconnected during trial {}", trial);
+                            room.close().await.ok();
+                            return;
+                        }
+                        _ => {}
                     }
                 }
             }
-            trial_latencies
-        });
-
-        for lat in &latencies {
-            println!("{},{:.1}", trial, lat);
-            all_latencies.push(*lat);
         }
+    }
 
-        // Pace trials
-        std::thread::sleep(std::time::Duration::from_millis(200));
+    // Send end signal
+    publish_msg(&room, &NetworkMessage::Chat("BENCH:END".to_string())).await;
+    println!();
+    println!("[sender] All {} trials sent. Stroke count: {}", trials, backend.get_strokes().len());
+
+    // Keep alive briefly for final sync replies
+    tokio::time::sleep(std::time::Duration::from_secs(2)).await;
+    room.close().await.ok();
+    println!("[sender] Done.");
+}
+
+// ---- RECEIVER MODE ---------------------------------------------------------
+
+async fn run_receiver(room_name: &str) {
+    let url = livekit_url();
+    let identity = "bench_receiver";
+    let token = create_token(room_name, identity);
+
+    println!("=== E2E Benchmark — RECEIVER ===");
+    println!("  Server:  {}", url);
+    println!("  Room:    {}", room_name);
+    println!();
+    println!("[receiver] Connecting...");
+
+    let (room, mut events) = match Room::connect(&url, &token, RoomOptions::default()).await {
+        Ok(res) => res,
+        Err(e) => {
+            eprintln!("[receiver] Connection error: {}", e);
+            return;
+        }
+    };
+    let room = Arc::new(room);
+    println!("[receiver] Connected! Waiting for sender...");
+
+    let mut backend = AutomergeBackend::new();
+    let mut transfers_by_sender: HashMap<String, HashMap<u64, (u32, Vec<Option<Vec<u8>>>)>> =
+        HashMap::new();
+
+    // Register already-present peers
+    for (_, p) in room.remote_participants() {
+        let pid = p.identity().to_string();
+        backend.peer_connected(&pid);
+        println!("[receiver] Pre-existing peer: {}", pid);
+    }
+
+    let mut last_stroke_count = backend.get_strokes().len();
+    // Pending timestamp from BENCH: chat messages (trial -> send_us)
+    let mut pending_timestamps: HashMap<usize, u64> = HashMap::new();
+    let mut all_latencies: Vec<f64> = Vec::new();
+
+    println!();
+    println!("trial,latency_us,latency_ms");
+
+    loop {
+        match events.recv().await {
+            Some(RoomEvent::ParticipantConnected(p)) => {
+                let pid = p.identity().to_string();
+                println!("[receiver] Peer joined: {}", pid);
+                backend.peer_connected(&pid);
+            }
+            Some(RoomEvent::ParticipantDisconnected(p)) => {
+                let pid = p.identity().to_string();
+                transfers_by_sender.remove(&pid);
+                backend.peer_disconnected(&pid);
+                println!("[receiver] Peer left: {}", pid);
+            }
+            Some(RoomEvent::DataReceived {
+                payload,
+                participant,
+                ..
+            }) => {
+                if let Some(p) = participant {
+                    let sender_id = p.identity().to_string();
+                    let transfers = transfers_by_sender
+                        .entry(sender_id.clone())
+                        .or_default();
+
+                    match decode_payload(transfers, &payload) {
+                        Some(NetworkMessage::Sync(sync_data)) => {
+                            backend.receive_sync_message(&sender_id, sync_data);
+
+                            // Check if new stroke arrived
+                            let current = backend.get_strokes().len();
+                            if current > last_stroke_count {
+                                let recv_us = now_us();
+                                let new_strokes = current - last_stroke_count;
+                                last_stroke_count = current;
+
+                                // Match with most recent pending timestamp
+                                // (trial numbers should align with stroke count)
+                                for trial_offset in 0..new_strokes {
+                                    let trial_guess = current - new_strokes + trial_offset;
+                                    if let Some(send_us) = pending_timestamps.remove(&trial_guess)
+                                    {
+                                        let latency_us = recv_us.saturating_sub(send_us) as f64;
+                                        all_latencies.push(latency_us);
+                                        println!(
+                                            "{},{:.1},{:.2}",
+                                            trial_guess,
+                                            latency_us,
+                                            latency_us / 1000.0
+                                        );
+                                    }
+                                }
+                            }
+
+                            // Send sync reply
+                            if let Some(reply) = backend.generate_sync_message(&sender_id) {
+                                publish_msg(&room, &NetworkMessage::Sync(reply)).await;
+                            }
+                        }
+                        Some(NetworkMessage::Chat(text)) => {
+                            if text == "BENCH:END" {
+                                println!();
+                                println!("[receiver] Sender finished.");
+                                break;
+                            }
+                            // Parse "BENCH:<trial>:<timestamp_us>"
+                            if let Some(rest) = text.strip_prefix("BENCH:") {
+                                let parts: Vec<&str> = rest.splitn(2, ':').collect();
+                                if parts.len() == 2 {
+                                    if let (Ok(trial), Ok(ts)) =
+                                        (parts[0].parse::<usize>(), parts[1].parse::<u64>())
+                                    {
+                                        // Store: expected stroke count = seed(1) + trial
+                                        pending_timestamps.insert(trial, ts);
+                                    }
+                                }
+                            }
+                        }
+                        _ => {}
+                    }
+                }
+            }
+            Some(RoomEvent::Disconnected { reason }) => {
+                eprintln!("[receiver] Disconnected: {:?}", reason);
+                break;
+            }
+            None => {
+                eprintln!("[receiver] Event stream ended");
+                break;
+            }
+            _ => {}
+        }
     }
 
     // --- Summary ---
@@ -653,10 +516,6 @@ fn main() {
         println!("  max:     {:.1} µs  ({:.2} ms)", max, max / 1000.0);
         println!("  stddev:  {:.1} µs  ({:.2} ms)", std_dev, std_dev / 1000.0);
         println!();
-        let timeouts = (trials * num_receivers) - n;
-        if timeouts > 0 {
-            println!("  timeouts: {}/{}", timeouts, trials * num_receivers);
-        }
         println!(
             "NF-07: sync ≤ 2000 ms  →  {}",
             if avg / 1000.0 <= 2000.0 {
@@ -669,13 +528,52 @@ fn main() {
         println!("No latency samples collected!");
     }
 
-    // Cleanup
-    let _ = cmd_tx.send(SenderCmd::Stop);
-    stop.notify_waiters();
+    // Brief wait then clean up
+    tokio::time::sleep(std::time::Duration::from_secs(1)).await;
+    room.close().await.ok();
+    println!("[receiver] Done.");
+}
 
-    sender_handle.join().ok();
-    for h in receiver_handles {
-        h.join().ok();
+// ---- MAIN ------------------------------------------------------------------
+
+fn main() {
+    dotenv::dotenv().ok();
+    env_logger::init();
+
+    let args: Vec<String> = std::env::args().collect();
+    let mode = args.get(1).map(|s| s.as_str()).unwrap_or("");
+
+    match mode {
+        "sender" => {
+            let room = args
+                .get(2)
+                .expect("Usage: bench_e2e sender <room> [trials] [delay_ms]");
+            let trials: usize = args.get(3).and_then(|s| s.parse().ok()).unwrap_or(30);
+            let delay_ms: u64 = args.get(4).and_then(|s| s.parse().ok()).unwrap_or(200);
+
+            let rt = tokio::runtime::Runtime::new().expect("Failed to create runtime");
+            rt.block_on(run_sender(room, trials, delay_ms));
+        }
+        "receiver" => {
+            let room = args
+                .get(2)
+                .expect("Usage: bench_e2e receiver <room>");
+
+            let rt = tokio::runtime::Runtime::new().expect("Failed to create runtime");
+            rt.block_on(run_receiver(room));
+        }
+        _ => {
+            eprintln!("Usage:");
+            eprintln!("  Terminal 1 (start first):");
+            eprintln!("    cargo run --release --bin bench_e2e -- receiver <room_name>");
+            eprintln!();
+            eprintln!("  Terminal 2 (start after receiver connects):");
+            eprintln!("    cargo run --release --bin bench_e2e -- sender <room_name> [trials] [delay_ms]");
+            eprintln!();
+            eprintln!("  Example:");
+            eprintln!("    cargo run --release --bin bench_e2e -- receiver test_room");
+            eprintln!("    cargo run --release --bin bench_e2e -- sender test_room 30 200");
+            std::process::exit(1);
+        }
     }
-    println!("=== Done ===");
 }
