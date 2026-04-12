@@ -133,6 +133,18 @@ pub struct AppView {
     last_cursor_update: std::time::Instant,
     /// Receiver channel for messages from the network thread.
     app_msg_receiver: Option<tokio::sync::mpsc::UnboundedReceiver<AppMsg>>,
+    /// FPS logging: collected frame durations (seconds).
+    fps_frame_times: Vec<f64>,
+    /// FPS logging: whether currently collecting.
+    fps_logging: bool,
+    /// FPS logging: when collection started.
+    fps_log_start: std::time::Instant,
+    /// FPS logging: label for the current measurement.
+    fps_log_label: String,
+    /// FPS logging: last frame timestamp for manual delta.
+    fps_last_frame: std::time::Instant,
+    /// FPS logging: warmup frames to skip after load.
+    fps_warmup: u32,
 }
 
 /// State for the collapsible sidebar configuration.
@@ -222,6 +234,12 @@ impl AppView {
             livekit_message: "".into(),
             livekit_command_sender: None,
             app_msg_receiver: None,
+            fps_frame_times: Vec::new(),
+            fps_logging: false,
+            fps_log_start: std::time::Instant::now(),
+            fps_log_label: String::new(),
+            fps_last_frame: std::time::Instant::now(),
+            fps_warmup: 0,
         };
         
         // Initial load
@@ -823,7 +841,17 @@ impl AppView {
 
                         // Refresh UI
                         let strokes = self.backend.get_strokes();
+                        let stroke_count = strokes.len();
                         self.apply_update(crate::backend_api::FrontendUpdate { strokes });
+                        
+                        // Start FPS logging
+                        self.fps_frame_times.clear();
+                        self.fps_logging = true;
+                        self.fps_warmup = 10; // skip first 10 frames
+                        self.fps_last_frame = std::time::Instant::now();
+                        self.fps_log_start = std::time::Instant::now();
+                        self.fps_log_label = format!("{} strokes", stroke_count);
+                        println!("[FPS] Started measuring for {} strokes...", stroke_count);
                     } else {
                          eprintln!("Failed to read file");
                     }
@@ -909,6 +937,52 @@ impl eframe::App for AppView {
                 let dt = ui.input(|i| i.stable_dt);
                 ui.label(format!("FPS: {:.0}", 1.0 / dt));
             });
+
+        // FPS logging
+        if self.fps_logging {
+            let now = std::time::Instant::now();
+            ctx.request_repaint(); // keep frames coming during measurement
+
+            if self.fps_warmup > 0 {
+                self.fps_warmup -= 1;
+                self.fps_last_frame = now;
+                self.fps_log_start = now; // reset start to after warmup
+            } else {
+                let dt = now.duration_since(self.fps_last_frame).as_secs_f64();
+                self.fps_last_frame = now;
+                // Only record reasonable frame times (0.1ms to 1s)
+                if dt > 0.0001 && dt < 1.0 {
+                    self.fps_frame_times.push(dt);
+                }
+            }
+
+            if self.fps_log_start.elapsed().as_secs() >= 5 && !self.fps_frame_times.is_empty() {
+                let n = self.fps_frame_times.len();
+                let total_time: f64 = self.fps_frame_times.iter().sum();
+                let avg_fps = n as f64 / total_time;
+                let fps_values: Vec<f64> = self.fps_frame_times.iter().map(|dt| 1.0 / dt).collect();
+                let min_fps = fps_values.iter().cloned().fold(f64::INFINITY, f64::min);
+                let max_fps = fps_values.iter().cloned().fold(f64::NEG_INFINITY, f64::max);
+                let mut sorted = fps_values.clone();
+                sorted.sort_by(|a, b| a.partial_cmp(b).unwrap());
+                let p1_fps = sorted[(n as f64 * 0.01) as usize];
+                let p5_fps = sorted[(n as f64 * 0.05) as usize];
+                let avg_dt_ms = (total_time / n as f64) * 1000.0;
+
+                println!("[FPS] === Results for: {} ===", self.fps_log_label);
+                println!("[FPS]   Frames:    {}", n);
+                println!("[FPS]   Avg FPS:   {:.1}", avg_fps);
+                println!("[FPS]   Min FPS:   {:.1}", min_fps);
+                println!("[FPS]   Max FPS:   {:.1}", max_fps);
+                println!("[FPS]   1% low:    {:.1}", p1_fps);
+                println!("[FPS]   5% low:    {:.1}", p5_fps);
+                println!("[FPS]   Avg frame: {:.2} ms", avg_dt_ms);
+                println!("[FPS]   NF-10:     {} (>= 30 FPS)", if avg_fps >= 30.0 { "PASS" } else { "FAIL" });
+                println!();
+
+                self.fps_logging = false;
+            }
+        }
 
         self.status_bar(ctx);
     }
