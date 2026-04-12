@@ -18,12 +18,14 @@
 ```bash
 docker run -d \
     -p 7880:7880 \
-    -p 7881:7881/udp \
-    -e "LIVEKIT_KEYS=devkey:devsecret" \
+    -p 7881:7881/tcp \
+    -p 7882:7882/udp \
+    -e "LIVEKIT_KEYS=devkey: devsecret" \
     -e "LIVEKIT_LOG_LEVEL=info" \
     --name livekit-server \
     livekit/livekit-server \
-    --node-ip 127.0.0.1 \
+    --node-ip $(curl -s https://checkip.amazonaws.com) \
+    --bind 0.0.0.0 \
     --dev
 ```
 *   API URL: `ws://127.0.0.1:7880`
