@@ -110,8 +110,18 @@ fn generate_stroke(i: usize) -> Stroke {
     }
 }
 
-/// Publish a NetworkMessage via LiveKit data channel, with chunking for >14KB.
+/// Publish a NetworkMessage via LiveKit data channel (broadcast), with chunking for >14KB.
 async fn publish_msg(room: &Room, msg: &NetworkMessage) {
+    publish_msg_inner(room, msg, Vec::new()).await;
+}
+
+/// Publish a NetworkMessage to a specific participant (directed), with chunking for >14KB.
+async fn publish_msg_to(room: &Room, msg: &NetworkMessage, identity: &str) {
+    let dest: Vec<ParticipantIdentity> = vec![identity.to_string().into()];
+    publish_msg_inner(room, msg, dest).await;
+}
+
+async fn publish_msg_inner(room: &Room, msg: &NetworkMessage, destination_identities: Vec<ParticipantIdentity>) {
     let data = serde_json::to_vec(msg).unwrap();
     let chunk_size = 14_000;
     let chunks_count = (data.len() + chunk_size - 1) / chunk_size;
@@ -124,6 +134,7 @@ async fn publish_msg(room: &Room, msg: &NetworkMessage) {
             .publish_data(DataPacket {
                 payload,
                 reliable: true,
+                destination_identities: destination_identities.clone(),
                 ..Default::default()
             })
             .await;
@@ -142,6 +153,7 @@ async fn publish_msg(room: &Room, msg: &NetworkMessage) {
                 .publish_data(DataPacket {
                     payload,
                     reliable: true,
+                    destination_identities: destination_identities.clone(),
                     ..Default::default()
                 })
                 .await;
@@ -249,7 +261,7 @@ async fn run_sender(room_name: &str, trials: usize, delay_ms: u64, suffix: Optio
     for (_, p) in room.remote_participants() {
         let pid = p.identity().to_string();
         if let Some(msg) = backend.generate_sync_message(&pid) {
-            publish_msg(&room, &NetworkMessage::Sync(msg)).await;
+            publish_msg_to(&room, &NetworkMessage::Sync(msg), &pid).await;
         }
     }
 
@@ -267,7 +279,7 @@ async fn run_sender(room_name: &str, trials: usize, delay_ms: u64, suffix: Optio
                             if let Some(NetworkMessage::Sync(data)) = decode_payload(t, &payload) {
                                 backend.receive_sync_message(&sid, data);
                                 if let Some(reply) = backend.generate_sync_message(&sid) {
-                                    publish_msg(&room, &NetworkMessage::Sync(reply)).await;
+                                    publish_msg_to(&room, &NetworkMessage::Sync(reply), &sid).await;
                                 }
                             }
                         }
@@ -297,7 +309,7 @@ async fn run_sender(room_name: &str, trials: usize, delay_ms: u64, suffix: Optio
         for (_, p) in room.remote_participants() {
             let pid = p.identity().to_string();
             if let Some(msg) = backend.generate_sync_message(&pid) {
-                publish_msg(&room, &NetworkMessage::Sync(msg)).await;
+                publish_msg_to(&room, &NetworkMessage::Sync(msg), &pid).await;
             }
         }
         // Send timestamp beacon so receiver can compute latency
@@ -324,7 +336,7 @@ async fn run_sender(room_name: &str, trials: usize, delay_ms: u64, suffix: Optio
                                 if let Some(NetworkMessage::Sync(data)) = decode_payload(t, &payload) {
                                     backend.receive_sync_message(&sid, data);
                                     if let Some(reply) = backend.generate_sync_message(&sid) {
-                                        publish_msg(&room, &NetworkMessage::Sync(reply)).await;
+                                        publish_msg_to(&room, &NetworkMessage::Sync(reply), &sid).await;
                                     }
                                 }
                             }
@@ -395,7 +407,10 @@ async fn run_receiver(room_name: &str, suffix: Option<&str>) {
     let mut last_stroke_count = backend.get_strokes().len();
     // Pending timestamp from BENCH: chat messages (trial -> send_us)
     let mut pending_timestamps: HashMap<usize, u64> = HashMap::new();
+    // Track which strokes arrived but haven't been matched to a timestamp yet (trial -> recv_us)
+    let mut pending_strokes: HashMap<usize, u64> = HashMap::new();
     let mut all_latencies: Vec<f64> = Vec::new();
+    let mut initial_strokes: Option<usize> = None;
 
     println!();
     println!("trial,latency_us,latency_ms");
@@ -428,34 +443,39 @@ async fn run_receiver(room_name: &str, suffix: Option<&str>) {
                         Some(NetworkMessage::Sync(sync_data)) => {
                             backend.receive_sync_message(&sender_id, sync_data);
 
-                            // Check if new stroke arrived
+                            // Check if new strokes arrived
                             let current = backend.get_strokes().len();
                             if current > last_stroke_count {
                                 let recv_us = now_us();
-                                let new_strokes = current - last_stroke_count;
-                                last_stroke_count = current;
 
-                                // Match with most recent pending timestamp
-                                // (trial numbers should align with stroke count)
-                                for trial_offset in 0..new_strokes {
-                                    let trial_guess = current - new_strokes + trial_offset;
-                                    if let Some(send_us) = pending_timestamps.remove(&trial_guess)
-                                    {
-                                        let latency_us = recv_us.saturating_sub(send_us) as f64;
-                                        all_latencies.push(latency_us);
-                                        println!(
-                                            "{},{:.1},{:.2}",
-                                            trial_guess,
-                                            latency_us,
-                                            latency_us / 1000.0
-                                        );
+                                // Record initial stroke count (after seed sync)
+                                if initial_strokes.is_none() {
+                                    initial_strokes = Some(current);
+                                    last_stroke_count = current;
+                                } else {
+                                    let base = initial_strokes.unwrap();
+                                    let new_strokes = current - last_stroke_count;
+                                    last_stroke_count = current;
+
+                                    // Each new stroke maps to a trial number
+                                    for offset in 0..new_strokes {
+                                        let trial = current - base - new_strokes + offset + 1;
+                                        // Try to match immediately with a pending timestamp
+                                        if let Some(send_us) = pending_timestamps.remove(&trial) {
+                                            let latency_us = recv_us.saturating_sub(send_us) as f64;
+                                            all_latencies.push(latency_us);
+                                            println!("{},{:.1},{:.2}", trial, latency_us, latency_us / 1000.0);
+                                        } else {
+                                            // Timestamp hasn't arrived yet, park it
+                                            pending_strokes.insert(trial, recv_us);
+                                        }
                                     }
                                 }
                             }
 
                             // Send sync reply
                             if let Some(reply) = backend.generate_sync_message(&sender_id) {
-                                publish_msg(&room, &NetworkMessage::Sync(reply)).await;
+                                publish_msg_to(&room, &NetworkMessage::Sync(reply), &sender_id).await;
                             }
                         }
                         Some(NetworkMessage::Chat(text)) => {
@@ -471,8 +491,15 @@ async fn run_receiver(room_name: &str, suffix: Option<&str>) {
                                     if let (Ok(trial), Ok(ts)) =
                                         (parts[0].parse::<usize>(), parts[1].parse::<u64>())
                                     {
-                                        // Store: expected stroke count = seed(1) + trial
-                                        pending_timestamps.insert(trial, ts);
+                                        // Check if this stroke already arrived
+                                        if let Some(recv_us) = pending_strokes.remove(&trial) {
+                                            let latency_us = recv_us.saturating_sub(ts) as f64;
+                                            all_latencies.push(latency_us);
+                                            println!("{},{:.1},{:.2}", trial, latency_us, latency_us / 1000.0);
+                                        } else {
+                                            // Stroke hasn't arrived yet, park the timestamp
+                                            pending_timestamps.insert(trial, ts);
+                                        }
                                     }
                                 }
                             }
