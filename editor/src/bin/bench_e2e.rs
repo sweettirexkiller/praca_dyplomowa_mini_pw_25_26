@@ -187,10 +187,13 @@ fn decode_payload(
 
 // ---- SENDER MODE -----------------------------------------------------------
 
-async fn run_sender(room_name: &str, trials: usize, delay_ms: u64) {
+async fn run_sender(room_name: &str, trials: usize, delay_ms: u64, suffix: Option<&str>) {
     let url = livekit_url();
-    let identity = "bench_sender";
-    let token = create_token(room_name, identity);
+    let identity = match suffix {
+        Some(s) => format!("bench_sender_{}", s),
+        None => "bench_sender".to_string(),
+    };
+    let token = create_token(room_name, &identity);
 
     println!("=== E2E Benchmark — SENDER ===");
     println!("  Server:  {}", url);
@@ -354,10 +357,13 @@ async fn run_sender(room_name: &str, trials: usize, delay_ms: u64) {
 
 // ---- RECEIVER MODE ---------------------------------------------------------
 
-async fn run_receiver(room_name: &str) {
+async fn run_receiver(room_name: &str, suffix: Option<&str>) {
     let url = livekit_url();
-    let identity = "bench_receiver";
-    let token = create_token(room_name, identity);
+    let identity = match suffix {
+        Some(s) => format!("bench_receiver_{}", s),
+        None => "bench_receiver".to_string(),
+    };
+    let token = create_token(room_name, &identity);
 
     println!("=== E2E Benchmark — RECEIVER ===");
     println!("  Server:  {}", url);
@@ -547,32 +553,39 @@ fn main() {
         "sender" => {
             let room = args
                 .get(2)
-                .expect("Usage: bench_e2e sender <room> [trials] [delay_ms]");
+                .expect("Usage: bench_e2e sender <room> [trials] [delay_ms] [id_suffix]");
             let trials: usize = args.get(3).and_then(|s| s.parse().ok()).unwrap_or(30);
             let delay_ms: u64 = args.get(4).and_then(|s| s.parse().ok()).unwrap_or(200);
+            let suffix = args.get(5).map(|s| s.as_str());
 
             let rt = tokio::runtime::Runtime::new().expect("Failed to create runtime");
-            rt.block_on(run_sender(room, trials, delay_ms));
+            rt.block_on(run_sender(room, trials, delay_ms, suffix));
         }
         "receiver" => {
             let room = args
                 .get(2)
-                .expect("Usage: bench_e2e receiver <room>");
+                .expect("Usage: bench_e2e receiver <room> [id_suffix]");
+            let suffix = args.get(3).map(|s| s.as_str());
 
             let rt = tokio::runtime::Runtime::new().expect("Failed to create runtime");
-            rt.block_on(run_receiver(room));
+            rt.block_on(run_receiver(room, suffix));
         }
         _ => {
             eprintln!("Usage:");
             eprintln!("  Terminal 1 (start first):");
-            eprintln!("    cargo run --release --bin bench_e2e -- receiver <room_name>");
+            eprintln!("    cargo run --release --bin bench_e2e -- receiver <room_name> [id_suffix]");
             eprintln!();
             eprintln!("  Terminal 2 (start after receiver connects):");
-            eprintln!("    cargo run --release --bin bench_e2e -- sender <room_name> [trials] [delay_ms]");
+            eprintln!("    cargo run --release --bin bench_e2e -- sender <room_name> [trials] [delay_ms] [id_suffix]");
             eprintln!();
-            eprintln!("  Example:");
+            eprintln!("  Example (single receiver):");
             eprintln!("    cargo run --release --bin bench_e2e -- receiver test_room");
             eprintln!("    cargo run --release --bin bench_e2e -- sender test_room 30 200");
+            eprintln!();
+            eprintln!("  Example (multi-receiver scalability test):");
+            eprintln!("    cargo run --release --bin bench_e2e -- receiver scale_room 1");
+            eprintln!("    cargo run --release --bin bench_e2e -- receiver scale_room 2");
+            eprintln!("    cargo run --release --bin bench_e2e -- sender scale_room 30 200");
             std::process::exit(1);
         }
     }
