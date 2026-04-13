@@ -98,4 +98,81 @@
 \@writefile{lof}{\contentsline {figure}{\numberline {2.7}{\ignorespaces Threaded connection sequence: UI thread and Tokio background thread during LiveKit room connection}}{47}{figure.2.7}\protected@file@percent }
 \newlabel{fig:connection-sequence-thread}{{2.7}{47}{Threaded connection sequence: UI thread and Tokio background thread during LiveKit room connection}{figure.2.7}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.6.3}Message flow and chunking}{47}{subsection.2.6.3}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numb
+\@writefile{lof}{\contentsline {figure}{\numberline {2.8}{\ignorespaces Transport and application-level message types: \texttt  {TransportPacket} and \texttt  {NetworkMessage}}}{48}{figure.2.8}\protected@file@percent }
+\newlabel{fig:connectivity-classes-1}{{2.8}{48}{Transport and application-level message types: \texttt {TransportPacket} and \texttt {NetworkMessage}}{figure.2.8}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.9}{\ignorespaces Inter-thread command and event types: \texttt  {AppCommand} and \texttt  {AppMsg} and \texttt  {RoomEvent}}}{48}{figure.2.9}\protected@file@percent }
+\newlabel{fig:communication-enums}{{2.9}{48}{Inter-thread command and event types: \texttt {AppCommand} and \texttt {AppMsg} and \texttt {RoomEvent}}{figure.2.9}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.10}{\ignorespaces Sequence diagram: Receiving and reassembling chunked data messages}}{49}{figure.2.10}\protected@file@percent }
+\newlabel{fig:data-receiving-seq}{{2.10}{49}{Sequence diagram: Receiving and reassembling chunked data messages}{figure.2.10}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.6.4}Cursor synchronization}{51}{subsection.2.6.4}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2.11}{\ignorespaces Broadcasting and rendering of remote cursor positions}}{52}{figure.2.11}\protected@file@percent }
+\newlabel{fig:cursor-broadcasting}{{2.11}{52}{Broadcasting and rendering of remote cursor positions}{figure.2.11}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {2.7}Final design}{52}{section.2.7}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2.12}{\ignorespaces Final UI design of the application}}{52}{figure.2.12}\protected@file@percent }
+\newlabel{fig:final-ui-design}{{2.12}{52}{Final UI design of the application}{figure.2.12}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.13}{\ignorespaces Final UI design of the application}}{53}{figure.2.13}\protected@file@percent }
+\newlabel{fig:final-ui-design-2}{{2.13}{53}{Final UI design of the application}{figure.2.13}{}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {3}Analysis of the solution}{54}{chapter.3}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\@writefile{toc}{\contentsline {section}{\numberline {3.1}Testing environment}{54}{section.3.1}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {3.1}{\ignorespaces Testing environment -- hardware and software configuration}}{54}{table.3.1}\protected@file@percent }
+\newlabel{tab:test-env}{{3.1}{54}{Testing environment -- hardware and software configuration}{table.3.1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.1}{\ignorespaces Hardware configuration (left) and LiveKit server version (right)}}{55}{figure.3.1}\protected@file@percent }
+\newlabel{fig:system-specs-livekit}{{3.1}{55}{Hardware configuration (left) and LiveKit server version (right)}{figure.3.1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.2}{\ignorespaces Ping latency to the LiveKit VPS (home network, avg 67.5~ms)}}{56}{figure.3.2}\protected@file@percent }
+\newlabel{fig:ping}{{3.2}{56}{Ping latency to the LiveKit VPS (home network, avg 67.5~ms)}{figure.3.2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.3}{\ignorespaces \texttt  {iperf3} throughput: library $\approx $829~Kbps (left), home $\approx $7.14~Mbps (right)}}{56}{figure.3.3}\protected@file@percent }
+\newlabel{fig:iperf-comparison}{{3.3}{56}{\texttt {iperf3} throughput: library $\approx $829~Kbps (left), home $\approx $7.14~Mbps (right)}{figure.3.3}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.2}Unit Testing}{56}{section.3.2}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {3.2}{\ignorespaces Unit test suite -- \texttt  {automerge\_backend.rs}}}{57}{table.3.2}\protected@file@percent }
+\newlabel{tab:unit-tests}{{3.2}{57}{Unit test suite -- \texttt {automerge\_backend.rs}}{table.3.2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.4}{\ignorespaces \texttt  {cargo test} output -- all 13 unit tests pass}}{58}{figure.3.4}\protected@file@percent }
+\newlabel{fig:unit-tests}{{3.4}{58}{\texttt {cargo test} output -- all 13 unit tests pass}{figure.3.4}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.3}Manual Acceptance Testing}{58}{section.3.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3.4}Performance benchmarks}{59}{section.3.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4.1}Synchronization latency (NF-07)}{59}{subsection.3.4.1}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {3.3}{\ignorespaces Local CRDT sync latency -- \texttt  {bench\_sync} (1000 iterations)}}{59}{table.3.3}\protected@file@percent }
+\newlabel{tab:sync-local}{{3.3}{59}{Local CRDT sync latency -- \texttt {bench\_sync} (1000 iterations)}{table.3.3}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.5}{\ignorespaces Local CRDT sync benchmark output (\texttt  {bench\_sync})}}{59}{figure.3.5}\protected@file@percent }
+\newlabel{fig:bench-sync}{{3.5}{59}{Local CRDT sync benchmark output (\texttt {bench\_sync})}{figure.3.5}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {3.4}{\ignorespaces End-to-end sync latency over LiveKit -- \texttt  {bench\_e2e}}}{60}{table.3.4}\protected@file@percent }
+\newlabel{tab:sync-e2e}{{3.4}{60}{End-to-end sync latency over LiveKit -- \texttt {bench\_e2e}}{table.3.4}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.6}{\ignorespaces End-to-end sync latency benchmark output (\texttt  {bench\_e2e})}}{60}{figure.3.6}\protected@file@percent }
+\newlabel{fig:bench-e2e}{{3.6}{60}{End-to-end sync latency benchmark output (\texttt {bench\_e2e})}{figure.3.6}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4.2}File load time (NF-08)}{61}{subsection.3.4.2}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {3.5}{\ignorespaces File load time by document size -- \texttt  {bench\_load}}}{61}{table.3.5}\protected@file@percent }
+\newlabel{tab:load-time}{{3.5}{61}{File load time by document size -- \texttt {bench\_load}}{table.3.5}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.7}{\ignorespaces File load benchmark output (\texttt  {bench\_load})}}{61}{figure.3.7}\protected@file@percent }
+\newlabel{fig:bench-load}{{3.7}{61}{File load benchmark output (\texttt {bench\_load})}{figure.3.7}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4.3}Multi-user scalability (NF-09)}{61}{subsection.3.4.3}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {3.6}{\ignorespaces Multi-user scalability -- average E2E sync latency per participant count}}{62}{table.3.6}\protected@file@percent }
+\newlabel{tab:multiuser}{{3.6}{62}{Multi-user scalability -- average E2E sync latency per participant count}{table.3.6}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.8}{\ignorespaces Multi-user headless test environment setup}}{62}{figure.3.8}\protected@file@percent }
+\newlabel{fig:multiuser-env}{{3.8}{62}{Multi-user headless test environment setup}{figure.3.8}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.9}{\ignorespaces Multi-user headless test: 4 participants (left), 5 participants (right)}}{62}{figure.3.9}\protected@file@percent }
+\newlabel{fig:multiuser-4p-5p}{{3.9}{62}{Multi-user headless test: 4 participants (left), 5 participants (right)}{figure.3.9}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4.4}Rendering frame rate (NF-10)}{63}{subsection.3.4.4}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {3.7}{\ignorespaces Rendering frame rate by stroke count (release build, vsync on)}}{64}{table.3.7}\protected@file@percent }
+\newlabel{tab:fps}{{3.7}{64}{Rendering frame rate by stroke count (release build, vsync on)}{table.3.7}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.10}{\ignorespaces FPS measurement output: 100, 500, 1000, and 5000 strokes}}{64}{figure.3.10}\protected@file@percent }
+\newlabel{fig:fps-measurements}{{3.10}{64}{FPS measurement output: 100, 500, 1000, and 5000 strokes}{figure.3.10}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4.5}Chunking overhead}{64}{subsection.3.4.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3.5}Reliability analysis}{65}{section.3.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.5.1}CRDT convergence (NF-06)}{65}{subsection.3.5.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3.11}{\ignorespaces CRDT convergence benchmark output (\texttt  {bench\_convergence})}}{66}{figure.3.11}\protected@file@percent }
+\newlabel{fig:convergence}{{3.11}{66}{CRDT convergence benchmark output (\texttt {bench\_convergence})}{figure.3.11}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.5.2}Offline continuity (NF-05)}{66}{subsection.3.5.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {4}Conclusions}{68}{chapter.4}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\bibcite{automerge-docs}{1}
+\bibcite{conclave}{2}
+\bibcite{inkandswitch-localfirst}{3}
+\bibcite{kleppmann-localfirst-talk}{4}
+\bibcite{kleppmann-egwalker}{5}
+\bibcite{livekit-deployment}{6}
+\bibcite{livekit-sfu}{7}
+\bibcite{mdn-webrtc}{8}
+\ttl@finishall
+\gdef \@abspage@last{73}
