@@ -45,5 +45,12 @@
 \contentsline {section}{\numberline {3.1}Testing environment}{54}{section.3.1}%
 \contentsline {section}{\numberline {3.2}Unit Testing}{56}{section.3.2}%
 \contentsline {section}{\numberline {3.3}Manual Acceptance Testing}{58}{section.3.3}%
-\contentsline {chapter}{\numberline {4}Conclusions}{59}{chapter.4}%
+\contentsline {section}{\numberline {3.4}Performance benchmarks}{59}{section.3.4}%
+\contentsline {subsection}{\numberline {3.4.1}Synchronization latency (NF-07)}{59}{subsection.3.4.1}%
+\contentsline {subsection}{\numberline {3.4.2}File load time (NF-08)}{61}{subsection.3.4.2}%
+\contentsline {subsection}{\numberline {3.4.3}Multi-user scalability (NF-09)}{61}{subsection.3.4.3}%
+\contentsline {subsection}{\numberline {3.4.4}Rendering frame rate (NF-10)}{63}{subsection.3.4.4}%
+\contentsline {subsection}{\numberline {3.4.5}Chunking overhead}{64}{subsection.3.4.5}%
+\contentsline {section}{\numberline {3.5}Reliability analysis}{65}{section.3.5}%
+\contentsline {chapter}{\numberline {4}Conclusions}{66}{chapter.4}%
 \contentsfinish 

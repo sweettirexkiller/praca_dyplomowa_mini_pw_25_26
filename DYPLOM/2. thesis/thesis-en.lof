@@ -30,5 +30,11 @@
 \contentsline {figure}{\numberline {3.2}{\ignorespaces Ping latency to the LiveKit VPS (home network, avg 67.5~ms)}}{56}{figure.3.2}%
 \contentsline {figure}{\numberline {3.3}{\ignorespaces \texttt {iperf3} throughput: library $\approx $829~Kbps (left), home $\approx $7.14~Mbps (right)}}{56}{figure.3.3}%
 \contentsline {figure}{\numberline {3.4}{\ignorespaces \texttt {cargo test} output -- all 13 unit tests pass}}{58}{figure.3.4}%
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Local CRDT sync benchmark output (\texttt {bench\_sync})}}{59}{figure.3.5}%
+\contentsline {figure}{\numberline {3.6}{\ignorespaces End-to-end sync latency benchmark output (\texttt {bench\_e2e})}}{60}{figure.3.6}%
+\contentsline {figure}{\numberline {3.7}{\ignorespaces File load benchmark output (\texttt {bench\_load})}}{61}{figure.3.7}%
+\contentsline {figure}{\numberline {3.8}{\ignorespaces Multi-user headless test environment setup}}{62}{figure.3.8}%
+\contentsline {figure}{\numberline {3.9}{\ignorespaces Multi-user headless test: 4 participants (left), 5 participants (right)}}{62}{figure.3.9}%
+\contentsline {figure}{\numberline {3.10}{\ignorespaces FPS measurement output: 100, 500, 1000, and 5000 strokes}}{64}{figure.3.10}%
 \addvspace {10\p@ }
 \contentsfinish 

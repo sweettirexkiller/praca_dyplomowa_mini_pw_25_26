@@ -130,7 +130,36 @@
 \@writefile{lof}{\contentsline {figure}{\numberline {3.4}{\ignorespaces \texttt  {cargo test} output -- all 13 unit tests pass}}{58}{figure.3.4}\protected@file@percent }
 \newlabel{fig:unit-tests}{{3.4}{58}{\texttt {cargo test} output -- all 13 unit tests pass}{figure.3.4}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {3.3}Manual Acceptance Testing}{58}{section.3.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {chapter}{\numberline {4}Conclusions}{59}{chapter.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3.4}Performance benchmarks}{59}{section.3.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4.1}Synchronization latency (NF-07)}{59}{subsection.3.4.1}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {3.3}{\ignorespaces Local CRDT sync latency -- \texttt  {bench\_sync} (1000 iterations)}}{59}{table.3.3}\protected@file@percent }
+\newlabel{tab:sync-local}{{3.3}{59}{Local CRDT sync latency -- \texttt {bench\_sync} (1000 iterations)}{table.3.3}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.5}{\ignorespaces Local CRDT sync benchmark output (\texttt  {bench\_sync})}}{59}{figure.3.5}\protected@file@percent }
+\newlabel{fig:bench-sync}{{3.5}{59}{Local CRDT sync benchmark output (\texttt {bench\_sync})}{figure.3.5}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {3.4}{\ignorespaces End-to-end sync latency over LiveKit -- \texttt  {bench\_e2e}}}{60}{table.3.4}\protected@file@percent }
+\newlabel{tab:sync-e2e}{{3.4}{60}{End-to-end sync latency over LiveKit -- \texttt {bench\_e2e}}{table.3.4}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.6}{\ignorespaces End-to-end sync latency benchmark output (\texttt  {bench\_e2e})}}{60}{figure.3.6}\protected@file@percent }
+\newlabel{fig:bench-e2e}{{3.6}{60}{End-to-end sync latency benchmark output (\texttt {bench\_e2e})}{figure.3.6}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4.2}File load time (NF-08)}{61}{subsection.3.4.2}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {3.5}{\ignorespaces File load time by document size -- \texttt  {bench\_load}}}{61}{table.3.5}\protected@file@percent }
+\newlabel{tab:load-time}{{3.5}{61}{File load time by document size -- \texttt {bench\_load}}{table.3.5}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.7}{\ignorespaces File load benchmark output (\texttt  {bench\_load})}}{61}{figure.3.7}\protected@file@percent }
+\newlabel{fig:bench-load}{{3.7}{61}{File load benchmark output (\texttt {bench\_load})}{figure.3.7}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4.3}Multi-user scalability (NF-09)}{61}{subsection.3.4.3}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {3.6}{\ignorespaces Multi-user scalability -- average E2E sync latency per participant count}}{62}{table.3.6}\protected@file@percent }
+\newlabel{tab:multiuser}{{3.6}{62}{Multi-user scalability -- average E2E sync latency per participant count}{table.3.6}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.8}{\ignorespaces Multi-user headless test environment setup}}{62}{figure.3.8}\protected@file@percent }
+\newlabel{fig:multiuser-env}{{3.8}{62}{Multi-user headless test environment setup}{figure.3.8}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.9}{\ignorespaces Multi-user headless test: 4 participants (left), 5 participants (right)}}{62}{figure.3.9}\protected@file@percent }
+\newlabel{fig:multiuser-4p-5p}{{3.9}{62}{Multi-user headless test: 4 participants (left), 5 participants (right)}{figure.3.9}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4.4}Rendering frame rate (NF-10)}{63}{subsection.3.4.4}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {3.7}{\ignorespaces Rendering frame rate by stroke count (release build, vsync on)}}{64}{table.3.7}\protected@file@percent }
+\newlabel{tab:fps}{{3.7}{64}{Rendering frame rate by stroke count (release build, vsync on)}{table.3.7}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.10}{\ignorespaces FPS measurement output: 100, 500, 1000, and 5000 strokes}}{64}{figure.3.10}\protected@file@percent }
+\newlabel{fig:fps-measurements}{{3.10}{64}{FPS measurement output: 100, 500, 1000, and 5000 strokes}{figure.3.10}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4.5}Chunking overhead}{64}{subsection.3.4.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3.5}Reliability analysis}{65}{section.3.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {4}Conclusions}{66}{chapter.4}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
 \bibcite{automerge-docs}{1}
@@ -142,4 +171,4 @@
 \bibcite{livekit-sfu}{7}
 \bibcite{mdn-webrtc}{8}
 \ttl@finishall
-\gdef \@abspage@last{64}
+\gdef \@abspage@last{71}

@@ -17,5 +17,10 @@
 \addvspace {10\p@ }
 \contentsline {table}{\numberline {3.1}{\ignorespaces Testing environment -- hardware and software configuration}}{54}{table.3.1}%
 \contentsline {table}{\numberline {3.2}{\ignorespaces Unit test suite -- \texttt {automerge\_backend.rs}}}{57}{table.3.2}%
+\contentsline {table}{\numberline {3.3}{\ignorespaces Local CRDT sync latency -- \texttt {bench\_sync} (1000 iterations)}}{59}{table.3.3}%
+\contentsline {table}{\numberline {3.4}{\ignorespaces End-to-end sync latency over LiveKit -- \texttt {bench\_e2e}}}{60}{table.3.4}%
+\contentsline {table}{\numberline {3.5}{\ignorespaces File load time by document size -- \texttt {bench\_load}}}{61}{table.3.5}%
+\contentsline {table}{\numberline {3.6}{\ignorespaces Multi-user scalability -- average E2E sync latency per participant count}}{62}{table.3.6}%
+\contentsline {table}{\numberline {3.7}{\ignorespaces Rendering frame rate by stroke count (release build, vsync on)}}{64}{table.3.7}%
 \addvspace {10\p@ }
 \contentsfinish 
