@@ -26,5 +26,9 @@
 \contentsline {figure}{\numberline {2.12}{\ignorespaces Final UI design of the application}}{52}{figure.2.12}%
 \contentsline {figure}{\numberline {2.13}{\ignorespaces Final UI design of the application}}{53}{figure.2.13}%
 \addvspace {10\p@ }
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Hardware configuration (left) and LiveKit server version (right)}}{55}{figure.3.1}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Ping latency to the LiveKit VPS (home network, avg 67.5~ms)}}{56}{figure.3.2}%
+\contentsline {figure}{\numberline {3.3}{\ignorespaces \texttt {iperf3} throughput: library $\approx $829~Kbps (left), home $\approx $7.14~Mbps (right)}}{56}{figure.3.3}%
+\contentsline {figure}{\numberline {3.4}{\ignorespaces \texttt {cargo test} output -- all 13 unit tests pass}}{58}{figure.3.4}%
 \addvspace {10\p@ }
 \contentsfinish 

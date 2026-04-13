@@ -15,5 +15,7 @@
 \contentsline {table}{\numberline {2.1}{\ignorespaces Conflict resolution strategies in Automerge}}{39}{table.2.1}%
 \contentsline {table}{\numberline {2.2}{\ignorespaces Mapping of user intents to Automerge CRDT operations}}{42}{table.2.2}%
 \addvspace {10\p@ }
+\contentsline {table}{\numberline {3.1}{\ignorespaces Testing environment -- hardware and software configuration}}{54}{table.3.1}%
+\contentsline {table}{\numberline {3.2}{\ignorespaces Unit test suite -- \texttt {automerge\_backend.rs}}}{57}{table.3.2}%
 \addvspace {10\p@ }
 \contentsfinish 

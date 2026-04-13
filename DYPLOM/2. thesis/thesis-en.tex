@@ -1554,20 +1554,6 @@ The images below illustrate the final UI design of the application.
 
 \chapter{Analysis of the solution}
 
-% =============================================================================
-% CHAPTER OUTLINE — to be filled in after performing the tests described below
-% =============================================================================
-%
-% This chapter answers: Does the solution meet the requirements?
-% It must contain ONLY measured/observed results — no design descriptions.
-%
-% Structure:
-%
-% 3.1  Testing environment
-%      - Hardware: CPU, RAM, OS version, display resolution
-%      - Network: LAN/Wi-Fi bandwidth, latency (use iperf3 / ping)
-%      - LiveKit server: version, where deployed (local Docker / remote)
-%      - Rust toolchain version, build mode (release)
 %
 
 In this chapter I will analyze the application and test its core non-functional requirements from chapter 1.8.2. 
@@ -1575,14 +1561,162 @@ The testing will be performed in a controlled environment, and the results will 
 manner to evaluate the application's performance, reliability, usability.
 \section{Testing environment}
 
+All tests and benchmarks were performed on the hardware and software configuration described in
+Table~\ref{tab:test-env}. The application was compiled in release mode (\texttt{cargo build
+--release}) for all performance measurements.
+
+\begin{table}[H]
+    \centering
+    \caption{Testing environment -- hardware and software configuration}
+    \begin{tabular}{|p{0.30\textwidth}|p{0.55\textwidth}|}
+        \hline
+        \textbf{Component} & \textbf{Value} \\
+        \hline
+        CPU & Apple M4 Pro \\
+        \hline
+        CPU cores & 14 (10 performance + 4 efficiency) \\
+        \hline
+        RAM & 48 GB unified memory \\
+        \hline
+        Operating system & macOS 15.6.1 \\
+        \hline
+        Rust toolchain & rustc 1.91.0, cargo 1.91.0 \\
+        \hline
+        \texttt{automerge} crate & 0.7.2 \\
+        \hline
+        \texttt{eframe} crate & 0.33.0 \\
+        \hline
+        LiveKit SFU & Docker image (74.4 MB), deployed on VPS at 209.38.105.89 \\
+        \hline
+    \end{tabular}
+    \label{tab:test-env}
+\end{table}
+
+Figures~\ref{fig:system-specs-livekit} confirms the hardware and LiveKit server version.
+Network measurements are shown in Figures~\ref{fig:ping} and~\ref{fig:iperf-comparison}.
+
+\begin{figure}[H]
+    \begin{minipage}[t]{0.54\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{./images/analysis/fig3_1a_system_specs.png}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.42\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{./images/analysis/fig3_1b_livekit_version.png}
+    \end{minipage}
+    \caption{Hardware configuration (left) and LiveKit server version (right)}
+    \label{fig:system-specs-livekit}
+\end{figure}
+
+Network conditions play an important role in evaluating the synchronization latency requirement
+NF-07 ($\leq$2~s on a connection with bandwidth $\geq$10~Mb/s). Tests were conducted in two
+network environments. At home, \texttt{ping} to the VPS averaged 67.5~ms and \texttt{iperf3}
+measured approximately 7.14~Mbps downstream -- just below the NF-07 bandwidth threshold, which
+is noted where relevant in the analysis. At a public library, \texttt{iperf3} measured
+approximately 829~Kbps, representing a constrained network typical of mobile hot-spot.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{./images/analysis/fig3_1c_network_ping.png}
+    \caption{Ping latency to the LiveKit VPS (home network, avg 67.5~ms)}
+    \label{fig:ping}
+\end{figure}
+
+\begin{figure}[H]
+    \begin{minipage}[t]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{./images/analysis/fig3_1d_network_iperf_library.png}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{./images/analysis/fig3_1e_network_iperf_home.png}
+    \end{minipage}
+    \caption{\texttt{iperf3} throughput: library $\approx$829~Kbps (left), home $\approx$7.14~Mbps (right)}
+    \label{fig:iperf-comparison}
+\end{figure}
 
 
+\section{Unit Testing}
 
-% 3.2  Unit testing
-%      - Summary of existing 5 unit tests (automerge_backend.rs)
-%      - Results table: test name | what it verifies | pass/fail
-%      - Screenshot of `cargo test` output
-%
+The backend logic is covered by 13 unit tests located in \texttt{automerge\_backend.rs}.
+All tests are executed with \texttt{cargo test} and all pass. The tests focus exclusively on
+the CRDT backend -- document manipulation, synchronization, persistence, and conflict
+resolution. UI rendering is not covered by automated tests, as it depends on the egui
+event loop and was verified through manual acceptance testing (Section~3.3).
+
+\begin{table}[H]
+    \centering
+    \caption{Unit test suite -- \texttt{automerge\_backend.rs}}
+    \begin{tabular}{|p{0.52\textwidth}|p{0.34\textwidth}|c|}
+        \hline
+        \textbf{Test name} & \textbf{What it verifies} & \textbf{Result} \\
+        \hline
+        \texttt{test\_new\_backend\_initialization} & Fresh backend has no strokes & PASS \\
+        \hline
+        \texttt{test\_apply\_draw\_intent} & Drawing a stroke appends it to the document & PASS \\
+        \hline
+        \texttt{test\_apply\_clear\_intent} & Clear removes all strokes from the document & PASS \\
+        \hline
+        \texttt{test\_save\_and\_load} & Save/load round-trip preserves all strokes & PASS \\
+        \hline
+        \texttt{test\_sync\_between\_peers} & Two-peer sync converges to identical state & PASS \\
+        \hline
+        \texttt{test\_concurrent\_draw\_both\_strokes\_survive} & Concurrent draws from two peers both survive merge (NF-06) & PASS \\
+        \hline
+        \texttt{test\_clear\_vs\_concurrent\_draw\_add\_wins} & Clear + concurrent draw: new stroke survives (add-wins, NF-06) & PASS \\
+        \hline
+        \texttt{test\_load\_invalid\_bytes\_does\_not\_panic} & Loading corrupted bytes does not crash the backend & PASS \\
+        \hline
+        \texttt{test\_load\_empty\_bytes\_does\_not\_panic} & Loading empty bytes does not crash the backend & PASS \\
+        \hline
+        \texttt{test\_strokes\_preserve\_insertion\_order} & Strokes are returned in insertion order & PASS \\
+        \hline
+        \texttt{test\_three\_peer\_sync\_convergence} & Three-peer chain (A$\leftrightarrow$B$\leftrightarrow$C) converges & PASS \\
+        \hline
+        \texttt{test\_set\_and\_get\_background} & Background image survives a save/load round-trip & PASS \\
+        \hline
+        \texttt{test\_peer\_disconnect\_removes\_sync\_state} & Peer disconnect cleans up the sync state map & PASS \\
+        \hline
+    \end{tabular}
+    \label{tab:unit-tests}
+\end{table}
+
+Figure~\ref{fig:unit-tests} shows the \texttt{cargo test} output confirming that all 13 tests pass.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{./images/analysis/fig3_2_unit_tests.png}
+    \caption{\texttt{cargo test} output -- all 13 unit tests pass}
+    \label{fig:unit-tests}
+\end{figure}
+
+\section{Manual Acceptance Testing}
+
+Manual acceptance testing was carried out continuously throughout development and during
+benchmark execution. No formal scripted test runs were conducted in isolation; instead,
+the core user workflows were exercised each time a feature was implemented or a benchmark
+was set up. The following workflows were verified:
+
+\begin{itemize}
+    \item \textbf{Drawing and erasing} -- freehand strokes rendered correctly with the
+    selected color and width; eraser paints white over existing strokes.
+    \item \textbf{Save and load} -- whiteboard state exported to \texttt{.crdt} and
+    \texttt{.png}; \texttt{.crdt} file reloaded and strokes reproduced correctly.
+    \item \textbf{Connect and sync} -- two clients joined the same LiveKit room; strokes
+    drawn on one client appeared on the other in real time.
+    \item \textbf{Remote cursors} -- cursor positions of remote participants visible as
+    colored circles with identity labels.
+    \item \textbf{Chat} -- text messages exchanged between participants and displayed in
+    the LiveKit panel.
+    \item \textbf{Disconnect} -- client disconnected cleanly; remote cursor removed from
+    the remaining peer's canvas.
+\end{itemize}
+
+All workflows behaved as expected. Identified limitations (eraser painting white over
+backgrounds, no undo/redo) are documented in Section~3.8.
+
 % 3.3  Manual acceptance testing
 %      - Reference to TESTING_MANUAL.md (10 scenarios)
 %      - Results table: MAN-01..MAN-10 | expected | actual | pass/fail
