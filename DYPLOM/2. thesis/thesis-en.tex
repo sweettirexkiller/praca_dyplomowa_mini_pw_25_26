@@ -1983,23 +1983,57 @@ latency overhead. Only an initial full-state sync message sent to a newly joinin
 exceeded the threshold and was transparently chunked and reassembled without any observed
 impact on end-to-end latency.
 
-% 3.5  Reliability analysis
 \section{Reliability analysis}
-%
-%   3.5.1  CRDT convergence (NF-06: no data loss during concurrent edits)
-%          - Two clients draw simultaneously for 60 s
-%          - After sync settles, compare stroke lists: assert identical sets
-%          - Repeat with "Clear" during concurrent drawing (add-wins semantics)
-%
-%   3.5.2  Offline continuity (NF-05)
-%          - Client draws while disconnected (kill LiveKit server or network)
-%          - Reconnect; verify all offline strokes sync to peers
-%          - Document whether current implementation supports this or note limitation
-%
+
+\subsection{CRDT convergence (NF-06)}
+
+Convergence was verified by the \texttt{bench\_convergence} benchmark, which ran sessions
+with 2, 3, 4, and 5 peers concurrently drawing strokes and then compared their document
+states after all sync messages had propagated. Two scenarios were tested:
+
+\begin{itemize}
+    \item \textbf{Concurrent draws} -- all peers drew strokes simultaneously; after sync
+    settled, every peer's stroke list was compared. All lists were identical across all
+    participant counts.
+    \item \textbf{Clear during concurrent draw} -- one peer issued a \texttt{Clear} while
+    another peer was simultaneously drawing a new stroke. After sync, the new stroke
+    survived on all peers (add-wins semantics confirmed), while the previously visible
+    strokes were removed.
+\end{itemize}
+
+The benchmark output is shown in Figure~\ref{fig:convergence}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{./images/analysis/fig3_7_convergence_benchmark.png}
+    \caption{CRDT convergence benchmark output (\texttt{bench\_convergence})}
+    \label{fig:convergence}
+\end{figure}
+
+No strokes were lost or duplicated in any run. The add-wins guarantee held in every
+clear-vs-draw scenario, consistent with the Automerge conflict resolution described in
+Section~2.4.3. \textbf{NF-06: PASS.}
+
+\subsection{Offline continuity (NF-05)}
+
+NF-05 requires that the system maintains continuity of work in offline mode and
+automatically synchronises upon reconnection. This scenario was tested by killing the
+LiveKit Docker container while clients were connected and drawing.
+
+The observed behaviour was as follows: both clients immediately hung --- the UI became
+unresponsive as the LiveKit SDK's connection handling blocked the background thread.
+No strokes drawn after the SFU went down were ever delivered to the peer, and no
+automatic reconnection was attempted. Upon restarting the SFU, the clients did not
+recover without a manual application restart.
+
+This behaviour is a consequence of the current architecture: the LiveKit SDK does not
+expose a built-in auto-reconnect callback that the application handles, and there is no
+offline queue for outgoing sync messages. Strokes drawn locally while disconnected are
+committed to the local CRDT document and would survive a restart, but the synchronisation
+with other peers does not resume. \textbf{NF-05: FAIL.}
+
 % 3.6  Usability assessment
 %      - Brief qualitative evaluation against NF-01..NF-04
-%      - Screenshots of UI showing status indicators, cursor labels, tool switching
-%      - Optionally: short user study (2-3 people) with a task + questionnaire
 %
 % 3.7  Non-functional requirements fulfillment summary
 %      - Table: NF-ID | requirement | measured value | pass/fail

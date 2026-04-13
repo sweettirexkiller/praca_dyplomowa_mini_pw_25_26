@@ -36,5 +36,6 @@
 \contentsline {figure}{\numberline {3.8}{\ignorespaces Multi-user headless test environment setup}}{62}{figure.3.8}%
 \contentsline {figure}{\numberline {3.9}{\ignorespaces Multi-user headless test: 4 participants (left), 5 participants (right)}}{62}{figure.3.9}%
 \contentsline {figure}{\numberline {3.10}{\ignorespaces FPS measurement output: 100, 500, 1000, and 5000 strokes}}{64}{figure.3.10}%
+\contentsline {figure}{\numberline {3.11}{\ignorespaces CRDT convergence benchmark output (\texttt {bench\_convergence})}}{66}{figure.3.11}%
 \addvspace {10\p@ }
 \contentsfinish 
