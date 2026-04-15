@@ -54,5 +54,16 @@
 \contentsline {section}{\numberline {3.5}Reliability analysis}{65}{section.3.5}%
 \contentsline {subsection}{\numberline {3.5.1}CRDT convergence (NF-06)}{65}{subsection.3.5.1}%
 \contentsline {subsection}{\numberline {3.5.2}Offline continuity (NF-05)}{66}{subsection.3.5.2}%
-\contentsline {chapter}{\numberline {4}Conclusions}{68}{chapter.4}%
+\contentsline {section}{\numberline {3.6}Usability assessment}{67}{section.3.6}%
+\contentsline {section}{\numberline {3.7}Non-functional requirements summary}{67}{section.3.7}%
+\contentsline {section}{\numberline {3.8}Identified limitations}{69}{section.3.8}%
+\contentsline {chapter}{\numberline {4}Conclusions}{70}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Is the final product a success?}{70}{section.4.1}%
+\contentsline {section}{\numberline {4.2}What we achieved and how we avoided dangers}{70}{section.4.2}%
+\contentsline {section}{\numberline {4.3}What could be done better}{71}{section.4.3}%
+\contentsline {section}{\numberline {4.4}Plans for future development}{71}{section.4.4}%
+\contentsline {section}{\numberline {4.5}Open problems}{72}{section.4.5}%
+\contentsline {chapter}{\numberline {A}User Manual}{}{appendix.A}%
+\contentsline {chapter}{\numberline {B}Deployment Guide}{}{appendix.B}%
+\contentsline {chapter}{\numberline {C}Manual Acceptance Test Scenarios}{}{appendix.C}%
 \contentsfinish 

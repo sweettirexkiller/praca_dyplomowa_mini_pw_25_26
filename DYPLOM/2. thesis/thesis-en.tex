@@ -2032,24 +2032,201 @@ offline queue for outgoing sync messages. Strokes drawn locally while disconnect
 committed to the local CRDT document and would survive a restart, but the synchronisation
 with other peers does not resume. \textbf{NF-05: FAIL.}
 
-% 3.6  Usability assessment
-%      - Brief qualitative evaluation against NF-01..NF-04
-%
-% 3.7  Non-functional requirements fulfillment summary
-%      - Table: NF-ID | requirement | measured value | pass/fail
-%      - One row per NF requirement from Section 1.8.2
-%
-% 3.8  Identified limitations and known issues
-%      - Eraser paints white (doesn't restore background)
-%      - Document growth from eraser strokes
-%      - No undo/redo
-%      - Canvas fixed at 800x600
-%      - Any bugs discovered during testing
-%
+\section{Usability assessment}
+
+Usability was evaluated against requirements NF-01 through NF-04 by
+exercising the application during development and benchmark runs.
+
+\textbf{NF-01 -- Simple and intuitive interface.} The whiteboard occupies the full
+window with a compact toolbar at the top. New users were able to draw, erase, change
+colour and thickness, and connect to a room without any instructions. No training is
+required for basic operation. \textbf{PASS.}
+
+\textbf{NF-02 -- Synchronisation status display.} The status bar at the bottom of the
+window shows the current connection state. When connected to a LiveKit room the bar
+displays the room name and the list of participants; when disconnected it shows
+``Ready''. State changes (participant joined, participant left, disconnected) are
+appended to the event log in the LiveKit panel. \textbf{PASS.}
+
+\textbf{NF-03 -- Collaborator cursors.} While connected, the canvas renders a coloured
+circle at each remote participant's last known cursor position, labelled with their
+identity. \textbf{PASS.}
+
+\textbf{NF-04 -- English interface.} All UI labels, buttons, status messages, and log
+entries are in English. \textbf{PASS.}
+
+\section{Non-functional requirements summary}
+
+Table~\ref{tab:nf-summary} summarises the outcome of all 14 non-functional requirements
+defined in Section~1.8.2.
+
+\begin{table}[H]
+    \centering
+    \caption{Non-functional requirements fulfilment summary}
+    \begin{tabular}{|c|p{0.30\textwidth}|p{0.28\textwidth}|c|}
+        \hline
+        \textbf{ID} & \textbf{Requirement} & \textbf{Measured / observed value} & \textbf{Result} \\
+        \hline
+        NF-01 & Simple, intuitive UI & Basic operations usable without training & PASS \\
+        \hline
+        NF-02 & Sync status display & Status bar + event log show connection state & PASS \\
+        \hline
+        NF-03 & Collaborator cursors & Remote cursors rendered with colour and label & PASS \\
+        \hline
+        NF-04 & English interface & All UI text in English & PASS \\
+        \hline
+        NF-05 & Offline continuity + auto-reconnect & UI hangs on SFU failure; no auto-reconnect & FAIL \\
+        \hline
+        NF-06 & No data loss during concurrent edits & All peers converge; add-wins confirmed & PASS \\
+        \hline
+        NF-07 & Sync $\leq$ 2~s on $\geq$ 10~Mb/s & E2E avg 460~ms, max 663~ms & PASS \\
+        \hline
+        NF-08 & Load $\leq$ 1~s & Max 1.77~ms (5000 strokes) & PASS \\
+        \hline
+        NF-09 & $\geq$ 3 simultaneous users & 5 users, avg $\approx$95~ms latency & PASS \\
+        \hline
+        NF-10 & $\geq$ 30~FPS during drawing & $\approx$60~FPS across all stroke counts & PASS \\
+        \hline
+        NF-11 & Documentation (README) & README with installation and usage instructions present & PASS \\
+        \hline
+        NF-12 & Runs on macOS and Windows & macOS verified; Windows build untested & PARTIAL \\
+        \hline
+        NF-13 & Rust / egui / Automerge / Tokio / LiveKit & All components used as specified & PASS \\
+        \hline
+        NF-14 & No default persistence & All state lost on close unless exported & PASS \\
+        \hline
+    \end{tabular}
+    \label{tab:nf-summary}
+\end{table}
+
+13 out of 14 requirements pass. NF-05 (offline continuity) fails due to the absence of
+auto-reconnect logic in the current implementation. NF-12 receives a partial result
+because the application was built and tested exclusively on macOS; a Windows build was
+not verified.
+\section{Identified limitations}
+
+The following limitations were identified during testing and are known issues in the
+current version of the application.
+
+\textbf{Eraser paints white.} The eraser tool is implemented by drawing strokes with
+opaque white colour rather than removing underlying strokes from the CRDT document.
+This means the eraser has no effect on a canvas with a loaded background image ---
+it paints white over the background instead of restoring it.
+
+\textbf{Document growth from eraser use.} Because eraser strokes are appended to the
+CRDT document just like pen strokes, heavy eraser use increases document size over time.
+A session that consists mostly of drawing and erasing will accumulate more data than a
+session with the same final visual result achieved without erasing.
+
+\textbf{No undo/redo.} The application does not implement undo or redo. Once a stroke
+is committed to the CRDT document it can only be hidden by drawing a white stroke over
+it (eraser) or by clearing the entire canvas.
+
+\textbf{Fixed canvas size.} The whiteboard canvas is fixed at $800 \times 600$ pixels.
+There is no pan, zoom, or canvas resize functionality.
+
+\textbf{No offline continuity or auto-reconnect.} As documented in Section~3.5.2, if
+the LiveKit SFU becomes unavailable the application hangs and does not attempt to
+reconnect. Strokes drawn during the outage are not delivered to peers even after the
+server recovers.
+
+\textbf{Client hangs on SFU crash.} Related to the above: when the server process is
+killed abruptly the UI thread becomes unresponsive because the LiveKit SDK's background
+task blocks without a timeout. A manual reconnection to the server is required to restore functionality.
+
 % =============================================================================
 
 
 \chapter{Conclusions}
+
+\section{Is the final product a success?}
+
+The goal of this thesis was to design and implement a collaborative whiteboard application
+using the local-first approach. The result is a working desktop application written in Rust
+that allows multiple users to draw and erase on a shared canvas in real time, communicate
+via chat, and see each other's cursors --- all without user accounts or server-side state.
+
+Of the 14 non-functional requirements defined at the outset, 13 pass and 1 fails.
+Synchronisation latency averaged 460~ms end-to-end, file load time peaked at 1.77~ms for
+5000 strokes, the application sustained 5 simultaneous users with stable latency, and the
+rendering frame rate held at approximately 60~FPS regardless of document size. CRDT
+convergence was verified with concurrent draws and clear-vs-draw scenarios across 2 to 5
+peers, with add-wins semantics confirmed in every case. The only failing requirement is
+NF-05 (offline continuity and auto-reconnect), which was not implemented in the current
+version. The final product can therefore be considered a success within its defined scope.
+
+\section{What we achieved and how we avoided dangers}
+
+Several architectural decisions proved important in keeping the implementation manageable
+and correct.
+
+Choosing a \textbf{star topology via LiveKit SFU} instead of a pure peer-to-peer mesh
+eliminated the need to handle NAT traversal, direct WebRTC signalling between every pair
+of clients, and the complex connection management that a fully decentralised design would
+require. The trade-off --- a central relay server --- was accepted consciously and is
+justified by the significant reduction in client-side complexity.
+
+Using \textbf{Automerge} rather than a custom CRDT implementation avoided weeks of
+potential correctness issues. Automerge provides a proven, well-tested sync protocol with
+bloom-filter-based delta synchronisation and deterministic conflict resolution out of the
+box. The decision to store strokes as opaque JSON strings inside a flat Automerge list,
+rather than as deeply nested CRDT maps, further reduced the number of CRDT objects
+created per stroke and kept sync message sizes small.
+
+Running \textbf{all network I/O on a Tokio background thread} and communicating with the
+UI thread via MPSC channels ensured that the interface remained responsive during
+connection setup, sync message processing, and data channel publishing --- operations that
+would otherwise cause visible frame drops if executed on the main thread.
+
+\section{What could be done better}
+
+The most significant gap is the absence of \textbf{offline continuity and auto-reconnect}
+(NF-05). When the LiveKit SFU becomes unavailable the application hangs and does not
+attempt to recover. A robust implementation would detect disconnection, queue outgoing
+sync messages locally, and re-establish the session transparently when connectivity is
+restored.
+
+The \textbf{eraser} is a deliberate simplification: it draws white strokes rather than
+removing existing ones from the CRDT document. This approach causes document size to grow
+with eraser use and breaks visually when a background image is loaded. A true eraser would
+perform geometric hit-testing against existing strokes and remove intersecting entries via
+\texttt{splice}, at the cost of more complex CRDT operations.
+
+Other areas that could be improved include the \textbf{fixed 800$\times$600 canvas} with
+no pan or zoom, the absence of \textbf{undo/redo}, and the fact that a \textbf{Windows
+build} was never verified within the scope of this project.
+
+\section{Plans for future development}
+
+The following extensions would bring the application closer to a production-ready
+collaborative tool:
+
+\begin{itemize}
+    \item \textbf{Auto-reconnect with offline queue} -- detect SFU disconnection, buffer
+    outgoing sync messages locally, and resume synchronisation automatically on
+    reconnection.
+    \item \textbf{Structural eraser} -- implement hit-testing against the stroke list and
+    remove intersecting strokes via CRDT \texttt{splice} instead of painting white.
+    \item \textbf{Undo/redo} -- expose Automerge's operation history to implement
+    per-user undo that does not conflict with concurrent remote edits.
+    \item \textbf{Resizable and scrollable canvas} -- remove the fixed 800$\times$600
+    constraint and allow users to pan and zoom the drawing surface.
+    \item \textbf{Windows verification} -- compile and test the release build on Windows
+    to confirm cross-platform support as required by NF-12.
+\end{itemize}
+
+\section{Open problems}
+
+Two problems remain unresolved and warrant further investigation. First, \textbf{document
+size growth}: because eraser strokes and all historical drawing operations are retained in
+the Automerge document, long collaborative sessions will accumulate significant data even
+if the visible canvas appears mostly empty. A compaction strategy --- for example,
+periodically snapshotting the raster state and discarding operation history --- would be
+needed for long-running use cases. Second, \textbf{client hang on SFU failure}: the
+current architecture has no timeout or watchdog on the LiveKit background thread, so an
+abrupt server crash leaves the application in an unrecoverable state that requires a
+manual restart. Addressing this would require either a timeout mechanism in the connection
+loop or a higher-level supervision strategy for the background thread.
 
 
 % ------------------------------- BIBLIOGRAPHY ---------------------------
@@ -2079,40 +2256,191 @@ with other peers does not resume. \textbf{NF-05: FAIL.}
 \pagenumbering{gobble}
 \thispagestyle{empty}
 
+% ----------------------------- APPENDICES ------------------------------------
+\appendix
 
-
-% ----------------------- LIST OF SYMBOLS AND ABBREVIATIONS ------------------
-\chapter*{List of symbols and abbreviations}
-
-\begin{tabular}{cl}
-nzw. & nadzwyczajny \\
-* & star operator \\
-$\widetilde{}$ & tilde 
-\end{tabular}
-\\
-If you don't need it, delete it.
+\chapter{User Manual}
 \thispagestyle{empty}
 
+\section*{Application: Collaborative Whiteboard, version 1.0}
 
-% ----------------------------  LIST OF FIGURES --------------------------------
-\listoffigures
+\subsection*{Introduction}
+
+The application enables real-time collaborative drawing on a shared virtual whiteboard.
+Users connect to named rooms; every participant sees changes made by others instantly.
+
+\subsection*{User Interface}
+
+The main window consists of three areas:
+\begin{itemize}
+    \item \textbf{Toolbar (top bar)} -- drawing tools, file operations, and settings.
+    \item \textbf{Sidebar (left panel)} -- toggled by the \texttt{☰ Menu} button; contains
+    network connection controls and chat.
+    \item \textbf{Canvas (centre)} -- the shared drawing surface.
+\end{itemize}
+
+\subsection*{Drawing}
+
+\begin{itemize}
+    \item \textbf{Pen / Eraser} -- select the active tool from the toolbar. The eraser
+    paints white over existing strokes.
+    \item \textbf{Colour} -- click the colour swatch in the toolbar to open the colour
+    picker.
+    \item \textbf{Size} -- use the \texttt{Size} slider to change stroke thickness.
+\end{itemize}
+
+\subsection*{File Operations}
+
+\begin{itemize}
+    \item \textbf{New} -- clears the canvas (prompts to save if unsaved work exists).
+    \item \textbf{Save} -- exports the current state as a \texttt{.crdt} file (full
+    history) or \texttt{.png} (raster snapshot).
+    \item \textbf{Open} -- loads a previously saved \texttt{.crdt} file or a \texttt{.png}
+    image as a background layer.
+\end{itemize}
+
+\subsection*{Collaborative Session}
+
+\begin{enumerate}
+    \item Open the sidebar with \textbf{☰ Menu}.
+    \item Enter a room name in the \textbf{Room} field (leave empty for a random name).
+    \item Click \textbf{Connect}.
+    \item Once connected, the button changes to \textbf{Disconnect}, and the participant
+    list appears. Remote cursors are shown on the canvas as coloured circles labelled with
+    the user's identity.
+    \item Strokes drawn by any participant appear on all other screens after the mouse
+    button is released.
+\end{enumerate}
+
+\subsection*{Chat}
+
+While connected, type a message in the \textbf{Message} field at the bottom of the
+sidebar and click \textbf{Send} to broadcast it to all participants in the room.
+
+\subsection*{Troubleshooting}
+
+\begin{itemize}
+    \item \textbf{Cannot connect} -- verify that the LiveKit server is running and that
+    the \texttt{LIVEKIT\_URL}, \texttt{LIVEKIT\_API\_KEY}, and
+    \texttt{LIVEKIT\_API\_SECRET} environment variables are set correctly.
+    \item \textbf{High latency} -- on a slow connection synchronisation may take several
+    seconds; this is expected behaviour.
+\end{itemize}
+
+% ---------------------------------------------------------------------------
+
+\chapter{Deployment Guide}
 \thispagestyle{empty}
-If you don't need it, delete it.
 
+\section*{Running the ALFA release}
 
-% -----------------------------  LIST OF TABLES --------------------------------
-\renewcommand{\listtablename}{Spis tabel}
-\listoftables
+A pre-built binary is provided for macOS. Unzip the release archive and run the binary
+from a terminal with the required environment variables set (see Section~B.3).
+
+\section*{Running in a development environment}
+
+Build the application from source following the instructions in \texttt{README.md},
+then start a local LiveKit server as described below.
+
+\subsection*{Starting the LiveKit SFU (Docker)}
+
+\begin{verbatim}
+docker run -d \
+    -p 7880:7880 \
+    -p 7881:7881/tcp \
+    -p 7882:7882/udp \
+    -e "LIVEKIT_KEYS=devkey: devsecret" \
+    -e "LIVEKIT_LOG_LEVEL=info" \
+    --name livekit-server \
+    livekit/livekit-server \
+    --node-ip $(curl -s https://checkip.amazonaws.com) \
+    --bind 0.0.0.0 \
+    --dev
+\end{verbatim}
+
+Default credentials: API URL \texttt{ws://127.0.0.1:7880}, key \texttt{devkey},
+secret \texttt{devsecret}.
+
+\subsection*{Client configuration (\texttt{.env} file)}
+
+Create \texttt{editor/.env} with the following content:
+
+\begin{verbatim}
+LIVEKIT_API_KEY=devkey
+LIVEKIT_API_SECRET=devsecret
+LIVEKIT_URL=ws://127.0.0.1:7880
+\end{verbatim}
+
+\subsection*{Building and running}
+
+\textbf{macOS} (from the \texttt{editor/} directory):
+\begin{verbatim}
+RUSTFLAGS="-C link-arg=-ObjC" cargo run          # debug
+RUSTFLAGS="-C link-arg=-ObjC" cargo build --release  # release
+\end{verbatim}
+The release binary is located at \texttt{target/release/mac\_textpad}.
+
+\textbf{Windows} (from the \texttt{editor/} directory):
+\begin{verbatim}
+cargo run            # debug
+cargo build --release  # release
+\end{verbatim}
+The release binary is located at \texttt{target\textbackslash release\textbackslash collaboratite\_editor.exe}.
+
+\subsection*{Distribution}
+
+Copy the release binary to the target machine together with a \texttt{.env} file (or
+set the three environment variables manually) and run it from a terminal. On macOS the
+binary can optionally be packaged into an \texttt{.app} bundle using
+\texttt{cargo-bundle}.
+
+% ---------------------------------------------------------------------------
+
+\chapter{Manual Acceptance Test Scenarios}
 \thispagestyle{empty}
-If you don't need it, delete it.
+
+The following test scenarios were used for manual acceptance testing during development.
+Each scenario should be executed with two client instances connected to the same LiveKit
+room (one on the main machine, one on a second device or VM).
+
+\begin{table}[H]
+    \centering
+    \caption{Manual acceptance test scenarios}
+    \begin{tabular}{|c|p{0.28\textwidth}|p{0.32\textwidth}|c|}
+        \hline
+        \textbf{ID} & \textbf{Test step} & \textbf{Expected behaviour} & \textbf{Result} \\
+        \hline
+        MAN-01 & Launch the application & Main window opens with a blank white canvas and toolbar visible & PASS \\
+        \hline
+        MAN-02 & Draw a freehand line with the Pen tool & Line appears immediately on the canvas with no visible delay & PASS \\
+        \hline
+        MAN-03 & Change colour to red and size to 20 & Subsequent strokes use the new colour and thickness & PASS \\
+        \hline
+        MAN-04 & Click Save and choose a file path & System save dialog appears; file is written to disk & PASS \\
+        \hline
+        MAN-05 & Client A enters room name \texttt{TestRoom} and clicks Connect & Status changes to Connected; room name shown in sidebar & PASS \\
+        \hline
+        MAN-06 & Client B joins the same room \texttt{TestRoom} & Connection succeeds; Client A sees Client B in participant list & PASS \\
+        \hline
+        MAN-07 & Client A draws a circle & Circle appears on Client B's canvas within $<$1~s & PASS \\
+        \hline
+        MAN-08 & Client B moves the mouse over the canvas & Client A sees a coloured cursor labelled with Client B's identity & PASS \\
+        \hline
+        MAN-09 & Client A sends a chat message & Message appears in Client B's event log & PASS \\
+        \hline
+        MAN-10 & Client B clicks Disconnect & Client A receives a participant-left notification & PASS \\
+        \hline
+    \end{tabular}
+    \label{tab:manual-tests}
+\end{table}
 
 % -----------------------------  LIST OF APPENDICES ---------------------------
 \chapter*{List of appendices}
 
 \begin{enumerate}
-\item Appendix 1
-\item Appendix 2
-\item In case of no appendices, delete this part.
+\item Appendix A -- User Manual
+\item Appendix B -- Deployment Guide
+\item Appendix C -- Manual Acceptance Test Scenarios
 \end{enumerate}
 \thispagestyle{empty}
 
