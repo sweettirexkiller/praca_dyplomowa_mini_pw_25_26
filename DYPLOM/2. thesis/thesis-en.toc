@@ -39,30 +39,30 @@
 \contentsline {subsection}{\numberline {2.6.1}LiveKit and WebRTC data channels}{45}{subsection.2.6.1}%
 \contentsline {subsection}{\numberline {2.6.2}Thread modeling}{45}{subsection.2.6.2}%
 \contentsline {subsection}{\numberline {2.6.3}Message flow and chunking}{46}{subsection.2.6.3}%
-\contentsline {subsection}{\numberline {2.6.4}Cursor synchronization}{50}{subsection.2.6.4}%
-\contentsline {section}{\numberline {2.7}Final design}{51}{section.2.7}%
-\contentsline {chapter}{\numberline {3}Analysis of the solution}{53}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Testing environment}{53}{section.3.1}%
-\contentsline {section}{\numberline {3.2}Unit Testing}{55}{section.3.2}%
-\contentsline {section}{\numberline {3.3}Manual Acceptance Testing}{57}{section.3.3}%
-\contentsline {section}{\numberline {3.4}Performance benchmarks}{58}{section.3.4}%
-\contentsline {subsection}{\numberline {3.4.1}Synchronization latency (NF-07)}{58}{subsection.3.4.1}%
-\contentsline {subsection}{\numberline {3.4.2}File load time (NF-08)}{60}{subsection.3.4.2}%
-\contentsline {subsection}{\numberline {3.4.3}Multi-user scalability (NF-09)}{60}{subsection.3.4.3}%
-\contentsline {subsection}{\numberline {3.4.4}Rendering frame rate (NF-10)}{62}{subsection.3.4.4}%
-\contentsline {subsection}{\numberline {3.4.5}Chunking overhead}{63}{subsection.3.4.5}%
-\contentsline {section}{\numberline {3.5}Reliability analysis}{64}{section.3.5}%
-\contentsline {subsection}{\numberline {3.5.1}CRDT convergence (NF-06)}{64}{subsection.3.5.1}%
-\contentsline {subsection}{\numberline {3.5.2}Offline continuity (NF-05)}{65}{subsection.3.5.2}%
-\contentsline {section}{\numberline {3.6}Usability assessment}{66}{section.3.6}%
-\contentsline {section}{\numberline {3.7}Non-functional requirements summary}{66}{section.3.7}%
-\contentsline {section}{\numberline {3.8}Identified limitations}{68}{section.3.8}%
-\contentsline {chapter}{\numberline {4}Conclusions}{69}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Is the final product a success?}{69}{section.4.1}%
-\contentsline {section}{\numberline {4.2}What we achieved and how we avoided dangers}{69}{section.4.2}%
-\contentsline {section}{\numberline {4.3}What could be done better}{70}{section.4.3}%
-\contentsline {section}{\numberline {4.4}Plans for future development}{70}{section.4.4}%
-\contentsline {section}{\numberline {4.5}Open problems}{71}{section.4.5}%
+\contentsline {subsection}{\numberline {2.6.4}Cursor synchronization}{49}{subsection.2.6.4}%
+\contentsline {section}{\numberline {2.7}Final design}{50}{section.2.7}%
+\contentsline {chapter}{\numberline {3}Analysis of the solution}{52}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Testing environment}{52}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Unit Testing}{54}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Manual Acceptance Testing}{56}{section.3.3}%
+\contentsline {section}{\numberline {3.4}Performance benchmarks}{57}{section.3.4}%
+\contentsline {subsection}{\numberline {3.4.1}Synchronization latency (NF-07)}{57}{subsection.3.4.1}%
+\contentsline {subsection}{\numberline {3.4.2}File load time (NF-08)}{59}{subsection.3.4.2}%
+\contentsline {subsection}{\numberline {3.4.3}Multi-user scalability (NF-09)}{59}{subsection.3.4.3}%
+\contentsline {subsection}{\numberline {3.4.4}Rendering frame rate (NF-10)}{61}{subsection.3.4.4}%
+\contentsline {subsection}{\numberline {3.4.5}Chunking overhead}{62}{subsection.3.4.5}%
+\contentsline {section}{\numberline {3.5}Reliability analysis}{63}{section.3.5}%
+\contentsline {subsection}{\numberline {3.5.1}CRDT convergence (NF-06)}{63}{subsection.3.5.1}%
+\contentsline {subsection}{\numberline {3.5.2}Offline continuity (NF-05)}{64}{subsection.3.5.2}%
+\contentsline {section}{\numberline {3.6}Usability assessment}{65}{section.3.6}%
+\contentsline {section}{\numberline {3.7}Non-functional requirements summary}{65}{section.3.7}%
+\contentsline {section}{\numberline {3.8}Identified limitations}{67}{section.3.8}%
+\contentsline {chapter}{\numberline {4}Conclusions}{68}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Is the final product a success?}{68}{section.4.1}%
+\contentsline {section}{\numberline {4.2}What we achieved and how we avoided dangers}{68}{section.4.2}%
+\contentsline {section}{\numberline {4.3}What could be done better}{69}{section.4.3}%
+\contentsline {section}{\numberline {4.4}Plans for future development}{69}{section.4.4}%
+\contentsline {section}{\numberline {4.5}Open problems}{70}{section.4.5}%
 \contentsline {chapter}{\numberline {A}User Manual}{}{appendix.A}%
 \contentsline {chapter}{\numberline {B}Deployment Guide}{}{appendix.B}%
 \contentsline {chapter}{\numberline {C}Manual Acceptance Test Scenarios}{}{appendix.C}%

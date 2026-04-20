@@ -19,9 +19,9 @@
 %\usepackage[backend=bibtex, style=verbose-trad2]{biblatex}
 
 
-\usepackage{commath} % various commands which can make writing math expressions easier --- documentation available at: https://ctan.gust.org.pl/tex-archive/macros/latex/contrib/commath/commath.pdf
+\usepackage{commath} % various commands which can make writing math expressions easier - documentation available at: https://ctan.gust.org.pl/tex-archive/macros/latex/contrib/commath/commath.pdf
 
-\usepackage[hidelinks]{hyperref} % for hyperlinks, for example, urls, references to equations, entries in a bibliography --- hidelinks option removes rectangles around hiperlinks
+\usepackage[hidelinks]{hyperref} % for hyperlinks, for example, urls, references to equations, entries in a bibliography - hidelinks option removes rectangles around hiperlinks
 
 
 % ---------------- MARGINS, INDENTATION, LINESPREAD ------------------
@@ -339,9 +339,9 @@ How far are these architectures from beeing good fit for collaboarative appliact
 \end{figure}
 
 
-As we can see, the level of complexity is already very high. A single user interaction triggers a cascade through multiple functions, modules, and services. Trying to layer real-time collaboration on top of this kind of architecture is, frankly, a nightmare -- it would require coordinating asynchronous, time-consuming remote calls across all those services just to keep everyone in sync.
+As we can see, the level of complexity is already very high. A single user interaction triggers a cascade through multiple functions, modules, and services. Trying to layer real-time collaboration on top of this kind of architecture is, frankly, a nightmare - it would require coordinating asynchronous, time-consuming remote calls across all those services just to keep everyone in sync.
 
-For a while people did try exactly this. The approach was called OT -- operational transformation -- and it is still the backbone of Google Docs today. OT works, but it is notoriously hard to implement correctly, and the failure modes under concurrent edits are subtle. In this thesis I chose to focus on local-first architectures instead, which have gained much broader traction in the industry and open up a wider range of application types. 
+For a while people did try exactly this. The approach was called OT - operational transformation - and it is still the backbone of Google Docs today. OT works, but it is notoriously hard to implement correctly, and the failure modes under concurrent edits are subtle. In this thesis I chose to focus on local-first architectures instead, which have gained much broader traction in the industry and open up a wider range of application types. 
 
 There are also other reasons to be skeptical of cloud-first when it comes to collaborative applications.
 Consider what actually happens during a typical user interaction. Below we can see the general asynchronous
@@ -354,9 +354,9 @@ flow of a user interacting with a standard cloud-based application.
 \end{figure}
 
 
-What stands out immediately is how much the system depends on database connectivity. The obvious follow-up question is: what happens when there is no internet? The answer is simple -- nothing works. In that sense the entire application is really just an asynchronous graphical wrapper around a remote database, which is a somewhat uncomfortable truth.
+What stands out immediately is how much the system depends on database connectivity. The obvious follow-up question is: what happens when there is no internet? The answer is simple - nothing works. In that sense the entire application is really just an asynchronous graphical wrapper around a remote database, which is a somewhat uncomfortable truth.
 
-This brings us to a useful contrast. In the cloud-first model the underlying assumption is: "if the user's action wasn't saved to the database, it never happened." Local-first flips this on its head: "local persistence is what matters most -- the cloud is there only to connect peers."
+This brings us to a useful contrast. In the cloud-first model the underlying assumption is: "if the user's action wasn't saved to the database, it never happened." Local-first flips this on its head: "local persistence is what matters most - the cloud is there only to connect peers."
 
 With that distinction in mind, let's look at how a typical user interaction plays out in a local-first system instead.
 
@@ -368,7 +368,7 @@ With that distinction in mind, let's look at how a typical user interaction play
 \end{figure}
 
 
-The contrast is immediately visible. In a local-first system, the user is never blocked waiting for a database roundtrip -- all interactions happen against the local replica, and connectivity to other peers is a bonus rather than a prerequisite. Synchronization of state between users happens on each machine independently. That is precisely what makes the system distributed in any meaningful sense. It is also worth noting that the architecture is considerably flatter: far fewer services and remote calls are involved. Later chapters will show concretely how this property is what makes true real-time collaboration actually achievable.
+The contrast is immediately visible. In a local-first system, the user is never blocked waiting for a database roundtrip - all interactions happen against the local replica, and connectivity to other peers is a bonus rather than a prerequisite. Synchronization of state between users happens on each machine independently. That is precisely what makes the system distributed in any meaningful sense. It is also worth noting that the architecture is considerably flatter: far fewer services and remote calls are involved. Later chapters will show concretely how this property is what makes true real-time collaboration actually achievable.
 
 
 \section{Local-first vs Cloud-first}
@@ -385,7 +385,7 @@ collaborative application.
 \end{figure}
 
 Given the trade-offs, local-first is the more compelling choice when designing a collaborative application.
-That said, it is not a universal solution -- there are scenarios where it simply does not fit.
+That said, it is not a universal solution - there are scenarios where it simply does not fit.
 The table below lays out use cases where local-first works well and where it breaks down.
 
 \begin{table}[H]
@@ -408,9 +408,9 @@ The table below lays out use cases where local-first works well and where it bre
 
 \section{Why would one implement own collaborative system ?}
 
-Building a collaborative whiteboard is in many ways just a gateway into a much richer topic: distributed, conflict-free, real-time data storage where every operation is reversible and mergeable. The whiteboard is an ideal teaching example because it is visually intuitive -- you can see convergence happening in front of you -- yet it exercises exactly the same data-structure challenges you would face in far more complex systems.
+Building a collaborative whiteboard is in many ways just a gateway into a much richer topic: distributed, conflict-free, real-time data storage where every operation is reversible and mergeable. The whiteboard is an ideal teaching example because it is visually intuitive - you can see convergence happening in front of you - yet it exercises exactly the same data-structure challenges you would face in far more complex systems.
 
-The same underlying principles -- distributed replicas that stay consistent without a central arbiter -- show up in wildly different domains. Drone swarms that broadcast formation data to one another, peer-to-peer file-sharing networks, collaborative code editors, even multi-player games: all of them are, at some level, the same problem with a different domain on top. 
+The same underlying principles - distributed replicas that stay consistent without a central arbiter - show up in wildly different domains. Drone swarms that broadcast formation data to one another, peer-to-peer file-sharing networks, collaborative code editors, even multi-player games: all of them are, at some level, the same problem with a different domain on top. 
 
 \section{Examples from industry}
 
@@ -500,12 +500,12 @@ The user interface is built on top of egui, which turned out to be a good fit fo
 needs to stay responsive while background threads are busy with network I/O.
 
 Peers communicate over WebRTC, with an open-source LiveKit server acting as the relay. Rather than requiring accounts
-or any kind of login, users simply type a room name to join a session -- the room is created automatically if it
+or any kind of login, users simply type a room name to join a session - the room is created automatically if it
 does not exist yet. Whiteboard state is kept consistent across all participants via CRDTs from the Automerge library.
 In practice this means everyone can draw and erase at the same time without worrying about conflicts, and the cursors
 of remote users are shown live on the canvas.
 
-Each stroke is represented as a vector of sampled points with an associated color and width -- not as raw pixels.
+Each stroke is represented as a vector of sampled points with an associated color and width - not as raw pixels.
 One deliberate design choice worth noting upfront: the application does not persist anything by default.
 When the app is closed, the session is gone unless the user explicitly exported it first.
 A mobile version was never part of the scope.
@@ -518,7 +518,7 @@ A mobile version was never part of the scope.
 Below you can see tables with user stories for each actor in the system: user, application, and server.
 \begin{table}[H]
 	\centering
-	\caption{Functional Requirements -- User Stories (Actor: User) Part 1}
+	\caption{Functional Requirements - User Stories (Actor: User) Part 1}
 	\begin{tabular}{|c|p{0.12\textwidth}|p{0.38\textwidth}|p{0.3\textwidth}|}
 		\hline
 		\textbf{ID} & \textbf{As a...} & \textbf{I want to...} & \textbf{In order to...} \\
@@ -535,7 +535,7 @@ Below you can see tables with user stories for each actor in the system: user, a
 
 \begin{table}[H]
 	\centering
-	\caption{Functional Requirements -- User Stories (Actor: User) Part 2}
+	\caption{Functional Requirements - User Stories (Actor: User) Part 2}
 	\begin{tabular}{|c|p{0.12\textwidth}|p{0.38\textwidth}|p{0.3\textwidth}|}
 		\hline
 		\textbf{ID} & \textbf{As a...} & \textbf{I want to...} & \textbf{In order to...} \\
@@ -573,7 +573,7 @@ Below you can see tables with user stories for each actor in the system: user, a
 
 \begin{table}[H]
 	\centering
-	\caption{Functional Requirements -- User Stories (Actor: Application, Part 1)}
+	\caption{Functional Requirements - User Stories (Actor: Application, Part 1)}
 	\begin{tabular}{|c|p{0.12\textwidth}|p{0.38\textwidth}|p{0.3\textwidth}|}
 		\hline
 		\textbf{ID} & \textbf{As a...} & \textbf{I want to...} & \textbf{In order to...} \\
@@ -606,7 +606,7 @@ Below you can see tables with user stories for each actor in the system: user, a
 
 \begin{table}[H]
 	\centering
-	\caption{Functional Requirements -- User Stories (Actor: Application, Part 2)}
+	\caption{Functional Requirements - User Stories (Actor: Application, Part 2)}
 	\begin{tabular}{|c|p{0.12\textwidth}|p{0.38\textwidth}|p{0.3\textwidth}|}
 		\hline
 		\textbf{ID} & \textbf{As a...} & \textbf{I want to...} & \textbf{In order to...} \\
@@ -623,7 +623,7 @@ Below you can see tables with user stories for each actor in the system: user, a
 
 \begin{table}[H]
 	\centering
-	\caption{Functional Requirements -- User Stories (Actor: Server)}
+	\caption{Functional Requirements - User Stories (Actor: Server)}
 	\begin{tabular}{|c|p{0.12\textwidth}|p{0.38\textwidth}|p{0.3\textwidth}|}
 		\hline
 		\textbf{ID} & \textbf{As a...} & \textbf{I want to...} & \textbf{In order to...} \\
@@ -655,7 +655,7 @@ Non-functional requirements define the quality attributes of the system. The FUR
 
 \begin{table}[H]
 	\centering
-	\caption{Non-Functional Requirements -- FURPS+ Analysis}
+	\caption{Non-Functional Requirements - FURPS+ Analysis}
 	\begin{tabular}{|p{0.18\textwidth}|c|p{0.62\textwidth}|}
 		\hline
 		\textbf{Category} & \textbf{ID} & \textbf{Description} \\
@@ -672,7 +672,7 @@ Non-functional requirements define the quality attributes of the system. The FUR
 		\multirow{2}{*}{\parbox{0.18\textwidth}{\textbf{Reliability}}}
 		& NF-05 & The system shall ensure continuity of work in offline mode through local CRDT state, with automatic synchronization upon reconnecting to the session. \\
 		\cline{2-3}
-		& NF-06 & The CRDT-based data model shall guarantee that no data is lost during concurrent edits -- all user operations shall be preserved after merge. \\
+		& NF-06 & The CRDT-based data model shall guarantee that no data is lost during concurrent edits - all user operations shall be preserved after merge. \\
 		\hline
 		\multirow{4}{*}{\parbox{0.18\textwidth}{\textbf{Performance}}}
 		& NF-07 & The synchronization time of changes between users shall not exceed 2 seconds on a connection with bandwidth $\geq$10~Mb/s. \\
@@ -691,7 +691,7 @@ Non-functional requirements define the quality attributes of the system. The FUR
 		\multirow{2}{*}{\parbox{0.18\textwidth}{\textbf{Constraints (+)}}}
 		& NF-13 & The application shall be implemented in Rust, using egui for the GUI, Automerge for CRDTs, Tokio for async runtime, and LiveKit for WebRTC signaling. \\
 		\cline{2-3}
-		& NF-14 & The application shall not persist any data by default -- all state is lost when the app is closed unless explicitly exported by the user. \\
+		& NF-14 & The application shall not persist any data by default - all state is lost when the app is closed unless explicitly exported by the user. \\
 		\hline
 	\end{tabular}
 	\label{tab:furps-analysis}
@@ -741,11 +741,11 @@ server (open source LiveKit SFU) facilitates communication between clients. Each
   CRDT data model (Automerge), and the networking layer (LiveKit/Tokio).
 
 The program is devided mostly into three main modules: \texttt{ui.rs} which holds most of the application interface
-state and UX interaction methods, \texttt{backend\_api.rs} -- a module of abstraction which defines connection points 
+state and UX interaction methods, \texttt{backend\_api.rs} - a module of abstraction which defines connection points 
 of canvas/CRDT and networking, because what user sees on the screen is not just a matrix of pixels from 
 persistent storage, but a result of rendering of the CRDT document.
 
-\texttt{automerge\_backend.rs} -- a module which defines the CRDT document and methods of interaction with it. It is 
+\texttt{automerge\_backend.rs} - a module which defines the CRDT document and methods of interaction with it. It is 
 an implementation of \texttt{backend\_api.rs} with a little bit of extra methods.
 
 \section{Technology Stack}
@@ -822,7 +822,7 @@ Below you can see more precise diagrams of submodules of the user interface modu
  the current page of the application, which can be either \texttt{Editor} (whiteboard) or \texttt{LiveKit}
  (connection panel). \texttt{SidebarState} struct defines the state of the sidebar, which can be either
   \texttt{visible} or not and have \texttt{default\_width}. Another important enum is \texttt{Tool}, which defines 
-	the current tool selected by the user -- either \texttt{Pen} or \texttt{Eraser}. 
+	the current tool selected by the user - either \texttt{Pen} or \texttt{Eraser}. 
 	
 The \texttt{WhiteboardState} struct, shown in the diagram below, holds everything that describes the 
 drawing canvas at any given moment.
@@ -889,19 +889,19 @@ As shown in Figure~\ref{fig:backend-interface}, the \texttt{DocBackend} interfac
 grouped into three categories:
 
 \begin{itemize}
-	\item \textbf{Document manipulation} -- The \texttt{apply\_intent} method accepts an \texttt{Intent}
+	\item \textbf{Document manipulation} - The \texttt{apply\_intent} method accepts an \texttt{Intent}
 		  (either \texttt{Draw} or \texttt{Clear}) and returns a \texttt{FrontendUpdate} containing the
 		  current list of strokes to render. The \texttt{get\_strokes} method allows the UI to retrieve
 		  the full set of strokes at any time.
 
-	\item \textbf{Synchronization} -- The \texttt{peer\_connected} and \texttt{peer\_disconnected} methods
+	\item \textbf{Synchronization} - The \texttt{peer\_connected} and \texttt{peer\_disconnected} methods
 		  notify the backend when remote peers join or leave. The \texttt{receive\_sync\_message} method
 		  processes incoming binary sync messages from a peer and returns a \texttt{FrontendUpdate}
 		  reflecting any changes. On the other hand, \texttt{generate\_sync\_message} produces an outgoing
 		  binary message broadcasted to all peers, returning \texttt{None} when there is nothing
 		  to send.
 
-	\item \textbf{Persistence} -- The \texttt{save} method serializes the entire document state into
+	\item \textbf{Persistence} - The \texttt{save} method serializes the entire document state into
 		  a byte vector, while \texttt{load} restores the document from previously saved bytes. The 1.0.0+1 
 		  version of the applicaiton in ALFA environment enables two file types persistence: .crdt and .png. These
 		  methods enable explicit file export and import without requiring any default persistence.
@@ -911,11 +911,11 @@ The raster graphics data types are also defined in this module. \texttt{Point} r
 \texttt{Stroke} groups a sequence of points with a color (RGBA) and width, \texttt{Intent} encodes
 user actions, and \texttt{FrontendUpdate} carries the resulting list of strokes back to the UI.
 
-This trait-based design makes the backend easily testable and replaceable -- one could swap Automerge
+This trait-based design makes the backend easily testable and replaceable - one could swap Automerge
 for a different CRDT library (or even a simple in-memory store for testing) without modifying the
 user interface code.
 
-\section{Synchronization Protocol -- How consistency is achieved}
+\section{Synchronization Protocol - How consistency is achieved}
 
 % automerge sync messages, how they are generated and applied, how conflicts are resolved, how cursors are synchronized, how new users synchronize with existing state
 %  when joining a room.
@@ -962,8 +962,8 @@ At the protocol level, synchronization in Automerge boils down to a conversation
 	\item \textbf{The core handshake} \\
 		\verb|generate_sync_message(peer_id)| asks the library: ``what has changed since this peer last synced?'' Automerge consults the per-peer \verb|sync::State| and, if there are unseen deltas, packs them into a compact binary blob. If the peer is already current it returns \verb|None| and the conversation ends.
 		\verb|receive_sync_message(peer_id, message)| does the other half: unpacks the blob, merges the changes into the local document, and advances the \verb|sync::State| so those same changes are not re-sent next time.
-	\item \textbf{Bloom filters -- cheap history summaries} \\
-		Sending a full history of every operation would be expensive, especially for peers that have diverged over a longer period. Automerge avoids this by including a Bloom filter in each sync message -- a compact probabilistic structure that summarises all the operations the sender holds. The receiver compares its own operations against this filter and can quickly identify which of its changes the other side has never seen, bundling only those into the response.
+	\item \textbf{Bloom filters - cheap history summaries} \\
+		Sending a full history of every operation would be expensive, especially for peers that have diverged over a longer period. Automerge avoids this by including a Bloom filter in each sync message - a compact probabilistic structure that summarises all the operations the sender holds. The receiver compares its own operations against this filter and can quickly identify which of its changes the other side has never seen, bundling only those into the response.
 	\item \textbf{Why convergence sometimes takes several rounds} \\
 		A single exchange rarely covers everything when peers have diverged significantly. The typical sequence looks like this:
 		\begin{itemize}
@@ -1030,7 +1030,7 @@ operation is issued.
     \item \textbf{Result}: The new stroke from Peer~B \emph{survives}. The old strokes are 
     deleted (since both A and B agree they existed), but the new stroke remains because 
     Peer~A's delete operation did not ``reach'' it. This is the \textbf{Add wins} semantics 
-    --- insertions that a peer has not observed cannot be removed by that peer's concurrent 
+    - insertions that a peer has not observed cannot be removed by that peer's concurrent 
     delete.
 \end{itemize}
 
@@ -1048,7 +1048,7 @@ such operations), Automerge must deterministically choose which value to display
     \item \textbf{Result}: If Peer~A's change hash is \texttt{0xabc...} and Peer~B's is 
     \texttt{0xdef...}, Peer~B wins because its hash is lexicographically higher. Crucially, 
     both peers will see the same winner. No data is actually lost in the operation history 
-    --- Automerge preserves the full history --- but only one value is displayed as the 
+    - Automerge preserves the full history - but only one value is displayed as the 
     ``current'' state.
 \end{itemize}
 
@@ -1101,9 +1101,12 @@ immediately converges to the same state as the rest of the room. No snapshot mec
 no dedicated initialization endpoint - it just falls out of the ordinary sync protocol for free.
 
 % Novel solutions
-\section{CRDT Data Model -- What is being synchronized?}
+\section{CRDT Data Model - What is being synchronized?}
 
-With the sync protocol covered, the natural next question is: what exactly is being synchronized? This section describes the concrete data structures inside the Automerge document -- how strokes and the background image are represented as CRDT objects, how user actions translate into CRDT operations, and how the whole document can be saved and loaded.
+With the sync protocol covered, the natural next question is: what exactly is being synchronized? 
+This section describes the concrete data structures inside the Automerge document - how strokes and 
+the background image are represented as CRDT objects, how user actions translate into CRDT operations,
+ and how the whole document can be saved and loaded.
 
 \subsection{Document schema}
 
@@ -1112,17 +1115,17 @@ document root (\texttt{ROOT}):
 
 \begin{verbatim}
 ROOT
- +-- "strokes"    : List<String>       // JSON-serialized strokes
- +-- "background" : Bytes              // optional background image
+ +- "strokes"    : List<String>       // JSON-serialized strokes
+ +- "background" : Bytes              // optional background image
 \end{verbatim}
 
 \begin{itemize}
-    \item \textbf{\texttt{strokes}} --- an Automerge \texttt{List} where each element is a JSON 
+    \item \textbf{\texttt{strokes}} - an Automerge \texttt{List} where each element is a JSON 
     string representing a single \texttt{Stroke} object. The list is created lazily: if it does 
     not exist when a stroke is drawn, the backend creates it with 
     \texttt{put\_object(ROOT, "strokes", ObjType::List)}.
     
-    \item \textbf{\texttt{background}} --- an optional \texttt{Bytes} scalar stored directly at 
+    \item \textbf{\texttt{background}} - an optional \texttt{Bytes} scalar stored directly at 
     the root. It holds the raw binary data (e.g., PNG) of a background image, if one has been 
     loaded by the user.
 \end{itemize}
@@ -1234,7 +1237,7 @@ the UI.
 For \texttt{Intent::Clear}, the backend retrieves the list and calls \texttt{splice} with a 
 delete count equal to the list length and an empty iterator for replacements. This removes all 
 elements in a single CRDT operation. As discussed in Section~2.4.3, this delete only affects 
-strokes that the local peer has observed --- any concurrently inserted strokes from remote 
+strokes that the local peer has observed - any concurrently inserted strokes from remote 
 peers will survive the clear.
 
 \paragraph{Eraser implementation}
@@ -1244,7 +1247,7 @@ implemented entirely at the UI layer by substituting the user-selected color wit
 (\texttt{Color32::WHITE}, i.e.\ RGBA \texttt{[255,\,255,\,255,\,255]}). When the user 
 releases the eraser stroke, the UI commits it through the same \texttt{Intent::Draw} path as 
 a regular pen stroke. From the CRDT's perspective, an eraser action is indistinguishable from 
-drawing a white line --- it is simply another entry appended to the \texttt{"strokes"} list.
+drawing a white line - it is simply another entry appended to the \texttt{"strokes"} list.
 
 This design has several implications:
 
@@ -1252,7 +1255,7 @@ This design has several implications:
     \item \textbf{Simplicity}: No additional CRDT operation or intent type is needed. The 
     backend remains unaware of the eraser concept entirely, keeping the synchronization logic 
     minimal.
-    \item \textbf{Additive nature}: Eraser strokes are additive --- they increase the size of 
+    \item \textbf{Additive nature}: Eraser strokes are additive - they increase the size of 
     the stroke list rather than removing elements. Over extended drawing sessions, this can 
     lead to a growing document even when the user is ``erasing'' content.
     \item \textbf{Background limitation}: Because the eraser paints white pixels, it only 
@@ -1261,7 +1264,7 @@ This design has several implications:
     underlying image.
     \item \textbf{No structural removal}: Individual strokes beneath the eraser path are not 
     removed from the CRDT document. They remain in the operation history and continue to be 
-    synchronized with peers. The ``erasure'' is purely visual --- the white stroke is rendered 
+    synchronized with peers. The ``erasure'' is purely visual - the white stroke is rendered 
     on top during the rasterization pass, hiding the strokes underneath.
 \end{itemize}
 
@@ -1281,15 +1284,15 @@ trait. Two export formats are supported:
 
 \begin{itemize}
     \item \textbf{\texttt{.crdt} (full state)}: The \texttt{save()} method calls 
-    \texttt{self.doc.save()}, which serializes the entire Automerge document --- including all 
-    operation history, actor IDs, and the current state --- into a compact binary format. 
+    \texttt{self.doc.save()}, which serializes the entire Automerge document - including all 
+    operation history, actor IDs, and the current state - into a compact binary format. 
     Loading this file with \texttt{AutoCommit::load(\&data)} fully reconstructs the document, 
     preserving the ability to merge with other peers' documents. After loading, all sync states 
     are cleared because the relationship with previously connected peers is no longer valid.
     
     \item \textbf{\texttt{.png} (raster snapshot)}: The UI layer can also export the current 
-    canvas as a PNG image. This is a one-way export --- the raster image cannot be loaded back 
-    into the CRDT --- but it is useful for sharing the whiteboard content outside the 
+    canvas as a PNG image. This is a one-way export - the raster image cannot be loaded back 
+    into the CRDT - but it is useful for sharing the whiteboard content outside the 
     application.
 \end{itemize}
 
@@ -1311,14 +1314,14 @@ fn load(&mut self, data: Vec<u8>) {
 
 The \texttt{.crdt} format preserves the full operation history, which means that a loaded 
 document can be taken into a new collaborative session and merged with other peers' changes 
-seamlessly. This is a direct benefit of the CRDT architecture --- the document carries its 
+seamlessly. This is a direct benefit of the CRDT architecture - the document carries its 
 own synchronization context.
 
 
 \section{Communication Layer - Where the messages travel ?}
 
 In previous sections, we have established \emph{how} the synchronization protocol achieves consistency and \emph{what} 
-data structures are being synchronized. This section focuses on the \emph{communication layer} --- the transport
+data structures are being synchronized. This section focuses on the \emph{communication layer} - the transport
  infrastructure that carries sync messages and other real-time updates between peers in a collaborative session.
 % - livekit room connection, data channel publishing/subscribing, broadcasting of messages/cursor positions,
 % - usage of Tokio.
@@ -1422,7 +1425,11 @@ application. The structs are: TransportPacket, NetworkMessage,
 	\label{fig:communication-enums}
 \end{figure}
 
-Figure~\ref{fig:data-receiving-seq} illustrates the complete lifecycle of an incoming message, from the moment a remote peer publishes data on the LiveKit data channel to the point where the local UI reacts to it. The flow traverses six participants that correspond to distinct runtime components: the remote peer, the LiveKit room (server-side), the background Tokio thread, the two ends of the MPSC channel (\texttt{UnboundedSender<AppMsg>} and \texttt{UnboundedReceiver<AppMsg>}), and the UI thread.
+Figure~\ref{fig:data-receiving-seq} illustrates the complete lifecycle of an incoming message, from
+ the moment a remote peer publishes data on the LiveKit data channel to the point where the local UI 
+ reacts to it. The flow traverses six participants that correspond to distinct runtime components: 
+ the remote peer, the LiveKit room (server-side), the background Tokio thread, the two ends of the MPSC 
+ channel (\texttt{UnboundedSender<AppMsg>} and \texttt{UnboundedReceiver<AppMsg>}), and the UI thread.
 
 \begin{figure}[H]
 	\centering
@@ -1431,29 +1438,77 @@ Figure~\ref{fig:data-receiving-seq} illustrates the complete lifecycle of an inc
 	\label{fig:data-receiving-seq}
 \end{figure}
 
-Knowing the data types we can now describe the message flow in detail. The process begins when a remote peer calls \texttt{publish\_data(payload)} on its local LiveKit participant. The LiveKit SFU forwards the payload to all other participants in the room, which triggers a \texttt{RoomEvent::DataReceived\{payload, participant\}} event on the background thread's event loop. The background thread immediately attempts to deserialize the raw bytes into a \texttt{TransportPacket} --- the wire-level envelope described earlier in this section.
+With the types established, tracing a message through the system is fairly straightforward. 
+The journey starts when a remote peer calls \texttt{publish\_data(payload)} on its LiveKit participant. 
+The SFU forwards this to everyone in the room, which fires a \texttt{RoomEvent::DataReceived} on 
+the background thread's event loop. The thread tries to deserialize the raw bytes into
+ a \texttt{TransportPacket}.
 
-At this point, the flow branches depending on the packet variant. If the packet is a \texttt{TransportPacket::Message}, the payload is small enough to have been sent in a single frame. The background thread deserializes the inner bytes directly into a \texttt{NetworkMessage} and forwards it to the UI thread by sending an \texttt{AppMsg::NetworkMessage\{sender, message\}} through the MPSC channel. If, however, the packet is a \texttt{TransportPacket::Chunk}, the message was too large for a single LiveKit frame and was split by the sender into multiple chunks. Each chunk carries a unique transfer identifier, its index within the sequence, and the total number of expected chunks. The background thread stores the incoming chunk in a per-peer \texttt{incomplete\_transfers} buffer --- a hash map keyed by the transfer identifier. After each chunk is stored, the thread checks whether all chunks for that transfer have arrived. If chunks are still missing, the thread simply returns to the event loop and waits for the next packet. Once the final chunk arrives and the buffer is complete, the thread concatenates all chunks in index order, reconstructs the full byte sequence, deserializes it into a \texttt{NetworkMessage}, and sends the result to the UI thread through the same MPSC channel path.
+What happens next depends on which variant arrived. A \texttt{TransportPacket::Message} means the 
+payload fit in one LiveKit frame - the thread deserializes it directly into a \texttt{NetworkMessage} 
+and pushes it onto the MPSC channel as an \texttt{AppMsg::NetworkMessage}.
+ A \texttt{TransportPacket::Chunk} means the original message was too large and had to be 
+ fragmented. Each chunk carries a unique 64-bit transfer ID, its position in the sequence, 
+ and the total chunk count. Incoming chunks accumulate in a per-peer \texttt{incomplete\_transfers}
+  buffer; once the last one arrives the thread reassembles them in order,
+   deserializes the complete payload, and sends it through the same MPSC path.
 
-LiveKit imposes a maximum message size limit of approximately 14\,KB for data channel packets. To accommodate this constraint, the sending side implements a symmetric chunking mechanism: before publishing, it checks the serialized size of the \texttt{NetworkMessage}. If the payload fits within the 14\,KB threshold, it is wrapped in a \texttt{TransportPacket::Message} and sent as a single packet. Otherwise, the payload is divided into 14\,KB segments, each wrapped in a \texttt{TransportPacket::Chunk} with the appropriate metadata, and sent sequentially. A randomly generated 64-bit identifier ties all chunks of the same logical message together, ensuring that concurrent transfers from different peers or even from the same peer do not interfere with each other.
+The 14\,KB chunk boundary comes from LiveKit's data channel limit. The sender mirrors this logic:
+ if the serialized payload fits, it goes as a single \texttt{TransportPacket::Message}; 
+ otherwise it is sliced into 14\,KB \texttt{Chunk} packets. A random 64-bit ID keeps concurrent transfers 
+ - even two simultaneous ones from the same peer - from getting their fragments mixed together.
 
-After the \texttt{AppMsg} is placed on the channel, the background thread calls \texttt{ctx.request\_repaint()} to wake up the egui rendering loop. On the next frame, the \texttt{update()} method of \texttt{AppView} polls the receiver with \texttt{try\_recv()} and retrieves the pending \texttt{AppMsg::NetworkMessage}. The UI then inspects the inner \texttt{NetworkMessage} variant and dispatches accordingly: a \texttt{Sync} message is forwarded to the CRDT backend via \texttt{receive\_sync\_message()}, which merges the remote changes and returns a \texttt{FrontendUpdate} that triggers a canvas redraw followed by a \texttt{sync\_with\_all()} call to propagate any resulting state to other peers; a \texttt{Chat} message is appended to the event log displayed in the LiveKit panel; and a \texttt{Cursor} message updates the sender's entry in the \texttt{remote\_cursors} map so that the next rendering pass draws the remote pointer at the correct position.
+Once the reassembled \texttt{AppMsg} lands on the channel, the background thread pokes the egui 
+loop with \texttt{ctx.request\_repaint()}. On the next frame, \texttt{AppView::update()} picks it
+ up via \texttt{try\_recv()} and dispatches based on the inner \texttt{NetworkMessage}
+  variant: a \texttt{Sync} payload goes to \texttt{receive\_sync\_message()}, which merges 
+  it and returns a \texttt{FrontendUpdate} triggering a canvas redraw
+   followed by \texttt{sync\_with\_all()}; a \texttt{Chat} payload gets appended to the event log; 
+   and a \texttt{Cursor} payload updates \texttt{remote\_cursors} so the next render pass places 
+   the remote pointer correctly.
 
-The entire message flow between the UI and the network layer is handled by four custom enum types, shown in the diagrams below. No additional classes were needed, as the remaining transport infrastructure is provided by the LiveKit SDK itself.
+The whole flow is managed by just four custom types. Everything else - connection handling, 
+room management, event dispatch - is provided by the LiveKit SDK itself.
 
 
 
-The first pair of types operates at the wire level. \texttt{TransportPacket} is a serializable envelope that wraps outgoing data before it is published to the LiveKit data channel. Its \texttt{Message} variant carries a small payload that fits within the 14\,KB limit in a single packet, while the \texttt{Chunk} variant carries a fragment of a larger message along with metadata --- a unique transfer identifier, the chunk index, and the total number of chunks --- so that the receiver can reassemble the original payload. \texttt{NetworkMessage} represents the application-level content inside each packet and has three variants: \texttt{Sync}, which carries raw Automerge synchronization bytes; \texttt{Chat}, which carries a plain-text chat string; and \texttt{Cursor}, which carries an $(x, y)$ coordinate pair for remote cursor rendering.
+At the wire level, two types handle encoding. \texttt{TransportPacket} is the envelope wrapping data
+ before it hits the LiveKit channel: \texttt{Message} holds a complete small payload, \texttt{Chunk}
+  holds a fragment together with the transfer ID, chunk index, and total count the receiver needs for 
+  reassembly. Inside every packet sits a \texttt{NetworkMessage} - the actual application payload:
+   raw Automerge bytes (\texttt{Sync}), a chat string (\texttt{Chat}), or a cursor coordinate
+    pair (\texttt{Cursor}).
 
-The second pair of types bridges the two application threads. \texttt{AppCommand} is sent from the UI thread to the background network thread through an MPSC channel. It can instruct the network thread to broadcast a \texttt{NetworkMessage} to all room participants (\texttt{Broadcast}), send a message to a specific subset of recipients (\texttt{Send}), or terminate the connection (\texttt{Disconnect}). Conversely, \texttt{AppMsg} is sent from the background thread back to the UI thread. It delivers incoming network messages (\texttt{NetworkMessage} variant with the sender identity attached), participant lifecycle events (\texttt{ParticipantConnected}, \texttt{ParticipantDisconnected}), and general log entries (\texttt{Log}). Together, these four types form a clean, minimal communication contract that decouples the UI rendering loop from all asynchronous network I/O.
+The other two types handle inter-thread communication. \texttt{AppCommand} flows from the UI thread 
+to the network thread and covers three intents: \texttt{Broadcast} (send to everyone in the room),
+ \texttt{Send} (send to a specific subset of peers), and \texttt{Disconnect} (leave cleanly). 
+ \texttt{AppMsg} flows back the other way, carrying inbound network messages, participant join/leave 
+ notifications, and log entries. These four types together define the entire communication boundary 
+ between the two halves of the application - anything beyond them is the LiveKit SDK's responsibility.
 
 \subsection{Cursor synchronization}
 
-Remote cursor positions are synchronized separately from the CRDT document state. Unlike strokes, which are permanent drawing artifacts stored in the Automerge document and persist across sessions, cursor positions are ephemeral --- they represent a momentary state that is only meaningful while the user is actively interacting with the canvas. For this reason, cursors are not part of the CRDT data model and are instead transmitted as lightweight, fire-and-forget messages over the LiveKit data channel.
+Remote cursor positions are synchronized separately from the CRDT document state. Unlike strokes,
+ which are permanent drawing artifacts stored in the Automerge document and persist across sessions,
+  cursor positions are ephemeral - they represent a momentary state that is only meaningful while the
+   user is actively interacting with the canvas. For this reason, cursors are not part of the CRDT
+    data model and are instead transmitted as lightweight, fire-and-forget messages over the LiveKit
+	 data channel.
 
-When the local user moves the mouse over the whiteboard canvas, the application checks whether at least 50 milliseconds have elapsed since the last cursor broadcast. This throttling mechanism prevents flooding the network with redundant updates during rapid mouse movements while still providing a smooth real-time experience for remote observers. If the throttle interval has passed, the current pointer coordinates are wrapped in a \texttt{NetworkMessage::Cursor\{x, y\}} and sent via \texttt{AppCommand::Broadcast} to all participants in the room.
+When the local user moves the mouse over the whiteboard canvas, the application checks whether at 
+least 50 milliseconds have elapsed since the last cursor broadcast. This throttling mechanism prevents
+ flooding the network with redundant updates during rapid mouse movements while still providing a smooth
+  real-time experience for remote observers. If the throttle interval has passed, the current pointer 
+  coordinates are wrapped in a \texttt{NetworkMessage::Cursor\{x, y\}} and sent 
+  via \texttt{AppCommand::Broadcast} to all participants in the room.
 
-On the receiving side, incoming cursor messages are stored in a \texttt{HashMap<String, Point>} keyed by the sender's identity. During each rendering frame, the UI iterates over this map and draws a colored circle at each remote user's last known position, accompanied by a label showing the user's identity. The color assigned to each remote cursor is deterministic --- it is derived by hashing the user's identity string --- so that the same user always appears with the same color across all peers' screens. When a participant disconnects, their entry is removed from the cursor map, and the indicator disappears from the canvas immediately.
+On the receiving side, incoming cursor messages are stored in a \texttt{HashMap<String, Point>} keyed
+ by the sender's identity. During each rendering frame, the UI iterates over this map and draws a colored
+  circle at each remote user's last known position, accompanied by a label showing the user's identity. 
+  The color assigned to each remote cursor is deterministic - it is derived by hashing the user's
+   identity string - so that the same user always appears with the same color across all peers' screens.
+    When a participant disconnects, their entry is removed from the cursor map, and the indicator
+	 disappears from the canvas immediately.
 
 \begin{figure}[H]
 	\centering
@@ -1462,7 +1517,11 @@ On the receiving side, incoming cursor messages are stored in a \texttt{HashMap<
 	\label{fig:cursor-broadcasting}
 \end{figure}
 
-This design keeps cursor synchronization simple and performant. Because cursor data is not persisted in the CRDT document, it adds no overhead to the Automerge sync protocol and does not increase the document size over time. The trade-off is that cursor positions are lost if a message is dropped, but given the high update frequency (up to 20 updates per second per user), any lost position is quickly replaced by a newer one, making occasional packet loss visually imperceptible.
+This design keeps cursor synchronization simple and performant. Because cursor data is not persisted
+ in the CRDT document, it adds no overhead to the Automerge sync protocol and does not increase the 
+ document size over time. The trade-off is that cursor positions are lost if a message is dropped, 
+ but given the high update frequency (up to 20 updates per second per user), any lost position is 
+ quickly replaced by a newer one, making occasional packet loss visually imperceptible.
 
 \section{Final design}
 
@@ -1494,11 +1553,11 @@ manner to evaluate the application's performance, reliability, usability.
 
 All tests and benchmarks were performed on the hardware and software configuration described in
 Table~\ref{tab:test-env}. The application was compiled in release mode (\texttt{cargo build
---release}) for all performance measurements.
+-release}) for all performance measurements.
 
 \begin{table}[H]
     \centering
-    \caption{Testing environment -- hardware and software configuration}
+    \caption{Testing environment - hardware and software configuration}
     \begin{tabular}{|p{0.30\textwidth}|p{0.55\textwidth}|}
         \hline
         \textbf{Component} & \textbf{Value} \\
@@ -1543,7 +1602,7 @@ Network measurements are shown in Figures~\ref{fig:ping} and~\ref{fig:iperf-comp
 Network conditions play an important role in evaluating the synchronization latency requirement
 NF-07 ($\leq$2~s on a connection with bandwidth $\geq$10~Mb/s). Tests were conducted in two
 network environments. At home, \texttt{ping} to the VPS averaged 67.5~ms and \texttt{iperf3}
-measured approximately 7.14~Mbps downstream -- just below the NF-07 bandwidth threshold, which
+measured approximately 7.14~Mbps downstream - just below the NF-07 bandwidth threshold, which
 is noted where relevant in the analysis. At a public library, \texttt{iperf3} measured
 approximately 829~Kbps, representing a constrained network typical of mobile hot-spot.
 
@@ -1573,13 +1632,13 @@ approximately 829~Kbps, representing a constrained network typical of mobile hot
 
 The backend logic is covered by 13 unit tests located in \texttt{automerge\_backend.rs}.
 All tests are executed with \texttt{cargo test} and all pass. The tests focus exclusively on
-the CRDT backend -- document manipulation, synchronization, persistence, and conflict
+the CRDT backend - document manipulation, synchronization, persistence, and conflict
 resolution. UI rendering is not covered by automated tests, as it depends on the egui
 event loop and was verified through manual acceptance testing (Section~3.3).
 
 \begin{table}[H]
     \centering
-    \caption{Unit test suite -- \texttt{automerge\_backend.rs}}
+    \caption{Unit test suite - \texttt{automerge\_backend.rs}}
     \begin{tabular}{|p{0.52\textwidth}|p{0.34\textwidth}|c|}
         \hline
         \textbf{Test name} & \textbf{What it verifies} & \textbf{Result} \\
@@ -1619,7 +1678,7 @@ Figure~\ref{fig:unit-tests} shows the \texttt{cargo test} output confirming that
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.85\textwidth]{./images/analysis/fig3_2_unit_tests.png}
-    \caption{\texttt{cargo test} output -- all 13 unit tests pass}
+    \caption{\texttt{cargo test} output - all 13 unit tests pass}
     \label{fig:unit-tests}
 \end{figure}
 
@@ -1631,17 +1690,17 @@ the core user workflows were exercised each time a feature was implemented or a 
 was set up. The following workflows were verified:
 
 \begin{itemize}
-    \item \textbf{Drawing and erasing} -- freehand strokes rendered correctly with the
+    \item \textbf{Drawing and erasing} - freehand strokes rendered correctly with the
     selected color and width; eraser paints white over existing strokes.
-    \item \textbf{Save and load} -- whiteboard state exported to \texttt{.crdt} and
+    \item \textbf{Save and load} - whiteboard state exported to \texttt{.crdt} and
     \texttt{.png}; \texttt{.crdt} file reloaded and strokes reproduced correctly.
-    \item \textbf{Connect and sync} -- two clients joined the same LiveKit room; strokes
+    \item \textbf{Connect and sync} - two clients joined the same LiveKit room; strokes
     drawn on one client appeared on the other in real time.
-    \item \textbf{Remote cursors} -- cursor positions of remote participants visible as
+    \item \textbf{Remote cursors} - cursor positions of remote participants visible as
     colored circles with identity labels.
-    \item \textbf{Chat} -- text messages exchanged between participants and displayed in
+    \item \textbf{Chat} - text messages exchanged between participants and displayed in
     the LiveKit panel.
-    \item \textbf{Disconnect} -- client disconnected cleanly; remote cursor removed from
+    \item \textbf{Disconnect} - client disconnected cleanly; remote cursor removed from
     the remaining peer's canvas.
 \end{itemize}
 
@@ -1653,7 +1712,7 @@ backgrounds, no undo/redo) are documented in Section~3.8.
 Performance was measured in two ways: local benchmarks running in a headless configuration
 with the UI disabled to isolate backend logic, and end-to-end tests involving live clients
 connected through the LiveKit VPS. All measurements used release builds
-(\texttt{cargo build --release}).
+(\texttt{cargo build -release}).
 
 \subsection{Synchronization latency (NF-07)}
 
@@ -1667,7 +1726,7 @@ Table~\ref{tab:sync-local} and Figure~\ref{fig:bench-sync}.
 
 \begin{table}[H]
     \centering
-    \caption{Local CRDT sync latency -- \texttt{bench\_sync} (1000 iterations)}
+    \caption{Local CRDT sync latency - \texttt{bench\_sync} (1000 iterations)}
     \begin{tabular}{|l|r|}
         \hline
         \textbf{Metric} & \textbf{Value} \\
@@ -1695,7 +1754,7 @@ Table~\ref{tab:sync-e2e} and Figure~\ref{fig:bench-e2e}.
 
 \begin{table}[H]
     \centering
-    \caption{End-to-end sync latency over LiveKit -- \texttt{bench\_e2e}}
+    \caption{End-to-end sync latency over LiveKit - \texttt{bench\_e2e}}
     \begin{tabular}{|l|r|}
         \hline
         \textbf{Metric} & \textbf{Value} \\
@@ -1728,7 +1787,7 @@ Figure~\ref{fig:bench-load}.
 
 \begin{table}[H]
     \centering
-    \caption{File load time by document size -- \texttt{bench\_load}}
+    \caption{File load time by document size - \texttt{bench\_load}}
     \begin{tabular}{|r|r|}
         \hline
         \textbf{Stroke count} & \textbf{Load time (ms)} \\
@@ -1765,7 +1824,7 @@ Figure~\ref{fig:multiuser-4p-5p}.
 
 \begin{table}[H]
     \centering
-    \caption{Multi-user scalability -- average E2E sync latency per participant count}
+    \caption{Multi-user scalability - average E2E sync latency per participant count}
     \begin{tabular}{|c|r|r|}
         \hline
         \textbf{Participants} & \textbf{Avg latency (ms)} & \textbf{Result} \\
@@ -1899,7 +1958,7 @@ and Figure~\ref{fig:fps-measurements}.
 
 The measured average FPS was approximately 60 across all stroke counts, with 1\% low FPS
 equally stable. The frame rate did not degrade as the document grew because strokes are
-rasterized once onto a \texttt{ColorImage} pixel buffer at commit time --- the \texttt{update()}
+rasterized once onto a \texttt{ColorImage} pixel buffer at commit time - the \texttt{update()}
 loop only uploads the pre-computed texture to the GPU each frame. There is no per-frame
 iteration over strokes, so rendering cost is effectively constant with respect to document
 size. \textbf{NF-10: PASS.}
@@ -1923,10 +1982,10 @@ with 2, 3, 4, and 5 peers concurrently drawing strokes and then compared their d
 states after all sync messages had propagated. Two scenarios were tested:
 
 \begin{itemize}
-    \item \textbf{Concurrent draws} -- all peers drew strokes simultaneously; after sync
+    \item \textbf{Concurrent draws} - all peers drew strokes simultaneously; after sync
     settled, every peer's stroke list was compared. All lists were identical across all
     participant counts.
-    \item \textbf{Clear during concurrent draw} -- one peer issued a \texttt{Clear} while
+    \item \textbf{Clear during concurrent draw} - one peer issued a \texttt{Clear} while
     another peer was simultaneously drawing a new stroke. After sync, the new stroke
     survived on all peers (add-wins semantics confirmed), while the previously visible
     strokes were removed.
@@ -1951,7 +2010,7 @@ NF-05 requires that the system maintains continuity of work in offline mode and
 automatically synchronises upon reconnection. This scenario was tested by killing the
 LiveKit Docker container while clients were connected and drawing.
 
-The observed behaviour was as follows: both clients immediately hung --- the UI became
+The observed behaviour was as follows: both clients immediately hung - the UI became
 unresponsive as the LiveKit SDK's connection handling blocked the background thread.
 No strokes drawn after the SFU went down were ever delivered to the peer, and no
 automatic reconnection was attempted. Upon restarting the SFU, the clients did not
@@ -1968,22 +2027,22 @@ with other peers does not resume. \textbf{NF-05: FAIL.}
 Usability was evaluated against requirements NF-01 through NF-04 by
 exercising the application during development and benchmark runs.
 
-\textbf{NF-01 -- Simple and intuitive interface.} The whiteboard occupies the full
+\textbf{NF-01 - Simple and intuitive interface.} The whiteboard occupies the full
 window with a compact toolbar at the top. New users were able to draw, erase, change
 colour and thickness, and connect to a room without any instructions. No training is
 required for basic operation. \textbf{PASS.}
 
-\textbf{NF-02 -- Synchronisation status display.} The status bar at the bottom of the
+\textbf{NF-02 - Synchronisation status display.} The status bar at the bottom of the
 window shows the current connection state. When connected to a LiveKit room the bar
 displays the room name and the list of participants; when disconnected it shows
 ``Ready''. State changes (participant joined, participant left, disconnected) are
 appended to the event log in the LiveKit panel. \textbf{PASS.}
 
-\textbf{NF-03 -- Collaborator cursors.} While connected, the canvas renders a coloured
+\textbf{NF-03 - Collaborator cursors.} While connected, the canvas renders a coloured
 circle at each remote participant's last known cursor position, labelled with their
 identity. \textbf{PASS.}
 
-\textbf{NF-04 -- English interface.} All UI labels, buttons, status messages, and log
+\textbf{NF-04 - English interface.} All UI labels, buttons, status messages, and log
 entries are in English. \textbf{PASS.}
 
 \section{Non-functional requirements summary}
@@ -2041,7 +2100,7 @@ current version of the application.
 
 \textbf{Eraser paints white.} The eraser tool is implemented by drawing strokes with
 opaque white colour rather than removing underlying strokes from the CRDT document.
-This means the eraser has no effect on a canvas with a loaded background image ---
+This means the eraser has no effect on a canvas with a loaded background image -
 it paints white over the background instead of restoring it.
 
 \textbf{Document growth from eraser use.} Because eraser strokes are appended to the
@@ -2075,7 +2134,7 @@ task blocks without a timeout. A manual reconnection to the server is required t
 The goal of this thesis was to design and implement a collaborative whiteboard application
 using the local-first approach. The result is a working desktop application written in Rust
 that allows multiple users to draw and erase on a shared canvas in real time, communicate
-via chat, and see each other's cursors --- all without user accounts or server-side state.
+via chat, and see each other's cursors - all without user accounts or server-side state.
 
 Of the 14 non-functional requirements defined at the outset, 13 pass and 1 fails.
 Synchronisation latency averaged 460~ms end-to-end, file load time peaked at 1.77~ms for
@@ -2094,7 +2153,7 @@ and correct.
 Choosing a \textbf{star topology via LiveKit SFU} instead of a pure peer-to-peer mesh
 eliminated the need to handle NAT traversal, direct WebRTC signalling between every pair
 of clients, and the complex connection management that a fully decentralised design would
-require. The trade-off --- a central relay server --- was accepted consciously and is
+require. The trade-off - a central relay server - was accepted consciously and is
 justified by the significant reduction in client-side complexity.
 
 Using \textbf{Automerge} rather than a custom CRDT implementation avoided weeks of
@@ -2106,7 +2165,7 @@ created per stroke and kept sync message sizes small.
 
 Running \textbf{all network I/O on a Tokio background thread} and communicating with the
 UI thread via MPSC channels ensured that the interface remained responsive during
-connection setup, sync message processing, and data channel publishing --- operations that
+connection setup, sync message processing, and data channel publishing - operations that
 would otherwise cause visible frame drops if executed on the main thread.
 
 \section{What could be done better}
@@ -2133,16 +2192,16 @@ The following extensions would bring the application closer to a production-read
 collaborative tool:
 
 \begin{itemize}
-    \item \textbf{Auto-reconnect with offline queue} -- detect SFU disconnection, buffer
+    \item \textbf{Auto-reconnect with offline queue} - detect SFU disconnection, buffer
     outgoing sync messages locally, and resume synchronisation automatically on
     reconnection.
-    \item \textbf{Structural eraser} -- implement hit-testing against the stroke list and
+    \item \textbf{Structural eraser} - implement hit-testing against the stroke list and
     remove intersecting strokes via CRDT \texttt{splice} instead of painting white.
-    \item \textbf{Undo/redo} -- expose Automerge's operation history to implement
+    \item \textbf{Undo/redo} - expose Automerge's operation history to implement
     per-user undo that does not conflict with concurrent remote edits.
-    \item \textbf{Resizable and scrollable canvas} -- remove the fixed 800$\times$600
+    \item \textbf{Resizable and scrollable canvas} - remove the fixed 800$\times$600
     constraint and allow users to pan and zoom the drawing surface.
-    \item \textbf{Windows verification} -- compile and test the release build on Windows
+    \item \textbf{Windows verification} - compile and test the release build on Windows
     to confirm cross-platform support as required by NF-12.
 \end{itemize}
 
@@ -2151,8 +2210,8 @@ collaborative tool:
 Two problems remain unresolved and warrant further investigation. First, \textbf{document
 size growth}: because eraser strokes and all historical drawing operations are retained in
 the Automerge document, long collaborative sessions will accumulate significant data even
-if the visible canvas appears mostly empty. A compaction strategy --- for example,
-periodically snapshotting the raster state and discarding operation history --- would be
+if the visible canvas appears mostly empty. A compaction strategy - for example,
+periodically snapshotting the raster state and discarding operation history - would be
 needed for long-running use cases. Second, \textbf{client hang on SFU failure}: the
 current architecture has no timeout or watchdog on the LiveKit background thread, so an
 abrupt server crash leaves the application in an unrecoverable state that requires a
@@ -2167,7 +2226,7 @@ loop or a higher-level supervision strategy for the background thread.
 
 \begin{thebibliography}{20}
 
-\bibitem[1]{automerge-docs} Automerge Contributors, \emph{Automerge -- Rust Documentation}, \url{https://docs.rs/automerge/latest/automerge/}, accessed March 2026.
+\bibitem[1]{automerge-docs} Automerge Contributors, \emph{Automerge - Rust Documentation}, \url{https://docs.rs/automerge/latest/automerge/}, accessed March 2026.
 
 \bibitem[2]{conclave} Conclave Team, \emph{Conclave: A Peer-to-Peer Collaborative Text Editor}, \url{https://conclave-team.github.io/conclave-site/}, accessed March 2026.
 
@@ -2181,7 +2240,7 @@ loop or a higher-level supervision strategy for the background thread.
 
 \bibitem[7]{livekit-sfu} LiveKit Inc., \emph{LiveKit SFU Internals}, \url{https://docs.livekit.io/reference/internals/livekit-sfu/}, accessed March 2026.
 
-\bibitem[8]{mdn-webrtc} Mozilla Contributors, \emph{WebRTC Connectivity -- MDN Web Docs}, \url{https://developer.mozilla.org/en-US/docs/Web/API/WebRTC_API/Connectivity}, accessed March 2026.
+\bibitem[8]{mdn-webrtc} Mozilla Contributors, \emph{WebRTC Connectivity - MDN Web Docs}, \url{https://developer.mozilla.org/en-US/docs/Web/API/WebRTC_API/Connectivity}, accessed March 2026.
 
 \end{thebibliography}
 \pagenumbering{gobble}
@@ -2204,29 +2263,29 @@ Users connect to named rooms; every participant sees changes made by others inst
 
 The main window consists of three areas:
 \begin{itemize}
-    \item \textbf{Toolbar (top bar)} -- drawing tools, file operations, and settings.
-    \item \textbf{Sidebar (left panel)} -- toggled by the \texttt{Menu Menu} button; contains
+    \item \textbf{Toolbar (top bar)} - drawing tools, file operations, and settings.
+    \item \textbf{Sidebar (left panel)} - toggled by the \texttt{Menu Menu} button; contains
     network connection controls and chat.
-    \item \textbf{Canvas (centre)} -- the shared drawing surface.
+    \item \textbf{Canvas (centre)} - the shared drawing surface.
 \end{itemize}
 
 \subsection*{Drawing}
 
 \begin{itemize}
-    \item \textbf{Pen / Eraser} -- select the active tool from the toolbar. The eraser
+    \item \textbf{Pen / Eraser} - select the active tool from the toolbar. The eraser
     paints white over existing strokes.
-    \item \textbf{Colour} -- click the colour swatch in the toolbar to open the colour
+    \item \textbf{Colour} - click the colour swatch in the toolbar to open the colour
     picker.
-    \item \textbf{Size} -- use the \texttt{Size} slider to change stroke thickness.
+    \item \textbf{Size} - use the \texttt{Size} slider to change stroke thickness.
 \end{itemize}
 
 \subsection*{File Operations}
 
 \begin{itemize}
-    \item \textbf{New} -- clears the canvas (prompts to save if unsaved work exists).
-    \item \textbf{Save} -- exports the current state as a \texttt{.crdt} file (full
+    \item \textbf{New} - clears the canvas (prompts to save if unsaved work exists).
+    \item \textbf{Save} - exports the current state as a \texttt{.crdt} file (full
     history) or \texttt{.png} (raster snapshot).
-    \item \textbf{Open} -- loads a previously saved \texttt{.crdt} file or a \texttt{.png}
+    \item \textbf{Open} - loads a previously saved \texttt{.crdt} file or a \texttt{.png}
     image as a background layer.
 \end{itemize}
 
@@ -2251,10 +2310,10 @@ sidebar and click \textbf{Send} to broadcast it to all participants in the room.
 \subsection*{Troubleshooting}
 
 \begin{itemize}
-    \item \textbf{Cannot connect} -- verify that the LiveKit server is running and that
+    \item \textbf{Cannot connect} - verify that the LiveKit server is running and that
     the \texttt{LIVEKIT\_URL}, \texttt{LIVEKIT\_API\_KEY}, and
     \texttt{LIVEKIT\_API\_SECRET} environment variables are set correctly.
-    \item \textbf{High latency} -- on a slow connection synchronisation may take several
+    \item \textbf{High latency} - on a slow connection synchronisation may take several
     seconds; this is expected behaviour.
 \end{itemize}
 
@@ -2307,7 +2366,7 @@ LIVEKIT_URL=ws://127.0.0.1:7880
 \textbf{macOS} (from the \texttt{editor/} directory):
 \begin{verbatim}
 RUSTFLAGS="-C link-arg=-ObjC" cargo run          # debug
-RUSTFLAGS="-C link-arg=-ObjC" cargo build --release  # release
+RUSTFLAGS="-C link-arg=-ObjC" cargo build -release  # release
 \end{verbatim}
 The release binary is located at \texttt{target/release/mac\_textpad}.
 
@@ -2369,9 +2428,9 @@ room (one on the main machine, one on a second device or VM).
 \chapter*{List of appendices}
 
 \begin{enumerate}
-\item Appendix A -- User Manual
-\item Appendix B -- Deployment Guide
-\item Appendix C -- Manual Acceptance Test Scenarios
+\item Appendix A - User Manual
+\item Appendix B - Deployment Guide
+\item Appendix C - Manual Acceptance Test Scenarios
 \end{enumerate}
 \thispagestyle{empty}
 
