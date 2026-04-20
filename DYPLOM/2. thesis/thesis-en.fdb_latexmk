@@ -1,6 +1,6 @@
 # Fdb version 4
-["pdflatex"] 1776709823.2323 "/Users/piotrjankiewicz/Documents/PROJEKTY/PW/praca_dyplomowa/DYPLOM/2. thesis/thesis-en.tex" "thesis-en.pdf" "thesis-en" 1776709831.26541 0
-  "/Users/piotrjankiewicz/Documents/PROJEKTY/PW/praca_dyplomowa/DYPLOM/2. thesis/thesis-en.tex" 1776709820.49387 120773 908eb365b00ba0e82fb9367a0d830c1c ""
+["pdflatex"] 1776710474.46062 "/Users/piotrjankiewicz/Documents/PROJEKTY/PW/praca_dyplomowa/DYPLOM/2. thesis/thesis-en.tex" "thesis-en.pdf" "thesis-en" 1776710482.16574 0
+  "/Users/piotrjankiewicz/Documents/PROJEKTY/PW/praca_dyplomowa/DYPLOM/2. thesis/thesis-en.tex" 1776710466.30603 120644 1b4262b6041c5efdb7ed2e0992bd2732 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc" 1136849721 2971 def0b6c1f0b107b3b936def894055589 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1136849721 2900 1537cc8184ad1792082cd229ecc269f4 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
@@ -170,10 +170,10 @@
   "images/ui-modules-3.png" 1772387166.05247 17007 a1b5572a865ab7a0dea1aff03fee962b ""
   "images/ui-modules-4.png" 1772387181.09868 11013 4eaf1151986422482361462af6050e28 ""
   "images/ui-modules-5.png" 1772387195.50174 59601 9fc68211e612c78733ccf3ec7af94289 ""
-  "thesis-en.aux" 1776709831.15784 23931 9f3e0282772328c5cbc554c1c33e9cf7 "pdflatex"
-  "thesis-en.out" 1776709831.15964 11729 6259067b36879b57d8c33e483db7f2c4 "pdflatex"
-  "thesis-en.tex" 1776709820.49387 120773 908eb365b00ba0e82fb9367a0d830c1c ""
-  "thesis-en.toc" 1776709831.15984 5848 e948f4a8e4d5f056c833e257ffb45dbe "pdflatex"
+  "thesis-en.aux" 1776710482.05289 23905 9a349ea056d8b0d436b47ae14d567811 "pdflatex"
+  "thesis-en.out" 1776710482.05485 11723 37058b40fc8b9e11d6d3e43ba0d72911 "pdflatex"
+  "thesis-en.tex" 1776710466.30603 120644 1b4262b6041c5efdb7ed2e0992bd2732 ""
+  "thesis-en.toc" 1776710482.05514 5846 5852e9881c0c510d27dd32d83de777b0 "pdflatex"
   "titlepage-en.pdf" 1771353546.35062 635553 a1957b8146f9ca75fa29296a0bcde4de ""
   (generated)
   "thesis-en.aux"
