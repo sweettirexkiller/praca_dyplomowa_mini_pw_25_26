@@ -309,9 +309,9 @@ And the apps for collaborative work today couldn’t exist 20 years ago. They ha
 	\label{fig:simple-architecture}
 \end{figure}
 
-These kind of application belong to ``cloud-first'' family. There was no
-need for ``local-first'' architectures yet and this term has not been popularized. Before even the 
-discussion on topic of  ``local-first architectures'' the ``cloud-first'' approach had its own more than one 
+These kind of application belong to "cloud-first" family. There was no
+need for "local-first" architectures yet and this term has not been popularized. Before even the 
+discussion on topic of  "local-first architectures" the "cloud-first" approach had its own more than one 
 decade 
 of fast development. From simple client server architectures the system rose to more difficult forms of 
 large size client-side application with lots of layers and microservices. Picture below shows architectures 
@@ -960,7 +960,7 @@ At the protocol level, synchronization in Automerge boils down to a conversation
 % https://arxiv.org/abs/2012.00472
 \begin{enumerate}
 	\item \textbf{The core handshake} \\
-		\verb|generate_sync_message(peer_id)| asks the library: ``what has changed since this peer last synced?'' Automerge consults the per-peer \verb|sync::State| and, if there are unseen deltas, packs them into a compact binary blob. If the peer is already current it returns \verb|None| and the conversation ends.
+		\verb|generate_sync_message(peer_id)| asks the library: "what has changed since this peer last synced?" Automerge consults the per-peer \verb|sync::State| and, if there are unseen deltas, packs them into a compact binary blob. If the peer is already current it returns \verb|None| and the conversation ends.
 		\verb|receive_sync_message(peer_id, message)| does the other half: unpacks the blob, merges the changes into the local document, and advances the \verb|sync::State| so those same changes are not re-sent next time.
 	\item \textbf{Bloom filters - cheap history summaries} \\
 		Sending a full history of every operation would be expensive, especially for peers that have diverged over a longer period. Automerge avoids this by including a Bloom filter in each sync message - a compact probabilistic structure that summarises all the operations the sender holds. The receiver compares its own operations against this filter and can quickly identify which of its changes the other side has never seen, bundling only those into the response.
@@ -1015,7 +1015,7 @@ on the same piece of data at the same time, they must both arrive at the exact s
 without a central server deciding the outcome. Automerge achieves this through deterministic 
 rules embedded directly into the data structure operations.
 
-\subsubsection*{The ``Clear'' operation (Delete vs.\ Edit)}
+\subsubsection*{The "Clear" operation (Delete vs.\ Edit)}
 
 In Automerge, a delete operation (such as clearing a list or removing an element) specifically 
 targets the set of \emph{visible Change IDs} that the peer has observed at the moment the 
@@ -1024,17 +1024,17 @@ operation is issued.
 \begin{itemize}
     \item \textbf{Scenario}: Peer~A clears the canvas (deletes all strokes from the list). 
     Simultaneously, Peer~B draws a new stroke.
-    \item \textbf{Logic}: Peer~A's ``Clear'' command only knows about the strokes that existed 
+    \item \textbf{Logic}: Peer~A's "Clear" command only knows about the strokes that existed 
     at the moment Peer~A clicked clear. It has no knowledge of the new stroke Peer~B is 
     currently creating, because that stroke has not yet been synchronized.
     \item \textbf{Result}: The new stroke from Peer~B \emph{survives}. The old strokes are 
     deleted (since both A and B agree they existed), but the new stroke remains because 
-    Peer~A's delete operation did not ``reach'' it. This is the \textbf{Add wins} semantics 
+    Peer~A's delete operation did not "reach" it. This is the \textbf{Add wins} semantics 
     - insertions that a peer has not observed cannot be removed by that peer's concurrent 
     delete.
 \end{itemize}
 
-\subsubsection*{The ``Draw'' operation (Concurrent edits to the same property)}
+\subsubsection*{The "Draw" operation (Concurrent edits to the same property)}
 
 If both peers modify the same property concurrently (for example, changing the color of the 
 same stroke at the same time - hypothetically, because 1.0.0 version of application does not allow 
@@ -1049,7 +1049,7 @@ such operations), Automerge must deterministically choose which value to display
     \texttt{0xdef...}, Peer~B wins because its hash is lexicographically higher. Crucially, 
     both peers will see the same winner. No data is actually lost in the operation history 
     - Automerge preserves the full history - but only one value is displayed as the 
-    ``current'' state.
+    "current" state.
 \end{itemize}
 
 The following table summarizes the conflict resolution strategies:
@@ -1148,7 +1148,7 @@ several practical advantages:
     design is the eraser implementation: rather than removing or modifying existing strokes, the 
     eraser tool works by drawing new strokes with a white color (\texttt{[255, 255, 255, 255]}), 
     effectively painting over previous content. This approach is discussed further in the 
-    ``Eraser implementation'' paragraph below.
+    "Eraser implementation" paragraph below.
 \end{enumerate}
 
 \subsection{Stroke representation}
@@ -1257,14 +1257,14 @@ This design has several implications:
     minimal.
     \item \textbf{Additive nature}: Eraser strokes are additive - they increase the size of 
     the stroke list rather than removing elements. Over extended drawing sessions, this can 
-    lead to a growing document even when the user is ``erasing'' content.
+    lead to a growing document even when the user is "erasing" content.
     \item \textbf{Background limitation}: Because the eraser paints white pixels, it only 
     produces the expected visual effect on a white canvas. If a background image has been 
     loaded, the eraser will paint opaque white over the background rather than restoring the 
     underlying image.
     \item \textbf{No structural removal}: Individual strokes beneath the eraser path are not 
     removed from the CRDT document. They remain in the operation history and continue to be 
-    synchronized with peers. The ``erasure'' is purely visual - the white stroke is rendered 
+    synchronized with peers. The "erasure" is purely visual - the white stroke is rendered 
     on top during the rasterization pass, hiding the strokes underneath.
 \end{itemize}
 
@@ -1546,14 +1546,13 @@ The images below illustrate the final UI design of the application.
 
 %
 
-In this chapter I will analyze the application and test its core non-functional requirements from chapter 1.8.2. 
-The testing will be performed in a controlled environment, and the results will be presented in a structured 
-manner to evaluate the application's performance, reliability, usability.
+In this chapter the application is analyzed and the core non-functional requirements
+ from chapter 1.8.2 are evaluated. Tests are performed in a controlled environment. Results are
+  presented in a tabular format to evaluate the application's performance, reliability, and usability.
 \section{Testing environment}
 
-All tests and benchmarks were performed on the hardware and software configuration described in
-Table~\ref{tab:test-env}. The application was compiled in release mode (\texttt{cargo build
--release}) for all performance measurements.
+All tests and benchmarks have been performed on the following hardware and software 
+infrastructure. 
 
 \begin{table}[H]
     \centering
@@ -1581,6 +1580,8 @@ Table~\ref{tab:test-env}. The application was compiled in release mode (\texttt{
     \end{tabular}
     \label{tab:test-env}
 \end{table}
+
+For the compilation of the application we used release mode (i.e., \texttt{cargo build --release}) for all performance measurements.
 
 Figures~\ref{fig:system-specs-livekit} confirms the hardware and LiveKit server version.
 Network measurements are shown in Figures~\ref{fig:ping} and~\ref{fig:iperf-comparison}.
@@ -1709,15 +1710,16 @@ backgrounds, no undo/redo) are documented in Section~3.8.
 
 \section{Performance benchmarks}
 
-Performance was measured in two ways: local benchmarks running in a headless configuration
-with the UI disabled to isolate backend logic, and end-to-end tests involving live clients
-connected through the LiveKit VPS. All measurements used release builds
+Performance was measured in two ways: local benchmarks running in a headless configuration 
+UI is disabled to test for backend functionality and all end-to-end tests are conducted 
+live with clients included. These are connected to the LiveKit VPS, and tested with release builds:
 (\texttt{cargo build -release}).
 
 \subsection{Synchronization latency (NF-07)}
 
-Synchronization latency was measured in two complementary ways: local CRDT merge time and
-full end-to-end (E2E) latency over the LiveKit network.
+To measure synchronization latency we looked at two aspects: local CRDT merge time and the remote
+ latency experienced by participants of a shared session: full end-to-end (E2E) latency over the
+  LiveKit network.
 
 \textbf{Local CRDT sync latency} was measured by the \texttt{bench\_sync} benchmark, which
 timed the \texttt{generate\_sync\_message} / \texttt{receive\_sync\_message} round-trip
@@ -1774,9 +1776,8 @@ Table~\ref{tab:sync-e2e} and Figure~\ref{fig:bench-e2e}.
     \label{fig:bench-e2e}
 \end{figure}
 
-Both measurements are well within the NF-07 threshold of 2~s. The E2E mean of 460~ms
-reflects the home network round-trip to the VPS (avg ping 67.5~ms) plus LiveKit forwarding
-overhead. \textbf{NF-07: PASS.}
+Both of those measurements are within the NF-07 spec of 2~s. The E2E mean is 460~ms. Shows the home 
+network round-trip to the VPS (avg ping 67.5~ms) plus LiveKit overhead. \textbf{NF-07: PASS.}
 
 \subsection{File load time (NF-08)}
 
@@ -2007,14 +2008,16 @@ Section~2.4.3. \textbf{NF-06: PASS.}
 \subsection{Offline continuity (NF-05)}
 
 NF-05 requires that the system maintains continuity of work in offline mode and
-automatically synchronises upon reconnection. This scenario was tested by killing the
-LiveKit Docker container while clients were connected and drawing.
+automatically synchronises upon reconnection. To test this, I simulated a network failure 
+by stopping the
+LiveKit Docker container while two clients were connected and drawing.
 
-The observed behaviour was as follows: both clients immediately hung - the UI became
-unresponsive as the LiveKit SDK's connection handling blocked the background thread.
-No strokes drawn after the SFU went down were ever delivered to the peer, and no
-automatic reconnection was attempted. Upon restarting the SFU, the clients did not
-recover without a manual application restart.
+What actually happened was that both clients immediately froze—the UI became
+unresponsive because the LiveKit SDK's connection handling blocked the background thread.
+Any strokes drawn after the SFU went down were never delivered to the other peer, and
+] the application did not
+attempt to reconnect on its own. Even after restarting the SFU, the clients remained 
+stuck and only recovered after a manual restart of the application.
 
 This behaviour is a consequence of the current architecture: the LiveKit SDK does not
 expose a built-in auto-reconnect callback that the application handles, and there is no
@@ -2035,7 +2038,7 @@ required for basic operation. \textbf{PASS.}
 \textbf{NF-02 - Synchronisation status display.} The status bar at the bottom of the
 window shows the current connection state. When connected to a LiveKit room the bar
 displays the room name and the list of participants; when disconnected it shows
-``Ready''. State changes (participant joined, participant left, disconnected) are
+"Ready". State changes (participant joined, participant left, disconnected) are
 appended to the event log in the LiveKit panel. \textbf{PASS.}
 
 \textbf{NF-03 - Collaborator cursors.} While connected, the canvas renders a coloured
