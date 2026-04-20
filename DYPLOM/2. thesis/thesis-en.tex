@@ -201,13 +201,11 @@ Local-First Approach}
 \begin{center}
 \title
 \end{center}
-The purpose of this thesis is to design and implement a collaborative board using the local-first approach. 
-The solution uses distribuited conflict free replicated data types (CRDTs) and real-time communication via WebRTC protocol to bring
-effortless collaboration with other users. \\
+This thesis concerns the design and implementation of a collaborative whiteboard application built around the local-first approach.
+The solution relies on distributed conflict-free replicated data types (CRDTs) and real-time peer communication over WebRTC to make collaboration with other users feel seamless, even in the face of intermittent connectivity. \\
 % TODO: one sentance summarizing each chapter - FIRST WRITE CHAPTERS
 % TODO: general view of the work done
-Final result of the effort done is an desktop application that enables drawing and erasing on the whiteboard with mutiple users
-simultaneously. This paper covers description of solution, but also thouches broader topic of local-first application design architectures.
+The end result is a desktop application that lets multiple users draw and erase on a shared whiteboard at the same time. Beyond describing the concrete implementation, this paper also touches on the broader topic of local-first design philosophies and why they are increasingly relevant for modern collaborative software.
 \\
 \\
 \noindent \textbf{Key words: rust language, local-first, CRDT, WebRTC, distributed system, star topology, multithread real time communication} 
@@ -294,13 +292,14 @@ It hasn't always been like this. The steep rise of collaborative applications be
 more popular but also it owes its rise of popularity to universality of fast global network and increase of computing power
 of everyday devices. 
 
-Current collaborative apps couldn't exist 20 years ago. They haven't been simply invented yet. Typical 
-application of early days of online applications had a simple architecture. It was a client-server application. 
-The server was responsible for storing data and processing it, while the client was responsible for presenting the 
-data to the user and sending user input to the server. 
-This architecture had its advantages and disadvantages. It was simple and easy to implement, but it had a single point of
-failure.
-If the server went down, the entire application went down. It also had scalability issues, as the server had to handle all the requests from the clients.
+And the apps for collaborative work today couldn’t exist 20 years ago. They haven’t been simply invented yet. When online
+ applications first came out, their architectures were really simple. In fact, online applications were 
+ nothing more than client-server applications. On the Server side, data was stored and processed; 
+ On the Client side, the data was presented. The library is used to send data to the user and to
+  send user input to the server. This architecture had its advantages and disadvantages. It was
+   simple and easy to implement, but it had a single point of failure. When the server went down, 
+   the entire web site went down. It also wasn't very scalable because all requests came from the
+    clients to the one server.
 
 % Place image exactly here
 \begin{figure}[H]
@@ -340,21 +339,13 @@ How far are these architectures from beeing good fit for collaboarative appliact
 \end{figure}
 
 
-As we can see the level of complication if very high. Simple user intercation with a system 
-triggers multiple functions from multiple modules from multiulpe services. This level of 
-sophistication simply cannot be used for collaborative applications, because orchestration 
-of synchoronization of state shown in simultaneus users would be extremely difficult. 
+As we can see, the level of complexity is already very high. A single user interaction triggers a cascade through multiple functions, modules, and services. Trying to layer real-time collaboration on top of this kind of architecture is, frankly, a nightmare -- it would require coordinating asynchronous, time-consuming remote calls across all those services just to keep everyone in sync.
 
-For one, in would require to many asynchronous time-consuming remote calls to different services. 
-Total synchronization nightmare. For some time tough there has been efforts to implement collaboration 
-this way. This approach was known as OT - operational transformation (still used in Google Docs). Although Google Docs is a 
-good example of usage of cloud-first approach, in this thesis I decided to focus on local-first architecutres
-as they have proved to be more broadly used in the industry and it offers way more possibilities of different 
-kind of applications. 
+For a while people did try exactly this. The approach was called OT -- operational transformation -- and it is still the backbone of Google Docs today. OT works, but it is notoriously hard to implement correctly, and the failure modes under concurrent edits are subtle. In this thesis I chose to focus on local-first architectures instead, which have gained much broader traction in the industry and open up a wider range of application types. 
 
-There are also other reasons to avoid cloud-first architectures when designing collaborative applications. 
-Lets take a look at simple sequance of user interaction with the system. Below we can see general asynchronous 
-interaction of a user with normal cloud-basen application. 
+There are also other reasons to be skeptical of cloud-first when it comes to collaborative applications.
+Consider what actually happens during a typical user interaction. Below we can see the general asynchronous
+flow of a user interacting with a standard cloud-based application. 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.7\textwidth]{./images/typical-sequance.png}
@@ -363,17 +354,11 @@ interaction of a user with normal cloud-basen application.
 \end{figure}
 
 
-As we can see on on this diagram, the system relies heavily on connectivity with the database. The big question that comes 
-comes to mind is - what happens to the system if there is no internet ? Answer is simple. It would not work. Therefore,
-one could even say, that whole application is just a asynchronous graphical database wrapper, and it wouldn't 
-be far from truth. This brings us the quastion - What is the definition of cloud-first and local first applications?
+What stands out immediately is how much the system depends on database connectivity. The obvious follow-up question is: what happens when there is no internet? The answer is simple -- nothing works. In that sense the entire application is really just an asynchronous graphical wrapper around a remote database, which is a somewhat uncomfortable truth.
 
-In simplest words the definition of cloud-approach is "If the interaction of the user with the system haven't been 
-saved to database, it never happened". On other hand local-first is "What's important the most is local persistance - 
-cloud brings only connectivity".
+This brings us to a useful contrast. In the cloud-first model the underlying assumption is: "if the user's action wasn't saved to the database, it never happened." Local-first flips this on its head: "local persistence is what matters most -- the cloud is there only to connect peers."
 
-Therefore let's have a look on how would typical sequance of user interaction with 
-local-first system look. The diagram below shows typical sequance in such system.
+With that distinction in mind, let's look at how a typical user interaction plays out in a local-first system instead.
 
 \begin{figure}[H]
 	\centering
@@ -383,12 +368,7 @@ local-first system look. The diagram below shows typical sequance in such system
 \end{figure}
 
 
-The distinction is clear. In local-first approach the user interaction with the system is not dependent 
-on connectivity with the database. Connectivity brings only messaging with other peers. Whole 
-synchronization of replicas of data between users happens on local machine. This is the reaseon 
-why we can call this system distributed. We can also notice that this approach requires much less
-modules across different serivces. Later, in the thesis, we will clearly show that this concept allows
-us to bring true real time collaboration to the users.
+The contrast is immediately visible. In a local-first system, the user is never blocked waiting for a database roundtrip -- all interactions happen against the local replica, and connectivity to other peers is a bonus rather than a prerequisite. Synchronization of state between users happens on each machine independently. That is precisely what makes the system distributed in any meaningful sense. It is also worth noting that the architecture is considerably flatter: far fewer services and remote calls are involved. Later chapters will show concretely how this property is what makes true real-time collaboration actually achievable.
 
 
 \section{Local-first vs Cloud-first}
@@ -404,9 +384,9 @@ collaborative application.
 	\label{fig:cloud-vs-local}
 \end{figure}
 
-Clearly, the obvious choice for apprach when designing collaborative application would be Local-first. 
-Let's now try to  distinguish, what are boundaries of such system - what use cases are not applicable with 
-local-first apprach. The table below shows use cases that are and are not good fit for local-first approach.
+Given the trade-offs, local-first is the more compelling choice when designing a collaborative application.
+That said, it is not a universal solution -- there are scenarios where it simply does not fit.
+The table below lays out use cases where local-first works well and where it breaks down.
 
 \begin{table}[H]
 	\centering
@@ -428,15 +408,9 @@ local-first apprach. The table below shows use cases that are and are not good f
 
 \section{Why would one implement own collaborative system ?}
 
-Creating collaborative whiterboard is just an intriduction to the general topic of distrubuted conflict 
-free real time data storage with editable operations. Designign whiteboard is easy exaple for system that
-can be used to many use cases (distribited conflict free data) - it serves as a  great introduction to
- this topic. 
+Building a collaborative whiteboard is in many ways just a gateway into a much richer topic: distributed, conflict-free, real-time data storage where every operation is reversible and mergeable. The whiteboard is an ideal teaching example because it is visually intuitive -- you can see convergence happening in front of you -- yet it exercises exactly the same data-structure challenges you would face in far more complex systems.
 
- There are multiple use cases/possible usage of distrubuted systems. For example drone swarms - distributed replicas 
- of formation among drones broadcasted between each other. Peer-to-peer file sharing -
-  distributed replicas of files among users. Real time collaborative editing - distributed
-   replicas of documents among users. 
+The same underlying principles -- distributed replicas that stay consistent without a central arbiter -- show up in wildly different domains. Drone swarms that broadcast formation data to one another, peer-to-peer file-sharing networks, collaborative code editors, even multi-player games: all of them are, at some level, the same problem with a different domain on top. 
 
 \section{Examples from industry}
 
@@ -456,10 +430,11 @@ Known examples of local-first applications are: Figma, Miro, Notion, Obsidian, R
 	\label{fig:client-server-vs-p2p}
 \end{figure}
 
-Connectivity among multiple users is always solved eigher by peer-to-peer or more "centered" relay 
-architecure for example start-topology. When designig a collaborative system each solution has its
-benefits and setbacks. In a table belowe there is simple analysis of pros and cons of choosing one or the ohter
-when designing local-first collaborative whiteboard.
+Connectivity among multiple users always comes down to one of two choices: peer-to-peer, 
+where clients talk directly to each other, or a more centralised relay model such
+ as star topology. Neither is strictly better - each makes different trade-offs. 
+ The table below is a straightforward comparison of the two when the goal is a local-first 
+ collaborative whiteboard.
 
 
 \begin{table}[H]
@@ -494,44 +469,46 @@ As we can see - each solution suits different applications.
 
 \section{OT vs CRDTs}
 
-One very important topic in the matter of conflict resolution and collaboration is data structures algorightms 
-that can be used. Local / remote inserts into data structures need to be \textbf{commutative}, \textbf{associative} and \textbf{idempotent}.
-These three properties are required to ensure that all replicas of data will be eventually consistent - assuming that all 
-operations (inserts/deletes) propagate properly. There are two main
-approaches to achieve this - OT (operational transformation) and CRDTs (conflict-free replicated data types).
+One of the more fundamental questions in building a collaborative system is how to handle conflicting edits.
+ When two users modify the same piece of data at the same time, the system needs a principled
+  way to decide what the merged result looks like. For a data structure to support this safely, 
+  every insert and delete operation must be \textbf{commutative}, \textbf{associative}, and \textbf{idempotent}.
+   Meet those three conditions and eventual consistency follows naturally, assuming 
+   messages eventually get delivered.
 
-Historically well known solution is OT - operational transformations. The basic idea
-behind this approach is to transform operations in such a way that they can be applied in any order and still produce the same result.
-This approach was used in Google Docs and it is still used in some applications. However, it has some drawbacks. It is complex to implement and
- it can lead to conflicts that are difficult to resolve.
+Two families of algorithms address this. The older one is OT - operational transformation. 
+The idea is to transform operations relative to each other so that applying them in any order 
+yields the same outcome. Google Docs is the most famous example and OT still powers it today.
+ The trouble is that getting OT right is genuinely difficult - the edge cases multiply quickly,
+  and bugs in the transformation logic can silently corrupt documents.
 
-CRDTs - conflict-free replicated data types - are a more recent approach to achieve eventual consistency in distributed systems.
-The basic idea behind CRDTs is to design data structures in such a way that they can be updated independently and still converge
- to the same state. The algorithms are implemented directly into data structures. This approach is simpler to implement and it can
-  handle conflicts more gracefully. It is used in many modern applications, including Figma, Miro, Notion, Obsidian, Roam Research, 
-  Coda and many more.
+CRDTs took a different path. Instead of transforming operations at merge time, 
+you bake the convergence rules directly into the data structure itself. If you design 
+the structure correctly, merging two independently-evolved replicas is always well-defined 
+and always produces the same result, with no coordination needed. The trade-off is that CRDTs 
+can be less expressive than OT in some scenarios, but for most collaborative editing use 
+cases the fit is excellent. Figma, Miro, Notion, Obsidian, and Coda all rely on CRDTs 
+- a reasonable signal that the approach has matured enough for production use.
 
 % Provide motivating examples.
 
 \section{Vision of the System}
 
-The envisioned system is a desktop application designed for real-time collaborative drawing on a whiteboard.
- It leverages the Rust programming language for performance and reliability, and utilizes the egui library 
- to provide a modern, responsive user interface. Communication between users is achieved through WebRTC,
-  with the Livekit open-source server facilitating room-based connections. Each room acts as a channel 
-  or document, allowing users to join by simply entering a room code or name, without the need for user 
-  accounts, authentication, or authorization.
+The system I set out to build is a desktop application for real-time collaborative drawing on a shared whiteboard.
+Rust was chosen as the implementation language, primarily for its memory-safety guarantees and predictable performance.
+The user interface is built on top of egui, which turned out to be a good fit for a native desktop application that
+needs to stay responsive while background threads are busy with network I/O.
 
-The application employs CRDTs (Conflict-Free Replicated Data Types) from the Automerge library to ensure 
-seamless synchronization of whiteboard state across all participants. This approach enables users to draw
- and erase simultaneously, with changes instantly reflected for everyone in the room. The cursors of other
-   users are visible, enhancing the collaborative experience. The whiteboard will be represented as a canvas 
-   with raster graphics of strokes from users as vector of points with certain width and color.
+Peers communicate over WebRTC, with an open-source LiveKit server acting as the relay. Rather than requiring accounts
+or any kind of login, users simply type a room name to join a session -- the room is created automatically if it
+does not exist yet. Whiteboard state is kept consistent across all participants via CRDTs from the Automerge library.
+In practice this means everyone can draw and erase at the same time without worrying about conflicts, and the cursors
+of remote users are shown live on the canvas.
 
-For real-time, multithreaded communication, the system uses the Tokio library, ensuring efficient handling
- of concurrent operations. Notably, the application does not persist data by default; once the app is 
- closed, all data is lost unless explicitly exported to a file by the user. The focus is on desktop
-  environments, with no mobile version planned.
+Each stroke is represented as a vector of sampled points with an associated color and width -- not as raw pixels.
+One deliberate design choice worth noting upfront: the application does not persist anything by default.
+When the app is closed, the session is gone unless the user explicitly exported it first.
+A mobile version was never part of the scope.
 
 \section{Requirements Specification}
 
@@ -847,19 +824,22 @@ Below you can see more precise diagrams of submodules of the user interface modu
   \texttt{visible} or not and have \texttt{default\_width}. Another important enum is \texttt{Tool}, which defines 
 	the current tool selected by the user -- either \texttt{Pen} or \texttt{Eraser}. 
 	
-The \texttt{WhiteboardState} struct, shown in the diagram below, encapsulates the entire state of the drawing canvas. 
-It contains the following fields: \texttt{image} of type \texttt{ColorImage}, which stores the current raster 
-representation of the whiteboard; \texttt{texture} of type \texttt{Option<TextureHandle>}, which holds the GPU 
-texture used by egui for rendering the canvas; \texttt{stroke\_color} of type \texttt{Color32}, representing 
-the currently selected drawing color; \texttt{stroke\_width} of type \texttt{f32}, defining the thickness of 
-the pen stroke; \texttt{current\_stroke} of type \texttt{Vec<Point>}, which accumulates the points of the 
-stroke currently being drawn by the user before it is committed to the CRDT document; \texttt{tool} of type 
-\texttt{Tool}, indicating whether the user is currently using the pen or eraser; and \texttt{background} of 
-type \texttt{Option<ColorImage>}, which optionally stores a background image loaded from a file. 
-This struct is central to the rendering pipeline -- on each frame, the \texttt{image} is updated based on 
-the strokes stored in the CRDT document, converted into a texture, and displayed on the canvas. The separation 
-of \texttt{current\_stroke} from the committed strokes allows for smooth real-time drawing, as the in-progress 
-stroke is rendered locally before being finalized and synchronized with remote peers.
+The \texttt{WhiteboardState} struct, shown in the diagram below, holds everything that describes the 
+drawing canvas at any given moment.
+The two most important fields are \texttt{image} (a \texttt{ColorImage} pixel buffer
+ representing the current raster state of the whiteboard) and \texttt{texture}
+  (an \texttt{Option<TextureHandle>} that egui uses to upload the buffer to the GPU for rendering).
+On top of those, the struct keeps track of the user's current tool
+ (\texttt{Pen} or \texttt{Eraser}), the selected color (\texttt{stroke\_color}), 
+ line thickness (\texttt{stroke\_width}),
+  and an optional background image (\texttt{Option<ColorImage>}) that can be loaded from a file.
+
+Perhaps the most interesting field is \texttt{current\_stroke}: a \texttt{Vec<Point>} 
+that accumulates the points of whatever stroke the user is currently drawing, 
+before it gets committed to the CRDT document.
+This separation is what allows the drawing to feel immediate - the in-progress stroke is 
+rendered locally on every frame, while the finalized version is pushed to
+ Automerge and synchronized with peers only when the user lifts the pen.
 
 
 \begin{figure}[H]
@@ -941,43 +921,28 @@ user interface code.
 %  when joining a room.
 %  ``generate\_sync\_message'', ``receive\_sync\_message''
 
-Having discuussed ui.rs and backend\_api.rs modules, we can now dive into the core of 
-the synchronization logic -- the automerge\_backend.rs module.
+With \texttt{ui.rs} and \texttt{backend\_api.rs} covered, we can now get into the actual meat of the system - the \texttt{automerge\_backend.rs} module, which is where consistency is actually enforced.
 
-The synchronization architecture of the collaborative whiteboard can be understood in three layers.
-First, Section~2.4 introduces the theoretical foundations of the sync protocol -- how Automerge
-ensures that all replicas converge to the same state without a central coordinator.
-Second, Section~2.5 describes the CRDT data model -- the concrete document schema and data structures
-that the protocol operates on.
-Finally, Section~2.6 covers the communication layer -- the transport infrastructure (LiveKit, WebRTC,
-Tokio) that carries sync messages between peers.
-Each layer answers one question in sequence: \emph{how} is consistency achieved, \emph{what} is being
-synchronized, and \emph{where} do the bytes travel.
+I find it helpful to think about the synchronization architecture as three nested questions. Section~2.4 deals with the \emph{how}: the Automerge sync protocol and the guarantees it provides. Section~2.5 answers \emph{what} is being synchronized - the concrete document schema and data structures. Section~2.6 covers the \emph{where}: the transport plumbing (LiveKit, WebRTC, Tokio) that actually carries the bytes between peers.
 
 %  CONCEPTS
 \subsection{State-based vs Operation-based synchronization}
 %  brief theoretical background, position Automerge as as state-based CRDT 
 %  with operation-log hisotry
 
-Automerge library is positioned as a state-based CRDT because it uses a specialised 
-synchronization protocol to find differences between peers.
+Automerge is technically a state-based CRDT, but its sync protocol behaves much more like a 
+delta-based system. Rather than broadcasting the full document on every change,
+ it tracks exactly what each peer has already acknowledged and sends only the missing pieces.
 
-\begin{itemize}
-	\item \textbf{Sync States}: each peer maintains a \texttt{sync::State} for every other connected peer.
-	This acts as a tracker for what the remote peer already knows about the document.
-	\item \textbf{Delta updates}: instead of sending the entire document, the backend uses 
-	\texttt{generate\_sync\_message()} to produce a compact binary blob containing only the changes 
-	(deltas) the specific remote peer has not seen yet.
-	\item \textbf{Convergence through merging}: when a peer receives this message, the \texttt{receive\_sync\_message}
-	function decodes the data and automatically merges the remote changes into a local 
-	document.
-\end{itemize}
+Each peer keeps a \texttt{sync::State} per remote peer - a bookmark recording what that remote last saw.
+ When a local change occurs, \texttt{generate\_sync\_message()} consults that bookmark, bundles only
+  the unseen deltas into a compact binary blob, and returns it for transmission. 
+  On the receiving side, \texttt{receive\_sync\_message()} decodes the blob, merges the changes 
+  into the local document, and advances the bookmark so the same delta is never requested twice.
 
-Figure below illustrates the synchronization sequance between two peers - A and B.
- When A makes a local change, it generates a sync message containing only the new
- operations that B has not seen yet. This message is sent to B, which applies it 
- to its local document. If B has made concurrent changes, the merge process ensures 
- that both A and B converge to the same final state without conflicts.
+The diagram below shows this for a simple two-peer session. A draws something, packages the diff, 
+sends it to B. B merges it and sends back its own pending changes if it has any. They keep
+ exchanging diffs until both replicas match.
 
 \begin{figure}[H]
 	\centering
@@ -988,54 +953,28 @@ Figure below illustrates the synchronization sequance between two peers - A and 
 
 \subsection{Automerge sync protocol}
 
-The synchronization process in Automerge is a state-based handshake designed to bring two peers
-into the same identical state by exchanging only the necessary data. This is managed 
-through a pair of functions: \texttt{generate\_sync\_message} and 
-\texttt{receive\_sync\_message}. 
+At the protocol level, synchronization in Automerge boils down to a conversation between two
+ peers that keeps going until neither has anything new to share. The two functions that drive 
+ this are \texttt{generate\_sync\_message} and \texttt{receive\_sync\_message}.
 
 % https://arxiv.org/abs/2012.00472
 \begin{enumerate}
-	\item \textbf{The Handshake: \texttt{generate\_sync\_message} and \texttt{receive\_sync\_message} }
-		\\ The handshake functions as a continuous conversation between peers until they are fully 
-		synchronized.
+	\item \textbf{The core handshake} \\
+		\verb|generate_sync_message(peer_id)| asks the library: ``what has changed since this peer last synced?'' Automerge consults the per-peer \verb|sync::State| and, if there are unseen deltas, packs them into a compact binary blob. If the peer is already current it returns \verb|None| and the conversation ends.
+		\verb|receive_sync_message(peer_id, message)| does the other half: unpacks the blob, merges the changes into the local document, and advances the \verb|sync::State| so those same changes are not re-sent next time.
+	\item \textbf{Bloom filters -- cheap history summaries} \\
+		Sending a full history of every operation would be expensive, especially for peers that have diverged over a longer period. Automerge avoids this by including a Bloom filter in each sync message -- a compact probabilistic structure that summarises all the operations the sender holds. The receiver compares its own operations against this filter and can quickly identify which of its changes the other side has never seen, bundling only those into the response.
+	\item \textbf{Why convergence sometimes takes several rounds} \\
+		A single exchange rarely covers everything when peers have diverged significantly. The typical sequence looks like this:
 		\begin{itemize}
-			\item \verb|generate_sync_message(peer_id)|: This function asks Automerge 
-			to identify what has changed since the last time this specific peer was updated. 
-			It uses a peer-peer \verb|sync::State| to track progress. If there are new 
-			changes (deltas), they are packed into a binary blob; if the peer is already 
-			up to date, it returns \verb|None|.
-			\item \verb|receive_sync_message(peer_id, message)|: When a peer receives this 
-			binary blob, it "unpacks" the changes and merges them into its own document.
-			This function also updates the local \verb|sync::State| for that sender, marking 
-			those specific changes as "received" so they aren't requested again. 
-		\end{itemize}
-	\item \textbf{The role of bloom filters} \\
-		Automerge uses Bloom filters to efficiently track "what the peer already knows"
-		without having to send a massive list of every operation ever performed. 
-		\begin{itemize}
-			\item Efficient summarization: Instead of sending full history, a peer sends
-			a compact Bloom filter---a probabilistic data structure---that represents the set 
-			of operations (changes) it currently holds in its document. 
-			\item Identify gaps: when receiving, the peer compares its own document against 
-			this bloom filter, it can quickly identify which operations it has that are not 
-			represented in the filter. These missing pieces are then bundled into the next 
-			sync message.
-		\end{itemize}
-	\item \textbf{Why multiple rounds may be needed} \\
-		While a single change might sync in one go, a full synchronization often requires 
-		two to three rounds to reach convergence.
-		\begin{itemize}
-			\item \textbf{Round 1 (Discovery):} Peer A sends a sync message containing its current "heads" (hashes of recent changes) and a Bloom filter summarizing all the changes it has.
-			\item \textbf{Round 2 (Response):} Peer B receives this, uses the Bloom filter to identify which of its own changes Peer A is missing, and sends those changes back. Peer B also sends its own Bloom filter.
-			\item \textbf{Round 3 (Convergence):} Peer A applies the changes from Peer B. It now knows if it is still missing anything based on Peer B's Bloom filter. It sends any remaining changes Peer B might need.
-			\item \textbf{Round 4 (Finalization):} Peer B applies those changes. At this point, Peer B generates a final "empty" sync message to confirm to Peer A that they are now in identical states.
+			\item \textbf{Round 1 (Discovery):} A sends its current heads and a Bloom filter.
+			\item \textbf{Round 2 (Response):} B identifies the gaps and sends the missing changes plus its own filter.
+			\item \textbf{Round 3 (Convergence):} A applies B's changes and sends whatever B was still missing.
+			\item \textbf{Round 4 (Finalization):} B applies those, sends an empty sync message as acknowledgement. Both sides are now identical.
 		\end{itemize}
 \end{enumerate}
 
-Synchronization often requires multiple round-trips to reach convergence, especially if the 
-divergence between peers is significant. The process mimics a conversation where peers exchange 
-what they know until no new information remains. The following Rust code snippet illustrates this 
-iterative negotiation pattern used during a sync session:
+The following Rust snippet shows how this iterative negotiation looks in code:
 
 \begin{verbatim}
 let mut peer1_state = sync::State::new();
@@ -1134,45 +1073,37 @@ The following table summarizes the conflict resolution strategies:
 
 \subsubsection*{Implications for the whiteboard application}
 
-In the implemented Rust application, strokes are stored in an Automerge \texttt{List}. 
-Calling \texttt{splice} to clear the list or \texttt{insert} to add a stroke is inherently 
-safe under concurrent usage. If one user clears the whiteboard while another draws a new 
-stroke, that new stroke will appear on both screens after the sync loop finishes, while the 
-old ``cleared'' strokes will vanish. This prevents the ``lost update'' problem where one 
-user's work is accidentally wiped out by another's cleanup action.
+In the Rust implementation, strokes live in an Automerge \texttt{List}. Both \texttt{splice} 
+(for clearing) and \texttt{insert} (for drawing) are safe to call concurrently,
+ and the semantics work out intuitively: if one user clears the whiteboard while another is mid-stroke,
+  that new stroke survives on both screens once sync completes, while the old strokes are gone. 
+  This is a good outcome - a "Clear" can never silently destroy work that the clearing peer has not even seen yet.
 
-If the application-level intent is that ``Clear'' should mean ``wipe everything, including 
-things I have not yet seen,'' this must be handled at the application layer --- for example, 
-by storing a \texttt{last\_cleared\_timestamp} and filtering out any strokes created before 
-that time. In the current implementation, the simpler CRDT-native semantics (add wins) are 
-used, which is the safer and more predictable default for collaborative drawing.
+If you wanted "Clear" to mean something stronger - "wipe absolutely everything, even changes I 
+have not received yet" - that would need application-level logic,
+ such as a \texttt{last\_cleared\_timestamp} used to filter out older strokes.
+  For the current version I chose to stay with the simpler CRDT-native add-wins semantics, 
+  which is the safer and more predictable default for a collaborative drawing canvas.
 
 
 \subsection{Initial synchronization of a new peer}
 
-A critical aspect of the collaborative experience is the ability for a new user to join an 
-existing session and seamlessly acquire the current state of the whiteboard. 
-When a new peer joins a room (mid-session), they start with an empty local document (or a 
-stale version if they were previously connected). The synchronization protocol handles this 
-case naturally without special "initialization" logic.
+One thing I was genuinely curious about before implementing this was how a late-joining peer
+ bootstraps itself. It has no local state and potentially needs to catch up 
+ to a session that has been running for a while.
 
-Upon connection, the existing peers in the room detect the new participant (via LiveKit events) 
-and initiate the standard sync handshake described in Section~2.4.2. Because the new peer's 
-knowledge state is zero (empty Bloom filter), the first sync message generated by an existing 
-peer will contain the entire history of operations needed to reconstruct the current document state. 
-The new peer receives this "full" update, applies it, and instantly converges to the same state 
-as the rest of the group. This process ensures that late-joining users are never out of sync 
-and have access to the full drawing history, allowing them to undo or modify strokes made before 
-they arrived.
+It turns out the Automerge protocol handles this without any special-case logic at all. 
+When a new participant appears, the existing peers detect the \texttt{ParticipantConnected} event 
+from LiveKit and kick off the standard sync handshake. Because the newcomer starts with an empty 
+Bloom filter, the very first sync message from any existing peer carries the full document history 
+- enough to reconstruct the current whiteboard state from scratch. The new peer applies it and 
+immediately converges to the same state as the rest of the room. No snapshot mechanism, 
+no dedicated initialization endpoint - it just falls out of the ordinary sync protocol for free.
 
 % Novel solutions
 \section{CRDT Data Model -- What is being synchronized?}
 
-Having described \emph{how} the synchronization protocol achieves consistency, this section 
-focuses on \emph{what} is being synchronized --- the concrete data structures stored inside 
-the Automerge document. The data model defines how user-visible whiteboard elements (strokes, 
-background) are represented as CRDT objects, how user actions map to CRDT operations, and how 
-the entire document can be persisted to and restored from disk.
+With the sync protocol covered, the natural next question is: what exactly is being synchronized? This section describes the concrete data structures inside the Automerge document -- how strokes and the background image are represented as CRDT objects, how user actions translate into CRDT operations, and how the whole document can be saved and loaded.
 
 \subsection{Document schema}
 
