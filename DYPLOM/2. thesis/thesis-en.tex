@@ -221,14 +221,14 @@ The end result is a desktop application that lets multiple users draw and erase 
 \begin{center}
 \tytul
 \end{center}
-Celem pracy inynierskiej jest zaprojektowanie i implementacja kolaboratywnej tablicy
+Celem pracy inżynierskiej jest zaprojektowanie i implementacja kolaboratywnej tablicy
  z wykorzystaniem podejścia "local-first".
- Wypracowane rozwiązanie uzywa rozproszonego bezkonfliktowego typy danych (CRDTs) oraz komunikacji w 
- czasie rzeczywistym przez protokół WebrRTC by umozliwic bezproblemową kolaborację z innymi uzytkownikami.
+ Wypracowane rozwiązanie używa rozproszonego bezkonfliktowego typy danych (CRDTs) oraz komunikacji w 
+czasie rzeczywistym przez protokół WebRTC, by umożliwić bezproblemową kolaborację z innymi użytkownikami.
  \\
- Ostatecznym wynikiem jest aplikacja desktop-owa umozliwiająca rysowanie oraz zmazywanie poprzednich 
- pociągnięć na białej tablicy z wieloma uzytkownikami jednocześnie. Praca pokrywa opis rozwiązania 
- ale równiez porusza bardziej obszerny temat architektur typu local-first w aplikacjach kolaboratywnych.
+ Ostatecznym wynikiem jest aplikacja desktop-owa umożliwiająca rysowanie oraz zmazywanie poprzednich 
+ pociągnięć na białej tablicy z wieloma użytkownikami jednocześnie. Praca pokrywa opis rozwiązania 
+ ale również porusza bardziej obszerny temat architektur typu local-first w aplikacjach kolaboratywnych.
 
 
 \noindent \textbf{Słowa kluczowe:} język rust, local-first, CRDT, WebRTC, system rozproszony, topologia gwiazdy, wielowątkowa komunikacja w czasie rzeczywistym
@@ -330,7 +330,6 @@ How far are these architectures from beeing good fit for collaboarative appliact
  typical modules that take part in standrd user interface interaction. Picure below shows typical modules of 
  morden web/mobile/desktop cloud-application.
 
-% Place image exactly here
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=1.0\textwidth]{./images/complicated-modules.png}
@@ -528,17 +527,17 @@ Below you can see tables with user stories for each actor in the system: user, a
 		US-02 & User & draw freehand strokes on the whiteboard using a pen tool & express my ideas visually \\
 		\hline
 		US-03 & User & erase previously drawn strokes & correct mistakes or modify drawings \\
-				\hline
-	\end{tabular}
-	\label{tab:user-stories-user-1}
-\end{table}
+				% \hline
+% 	\end{tabular}
+% 	\label{tab:user-stories-user-1}
+% \end{table}
 
-\begin{table}[H]
-	\centering
-	\caption{Functional Requirements - User Stories (Actor: User) Part 2}
-	\begin{tabular}{|c|p{0.12\textwidth}|p{0.38\textwidth}|p{0.3\textwidth}|}
-		\hline
-		\textbf{ID} & \textbf{As a...} & \textbf{I want to...} & \textbf{In order to...} \\
+% \begin{table}[H]
+% 	\centering
+% 	\caption{Functional Requirements - User Stories (Actor: User) Part 2}
+% 	\begin{tabular}{|c|p{0.12\textwidth}|p{0.38\textwidth}|p{0.3\textwidth}|}
+		% \hline
+		% \textbf{ID} & \textbf{As a...} & \textbf{I want to...} & \textbf{In order to...} \\
 		
 		\hline
 		US-04 & User & change the color of the pen & differentiate between elements and add visual clarity \\
@@ -606,7 +605,7 @@ Below you can see tables with user stories for each actor in the system: user, a
 
 \begin{table}[H]
 	\centering
-	\caption{Functional Requirements - User Stories (Actor: Application, Part 2)}
+	\caption{Functional Requirements - User Stories (Actor: Application, Part 2, Actor: Server)}
 	\begin{tabular}{|c|p{0.12\textwidth}|p{0.38\textwidth}|p{0.3\textwidth}|}
 		\hline
 		\textbf{ID} & \textbf{As a...} & \textbf{I want to...} & \textbf{In order to...} \\
@@ -616,15 +615,15 @@ Below you can see tables with user stories for each actor in the system: user, a
 		AP-13 & Application & represent each stroke as a vector of points with associated width and color in the CRDT & faithfully reproduce strokes across all replicas \\
 		\hline
 		AP-14 & Application & provide a modern responsive GUI via the egui library & deliver a native desktop experience on macOS and Windows \\
-		\hline
-	\end{tabular}
-	\label{tab:user-stories-application-2}
-\end{table}
+		% \hline
+% 	\end{tabular}
+% 	\label{tab:user-stories-application-2}
+% \end{table}
 
-\begin{table}[H]
-	\centering
-	\caption{Functional Requirements - User Stories (Actor: Server)}
-	\begin{tabular}{|c|p{0.12\textwidth}|p{0.38\textwidth}|p{0.3\textwidth}|}
+% \begin{table}[H]
+% 	\centering
+% 	\caption{Functional Requirements - User Stories (Actor: Server)}
+% 	\begin{tabular}{|c|p{0.12\textwidth}|p{0.38\textwidth}|p{0.3\textwidth}|}
 		\hline
 		\textbf{ID} & \textbf{As a...} & \textbf{I want to...} & \textbf{In order to...} \\
 		\hline
