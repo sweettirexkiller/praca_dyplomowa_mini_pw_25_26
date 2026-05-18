@@ -304,7 +304,7 @@ And the apps for collaborative work today couldn’t exist 20 years ago. They ha
 % Place image exactly here
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.3\textwidth]{./images/simple-architecture.png}
+	\includegraphics[width=0.2\textwidth]{./images/simple-architecture.png}
 	\caption{Simple client-server architecture of early internet era applications}
 	\label{fig:simple-architecture}
 \end{figure}
@@ -329,14 +329,13 @@ on the market with rise of popularity of mobile and web apps from 2010.
 How far are these architectures from beeing good fit for collaboarative appliactions? Lets have a look on
  typical modules that take part in standrd user interface interaction. Picure below shows typical modules of 
  morden web/mobile/desktop cloud-application.
-
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=1.0\textwidth]{./images/complicated-modules.png}
 	\caption{Typical modules of modern cloud-based applications}
 	\label{fig:complicated-modules}
 \end{figure}
-
+\vspace{-20em}
 
 As we can see, the level of complexity is already very high. A single user interaction triggers a cascade through multiple functions, modules, and services. Trying to layer real-time collaboration on top of this kind of architecture is, frankly, a nightmare - it would require coordinating asynchronous, time-consuming remote calls across all those services just to keep everyone in sync.
 
@@ -358,6 +357,7 @@ What stands out immediately is how much the system depends on database connectiv
 This brings us to a useful contrast. In the cloud-first model the underlying assumption is: "if the user's action wasn't saved to the database, it never happened." Local-first flips this on its head: "local persistence is what matters most - the cloud is there only to connect peers."
 
 With that distinction in mind, let's look at how a typical user interaction plays out in a local-first system instead.
+
 
 \begin{figure}[H]
 	\centering
@@ -490,8 +490,8 @@ cases the fit is excellent. Figma, Miro, Notion, Obsidian, and Coda all rely on 
 - a reasonable signal that the approach has matured enough for production use.
 
 % Provide motivating examples.
-
 \section{Vision of the System}
+
 
 The system I set out to build is a desktop application for real-time collaborative drawing on a shared whiteboard.
 Rust was chosen as the implementation language, primarily for its memory-safety guarantees and predictable performance.

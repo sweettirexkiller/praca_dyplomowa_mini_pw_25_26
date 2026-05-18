@@ -247,12 +247,12 @@ INPUT ./images/more-complicated-architecture.png
 INPUT ./images/more-complicated-architecture.png
 INPUT ./images/more-complicated-architecture.png
 INPUT ./images/more-complicated-architecture.png
+INPUT ./images/complicated-modules.png
+INPUT ./images/complicated-modules.png
+INPUT ./images/complicated-modules.png
+INPUT ./images/complicated-modules.png
+INPUT ./images/complicated-modules.png
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/jknappen/ec/eccc1095.tfm
-INPUT ./images/complicated-modules.png
-INPUT ./images/complicated-modules.png
-INPUT ./images/complicated-modules.png
-INPUT ./images/complicated-modules.png
-INPUT ./images/complicated-modules.png
 INPUT ./images/typical-sequance.png
 INPUT ./images/typical-sequance.png
 INPUT ./images/typical-sequance.png

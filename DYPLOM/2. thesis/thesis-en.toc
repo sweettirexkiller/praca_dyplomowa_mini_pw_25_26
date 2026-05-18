@@ -5,64 +5,64 @@
 \contentsline {chapter}{\numberline {1}Introduction}{11}{chapter.1}%
 \contentsline {chapter}{Introduction}{11}{chapter.1}%
 \contentsline {section}{\numberline {1.1}Analysis and description of collaborative local-first applications}{11}{section.1.1}%
-\contentsline {section}{\numberline {1.2}Local-first vs Cloud-first}{15}{section.1.2}%
-\contentsline {section}{\numberline {1.3}Why would one implement own collaborative system ?}{17}{section.1.3}%
-\contentsline {section}{\numberline {1.4}Examples from industry}{17}{section.1.4}%
-\contentsline {section}{\numberline {1.5}Known architectures for collaborative applications}{17}{section.1.5}%
-\contentsline {section}{\numberline {1.6}OT vs CRDTs}{18}{section.1.6}%
-\contentsline {section}{\numberline {1.7}Vision of the System}{19}{section.1.7}%
-\contentsline {section}{\numberline {1.8}Requirements Specification}{20}{section.1.8}%
-\contentsline {subsection}{\numberline {1.8.1}Functional Requirements}{20}{subsection.1.8.1}%
-\contentsline {subsection}{\numberline {1.8.2}Non-Functional Requirements}{24}{subsection.1.8.2}%
-\contentsline {section}{\numberline {1.9}Business Cases}{26}{section.1.9}%
-\contentsline {section}{\numberline {1.10}User Interface vision}{26}{section.1.10}%
-\contentsline {chapter}{\numberline {2}Description of the solution}{28}{chapter.2}%
-\contentsline {section}{\numberline {2.1}System Architecture}{28}{section.2.1}%
-\contentsline {section}{\numberline {2.2}Technology Stack}{28}{section.2.2}%
-\contentsline {section}{\numberline {2.3}Application Modules}{30}{section.2.3}%
-\contentsline {subsection}{\numberline {2.3.1}User Interface Modules and Implementation}{30}{subsection.2.3.1}%
-\contentsline {subsection}{\numberline {2.3.2}Backend Module}{32}{subsection.2.3.2}%
-\contentsline {section}{\numberline {2.4}Synchronization Protocol - How consistency is achieved}{34}{section.2.4}%
-\contentsline {subsection}{\numberline {2.4.1}State-based vs Operation-based synchronization}{34}{subsection.2.4.1}%
-\contentsline {subsection}{\numberline {2.4.2}Automerge sync protocol}{35}{subsection.2.4.2}%
-\contentsline {subsection}{\numberline {2.4.3}Conflict resolution and guarantees}{37}{subsection.2.4.3}%
-\contentsline {subsection}{\numberline {2.4.4}Initial synchronization of a new peer}{39}{subsection.2.4.4}%
-\contentsline {section}{\numberline {2.5}CRDT Data Model - What is being synchronized?}{39}{section.2.5}%
-\contentsline {subsection}{\numberline {2.5.1}Document schema}{39}{subsection.2.5.1}%
-\contentsline {paragraph}{Why JSON strings inside a List?}{40}{subsection.2.5.1}%
-\contentsline {subsection}{\numberline {2.5.2}Stroke representation}{40}{subsection.2.5.2}%
-\contentsline {paragraph}{Why a vector of points rather than pixels?}{41}{subsection.2.5.2}%
-\contentsline {subsection}{\numberline {2.5.3}Intent abstraction}{41}{subsection.2.5.3}%
-\contentsline {paragraph}{Eraser implementation}{43}{figure.2.6}%
-\contentsline {subsection}{\numberline {2.5.4}File persistence}{43}{subsection.2.5.4}%
-\contentsline {section}{\numberline {2.6}Communication Layer - Where the messages travel ?}{44}{section.2.6}%
-\contentsline {subsection}{\numberline {2.6.1}LiveKit and WebRTC data channels}{45}{subsection.2.6.1}%
-\contentsline {subsection}{\numberline {2.6.2}Thread modeling}{45}{subsection.2.6.2}%
-\contentsline {subsection}{\numberline {2.6.3}Message flow and chunking}{46}{subsection.2.6.3}%
-\contentsline {subsection}{\numberline {2.6.4}Cursor synchronization}{49}{subsection.2.6.4}%
-\contentsline {section}{\numberline {2.7}Final design}{50}{section.2.7}%
-\contentsline {chapter}{\numberline {3}Analysis of the solution}{52}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Testing environment}{52}{section.3.1}%
-\contentsline {section}{\numberline {3.2}Unit Testing}{54}{section.3.2}%
-\contentsline {section}{\numberline {3.3}Manual Acceptance Testing}{56}{section.3.3}%
-\contentsline {section}{\numberline {3.4}Performance benchmarks}{57}{section.3.4}%
-\contentsline {subsection}{\numberline {3.4.1}Synchronization latency (NF-07)}{57}{subsection.3.4.1}%
-\contentsline {subsection}{\numberline {3.4.2}File load time (NF-08)}{59}{subsection.3.4.2}%
-\contentsline {subsection}{\numberline {3.4.3}Multi-user scalability (NF-09)}{59}{subsection.3.4.3}%
-\contentsline {subsection}{\numberline {3.4.4}Rendering frame rate (NF-10)}{61}{subsection.3.4.4}%
-\contentsline {subsection}{\numberline {3.4.5}Chunking overhead}{62}{subsection.3.4.5}%
-\contentsline {section}{\numberline {3.5}Reliability analysis}{63}{section.3.5}%
-\contentsline {subsection}{\numberline {3.5.1}CRDT convergence (NF-06)}{63}{subsection.3.5.1}%
-\contentsline {subsection}{\numberline {3.5.2}Offline continuity (NF-05)}{64}{subsection.3.5.2}%
-\contentsline {section}{\numberline {3.6}Usability assessment}{65}{section.3.6}%
-\contentsline {section}{\numberline {3.7}Non-functional requirements summary}{65}{section.3.7}%
-\contentsline {section}{\numberline {3.8}Identified limitations}{67}{section.3.8}%
-\contentsline {chapter}{\numberline {4}Conclusions}{68}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Is the final product a success?}{68}{section.4.1}%
-\contentsline {section}{\numberline {4.2}What we achieved and how we avoided dangers}{68}{section.4.2}%
-\contentsline {section}{\numberline {4.3}What could be done better}{69}{section.4.3}%
-\contentsline {section}{\numberline {4.4}Plans for future development}{69}{section.4.4}%
-\contentsline {section}{\numberline {4.5}Open problems}{70}{section.4.5}%
+\contentsline {section}{\numberline {1.2}Local-first vs Cloud-first}{14}{section.1.2}%
+\contentsline {section}{\numberline {1.3}Why would one implement own collaborative system ?}{16}{section.1.3}%
+\contentsline {section}{\numberline {1.4}Examples from industry}{16}{section.1.4}%
+\contentsline {section}{\numberline {1.5}Known architectures for collaborative applications}{16}{section.1.5}%
+\contentsline {section}{\numberline {1.6}OT vs CRDTs}{17}{section.1.6}%
+\contentsline {section}{\numberline {1.7}Vision of the System}{18}{section.1.7}%
+\contentsline {section}{\numberline {1.8}Requirements Specification}{19}{section.1.8}%
+\contentsline {subsection}{\numberline {1.8.1}Functional Requirements}{19}{subsection.1.8.1}%
+\contentsline {subsection}{\numberline {1.8.2}Non-Functional Requirements}{23}{subsection.1.8.2}%
+\contentsline {section}{\numberline {1.9}Business Cases}{25}{section.1.9}%
+\contentsline {section}{\numberline {1.10}User Interface vision}{25}{section.1.10}%
+\contentsline {chapter}{\numberline {2}Description of the solution}{27}{chapter.2}%
+\contentsline {section}{\numberline {2.1}System Architecture}{27}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Technology Stack}{27}{section.2.2}%
+\contentsline {section}{\numberline {2.3}Application Modules}{29}{section.2.3}%
+\contentsline {subsection}{\numberline {2.3.1}User Interface Modules and Implementation}{29}{subsection.2.3.1}%
+\contentsline {subsection}{\numberline {2.3.2}Backend Module}{31}{subsection.2.3.2}%
+\contentsline {section}{\numberline {2.4}Synchronization Protocol - How consistency is achieved}{33}{section.2.4}%
+\contentsline {subsection}{\numberline {2.4.1}State-based vs Operation-based synchronization}{33}{subsection.2.4.1}%
+\contentsline {subsection}{\numberline {2.4.2}Automerge sync protocol}{34}{subsection.2.4.2}%
+\contentsline {subsection}{\numberline {2.4.3}Conflict resolution and guarantees}{36}{subsection.2.4.3}%
+\contentsline {subsection}{\numberline {2.4.4}Initial synchronization of a new peer}{38}{subsection.2.4.4}%
+\contentsline {section}{\numberline {2.5}CRDT Data Model - What is being synchronized?}{38}{section.2.5}%
+\contentsline {subsection}{\numberline {2.5.1}Document schema}{38}{subsection.2.5.1}%
+\contentsline {paragraph}{Why JSON strings inside a List?}{39}{subsection.2.5.1}%
+\contentsline {subsection}{\numberline {2.5.2}Stroke representation}{39}{subsection.2.5.2}%
+\contentsline {paragraph}{Why a vector of points rather than pixels?}{40}{subsection.2.5.2}%
+\contentsline {subsection}{\numberline {2.5.3}Intent abstraction}{40}{subsection.2.5.3}%
+\contentsline {paragraph}{Eraser implementation}{42}{figure.2.6}%
+\contentsline {subsection}{\numberline {2.5.4}File persistence}{42}{subsection.2.5.4}%
+\contentsline {section}{\numberline {2.6}Communication Layer - Where the messages travel ?}{43}{section.2.6}%
+\contentsline {subsection}{\numberline {2.6.1}LiveKit and WebRTC data channels}{44}{subsection.2.6.1}%
+\contentsline {subsection}{\numberline {2.6.2}Thread modeling}{44}{subsection.2.6.2}%
+\contentsline {subsection}{\numberline {2.6.3}Message flow and chunking}{45}{subsection.2.6.3}%
+\contentsline {subsection}{\numberline {2.6.4}Cursor synchronization}{48}{subsection.2.6.4}%
+\contentsline {section}{\numberline {2.7}Final design}{49}{section.2.7}%
+\contentsline {chapter}{\numberline {3}Analysis of the solution}{51}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Testing environment}{51}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Unit Testing}{53}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Manual Acceptance Testing}{55}{section.3.3}%
+\contentsline {section}{\numberline {3.4}Performance benchmarks}{56}{section.3.4}%
+\contentsline {subsection}{\numberline {3.4.1}Synchronization latency (NF-07)}{56}{subsection.3.4.1}%
+\contentsline {subsection}{\numberline {3.4.2}File load time (NF-08)}{58}{subsection.3.4.2}%
+\contentsline {subsection}{\numberline {3.4.3}Multi-user scalability (NF-09)}{58}{subsection.3.4.3}%
+\contentsline {subsection}{\numberline {3.4.4}Rendering frame rate (NF-10)}{60}{subsection.3.4.4}%
+\contentsline {subsection}{\numberline {3.4.5}Chunking overhead}{61}{subsection.3.4.5}%
+\contentsline {section}{\numberline {3.5}Reliability analysis}{62}{section.3.5}%
+\contentsline {subsection}{\numberline {3.5.1}CRDT convergence (NF-06)}{62}{subsection.3.5.1}%
+\contentsline {subsection}{\numberline {3.5.2}Offline continuity (NF-05)}{63}{subsection.3.5.2}%
+\contentsline {section}{\numberline {3.6}Usability assessment}{64}{section.3.6}%
+\contentsline {section}{\numberline {3.7}Non-functional requirements summary}{64}{section.3.7}%
+\contentsline {section}{\numberline {3.8}Identified limitations}{66}{section.3.8}%
+\contentsline {chapter}{\numberline {4}Conclusions}{67}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Is the final product a success?}{67}{section.4.1}%
+\contentsline {section}{\numberline {4.2}What we achieved and how we avoided dangers}{67}{section.4.2}%
+\contentsline {section}{\numberline {4.3}What could be done better}{68}{section.4.3}%
+\contentsline {section}{\numberline {4.4}Plans for future development}{68}{section.4.4}%
+\contentsline {section}{\numberline {4.5}Open problems}{69}{section.4.5}%
 \contentsline {chapter}{\numberline {A}User Manual}{}{appendix.A}%
 \contentsline {chapter}{\numberline {B}Deployment Guide}{}{appendix.B}%
 \contentsline {chapter}{\numberline {C}Manual Acceptance Test Scenarios}{}{appendix.C}%
