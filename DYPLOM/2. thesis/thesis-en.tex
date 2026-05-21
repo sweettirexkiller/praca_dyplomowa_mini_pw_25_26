@@ -2028,14 +2028,6 @@ No strokes were lost or duplicated in any run. The add-wins guarantee held in ev
 clear-vs-draw scenario, consistent with the Automerge conflict resolution described in
 Section~2.4.3. \textbf{NF-06: PASS.}
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.85\textwidth]{./images/analysis/fig3_7_convergence_benchmark.png}
-    \caption{CRDT convergence benchmark output (\texttt{bench\_convergence})}
-    \label{fig:convergence}
-\end{figure}
-
-
 \subsection{Offline continuity (NF-05)}
 
 NF-05 requires that the system maintains continuity of work in offline mode and
@@ -2046,9 +2038,19 @@ LiveKit Docker container while two clients were connected and drawing.
 What actually happened was that both clients immediately froze—the UI became
 unresponsive because the LiveKit SDK's connection handling blocked the background thread.
 Any strokes drawn after the SFU went down were never delivered to the other peer, and
-] the application did not
+the application did not
 attempt to reconnect on its own. Even after restarting the SFU, the clients remained 
 stuck and only recovered after a manual restart of the application.
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{./images/analysis/fig3_7_convergence_benchmark.png}
+    \caption{CRDT convergence benchmark output (\texttt{bench\_convergence})}
+    \label{fig:convergence}
+\end{figure}
+
+
 
 This behaviour is a consequence of the current architecture: the LiveKit SDK does not
 expose a built-in auto-reconnect callback that the application handles, and there is no
@@ -2081,12 +2083,12 @@ entries are in English. \textbf{PASS.}
 
 \section{Non-functional requirements summary}
 
-Table~\ref{tab:nf-summary} summarises the outcome of all 14 non-functional requirements
+Table~\ref{tab:nf-summary-1} and Table~\ref{tab:nf-summary-2} summarise the outcome of all 14 non-functional requirements
 defined in Section~1.8.2.
 
 \begin{table}[H]
     \centering
-    \caption{Non-functional requirements fulfilment summary}
+    \caption{Non-functional requirements fulfilment summary (Part 1)}
     \begin{tabular}{|c|p{0.30\textwidth}|p{0.28\textwidth}|c|}
         \hline
         \textbf{ID} & \textbf{Requirement} & \textbf{Measured / observed value} & \textbf{Result} \\
@@ -2105,6 +2107,17 @@ defined in Section~1.8.2.
         \hline
         NF-07 & Sync $\leq$ 2~s on $\geq$ 10~Mb/s & E2E avg 460~ms, max 663~ms & PASS \\
         \hline
+    \end{tabular}
+    \label{tab:nf-summary-1}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \caption{Non-functional requirements fulfilment summary (Part 2)}
+    \begin{tabular}{|c|p{0.30\textwidth}|p{0.28\textwidth}|c|}
+        \hline
+        \textbf{ID} & \textbf{Requirement} & \textbf{Measured / observed value} & \textbf{Result} \\
+        \hline
         NF-08 & Load $\leq$ 1~s & Max 1.77~ms (5000 strokes) & PASS \\
         \hline
         NF-09 & $\geq$ 3 simultaneous users & 5 users, avg $\approx$95~ms latency & PASS \\
@@ -2120,7 +2133,7 @@ defined in Section~1.8.2.
         NF-14 & No default persistence & All state lost on close unless exported & PASS \\
         \hline
     \end{tabular}
-    \label{tab:nf-summary}
+    \label{tab:nf-summary-2}
 \end{table}
 
 13 out of 14 requirements pass. NF-05 (offline continuity) fails due to the absence of
