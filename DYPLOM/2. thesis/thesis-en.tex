@@ -31,6 +31,7 @@
 
 \linespread{1.5}
 \allowdisplaybreaks         % ALLOWS BREAKING PAGE IN MATH MODE
+\raggedbottom               % PREVENTS STRETCHING VERTICAL SPACE ON UNDERFULL PAGES
 
 \usepackage{indentfirst}    % IT MAKES THE FIRST PARAGRAPH INDENTED; NOT NEEDED
 \setlength{\parindent}{5mm} % WIDTH OF AN INDENTATION
@@ -70,16 +71,17 @@
 \titleformat{\chapter}
   {\normalfont\Large \bfseries}
   {\thechapter.}{1ex}{\Large}
+\titlespacing{\chapter}{0pt}{-20pt}{10pt}
 
 \titleformat{\section}
   {\normalfont\large\bfseries}
   {\thesection.}{1ex}{}
-\titlespacing{\section}{0pt}{30pt}{20pt} 
+\titlespacing{\section}{0pt}{20pt}{10pt}
 
-    
 \titleformat{\subsection}
   {\normalfont \bfseries}
   {\thesubsection.}{1ex}{}
+\titlespacing{\subsection}{0pt}{15pt}{8pt}
 
 
 % ----------------------- TABLE OF CONTENTS SETUP ---------------------------
@@ -335,7 +337,6 @@ How far are these architectures from beeing good fit for collaboarative appliact
 	\caption{Typical modules of modern cloud-based applications}
 	\label{fig:complicated-modules}
 \end{figure}
-\vspace{-20em}
 
 As we can see, the level of complexity is already very high. A single user interaction triggers a cascade through multiple functions, modules, and services. Trying to layer real-time collaboration on top of this kind of architecture is, frankly, a nightmare - it would require coordinating asynchronous, time-consuming remote calls across all those services just to keep everyone in sync.
 
@@ -359,6 +360,7 @@ This brings us to a useful contrast. In the cloud-first model the underlying ass
 With that distinction in mind, let's look at how a typical user interaction plays out in a local-first system instead.
 
 
+% TODO: finish formatting here
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.7\textwidth]{./images/local-first-sequanec.png}
@@ -654,7 +656,7 @@ Non-functional requirements define the quality attributes of the system. The FUR
 
 \begin{table}[H]
 	\centering
-	\caption{Non-Functional Requirements - FURPS+ Analysis}
+	\caption{Non-Functional Requirements - FURPS+ Analysis (Part 1)}
 	\begin{tabular}{|p{0.18\textwidth}|c|p{0.62\textwidth}|}
 		\hline
 		\textbf{Category} & \textbf{ID} & \textbf{Description} \\
@@ -682,6 +684,17 @@ Non-functional requirements define the quality attributes of the system. The FUR
 		\cline{2-3}
 		& NF-10 & The drawing canvas shall maintain a responsive frame rate ($\geq$30 FPS) during normal drawing operations. \\
 		\hline
+	\end{tabular}
+	\label{tab:furps-analysis-1}
+\end{table}
+
+\begin{table}[H]
+	\centering
+	\caption{Non-Functional Requirements - FURPS+ Analysis (Part 2)}
+	\begin{tabular}{|p{0.18\textwidth}|c|p{0.62\textwidth}|}
+		\hline
+		\textbf{Category} & \textbf{ID} & \textbf{Description} \\
+		\hline
 		\multirow{2}{*}{\parbox{0.18\textwidth}{\textbf{Supportability}}}
 		& NF-11 & The system documentation shall include installation and configuration instructions (README) to enable returning to the project after an extended period. \\
 		\cline{2-3}
@@ -693,7 +706,7 @@ Non-functional requirements define the quality attributes of the system. The FUR
 		& NF-14 & The application shall not persist any data by default - all state is lost when the app is closed unless explicitly exported by the user. \\
 		\hline
 	\end{tabular}
-	\label{tab:furps-analysis}
+	\label{tab:furps-analysis-2}
 \end{table}
 
 % List and describe the non-functional requirements of the system.
@@ -789,7 +802,7 @@ It provides a simple API for creating rooms and managing connections between
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.8\textwidth]{./images/architecture.png}
+	\includegraphics[width=0.5\textwidth]{./images/architecture.png}
 	\caption{Architecture of the envisioned system}
 	\label{fig:architecture}
 \end{figure}
@@ -875,16 +888,7 @@ implementation and can work with any backend that satisfies the trait contract.
 
 % If you need to show underscores in text, use \texttt{backend\_api.rs} or \verb|backend_api.rs| to avoid math mode errors.
 
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.7\textwidth]{./images/backend-interface.png}
-	\caption{Backend Interface}
-	\label{fig:backend-interface}
-\end{figure}
-
-
-As shown in Figure~\ref{fig:backend-interface}, the \texttt{DocBackend} interface exposes methods
+The \texttt{DocBackend} interface exposes methods
 grouped into three categories:
 
 \begin{itemize}
@@ -905,6 +909,14 @@ grouped into three categories:
 		  version of the applicaiton in ALFA environment enables two file types persistence: .crdt and .png. These
 		  methods enable explicit file export and import without requiring any default persistence.
 \end{itemize}
+
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\textwidth]{./images/backend-interface.png}
+	\caption{Backend Interface}
+	\label{fig:backend-interface}
+\end{figure}
 
 The raster graphics data types are also defined in this module. \texttt{Point} represents a 2D coordinate,
 \texttt{Stroke} groups a sequence of points with a color (RGBA) and width, \texttt{Intent} encodes
@@ -1430,20 +1442,13 @@ Figure~\ref{fig:data-receiving-seq} illustrates the complete lifecycle of an inc
  the remote peer, the LiveKit room (server-side), the background Tokio thread, the two ends of the MPSC 
  channel (\texttt{UnboundedSender<AppMsg>} and \texttt{UnboundedReceiver<AppMsg>}), and the UI thread.
 
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.99\textwidth]{./images/data-receiving-seq.png}
-	\caption{Sequence diagram: Receiving and reassembling chunked data messages}
-	\label{fig:data-receiving-seq}
-\end{figure}
-
-With the types established, tracing a message through the system is fairly straightforward. 
+ With the types established, tracing a message through the system is fairly straightforward. 
 The journey starts when a remote peer calls \texttt{publish\_data(payload)} on its LiveKit participant. 
 The SFU forwards this to everyone in the room, which fires a \texttt{RoomEvent::DataReceived} on 
 the background thread's event loop. The thread tries to deserialize the raw bytes into
  a \texttt{TransportPacket}.
 
-What happens next depends on which variant arrived. A \texttt{TransportPacket::Message} means the 
+ What happens next depends on which variant arrived. A \texttt{TransportPacket::Message} means the 
 payload fit in one LiveKit frame - the thread deserializes it directly into a \texttt{NetworkMessage} 
 and pushes it onto the MPSC channel as an \texttt{AppMsg::NetworkMessage}.
  A \texttt{TransportPacket::Chunk} means the original message was too large and had to be 
@@ -1451,6 +1456,16 @@ and pushes it onto the MPSC channel as an \texttt{AppMsg::NetworkMessage}.
  and the total chunk count. Incoming chunks accumulate in a per-peer \texttt{incomplete\_transfers}
   buffer; once the last one arrives the thread reassembles them in order,
    deserializes the complete payload, and sends it through the same MPSC path.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.99\textwidth]{./images/data-receiving-seq.png}
+	\caption{Sequence diagram: Receiving and reassembling chunked data messages}
+	\label{fig:data-receiving-seq}
+\end{figure}
+
+
+
 
 The 14\,KB chunk boundary comes from LiveKit's data channel limit. The sender mirrors this logic:
  if the serialized payload fits, it goes as a single \texttt{TransportPacket::Message}; 
@@ -1585,6 +1600,13 @@ For the compilation of the application we used release mode (i.e., \texttt{cargo
 Figures~\ref{fig:system-specs-livekit} confirms the hardware and LiveKit server version.
 Network measurements are shown in Figures~\ref{fig:ping} and~\ref{fig:iperf-comparison}.
 
+Network conditions play an important role in evaluating the synchronization latency requirement
+NF-07 ($\leq$2~s on a connection with bandwidth $\geq$10~Mb/s). Tests were conducted in two
+network environments. At home, \texttt{ping} to the VPS averaged 67.5~ms and \texttt{iperf3}
+measured approximately 7.14~Mbps downstream - just below the NF-07 bandwidth threshold, which
+is noted where relevant in the analysis. At a public library, \texttt{iperf3} measured
+approximately 829~Kbps, representing a constrained network typical of mobile hot-spot.
+
 \begin{figure}[H]
     \begin{minipage}[t]{0.54\textwidth}
         \centering
@@ -1599,16 +1621,10 @@ Network measurements are shown in Figures~\ref{fig:ping} and~\ref{fig:iperf-comp
     \label{fig:system-specs-livekit}
 \end{figure}
 
-Network conditions play an important role in evaluating the synchronization latency requirement
-NF-07 ($\leq$2~s on a connection with bandwidth $\geq$10~Mb/s). Tests were conducted in two
-network environments. At home, \texttt{ping} to the VPS averaged 67.5~ms and \texttt{iperf3}
-measured approximately 7.14~Mbps downstream - just below the NF-07 bandwidth threshold, which
-is noted where relevant in the analysis. At a public library, \texttt{iperf3} measured
-approximately 829~Kbps, representing a constrained network typical of mobile hot-spot.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.75\textwidth]{./images/analysis/fig3_1c_network_ping.png}
+    \includegraphics[width=0.6\textwidth]{./images/analysis/fig3_1c_network_ping.png}
     \caption{Ping latency to the LiveKit VPS (home network, avg 67.5~ms)}
     \label{fig:ping}
 \end{figure}
@@ -1638,7 +1654,7 @@ event loop and was verified through manual acceptance testing (Section~3.3).
 
 \begin{table}[H]
     \centering
-    \caption{Unit test suite - \texttt{automerge\_backend.rs}}
+    \caption{Unit test suite - \texttt{automerge\_backend.rs} (Part 1)}
     \begin{tabular}{|p{0.52\textwidth}|p{0.34\textwidth}|c|}
         \hline
         \textbf{Test name} & \textbf{What it verifies} & \textbf{Result} \\
@@ -1657,20 +1673,31 @@ event loop and was verified through manual acceptance testing (Section~3.3).
         \hline
         \texttt{test\_clear\_vs\_concurrent\_draw\_add\_wins} & Clear + concurrent draw: new stroke survives (add-wins, NF-06) & PASS \\
         \hline
-        \texttt{test\_load\_invalid\_bytes\_does\_not\_panic} & Loading corrupted bytes does not crash the backend & PASS \\
+         \texttt{test\_load\_invalid\_bytes\_does\_not\_panic} & Loading corrupted bytes does not crash the backend & PASS \\
         \hline
         \texttt{test\_load\_empty\_bytes\_does\_not\_panic} & Loading empty bytes does not crash the backend & PASS \\
         \hline
-        \texttt{test\_strokes\_preserve\_insertion\_order} & Strokes are returned in insertion order & PASS \\
+         \texttt{test\_strokes\_preserve\_insertion\_order} & Strokes are returned in insertion order & PASS \\
         \hline
-        \texttt{test\_three\_peer\_sync\_convergence} & Three-peer chain (A$\leftrightarrow$B$\leftrightarrow$C) converges & PASS \\
+           \texttt{test\_three\_peer\_sync\_convergence} & Three-peer chain (A$\leftrightarrow$B$\leftrightarrow$C) converges & PASS \\
+        \hline
+    \end{tabular}
+    \label{tab:unit-tests-1}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \caption{Unit test suite - \texttt{automerge\_backend.rs} (Part 2)}
+    \begin{tabular}{|p{0.52\textwidth}|p{0.34\textwidth}|c|}
+        \hline
+        \textbf{Test name} & \textbf{What it verifies} & \textbf{Result} \\
         \hline
         \texttt{test\_set\_and\_get\_background} & Background image survives a save/load round-trip & PASS \\
         \hline
         \texttt{test\_peer\_disconnect\_removes\_sync\_state} & Peer disconnect cleans up the sync state map & PASS \\
         \hline
     \end{tabular}
-    \label{tab:unit-tests}
+    \label{tab:unit-tests-2}
 \end{table}
 
 Figure~\ref{fig:unit-tests} shows the \texttt{cargo test} output confirming that all 13 tests pass.
