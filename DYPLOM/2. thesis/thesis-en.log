@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.11.29)  21 MAY 2026 18:43
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.11.29)  21 MAY 2026 19:07
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -332,23 +332,47 @@ Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
 Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 285.
 )
 \Hy@SectionHShift=\skip62
-) (/usr/local/texlive/2025/texmf-dist/tex/latex/geometry/geometry.sty
+) (/usr/local/texlive/2025/texmf-dist/tex/latex/listings/listings.sty
+\lst@mode=\count305
+\lst@gtempboxa=\box58
+\lst@token=\toks36
+\lst@length=\count306
+\lst@currlwidth=\dimen166
+\lst@column=\count307
+\lst@pos=\count308
+\lst@lostspace=\dimen167
+\lst@width=\dimen168
+\lst@newlines=\count309
+\lst@lineno=\count310
+\lst@maxwidth=\dimen169
+ (/usr/local/texlive/2025/texmf-dist/tex/latex/listings/lstpatch.sty
+File: lstpatch.sty 2024/09/23 1.10c (Carsten Heinz)
+) (/usr/local/texlive/2025/texmf-dist/tex/latex/listings/lstmisc.sty
+File: lstmisc.sty 2024/09/23 1.10c (Carsten Heinz)
+\c@lstnumber=\count311
+\lst@skipnumbers=\count312
+\lst@framebox=\box59
+) (/usr/local/texlive/2025/texmf-dist/tex/latex/listings/listings.cfg
+File: listings.cfg 2024/09/23 1.10c listings configuration
+))
+Package: listings 2024/09/23 1.10c (Carsten Heinz)
+ (/usr/local/texlive/2025/texmf-dist/tex/latex/geometry/geometry.sty
 Package: geometry 2020/01/02 v5.9 Page Geometry
  (/usr/local/texlive/2025/texmf-dist/tex/generic/iftex/ifvtex.sty
 Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
 )
-\Gm@cnth=\count305
-\Gm@cntv=\count306
-\c@Gm@tempcnt=\count307
-\Gm@bindingoffset=\dimen166
-\Gm@wd@mp=\dimen167
-\Gm@odd@mp=\dimen168
-\Gm@even@mp=\dimen169
-\Gm@layoutwidth=\dimen170
-\Gm@layoutheight=\dimen171
-\Gm@layouthoffset=\dimen172
-\Gm@layoutvoffset=\dimen173
-\Gm@dimlist=\toks36
+\Gm@cnth=\count313
+\Gm@cntv=\count314
+\c@Gm@tempcnt=\count315
+\Gm@bindingoffset=\dimen170
+\Gm@wd@mp=\dimen171
+\Gm@odd@mp=\dimen172
+\Gm@even@mp=\dimen173
+\Gm@layoutwidth=\dimen174
+\Gm@layoutheight=\dimen175
+\Gm@layouthoffset=\dimen176
+\Gm@layoutvoffset=\dimen177
+\Gm@dimlist=\toks37
 ) (/usr/local/texlive/2025/texmf-dist/tex/latex/tools/indentfirst.sty
 Package: indentfirst 2023/07/02 v1.03 Indent first paragraph (DPC)
 ) (/usr/local/texlive/2025/texmf-dist/tex/latex/fancyhdr/fancyhdr.sty
@@ -367,61 +391,61 @@ Package: fancyhdr 2025/02/07 v5.2 Extensive control of page headers and footers
 \f@nch@widthL=\skip74
 \f@nch@widthC=\skip75
 \f@nch@widthR=\skip76
-\@temptokenb=\toks37
+\@temptokenb=\toks38
 ) (/usr/local/texlive/2025/texmf-dist/tex/latex/titlesec/titlesec.sty
 Package: titlesec 2025/01/04 v2.17 Sectioning titles
-\ttl@box=\box58
+\ttl@box=\box60
 \beforetitleunit=\skip77
 \aftertitleunit=\skip78
-\ttl@plus=\dimen174
-\ttl@minus=\dimen175
-\ttl@toksa=\toks38
-\titlewidth=\dimen176
-\titlewidthlast=\dimen177
-\titlewidthfirst=\dimen178
+\ttl@plus=\dimen178
+\ttl@minus=\dimen179
+\ttl@toksa=\toks39
+\titlewidth=\dimen180
+\titlewidthlast=\dimen181
+\titlewidthfirst=\dimen182
 ) (/usr/local/texlive/2025/texmf-dist/tex/latex/titlesec/titletoc.sty
 Package: titletoc 2025/01/04 v2.17 TOC entries
-\ttl@leftsep=\dimen179
+\ttl@leftsep=\dimen183
 )
-\c@theorem=\count308
+\c@theorem=\count316
  (/usr/local/texlive/2025/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 File: l3backend-pdftex.def 2024-05-08 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count309
-\l__pdf_internal_box=\box59
+\l__color_backend_stack_int=\count317
+\l__pdf_internal_box=\box61
 ) (./thesis-en.aux)
 \openout1 = `thesis-en.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 174.
-LaTeX Font Info:    ... okay on input line 174.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 174.
-LaTeX Font Info:    ... okay on input line 174.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 174.
-LaTeX Font Info:    ... okay on input line 174.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 174.
-LaTeX Font Info:    ... okay on input line 174.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 174.
-LaTeX Font Info:    ... okay on input line 174.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 174.
-LaTeX Font Info:    ... okay on input line 174.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 174.
-LaTeX Font Info:    ... okay on input line 174.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 174.
-LaTeX Font Info:    ... okay on input line 174.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 174.
-LaTeX Font Info:    ... okay on input line 174.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 203.
+LaTeX Font Info:    ... okay on input line 203.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 203.
+LaTeX Font Info:    ... okay on input line 203.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 203.
+LaTeX Font Info:    ... okay on input line 203.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 203.
+LaTeX Font Info:    ... okay on input line 203.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 203.
+LaTeX Font Info:    ... okay on input line 203.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 203.
+LaTeX Font Info:    ... okay on input line 203.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 203.
+LaTeX Font Info:    ... okay on input line 203.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 203.
+LaTeX Font Info:    ... okay on input line 203.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 203.
+LaTeX Font Info:    ... okay on input line 203.
  (/usr/local/texlive/2025/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count310
-\scratchdimen=\dimen180
-\scratchbox=\box60
-\nofMPsegments=\count311
-\nofMParguments=\count312
-\everyMPshowfont=\toks39
-\MPscratchCnt=\count313
-\MPscratchDim=\dimen181
-\MPnumerator=\count314
-\makeMPintoPDFobject=\count315
-\everyMPtoPDFconversion=\toks40
+\scratchcounter=\count318
+\scratchdimen=\dimen184
+\scratchbox=\box62
+\nofMPsegments=\count319
+\nofMParguments=\count320
+\everyMPshowfont=\toks40
+\MPscratchCnt=\count321
+\MPscratchDim=\dimen185
+\MPnumerator=\count322
+\makeMPintoPDFobject=\count323
+\everyMPtoPDFconversion=\toks41
 ) (/usr/local/texlive/2025/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 485.
@@ -436,11 +460,12 @@ Package: lscape 2020/05/28 v3.02 Landscape Pages (DPC)
 )
 Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
 ))
-Package hyperref Info: Link coloring OFF on input line 174.
+Package hyperref Info: Link coloring OFF on input line 203.
  (./thesis-en.out) (./thesis-en.out)
 \@outlinefile=\write3
 \openout3 = `thesis-en.out'.
 
+\c@lstlisting=\count324
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -480,30 +505,30 @@ Package hyperref Info: Link coloring OFF on input line 174.
 <titlepage-en.pdf, id=248, 597.51233pt x 845.0471pt>
 File: titlepage-en.pdf Graphic file (type pdf)
 <use titlepage-en.pdf>
-Package pdftex.def Info: titlepage-en.pdf  used on input line 178.
+Package pdftex.def Info: titlepage-en.pdf  used on input line 207.
 (pdftex.def)             Requested size: 597.51086pt x 845.04504pt.
 <titlepage-en.pdf, id=250, page=1, 597.51233pt x 845.0471pt>
 File: titlepage-en.pdf Graphic file (type pdf)
 <use titlepage-en.pdf, page 1>
-Package pdftex.def Info: titlepage-en.pdf , page1 used on input line 178.
+Package pdftex.def Info: titlepage-en.pdf , page1 used on input line 207.
 (pdftex.def)             Requested size: 597.51086pt x 845.04504pt.
 File: titlepage-en.pdf Graphic file (type pdf)
 <use titlepage-en.pdf, page 1>
-Package pdftex.def Info: titlepage-en.pdf , page1 used on input line 178.
+Package pdftex.def Info: titlepage-en.pdf , page1 used on input line 207.
 (pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
 File: titlepage-en.pdf Graphic file (type pdf)
 <use titlepage-en.pdf, page 1>
-Package pdftex.def Info: titlepage-en.pdf , page1 used on input line 178.
+Package pdftex.def Info: titlepage-en.pdf , page1 used on input line 207.
 (pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
 File: titlepage-en.pdf Graphic file (type pdf)
 <use titlepage-en.pdf, page 1>
-Package pdftex.def Info: titlepage-en.pdf , page1 used on input line 178.
+Package pdftex.def Info: titlepage-en.pdf , page1 used on input line 207.
 (pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
 
 
 File: titlepage-en.pdf Graphic file (type pdf)
 <use titlepage-en.pdf, page 1>
-Package pdftex.def Info: titlepage-en.pdf , page1 used on input line 178.
+Package pdftex.def Info: titlepage-en.pdf , page1 used on input line 207.
 (pdftex.def)             Requested size: 597.53821pt x 845.08372pt.
 [1
 
@@ -511,7 +536,7 @@ Package pdftex.def Info: titlepage-en.pdf , page1 used on input line 178.
  <./titlepage-en.pdf>]
 
 [2]
-Underfull \hbox (badness 10000) in paragraph at lines 206--214
+Underfull \hbox (badness 10000) in paragraph at lines 235--243
 
  []
 
@@ -521,28 +546,28 @@ Underfull \hbox (badness 10000) in paragraph at lines 206--214
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.214 \end{abstract}
+l.243 \end{abstract}
                      [1{/usr/local/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}]
 
 
 pdfTeX warning (ext4): destination with the same identifier (name{page.2}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.217 \null\thispagestyle{empty}\newpage
+l.246 \null\thispagestyle{empty}\newpage
                                          [2]
 
 
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.237 \end{abstract}
+l.266 \end{abstract}
                      [1]
 
 
 pdfTeX warning (ext4): destination with the same identifier (name{page.2}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.259 \null\thispagestyle{empty}\newpage
+l.288 \null\thispagestyle{empty}\newpage
                                          [2] (./thesis-en.toc
 LaTeX Font Info:    Trying to load font information for U+msa on input line 5.
  (/usr/local/texlive/2025/texmf-dist/tex/latex/amsfonts/umsa.fd
@@ -569,20 +594,20 @@ File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.265 \newpage
+l.294 \newpage
                % IF YOU HAVE EVEN QUANTITY OD PAGES OF TOC, THEN REMOVE IT O... [2]
 
 
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.270 \null\thispagestyle{empty}\newpage
+l.299 \null\thispagestyle{empty}\newpage
                                          [3]
 Chapter 1.
 <./images/simple-architecture.png, id=424, 499.8675pt x 851.18pt>
 File: ./images/simple-architecture.png Graphic file (type png)
 <use ./images/simple-architecture.png>
-Package pdftex.def Info: ./images/simple-architecture.png  used on input line 309.
+Package pdftex.def Info: ./images/simple-architecture.png  used on input line 338.
 (pdftex.def)             Requested size: 91.04742pt x 155.03708pt.
 
 
@@ -592,17 +617,17 @@ Package pdftex.def Info: ./images/simple-architecture.png  used on input line 30
 <./images/more-complicated-architecture.png, id=432, 633.36626pt x 1059.96pt>
 File: ./images/more-complicated-architecture.png Graphic file (type png)
 <use ./images/more-complicated-architecture.png>
-Package pdftex.def Info: ./images/more-complicated-architecture.png  used on input line 326.
+Package pdftex.def Info: ./images/more-complicated-architecture.png  used on input line 355.
 (pdftex.def)             Requested size: 136.57462pt x 228.55008pt.
 <./images/complicated-modules.png, id=433, 3468.96pt x 192.72pt>
 File: ./images/complicated-modules.png Graphic file (type png)
 <use ./images/complicated-modules.png>
-Package pdftex.def Info: ./images/complicated-modules.png  used on input line 336.
+Package pdftex.def Info: ./images/complicated-modules.png  used on input line 365.
 (pdftex.def)             Requested size: 455.24413pt x 25.28972pt.
 <./images/typical-sequance.png, id=434, 4265.9375pt x 5199.425pt>
 File: ./images/typical-sequance.png Graphic file (type png)
 <use ./images/typical-sequance.png>
-Package pdftex.def Info: ./images/typical-sequance.png  used on input line 350.
+Package pdftex.def Info: ./images/typical-sequance.png  used on input line 379.
 (pdftex.def)             Requested size: 318.6695pt x 388.35332pt.
 
 
@@ -617,7 +642,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 <./images/local-first-sequanec.png, id=443, 4265.9375pt x 3543.2375pt>
 File: ./images/local-first-sequanec.png Graphic file (type png)
 <use ./images/local-first-sequanec.png>
-Package pdftex.def Info: ./images/local-first-sequanec.png  used on input line 366.
+Package pdftex.def Info: ./images/local-first-sequanec.png  used on input line 395.
 (pdftex.def)             Requested size: 318.6695pt x 264.65004pt.
 
 
@@ -632,7 +657,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 <./images/cloud-vs-local.png, id=451, 3201.9625pt x 3392.675pt>
 File: ./images/cloud-vs-local.png Graphic file (type png)
 <use ./images/cloud-vs-local.png>
-Package pdftex.def Info: ./images/cloud-vs-local.png  used on input line 383.
+Package pdftex.def Info: ./images/cloud-vs-local.png  used on input line 412.
 (pdftex.def)             Requested size: 318.6695pt x 337.6308pt.
 
 
@@ -644,12 +669,12 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [14 <./images/local-first-sequanec.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 399--399
+Underfull \hbox (badness 10000) in paragraph at lines 428--428
 []\T1/cmr/m/n/10.95 Real-time col-lab-o-ra-tive edit-ing (doc-u-
  []
 
 
-Underfull \hbox (badness 3428) in paragraph at lines 402--403
+Underfull \hbox (badness 3428) in paragraph at lines 431--432
 []\T1/cmr/m/n/10.95 Centralized trans-ac-tional sys-tems (e.g.,
  []
 
@@ -666,15 +691,15 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 <./images/p2p-vs-start.png, id=466, 755.82375pt x 355.3275pt>
 File: ./images/p2p-vs-start.png Graphic file (type png)
 <use ./images/p2p-vs-start.png>
-Package pdftex.def Info: ./images/p2p-vs-start.png  used on input line 429.
+Package pdftex.def Info: ./images/p2p-vs-start.png  used on input line 458.
 (pdftex.def)             Requested size: 364.19669pt x 171.21672pt.
 
-Underfull \hbox (badness 1009) in paragraph at lines 448--449
+Underfull \hbox (badness 1009) in paragraph at lines 477--478
 \T1/cmr/m/n/10.95 Clients man-age their con-nec-tions them-
  []
 
 
-Underfull \hbox (badness 2142) in paragraph at lines 457--458
+Underfull \hbox (badness 2142) in paragraph at lines 486--487
 []\T1/cmr/m/n/10.95 Easier man-age-ment and co-or-di-na-tion -
  []
 
@@ -697,37 +722,37 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [17]
-Underfull \hbox (badness 2556) in paragraph at lines 527--528
+Underfull \hbox (badness 2556) in paragraph at lines 556--557
 []\T1/cmr/m/n/10.95 start draw-ing im-me-di-ately
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 545--546
+Underfull \hbox (badness 10000) in paragraph at lines 574--575
 []\T1/cmr/m/n/10.95 differentiate be-tween el-e-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 555--556
+Underfull \hbox (badness 10000) in paragraph at lines 584--585
 []\T1/cmr/m/n/10.95 begin a fresh col-lab-o-ra-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 555--556
+Underfull \hbox (badness 10000) in paragraph at lines 584--585
 \T1/cmr/m/n/10.95 tive ses-sion or per-sonal
  []
 
 
-Underfull \hbox (badness 3271) in paragraph at lines 557--558
+Underfull \hbox (badness 3271) in paragraph at lines 586--587
 []\T1/cmr/m/n/10.95 work to-gether with other
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 565--566
+Underfull \hbox (badness 10000) in paragraph at lines 594--595
 []\T1/cmr/m/n/10.95 communicate tex-tu-ally
  []
 
 
-Underfull \hbox (badness 2961) in paragraph at lines 565--566
+Underfull \hbox (badness 2961) in paragraph at lines 594--595
 \T1/cmr/m/n/10.95 along-side vi-sual col-lab-o-ra-
  []
 
@@ -753,103 +778,33 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [19]
-Overfull \hbox (0.71977pt too wide) in paragraph at lines 582--582
+Overfull \hbox (0.71977pt too wide) in paragraph at lines 611--611
 []\T1/cmr/m/n/10.95 Application| 
  []
 
 
-Underfull \hbox (badness 5460) in paragraph at lines 582--583
+Underfull \hbox (badness 5460) in paragraph at lines 611--612
 []\T1/cmr/m/n/10.95 enable offline-capable and
  []
 
 
-Overfull \hbox (0.71977pt too wide) in paragraph at lines 584--584
+Overfull \hbox (0.71977pt too wide) in paragraph at lines 613--613
 []\T1/cmr/m/n/10.95 Application| 
  []
 
 
-Underfull \hbox (badness 2644) in paragraph at lines 584--584
+Underfull \hbox (badness 2644) in paragraph at lines 613--613
 []\T1/cmr/m/n/10.95 render all strokes stored in the
  []
 
 
-Underfull \hbox (badness 1496) in paragraph at lines 584--585
+Underfull \hbox (badness 1496) in paragraph at lines 613--614
 []\T1/cmr/m/n/10.95 display the cur-rent white-
- []
-
-
-Overfull \hbox (0.71977pt too wide) in paragraph at lines 586--586
-[]\T1/cmr/m/n/10.95 Application| 
- []
-
-
-Overfull \hbox (0.71977pt too wide) in paragraph at lines 588--588
-[]\T1/cmr/m/n/10.95 Application| 
- []
-
-
-Overfull \hbox (0.71977pt too wide) in paragraph at lines 590--590
-[]\T1/cmr/m/n/10.95 Application| 
- []
-
-
-Underfull \hbox (badness 2384) in paragraph at lines 590--590
-[]\T1/cmr/m/n/10.95 establish a We-bRTC data chan-
- []
-
-
-Overfull \hbox (0.71977pt too wide) in paragraph at lines 592--592
-[]\T1/cmr/m/n/10.95 Application| 
- []
-
-
-Underfull \hbox (badness 4279) in paragraph at lines 592--593
-[]\T1/cmr/m/n/10.95 allow other users to see
- []
-
-
-Overfull \hbox (0.71977pt too wide) in paragraph at lines 594--594
-[]\T1/cmr/m/n/10.95 Application| 
- []
-
-
-Overfull \hbox (0.71977pt too wide) in paragraph at lines 596--596
-[]\T1/cmr/m/n/10.95 Application| 
- []
-
-
-Underfull \hbox (badness 3439) in paragraph at lines 596--596
-\T1/cmr/m/n/10.95 chro-niza-tion on sep-a-rate threads
- []
-
-
-Overfull \hbox (0.71977pt too wide) in paragraph at lines 598--598
-[]\T1/cmr/m/n/10.95 Application| 
- []
-
-
-Overfull \hbox (0.71977pt too wide) in paragraph at lines 600--600
-[]\T1/cmr/m/n/10.95 Application| 
- []
-
-
-Underfull \hbox (badness 1661) in paragraph at lines 600--601
-[]\T1/cmr/m/n/10.95 restore a pre-vi-ously saved
- []
-
-
-Overfull \hbox (0.71977pt too wide) in paragraph at lines 602--602
-[]\T1/cmr/m/n/10.95 Application| 
  []
 
 
 Overfull \hbox (0.71977pt too wide) in paragraph at lines 615--615
 []\T1/cmr/m/n/10.95 Application| 
- []
-
-
-Underfull \hbox (badness 3471) in paragraph at lines 615--616
-[]\T1/cmr/m/n/10.95 guarantee even-tual con-sis-
  []
 
 
@@ -863,32 +818,102 @@ Overfull \hbox (0.71977pt too wide) in paragraph at lines 619--619
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 632--633
+Underfull \hbox (badness 2384) in paragraph at lines 619--619
+[]\T1/cmr/m/n/10.95 establish a We-bRTC data chan-
+ []
+
+
+Overfull \hbox (0.71977pt too wide) in paragraph at lines 621--621
+[]\T1/cmr/m/n/10.95 Application| 
+ []
+
+
+Underfull \hbox (badness 4279) in paragraph at lines 621--622
+[]\T1/cmr/m/n/10.95 allow other users to see
+ []
+
+
+Overfull \hbox (0.71977pt too wide) in paragraph at lines 623--623
+[]\T1/cmr/m/n/10.95 Application| 
+ []
+
+
+Overfull \hbox (0.71977pt too wide) in paragraph at lines 625--625
+[]\T1/cmr/m/n/10.95 Application| 
+ []
+
+
+Underfull \hbox (badness 3439) in paragraph at lines 625--625
+\T1/cmr/m/n/10.95 chro-niza-tion on sep-a-rate threads
+ []
+
+
+Overfull \hbox (0.71977pt too wide) in paragraph at lines 627--627
+[]\T1/cmr/m/n/10.95 Application| 
+ []
+
+
+Overfull \hbox (0.71977pt too wide) in paragraph at lines 629--629
+[]\T1/cmr/m/n/10.95 Application| 
+ []
+
+
+Underfull \hbox (badness 1661) in paragraph at lines 629--630
+[]\T1/cmr/m/n/10.95 restore a pre-vi-ously saved
+ []
+
+
+Overfull \hbox (0.71977pt too wide) in paragraph at lines 631--631
+[]\T1/cmr/m/n/10.95 Application| 
+ []
+
+
+Overfull \hbox (0.71977pt too wide) in paragraph at lines 644--644
+[]\T1/cmr/m/n/10.95 Application| 
+ []
+
+
+Underfull \hbox (badness 3471) in paragraph at lines 644--645
+[]\T1/cmr/m/n/10.95 guarantee even-tual con-sis-
+ []
+
+
+Overfull \hbox (0.71977pt too wide) in paragraph at lines 646--646
+[]\T1/cmr/m/n/10.95 Application| 
+ []
+
+
+Overfull \hbox (0.71977pt too wide) in paragraph at lines 648--648
+[]\T1/cmr/m/n/10.95 Application| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 661--662
 []\T1/cmr/m/n/10.95 group col-lab-o-rat-ing users
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 638--639
+Underfull \hbox (badness 10000) in paragraph at lines 667--668
 []\T1/cmr/m/n/10.95 allow clients to ini-ti-ate
  []
 
 
-Underfull \hbox (badness 4518) in paragraph at lines 640--641
+Underfull \hbox (badness 4518) in paragraph at lines 669--670
 \T1/cmr/m/n/10.95 dis-con-nected user's cur-sor
  []
 
 
-Underfull \hbox (badness 3514) in paragraph at lines 644--645
+Underfull \hbox (badness 3514) in paragraph at lines 673--674
 []\T1/cmr/m/n/10.95 allow sev-eral col-lab-o-ra-tive
  []
 
 
-Underfull \hbox (badness 1616) in paragraph at lines 644--645
+Underfull \hbox (badness 1616) in paragraph at lines 673--674
 \T1/cmr/m/n/10.95 ses-sions to run si-mul-ta-ne-
  []
 
 
-Underfull \hbox (badness 4156) in paragraph at lines 646--647
+Underfull \hbox (badness 4156) in paragraph at lines 675--676
 []\T1/cmr/m/n/10.95 support the real-time re-
  []
 
@@ -914,7 +939,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [21]
-Underfull \hbox (badness 10000) in paragraph at lines 703--703
+Underfull \hbox (badness 10000) in paragraph at lines 732--732
 []\T1/cmr/bx/n/10.95 Constraints
  []
 
@@ -931,7 +956,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 <./images/initial-ui.png, id=504, 483.8075pt x 433.62pt>
 File: ./images/initial-ui.png Graphic file (type png)
 <use ./images/initial-ui.png>
-Package pdftex.def Info: ./images/initial-ui.png  used on input line 737.
+Package pdftex.def Info: ./images/initial-ui.png  used on input line 766.
 (pdftex.def)             Requested size: 364.19669pt x 326.43164pt.
 
 
@@ -961,7 +986,7 @@ Chapter 2.
 <./images/architecture.png, id=521, 338.26375pt x 232.87pt>
 File: ./images/architecture.png Graphic file (type png)
 <use ./images/architecture.png>
-Package pdftex.def Info: ./images/architecture.png  used on input line 805.
+Package pdftex.def Info: ./images/architecture.png  used on input line 834.
 (pdftex.def)             Requested size: 227.62206pt x 156.70432pt.
 
 
@@ -976,7 +1001,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 <./images/ui-modules-1.png, id=529, 233.37187pt x 316.68312pt>
 File: ./images/ui-modules-1.png Graphic file (type png)
 <use ./images/ui-modules-1.png>
-Package pdftex.def Info: ./images/ui-modules-1.png  used on input line 828.
+Package pdftex.def Info: ./images/ui-modules-1.png  used on input line 857.
 (pdftex.def)             Requested size: 227.62206pt x 308.89285pt.
 
 
@@ -991,27 +1016,27 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 <./images/ui-modules-2.png, id=536, 95.85812pt x 126.4725pt>
 File: ./images/ui-modules-2.png Graphic file (type png)
 <use ./images/ui-modules-2.png>
-Package pdftex.def Info: ./images/ui-modules-2.png  used on input line 860.
+Package pdftex.def Info: ./images/ui-modules-2.png  used on input line 889.
 (pdftex.def)             Requested size: 72.84071pt x 96.1085pt.
 <./images/ui-modules-3.png, id=537, 140.525pt x 115.43124pt>
 File: ./images/ui-modules-3.png Graphic file (type png)
 <use ./images/ui-modules-3.png>
-Package pdftex.def Info: ./images/ui-modules-3.png  used on input line 864.
+Package pdftex.def Info: ./images/ui-modules-3.png  used on input line 893.
 (pdftex.def)             Requested size: 109.26108pt x 89.75066pt.
 <./images/ui-modules-4.png, id=538, 92.345pt x 122.4575pt>
 File: ./images/ui-modules-4.png Graphic file (type png)
 <use ./images/ui-modules-4.png>
-Package pdftex.def Info: ./images/ui-modules-4.png  used on input line 869.
+Package pdftex.def Info: ./images/ui-modules-4.png  used on input line 898.
 (pdftex.def)             Requested size: 81.9406pt x 108.65982pt.
 <./images/ui-modules-5.png, id=539, 240.9pt x 175.65625pt>
 File: ./images/ui-modules-5.png Graphic file (type png)
 <use ./images/ui-modules-5.png>
-Package pdftex.def Info: ./images/ui-modules-5.png  used on input line 874.
+Package pdftex.def Info: ./images/ui-modules-5.png  used on input line 903.
 (pdftex.def)             Requested size: 186.65175pt x 136.10269pt.
 <./images/backend-interface.png, id=540, 1267.73625pt x 2176.13pt>
 File: ./images/backend-interface.png Graphic file (type png)
 <use ./images/backend-interface.png>
-Package pdftex.def Info: ./images/backend-interface.png  used on input line 916.
+Package pdftex.def Info: ./images/backend-interface.png  used on input line 945.
 (pdftex.def)             Requested size: 318.6695pt x 546.98642pt.
 
 
@@ -1035,7 +1060,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 <./images/automerge-sequance.png, id=558, 2526.43875pt x 2148.025pt>
 File: ./images/automerge-sequance.png Graphic file (type png)
 <use ./images/automerge-sequance.png>
-Package pdftex.def Info: ./images/automerge-sequance.png  used on input line 960.
+Package pdftex.def Info: ./images/automerge-sequance.png  used on input line 989.
 (pdftex.def)             Requested size: 450.69418pt x 383.18633pt.
 
 
@@ -1056,6 +1081,9 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [31 <./images/automerge-sequance.png>]
+LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <10> not available
+(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 1020.
+
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1074,7 +1102,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [33]
-Underfull \hbox (badness 1052) in paragraph at lines 1093--1098
+Underfull \hbox (badness 1052) in paragraph at lines 1122--1127
 \T1/cmr/m/n/10.95 changes I have not re-ceived yet" - that would need application-level logic, such as a
  []
 
@@ -1089,7 +1117,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 [34]
 LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <10.95> not available
-(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 1134.
+(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 1163.
 
 
 
@@ -1109,29 +1137,29 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [36]
-Underfull \hbox (badness 10000) in paragraph at lines 1223--1224
+Underfull \hbox (badness 10000) in paragraph at lines 1252--1253
 []\T1/cmtt/m/n/10.95 insert(&list_id, len,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1226--1227
+Underfull \hbox (badness 10000) in paragraph at lines 1255--1256
 []\T1/cmtt/m/n/10.95 insert(&list_id, len,
  []
 
 
-Underfull \hbox (badness 1496) in paragraph at lines 1228--1228
+Underfull \hbox (badness 1496) in paragraph at lines 1257--1257
 []\T1/cmr/m/n/10.95 Remove all el-e-ments from the
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1229--1230
+Underfull \hbox (badness 10000) in paragraph at lines 1258--1259
 []\T1/cmtt/m/n/10.95 splice(&list_id, 0, len,
  []
 
-<./images/automerge-local-intent.png, id=601, 2264.46pt x 1696.3375pt>
+<./images/automerge-local-intent.png, id=643, 2264.46pt x 1696.3375pt>
 File: ./images/automerge-local-intent.png Graphic file (type png)
 <use ./images/automerge-local-intent.png>
-Package pdftex.def Info: ./images/automerge-local-intent.png  used on input line 1243.
+Package pdftex.def Info: ./images/automerge-local-intent.png  used on input line 1272.
 (pdftex.def)             Requested size: 386.96028pt x 289.87483pt.
 
 
@@ -1170,10 +1198,10 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [40]
-<./images/connecting-sequance.png, id=622, 4587.1375pt x 2505.36pt>
+<./images/connecting-sequance.png, id=684, 4587.1375pt x 2505.36pt>
 File: ./images/connecting-sequance.png Graphic file (type png)
 <use ./images/connecting-sequance.png>
-Package pdftex.def Info: ./images/connecting-sequance.png  used on input line 1396.
+Package pdftex.def Info: ./images/connecting-sequance.png  used on input line 1427.
 (pdftex.def)             Requested size: 432.48053pt x 236.1767pt.
 
 
@@ -1185,13 +1213,13 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [41]
-<./images/connectivity-classes-1.png, id=627, 1543.7675pt x 429.605pt>
+<./images/connectivity-classes-1.png, id=689, 1543.7675pt x 429.605pt>
 File: ./images/connectivity-classes-1.png Graphic file (type png)
 <use ./images/connectivity-classes-1.png>
-Package pdftex.def Info: ./images/connectivity-classes-1.png  used on input line 1427.
+Package pdftex.def Info: ./images/connectivity-classes-1.png  used on input line 1458.
 (pdftex.def)             Requested size: 364.19669pt x 101.3505pt.
 
-Underfull \hbox (badness 4621) in paragraph at lines 1428--1428
+Underfull \hbox (badness 4621) in paragraph at lines 1459--1459
 []\T1/cmr/m/n/10.95 Figure 2.8: []Transport and application-level mes-sage types: \T1/cmtt/m/n/10.95 TransportPacket \T1/cmr/m/n/10.95 and
  []
 
@@ -1205,15 +1233,15 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [42 <./images/connecting-sequance.png>]
-<./images/communication-enums.png, id=634, 3478.9975pt x 477.785pt>
+<./images/communication-enums.png, id=696, 3478.9975pt x 477.785pt>
 File: ./images/communication-enums.png Graphic file (type png)
 <use ./images/communication-enums.png>
-Package pdftex.def Info: ./images/communication-enums.png  used on input line 1434.
+Package pdftex.def Info: ./images/communication-enums.png  used on input line 1465.
 (pdftex.def)             Requested size: 450.69418pt x 61.89551pt.
-<./images/data-receiving-seq.png, id=636, 4095.3pt x 3344.495pt>
+<./images/data-receiving-seq.png, id=698, 4095.3pt x 3344.495pt>
 File: ./images/data-receiving-seq.png Graphic file (type png)
 <use ./images/data-receiving-seq.png>
-Package pdftex.def Info: ./images/data-receiving-seq.png  used on input line 1462.
+Package pdftex.def Info: ./images/data-receiving-seq.png  used on input line 1493.
 (pdftex.def)             Requested size: 450.69418pt x 368.04869pt.
 
 
@@ -1234,10 +1262,10 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [44 <./images/data-receiving-seq.png>]
-<./images/cursor-broadcasting.png, id=652, 4623.2725pt x 1078.0275pt>
+<./images/cursor-broadcasting.png, id=714, 4623.2725pt x 1078.0275pt>
 File: ./images/cursor-broadcasting.png Graphic file (type png)
 <use ./images/cursor-broadcasting.png>
-Package pdftex.def Info: ./images/cursor-broadcasting.png  used on input line 1529.
+Package pdftex.def Info: ./images/cursor-broadcasting.png  used on input line 1560.
 (pdftex.def)             Requested size: 450.69418pt x 105.07846pt.
 
 
@@ -1249,15 +1277,15 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [45]
-<./images/ui-final-1.png, id=657, 616.3025pt x 485.815pt>
+<./images/ui-final-1.png, id=719, 616.3025pt x 485.815pt>
 File: ./images/ui-final-1.png Graphic file (type png)
 <use ./images/ui-final-1.png>
-Package pdftex.def Info: ./images/ui-final-1.png  used on input line 1545.
+Package pdftex.def Info: ./images/ui-final-1.png  used on input line 1576.
 (pdftex.def)             Requested size: 364.19669pt x 287.09538pt.
-<./images/ui-final-2.png, id=658, 628.3475pt x 491.8375pt>
+<./images/ui-final-2.png, id=720, 628.3475pt x 491.8375pt>
 File: ./images/ui-final-2.png Graphic file (type png)
 <use ./images/ui-final-2.png>
-Package pdftex.def Info: ./images/ui-final-2.png  used on input line 1552.
+Package pdftex.def Info: ./images/ui-final-2.png  used on input line 1583.
 (pdftex.def)             Requested size: 364.19669pt x 285.07082pt.
 
 
@@ -1280,39 +1308,39 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 [47 <./images/ui-final-2.png>]
 Chapter 3.
 
-Underfull \hbox (badness 1490) in paragraph at lines 1592--1593
+Underfull \hbox (badness 1490) in paragraph at lines 1623--1624
 []\T1/cmr/m/n/10.95 Docker im-age (74.4 MB), de-ployed on VPS at
  []
 
-<./images/analysis/fig3_1a_system_specs.png, id=676, 494.84875pt x 461.725pt>
+<./images/analysis/fig3_1a_system_specs.png, id=738, 494.84875pt x 461.725pt>
 File: ./images/analysis/fig3_1a_system_specs.png Graphic file (type png)
 <use ./images/analysis/fig3_1a_system_specs.png>
-Package pdftex.def Info: ./images/analysis/fig3_1a_system_specs.png  used on input line 1613.
+Package pdftex.def Info: ./images/analysis/fig3_1a_system_specs.png  used on input line 1644.
 (pdftex.def)             Requested size: 245.82877pt x 229.37537pt.
-<./images/analysis/fig3_1b_livekit_version.png, id=677, 520.94624pt x 75.28125pt>
+<./images/analysis/fig3_1b_livekit_version.png, id=739, 520.94624pt x 75.28125pt>
 File: ./images/analysis/fig3_1b_livekit_version.png Graphic file (type png)
 <use ./images/analysis/fig3_1b_livekit_version.png>
-Package pdftex.def Info: ./images/analysis/fig3_1b_livekit_version.png  used on input line 1618.
+Package pdftex.def Info: ./images/analysis/fig3_1b_livekit_version.png  used on input line 1649.
 (pdftex.def)             Requested size: 191.20169pt x 27.62962pt.
 
 
 [48
 
 ]
-<./images/analysis/fig3_1c_network_ping.png, id=687, 502.87875pt x 387.4475pt>
+<./images/analysis/fig3_1c_network_ping.png, id=748, 502.87875pt x 387.4475pt>
 File: ./images/analysis/fig3_1c_network_ping.png Graphic file (type png)
 <use ./images/analysis/fig3_1c_network_ping.png>
-Package pdftex.def Info: ./images/analysis/fig3_1c_network_ping.png  used on input line 1627.
+Package pdftex.def Info: ./images/analysis/fig3_1c_network_ping.png  used on input line 1658.
 (pdftex.def)             Requested size: 273.14925pt x 210.44821pt.
-<./images/analysis/fig3_1d_network_iperf_library.png, id=688, 1241.63875pt x 409.53pt>
+<./images/analysis/fig3_1d_network_iperf_library.png, id=749, 1241.63875pt x 409.53pt>
 File: ./images/analysis/fig3_1d_network_iperf_library.png Graphic file (type png)
 <use ./images/analysis/fig3_1d_network_iperf_library.png>
-Package pdftex.def Info: ./images/analysis/fig3_1d_network_iperf_library.png  used on input line 1635.
+Package pdftex.def Info: ./images/analysis/fig3_1d_network_iperf_library.png  used on input line 1666.
 (pdftex.def)             Requested size: 218.51523pt x 72.06874pt.
-<./images/analysis/fig3_1e_network_iperf_home.png, id=689, 1014.79124pt x 536.0025pt>
+<./images/analysis/fig3_1e_network_iperf_home.png, id=750, 1014.79124pt x 536.0025pt>
 File: ./images/analysis/fig3_1e_network_iperf_home.png Graphic file (type png)
 <use ./images/analysis/fig3_1e_network_iperf_home.png>
-Package pdftex.def Info: ./images/analysis/fig3_1e_network_iperf_home.png  used on input line 1640.
+Package pdftex.def Info: ./images/analysis/fig3_1e_network_iperf_home.png  used on input line 1671.
 (pdftex.def)             Requested size: 218.51523pt x 115.41821pt.
 
 
@@ -1324,32 +1352,32 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [49 <./images/analysis/fig3_1a_system_specs.png> <./images/analysis/fig3_1b_livekit_version.png> <./images/analysis/fig3_1c_network_ping.png> <./images/analysis/fig3_1d_network_iperf_library.png> <./images/analysis/fig3_1e_network_iperf_home.png>]
-Underfull \hbox (badness 1314) in paragraph at lines 1668--1668
+Underfull \hbox (badness 1314) in paragraph at lines 1699--1699
 []\T1/cmr/m/n/10.95 Save/load round-trip pre-serves
  []
 
 
-Underfull \hbox (badness 1655) in paragraph at lines 1676--1676
+Underfull \hbox (badness 1655) in paragraph at lines 1707--1707
 []\T1/cmr/m/n/10.95 Loading cor-rupted bytes does
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1682--1682
+Underfull \hbox (badness 10000) in paragraph at lines 1713--1713
 []\T1/cmr/m/n/10.95 Three-peer chain (A$\OMS/cmsy/m/n/10.95 $$\T1/cmr/m/n/10.95 B$\OMS/cmsy/m/n/10.95 $$\T1/cmr/m/n/10.95 C)
  []
 
 
-Overfull \hbox (7.55289pt too wide) in paragraph at lines 1658--1686
+Overfull \hbox (7.55289pt too wide) in paragraph at lines 1689--1717
  [][] 
  []
 
 
-Underfull \hbox (badness 2529) in paragraph at lines 1695--1695
+Underfull \hbox (badness 2529) in paragraph at lines 1726--1726
 []\T1/cmr/m/n/10.95 Background im-age sur-vives a
  []
 
 
-Overfull \hbox (7.55289pt too wide) in paragraph at lines 1691--1701
+Overfull \hbox (7.55289pt too wide) in paragraph at lines 1722--1732
  [][] 
  []
 
@@ -1363,10 +1391,10 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [50]
-<./images/analysis/fig3_2_unit_tests.png, id=706, 704.6325pt x 351.3125pt>
+<./images/analysis/fig3_2_unit_tests.png, id=767, 704.6325pt x 351.3125pt>
 File: ./images/analysis/fig3_2_unit_tests.png Graphic file (type png)
 <use ./images/analysis/fig3_2_unit_tests.png>
-Package pdftex.def Info: ./images/analysis/fig3_2_unit_tests.png  used on input line 1707.
+Package pdftex.def Info: ./images/analysis/fig3_2_unit_tests.png  used on input line 1738.
 (pdftex.def)             Requested size: 386.96028pt x 192.92763pt.
 
 
@@ -1378,10 +1406,10 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [51 <./images/analysis/fig3_2_unit_tests.png>]
-<./images/analysis/fig3_3a_sync_local_benchmark.png, id=716, 806.01125pt x 343.2825pt>
+<./images/analysis/fig3_3a_sync_local_benchmark.png, id=777, 806.01125pt x 343.2825pt>
 File: ./images/analysis/fig3_3a_sync_local_benchmark.png Graphic file (type png)
 <use ./images/analysis/fig3_3a_sync_local_benchmark.png>
-Package pdftex.def Info: ./images/analysis/fig3_3a_sync_local_benchmark.png  used on input line 1759.
+Package pdftex.def Info: ./images/analysis/fig3_3a_sync_local_benchmark.png  used on input line 1790.
 (pdftex.def)             Requested size: 386.96028pt x 164.80515pt.
 
 
@@ -1393,19 +1421,19 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [52 <./images/analysis/fig3_3a_sync_local_benchmark.png>]
-Underfull \hbox (badness 2205) in paragraph at lines 1773--1773
+Underfull \hbox (badness 2205) in paragraph at lines 1804--1804
 []\T1/cmr/m/n/10.95 Table 3.4: []Local CRDT sync la-tency -
  []
 
 
-Underfull \hbox (badness 1655) in paragraph at lines 1788--1788
+Underfull \hbox (badness 1655) in paragraph at lines 1819--1819
 []\T1/cmr/m/n/10.95 Table 3.5: []End-to-end sync la-tency over
  []
 
-<./images/analysis/fig3_3b_e2e_latency_home.png, id=726, 723.70375pt x 839.135pt>
+<./images/analysis/fig3_3b_e2e_latency_home.png, id=787, 723.70375pt x 839.135pt>
 File: ./images/analysis/fig3_3b_e2e_latency_home.png Graphic file (type png)
 <use ./images/analysis/fig3_3b_e2e_latency_home.png>
-Package pdftex.def Info: ./images/analysis/fig3_3b_e2e_latency_home.png  used on input line 1804.
+Package pdftex.def Info: ./images/analysis/fig3_3b_e2e_latency_home.png  used on input line 1835.
 (pdftex.def)             Requested size: 364.19669pt x 422.29375pt.
 
 
@@ -1417,10 +1445,10 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [53 <./images/analysis/fig3_3b_e2e_latency_home.png>]
-<./images/analysis/fig3_4_load_benchmark.png, id=736, 790.955pt x 244.915pt>
+<./images/analysis/fig3_4_load_benchmark.png, id=797, 790.955pt x 244.915pt>
 File: ./images/analysis/fig3_4_load_benchmark.png Graphic file (type png)
 <use ./images/analysis/fig3_4_load_benchmark.png>
-Package pdftex.def Info: ./images/analysis/fig3_4_load_benchmark.png  used on input line 1840.
+Package pdftex.def Info: ./images/analysis/fig3_4_load_benchmark.png  used on input line 1871.
 (pdftex.def)             Requested size: 386.96028pt x 119.81879pt.
 
 
@@ -1432,20 +1460,20 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [54 <./images/analysis/fig3_4_load_benchmark.png>]
-<./images/analysis/fig3_5a_multiuser_env.png, id=749, 1031.855pt x 487.8225pt>
+<./images/analysis/fig3_5a_multiuser_env.png, id=811, 1031.855pt x 487.8225pt>
 File: ./images/analysis/fig3_5a_multiuser_env.png Graphic file (type png)
 <use ./images/analysis/fig3_5a_multiuser_env.png>
-Package pdftex.def Info: ./images/analysis/fig3_5a_multiuser_env.png  used on input line 1877.
+Package pdftex.def Info: ./images/analysis/fig3_5a_multiuser_env.png  used on input line 1908.
 (pdftex.def)             Requested size: 386.96028pt x 182.94043pt.
-<./images/analysis/fig3_5d_multiuser_4p.png, id=750, 1806.75pt x 1075.01625pt>
+<./images/analysis/fig3_5d_multiuser_4p.png, id=812, 1806.75pt x 1075.01625pt>
 File: ./images/analysis/fig3_5d_multiuser_4p.png Graphic file (type png)
 <use ./images/analysis/fig3_5d_multiuser_4p.png>
-Package pdftex.def Info: ./images/analysis/fig3_5d_multiuser_4p.png  used on input line 1885.
+Package pdftex.def Info: ./images/analysis/fig3_5d_multiuser_4p.png  used on input line 1916.
 (pdftex.def)             Requested size: 218.51523pt x 130.0134pt.
-<./images/analysis/fig3_5e_multiuser_5p.png, id=751, 1806.75pt x 1106.1325pt>
+<./images/analysis/fig3_5e_multiuser_5p.png, id=813, 1806.75pt x 1106.1325pt>
 File: ./images/analysis/fig3_5e_multiuser_5p.png Graphic file (type png)
 <use ./images/analysis/fig3_5e_multiuser_5p.png>
-Package pdftex.def Info: ./images/analysis/fig3_5e_multiuser_5p.png  used on input line 1890.
+Package pdftex.def Info: ./images/analysis/fig3_5e_multiuser_5p.png  used on input line 1921.
 (pdftex.def)             Requested size: 218.51523pt x 133.77661pt.
 
 
@@ -1466,25 +1494,25 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [56]
-<./images/analysis/fig3_6c_fps_100_strokes.png, id=767, 442.65375pt x 208.78pt>
+<./images/analysis/fig3_6c_fps_100_strokes.png, id=857, 442.65375pt x 208.78pt>
 File: ./images/analysis/fig3_6c_fps_100_strokes.png Graphic file (type png)
 <use ./images/analysis/fig3_6c_fps_100_strokes.png>
-Package pdftex.def Info: ./images/analysis/fig3_6c_fps_100_strokes.png  used on input line 1967.
+Package pdftex.def Info: ./images/analysis/fig3_6c_fps_100_strokes.png  used on input line 1998.
 (pdftex.def)             Requested size: 218.51523pt x 103.06447pt.
-<./images/analysis/fig3_6d_fps_500_strokes.png, id=768, 323.2075pt x 181.67876pt>
+<./images/analysis/fig3_6d_fps_500_strokes.png, id=858, 323.2075pt x 181.67876pt>
 File: ./images/analysis/fig3_6d_fps_500_strokes.png Graphic file (type png)
 <use ./images/analysis/fig3_6d_fps_500_strokes.png>
-Package pdftex.def Info: ./images/analysis/fig3_6d_fps_500_strokes.png  used on input line 1972.
+Package pdftex.def Info: ./images/analysis/fig3_6d_fps_500_strokes.png  used on input line 2003.
 (pdftex.def)             Requested size: 218.51523pt x 122.83023pt.
-<./images/analysis/fig3_6e_fps_1000_strokes.png, id=769, 325.215pt x 183.68625pt>
+<./images/analysis/fig3_6e_fps_1000_strokes.png, id=859, 325.215pt x 183.68625pt>
 File: ./images/analysis/fig3_6e_fps_1000_strokes.png Graphic file (type png)
 <use ./images/analysis/fig3_6e_fps_1000_strokes.png>
-Package pdftex.def Info: ./images/analysis/fig3_6e_fps_1000_strokes.png  used on input line 1979.
+Package pdftex.def Info: ./images/analysis/fig3_6e_fps_1000_strokes.png  used on input line 2010.
 (pdftex.def)             Requested size: 218.51523pt x 123.42229pt.
-<./images/analysis/fig3_6f_fps_5000_strokes.png, id=770, 325.215pt x 178.6675pt>
+<./images/analysis/fig3_6f_fps_5000_strokes.png, id=860, 325.215pt x 178.6675pt>
 File: ./images/analysis/fig3_6f_fps_5000_strokes.png Graphic file (type png)
 <use ./images/analysis/fig3_6f_fps_5000_strokes.png>
-Package pdftex.def Info: ./images/analysis/fig3_6f_fps_5000_strokes.png  used on input line 1984.
+Package pdftex.def Info: ./images/analysis/fig3_6f_fps_5000_strokes.png  used on input line 2015.
 (pdftex.def)             Requested size: 218.51523pt x 120.0501pt.
 
 
@@ -1496,10 +1524,10 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [57 <./images/analysis/fig3_6c_fps_100_strokes.png> <./images/analysis/fig3_6d_fps_500_strokes.png> <./images/analysis/fig3_6e_fps_1000_strokes.png> <./images/analysis/fig3_6f_fps_5000_strokes.png>]
-<./images/analysis/fig3_7_convergence_benchmark.png, id=782, 833.1125pt x 789.95125pt>
+<./images/analysis/fig3_7_convergence_benchmark.png, id=870, 833.1125pt x 789.95125pt>
 File: ./images/analysis/fig3_7_convergence_benchmark.png Graphic file (type png)
 <use ./images/analysis/fig3_7_convergence_benchmark.png>
-Package pdftex.def Info: ./images/analysis/fig3_7_convergence_benchmark.png  used on input line 2048.
+Package pdftex.def Info: ./images/analysis/fig3_7_convergence_benchmark.png  used on input line 2079.
 (pdftex.def)             Requested size: 386.96028pt x 366.91371pt.
 
 
@@ -1520,47 +1548,47 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [59 <./images/analysis/fig3_7_convergence_benchmark.png>]
-Underfull \hbox (badness 2165) in paragraph at lines 2094--2094
+Underfull \hbox (badness 2165) in paragraph at lines 2125--2125
 []\T1/cmr/bx/n/10.95 Measured / ob-served
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 2096--2096
+Underfull \hbox (badness 10000) in paragraph at lines 2127--2127
 []\T1/cmr/m/n/10.95 Basic op-er-a-tions us-able
  []
 
 
-Underfull \hbox (badness 1917) in paragraph at lines 2098--2098
+Underfull \hbox (badness 1917) in paragraph at lines 2129--2129
 []\T1/cmr/m/n/10.95 Status bar + event log
  []
 
 
-Underfull \hbox (badness 1648) in paragraph at lines 2100--2100
+Underfull \hbox (badness 1648) in paragraph at lines 2131--2131
 []\T1/cmr/m/n/10.95 Remote cur-sors ren-dered
  []
 
 
-Underfull \hbox (badness 1412) in paragraph at lines 2104--2104
+Underfull \hbox (badness 1412) in paragraph at lines 2135--2135
 []\T1/cmr/m/n/10.95 Offline con-ti-nu-ity + auto-
  []
 
 
-Underfull \hbox (badness 2781) in paragraph at lines 2108--2108
+Underfull \hbox (badness 2781) in paragraph at lines 2139--2139
 []\T1/cmr/m/n/10.95 E2E avg 460 ms, max
  []
 
 
-Underfull \hbox (badness 2165) in paragraph at lines 2119--2119
+Underfull \hbox (badness 2165) in paragraph at lines 2150--2150
 []\T1/cmr/bx/n/10.95 Measured / ob-served
  []
 
 
-Underfull \hbox (badness 3260) in paragraph at lines 2127--2127
+Underfull \hbox (badness 3260) in paragraph at lines 2158--2158
 []\T1/cmr/m/n/10.95 README with in-stal-la-
  []
 
 
-Underfull \hbox (badness 2126) in paragraph at lines 2131--2131
+Underfull \hbox (badness 2126) in paragraph at lines 2162--2162
 []\T1/cmr/m/n/10.95 All com-po-nents used as
  []
 
@@ -1616,7 +1644,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [65]
-Underfull \hbox (badness 3849) in paragraph at lines 2278--2279
+Underfull \hbox (badness 3849) in paragraph at lines 2309--2310
 []\T1/cmr/m/n/10.95 Conclave Team, \T1/cmr/m/it/10.95 Con-clave: A Peer-to-Peer Col-lab-o-ra-tive Text Ed-i-tor\T1/cmr/m/n/10.95 , []$\T1/cmtt/m/n/10.95 https : / /
  []
 
@@ -1626,7 +1654,7 @@ Underfull \hbox (badness 3849) in paragraph at lines 2278--2279
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.2299 \chapter
+l.2330 \chapter
                {User Manual} [1
 
 ]
@@ -1637,7 +1665,7 @@ Appendix A.
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.2348     \item S
+l.2379     \item S
                   trokes drawn by any participant appear on all other screen... [2
 
 ]
@@ -1653,7 +1681,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.2369 \chapter
+l.2400 \chapter
                {Deployment Guide} [3]
 Appendix B.
 
@@ -1662,7 +1690,7 @@ Appendix B.
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.2417 \end{verbatim}
+l.2448 \end{verbatim}
                       [4
 
 ]
@@ -1678,16 +1706,16 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.2436 \chapter
+l.2467 \chapter
                {Manual Acceptance Test Scenarios} [5]
 Appendix C.
 
-Underfull \hbox (badness 1303) in paragraph at lines 2450--2450
+Underfull \hbox (badness 1303) in paragraph at lines 2481--2481
 []\T1/cmr/m/n/10.95 Main win-dow opens with a
  []
 
 
-Underfull \hbox (badness 1275) in paragraph at lines 2456--2456
+Underfull \hbox (badness 1275) in paragraph at lines 2487--2487
 []\T1/cmr/m/n/10.95 System save di-a-log ap-pears;
  []
 
@@ -1697,7 +1725,7 @@ Underfull \hbox (badness 1275) in paragraph at lines 2456--2456
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.2475 \chapter
+l.2506 \chapter
                *{List of appendices} [6
 
 ]
@@ -1706,7 +1734,7 @@ l.2475 \chapter
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.2485 \end{document}
+l.2516 \end{document}
                       [7
 
 ] (./thesis-en.aux)
@@ -1718,18 +1746,18 @@ Package rerunfilecheck Info: File `thesis-en.out' has not changed.
 (rerunfilecheck)             Checksum: 37058B40FC8B9E11D6D3E43BA0D72911;11723.
  ) 
 Here is how much of TeX's memory you used:
- 14286 strings out of 473190
- 231955 string characters out of 5715799
- 663597 words of memory out of 5000000
- 37119 multiletter control sequences out of 15000+600000
- 570458 words of font info for 67 fonts, out of 8000000 for 9000
+ 16107 strings out of 473190
+ 256319 string characters out of 5715799
+ 893804 words of memory out of 5000000
+ 38840 multiletter control sequences out of 15000+600000
+ 571849 words of font info for 70 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,17n,79p,753b,640s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfbx1095.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfcc1095.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfti1095.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sftt1095.pfb>
-Output written on thesis-en.pdf (71 pages, 13517186 bytes).
+ 75i,17n,79p,753b,2091s stack positions out of 10000i,1000n,20000p,200000b,200000s
+</usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfbx1095.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfcc1095.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfit1000.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfti1095.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sftt1000.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sftt1095.pfb>
+Output written on thesis-en.pdf (71 pages, 13589182 bytes).
 PDF statistics:
- 977 PDF objects out of 1000 (max. 8388607)
- 720 compressed objects within 8 object streams
- 197 named destinations out of 1000 (max. 500000)
+ 1091 PDF objects out of 1200 (max. 8388607)
+ 829 compressed objects within 9 object streams
+ 282 named destinations out of 1000 (max. 500000)
  709 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -29,9 +29,9 @@
 \contentsline {subsection}{\numberline {2.4.4}Initial synchronization of a new peer}{35}{subsection.2.4.4}%
 \contentsline {section}{\numberline {2.5}CRDT Data Model - What is being synchronized?}{35}{section.2.5}%
 \contentsline {subsection}{\numberline {2.5.1}Document schema}{35}{subsection.2.5.1}%
-\contentsline {paragraph}{Why JSON strings inside a List?}{35}{subsection.2.5.1}%
+\contentsline {paragraph}{Why JSON strings inside a List?}{35}{lstnumber.-2.3}%
 \contentsline {subsection}{\numberline {2.5.2}Stroke representation}{36}{subsection.2.5.2}%
-\contentsline {paragraph}{Why a vector of points rather than pixels?}{36}{subsection.2.5.2}%
+\contentsline {paragraph}{Why a vector of points rather than pixels?}{36}{lstnumber.-3.10}%
 \contentsline {subsection}{\numberline {2.5.3}Intent abstraction}{37}{subsection.2.5.3}%
 \contentsline {paragraph}{Eraser implementation}{38}{figure.2.6}%
 \contentsline {subsection}{\numberline {2.5.4}File persistence}{39}{subsection.2.5.4}%
