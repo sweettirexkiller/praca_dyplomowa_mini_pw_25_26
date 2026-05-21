@@ -1752,20 +1752,7 @@ timed the \texttt{generate\_sync\_message} / \texttt{receive\_sync\_message} rou
 between two in-process peers over 1000 iterations. Results are shown in
 Table~\ref{tab:sync-local} and Figure~\ref{fig:bench-sync}.
 
-\begin{table}[H]
-    \centering
-    \caption{Local CRDT sync latency - \texttt{bench\_sync} (1000 iterations)}
-    \begin{tabular}{|l|r|}
-        \hline
-        \textbf{Metric} & \textbf{Value} \\
-        \hline
-        Mean   & 709.5~µs \\
-        \hline
-        p95    & 1244.4~µs \\
-        \hline
-    \end{tabular}
-    \label{tab:sync-local}
-\end{table}
+
 
 \begin{figure}[H]
     \centering
@@ -1781,23 +1768,40 @@ wall-clock travel time through the LiveKit SFU. Results are shown in
 Table~\ref{tab:sync-e2e} and Figure~\ref{fig:bench-e2e}.
 
 \begin{table}[H]
-    \centering
-    \caption{End-to-end sync latency over LiveKit - \texttt{bench\_e2e}}
-    \begin{tabular}{|l|r|}
-        \hline
-        \textbf{Metric} & \textbf{Value} \\
-        \hline
-        Mean & 460~ms \\
-        \hline
-        Max  & 663~ms \\
-        \hline
-    \end{tabular}
-    \label{tab:sync-e2e}
+    \begin{minipage}[t]{0.48\textwidth}
+        \centering
+        \caption{Local CRDT sync latency - \texttt{bench\_sync} (1000 iterations)}
+        \begin{tabular}{|l|r|}
+            \hline
+            \textbf{Metric} & \textbf{Value} \\
+            \hline
+            Mean   & 709.5~µs \\
+            \hline
+            p95    & 1244.4~µs \\
+            \hline
+        \end{tabular}
+        \label{tab:sync-local}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.48\textwidth}
+        \centering
+        \caption{End-to-end sync latency over LiveKit - \texttt{bench\_e2e}}
+        \begin{tabular}{|l|r|}
+            \hline
+            \textbf{Metric} & \textbf{Value} \\
+            \hline
+            Mean & 460~ms \\
+            \hline
+            Max  & 663~ms \\
+            \hline
+        \end{tabular}
+        \label{tab:sync-e2e}
+    \end{minipage}
 \end{table}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.85\textwidth]{./images/analysis/fig3_3b_e2e_latency_home.png}
+    \includegraphics[width=0.8\textwidth]{./images/analysis/fig3_3b_e2e_latency_home.png}
     \caption{End-to-end sync latency benchmark output (\texttt{bench\_e2e})}
     \label{fig:bench-e2e}
 \end{figure}
@@ -2020,6 +2024,10 @@ states after all sync messages had propagated. Two scenarios were tested:
 
 The benchmark output is shown in Figure~\ref{fig:convergence}.
 
+No strokes were lost or duplicated in any run. The add-wins guarantee held in every
+clear-vs-draw scenario, consistent with the Automerge conflict resolution described in
+Section~2.4.3. \textbf{NF-06: PASS.}
+
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.85\textwidth]{./images/analysis/fig3_7_convergence_benchmark.png}
@@ -2027,9 +2035,6 @@ The benchmark output is shown in Figure~\ref{fig:convergence}.
     \label{fig:convergence}
 \end{figure}
 
-No strokes were lost or duplicated in any run. The add-wins guarantee held in every
-clear-vs-draw scenario, consistent with the Automerge conflict resolution described in
-Section~2.4.3. \textbf{NF-06: PASS.}
 
 \subsection{Offline continuity (NF-05)}
 

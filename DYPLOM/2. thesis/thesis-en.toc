@@ -48,21 +48,21 @@
 \contentsline {section}{\numberline {3.4}Performance benchmarks}{52}{section.3.4}%
 \contentsline {subsection}{\numberline {3.4.1}Synchronization latency (NF-07)}{52}{subsection.3.4.1}%
 \contentsline {subsection}{\numberline {3.4.2}File load time (NF-08)}{54}{subsection.3.4.2}%
-\contentsline {subsection}{\numberline {3.4.3}Multi-user scalability (NF-09)}{55}{subsection.3.4.3}%
+\contentsline {subsection}{\numberline {3.4.3}Multi-user scalability (NF-09)}{54}{subsection.3.4.3}%
 \contentsline {subsection}{\numberline {3.4.4}Rendering frame rate (NF-10)}{56}{subsection.3.4.4}%
-\contentsline {subsection}{\numberline {3.4.5}Chunking overhead}{58}{subsection.3.4.5}%
-\contentsline {section}{\numberline {3.5}Reliability analysis}{59}{section.3.5}%
-\contentsline {subsection}{\numberline {3.5.1}CRDT convergence (NF-06)}{59}{subsection.3.5.1}%
-\contentsline {subsection}{\numberline {3.5.2}Offline continuity (NF-05)}{60}{subsection.3.5.2}%
+\contentsline {subsection}{\numberline {3.4.5}Chunking overhead}{57}{subsection.3.4.5}%
+\contentsline {section}{\numberline {3.5}Reliability analysis}{58}{section.3.5}%
+\contentsline {subsection}{\numberline {3.5.1}CRDT convergence (NF-06)}{58}{subsection.3.5.1}%
+\contentsline {subsection}{\numberline {3.5.2}Offline continuity (NF-05)}{59}{subsection.3.5.2}%
 \contentsline {section}{\numberline {3.6}Usability assessment}{60}{section.3.6}%
-\contentsline {section}{\numberline {3.7}Non-functional requirements summary}{61}{section.3.7}%
-\contentsline {section}{\numberline {3.8}Identified limitations}{63}{section.3.8}%
-\contentsline {chapter}{\numberline {4}Conclusions}{64}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Is the final product a success?}{64}{section.4.1}%
-\contentsline {section}{\numberline {4.2}What we achieved and how we avoided dangers}{64}{section.4.2}%
-\contentsline {section}{\numberline {4.3}What could be done better}{65}{section.4.3}%
-\contentsline {section}{\numberline {4.4}Plans for future development}{65}{section.4.4}%
-\contentsline {section}{\numberline {4.5}Open problems}{66}{section.4.5}%
+\contentsline {section}{\numberline {3.7}Non-functional requirements summary}{60}{section.3.7}%
+\contentsline {section}{\numberline {3.8}Identified limitations}{62}{section.3.8}%
+\contentsline {chapter}{\numberline {4}Conclusions}{63}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Is the final product a success?}{63}{section.4.1}%
+\contentsline {section}{\numberline {4.2}What we achieved and how we avoided dangers}{63}{section.4.2}%
+\contentsline {section}{\numberline {4.3}What could be done better}{64}{section.4.3}%
+\contentsline {section}{\numberline {4.4}Plans for future development}{64}{section.4.4}%
+\contentsline {section}{\numberline {4.5}Open problems}{65}{section.4.5}%
 \contentsline {chapter}{\numberline {A}User Manual}{}{appendix.A}%
 \contentsline {chapter}{\numberline {B}Deployment Guide}{}{appendix.B}%
 \contentsline {chapter}{\numberline {C}Manual Acceptance Test Scenarios}{}{appendix.C}%
