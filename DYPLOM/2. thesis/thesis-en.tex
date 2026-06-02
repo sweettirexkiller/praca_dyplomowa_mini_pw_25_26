@@ -403,7 +403,7 @@ The contrast is immediately visible. In a local-first system, the user is never 
 
 \section{Local-first vs Cloud-first}
 
-Lets have a look on the main differences between local-first and cloud-first approaches~\cite{kleppmann-localfirst-talk}. 
+Lets have a look on the main differences between local-first and cloud-first approaches~\cite{kleppmann-localfirst-talk, inkandswitch-localfirst}. 
 The table below shows the main differences between these two approaches when it comes to designing 
 collaborative application.
 
@@ -440,7 +440,7 @@ The table below lays out use cases where local-first works well and where it bre
 
 Building a collaborative whiteboard is in many ways just a gateway into a much richer topic: distributed, conflict-free, real-time data storage where every operation is reversible and mergeable. The whiteboard is an ideal teaching example because it is visually intuitive - you can see convergence happening in front of you - yet it exercises exactly the same data-structure challenges you would face in far more complex systems.
 
-The same underlying principles - distributed replicas that stay consistent without a central arbiter - show up in wildly different domains. Drone swarms that broadcast formation data to one another, peer-to-peer file-sharing networks, collaborative code editors, even multi-player games: all of them are, at some level, the same problem with a different domain on top. 
+The same underlying principles - distributed replicas that stay consistent without a central arbiter - show up in wildly different domains. Drone swarms that broadcast formation data to one another, peer-to-peer file-sharing networks, collaborative code editors, even multi-player games: all of them are, at some level, the same problem with a different domain on top. The motivation for building such systems oneself is articulated well by the seven ideals of local-first software~\cite{inkandswitch-localfirst}: fast local interaction, multi-device access, offline operation, seamless collaboration, longevity of data, privacy by default, and ultimate user ownership - properties that off-the-shelf cloud SaaS rarely delivers in full.
 
 \section{Examples from industry}
 
