@@ -518,7 +518,10 @@ the structure correctly, merging two independently-evolved replicas is always we
 and always produces the same result, with no coordination needed. The trade-off is that CRDTs 
 can be less expressive than OT in some scenarios, but for most collaborative editing use 
 cases the fit is excellent. Figma, Miro, Notion, Obsidian, and Coda all rely on CRDTs 
-- a reasonable signal that the approach has matured enough for production use.
+- a reasonable signal that the approach has matured enough for production use. Recent
+research has further narrowed the gap between the two approaches: Eg-walker~\cite{kleppmann-egwalker}
+achieves CRDT-like decentralisation with memory and loading performance competitive with
+centralised OT systems.
 
 % Provide motivating examples.
 \section{Vision of the System}
@@ -2290,7 +2293,10 @@ size growth}: because eraser strokes and all historical drawing operations are r
 the Automerge document, long collaborative sessions will accumulate significant data even
 if the visible canvas appears mostly empty. A compaction strategy - for example,
 periodically snapshotting the raster state and discarding operation history - would be
-needed for long-running use cases. Second, \textbf{client hang on SFU failure}: the
+needed for long-running use cases. Alternatively, more recent algorithms such as
+Eg-walker~\cite{kleppmann-egwalker} address exactly this weakness of state-based CRDTs,
+offering substantially smaller memory footprints and faster document loading without
+giving up decentralised conflict resolution. Second, \textbf{client hang on SFU failure}: the
 current architecture has no timeout or watchdog on the LiveKit background thread, so an
 abrupt server crash leaves the application in an unrecoverable state that requires a
 manual restart. Addressing this would require either a timeout mechanism in the connection
