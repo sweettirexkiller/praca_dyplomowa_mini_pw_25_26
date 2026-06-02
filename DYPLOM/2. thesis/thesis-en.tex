@@ -384,7 +384,7 @@ flow of a user interacting with a standard cloud-based application.
 
 What stands out immediately is how much the system depends on database connectivity. The obvious follow-up question is: what happens when there is no internet? The answer is simple - nothing works. In that sense the entire application is really just an asynchronous graphical wrapper around a remote database, which is a somewhat uncomfortable truth.
 
-This brings us to a useful contrast. In the cloud-first model the underlying assumption is: "if the user's action wasn't saved to the database, it never happened." Local-first flips this on its head: "local persistence is what matters most - the cloud is there only to connect peers."
+This brings us to a useful contrast. In the cloud-first model the underlying assumption is: "if the user's action wasn't saved to the database, it never happened." Local-first flips this on its head: "local persistence is what matters most - the cloud is there only to connect peers"~\cite{kleppmann-localfirst-talk, inkandswitch-localfirst}.
 
 With that distinction in mind, let's look at how a typical user interaction plays out in a local-first system instead.
 
@@ -403,7 +403,7 @@ The contrast is immediately visible. In a local-first system, the user is never 
 
 \section{Local-first vs Cloud-first}
 
-Lets have a look on the main differences between local-first and cloud-first approaches. 
+Lets have a look on the main differences between local-first and cloud-first approaches~\cite{kleppmann-localfirst-talk}. 
 The table below shows the main differences between these two approaches when it comes to designing 
 collaborative application.
 
@@ -513,7 +513,7 @@ yields the same outcome. Google Docs is the most famous example and OT still pow
   and bugs in the transformation logic can silently corrupt documents.
 
 CRDTs took a different path. Instead of transforming operations at merge time, 
-you bake the convergence rules directly into the data structure itself. If you design 
+you bake the convergence rules directly into the data structure itself~\cite{inkandswitch-localfirst}. If you design 
 the structure correctly, merging two independently-evolved replicas is always well-defined 
 and always produces the same result, with no coordination needed. The trade-off is that CRDTs 
 can be less expressive than OT in some scenarios, but for most collaborative editing use 
@@ -808,7 +808,7 @@ Becasue the application is a desktop application, I decided to use egui library 
   but during the research, I stumbled upon a very highly regarded and industry wide accepted library developed 
   by Cambride Cumputer Scientist - Martin Kleppmann. The library is Automerge and it implements most of
   basic data structures as CRDTS. In my case I would use mostly use only few of them, 
-  but the library still provides a lot of useful methods for merging, generating sync messages, applying sync messages and so on.
+  but the library still provides a lot of useful methods for merging, generating sync messages, applying sync messages and so on~\cite{automerge-docs}.
 
 While doing research on how to implement the communication layer, I found out that
  there is a very good open 
@@ -971,7 +971,7 @@ I find it helpful to think about the synchronization architecture as three neste
 %  with operation-log hisotry
 
 Automerge is technically a state-based CRDT, but its sync protocol behaves much more like a 
-delta-based system. Rather than broadcasting the full document on every change,
+delta-based system~\cite{automerge-docs}. Rather than broadcasting the full document on every change,
  it tracks exactly what each peer has already acknowledged and sends only the missing pieces.
 
 Each peer keeps a \texttt{sync::State} per remote peer - a bookmark recording what that remote last saw.

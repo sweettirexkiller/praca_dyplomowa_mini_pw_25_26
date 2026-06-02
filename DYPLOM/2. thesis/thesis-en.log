@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.11.29)  21 MAY 2026 19:07
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.11.29)  2 JUN 2026 18:21
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -639,7 +639,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [12 <./images/more-complicated-architecture.png> <./images/complicated-modules.png>]
-<./images/local-first-sequanec.png, id=443, 4265.9375pt x 3543.2375pt>
+<./images/local-first-sequanec.png, id=445, 4265.9375pt x 3543.2375pt>
 File: ./images/local-first-sequanec.png Graphic file (type png)
 <use ./images/local-first-sequanec.png>
 Package pdftex.def Info: ./images/local-first-sequanec.png  used on input line 395.
@@ -654,7 +654,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [13 <./images/typical-sequance.png>]
-<./images/cloud-vs-local.png, id=451, 3201.9625pt x 3392.675pt>
+<./images/cloud-vs-local.png, id=456, 3201.9625pt x 3392.675pt>
 File: ./images/cloud-vs-local.png Graphic file (type png)
 <use ./images/cloud-vs-local.png>
 Package pdftex.def Info: ./images/cloud-vs-local.png  used on input line 412.
@@ -688,7 +688,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [15 <./images/cloud-vs-local.png>]
-<./images/p2p-vs-start.png, id=466, 755.82375pt x 355.3275pt>
+<./images/p2p-vs-start.png, id=471, 755.82375pt x 355.3275pt>
 File: ./images/p2p-vs-start.png Graphic file (type png)
 <use ./images/p2p-vs-start.png>
 Package pdftex.def Info: ./images/p2p-vs-start.png  used on input line 458.
@@ -953,7 +953,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [22]
-<./images/initial-ui.png, id=504, 483.8075pt x 433.62pt>
+<./images/initial-ui.png, id=510, 483.8075pt x 433.62pt>
 File: ./images/initial-ui.png Graphic file (type png)
 <use ./images/initial-ui.png>
 Package pdftex.def Info: ./images/initial-ui.png  used on input line 766.
@@ -983,7 +983,7 @@ Chapter 2.
 [25
 
 ]
-<./images/architecture.png, id=521, 338.26375pt x 232.87pt>
+<./images/architecture.png, id=528, 338.26375pt x 232.87pt>
 File: ./images/architecture.png Graphic file (type png)
 <use ./images/architecture.png>
 Package pdftex.def Info: ./images/architecture.png  used on input line 834.
@@ -998,7 +998,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [26 <./images/architecture.png>]
-<./images/ui-modules-1.png, id=529, 233.37187pt x 316.68312pt>
+<./images/ui-modules-1.png, id=537, 233.37187pt x 316.68312pt>
 File: ./images/ui-modules-1.png Graphic file (type png)
 <use ./images/ui-modules-1.png>
 Package pdftex.def Info: ./images/ui-modules-1.png  used on input line 857.
@@ -1013,27 +1013,27 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [27 <./images/ui-modules-1.png>]
-<./images/ui-modules-2.png, id=536, 95.85812pt x 126.4725pt>
+<./images/ui-modules-2.png, id=545, 95.85812pt x 126.4725pt>
 File: ./images/ui-modules-2.png Graphic file (type png)
 <use ./images/ui-modules-2.png>
 Package pdftex.def Info: ./images/ui-modules-2.png  used on input line 889.
 (pdftex.def)             Requested size: 72.84071pt x 96.1085pt.
-<./images/ui-modules-3.png, id=537, 140.525pt x 115.43124pt>
+<./images/ui-modules-3.png, id=546, 140.525pt x 115.43124pt>
 File: ./images/ui-modules-3.png Graphic file (type png)
 <use ./images/ui-modules-3.png>
 Package pdftex.def Info: ./images/ui-modules-3.png  used on input line 893.
 (pdftex.def)             Requested size: 109.26108pt x 89.75066pt.
-<./images/ui-modules-4.png, id=538, 92.345pt x 122.4575pt>
+<./images/ui-modules-4.png, id=547, 92.345pt x 122.4575pt>
 File: ./images/ui-modules-4.png Graphic file (type png)
 <use ./images/ui-modules-4.png>
 Package pdftex.def Info: ./images/ui-modules-4.png  used on input line 898.
 (pdftex.def)             Requested size: 81.9406pt x 108.65982pt.
-<./images/ui-modules-5.png, id=539, 240.9pt x 175.65625pt>
+<./images/ui-modules-5.png, id=548, 240.9pt x 175.65625pt>
 File: ./images/ui-modules-5.png Graphic file (type png)
 <use ./images/ui-modules-5.png>
 Package pdftex.def Info: ./images/ui-modules-5.png  used on input line 903.
 (pdftex.def)             Requested size: 186.65175pt x 136.10269pt.
-<./images/backend-interface.png, id=540, 1267.73625pt x 2176.13pt>
+<./images/backend-interface.png, id=549, 1267.73625pt x 2176.13pt>
 File: ./images/backend-interface.png Graphic file (type png)
 <use ./images/backend-interface.png>
 Package pdftex.def Info: ./images/backend-interface.png  used on input line 945.
@@ -1057,7 +1057,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [29 <./images/backend-interface.png>]
-<./images/automerge-sequance.png, id=558, 2526.43875pt x 2148.025pt>
+<./images/automerge-sequance.png, id=567, 2526.43875pt x 2148.025pt>
 File: ./images/automerge-sequance.png Graphic file (type png)
 <use ./images/automerge-sequance.png>
 Package pdftex.def Info: ./images/automerge-sequance.png  used on input line 989.
@@ -1156,7 +1156,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 1258--1259
 []\T1/cmtt/m/n/10.95 splice(&list_id, 0, len,
  []
 
-<./images/automerge-local-intent.png, id=643, 2264.46pt x 1696.3375pt>
+<./images/automerge-local-intent.png, id=652, 2264.46pt x 1696.3375pt>
 File: ./images/automerge-local-intent.png Graphic file (type png)
 <use ./images/automerge-local-intent.png>
 Package pdftex.def Info: ./images/automerge-local-intent.png  used on input line 1272.
@@ -1198,7 +1198,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [40]
-<./images/connecting-sequance.png, id=684, 4587.1375pt x 2505.36pt>
+<./images/connecting-sequance.png, id=693, 4587.1375pt x 2505.36pt>
 File: ./images/connecting-sequance.png Graphic file (type png)
 <use ./images/connecting-sequance.png>
 Package pdftex.def Info: ./images/connecting-sequance.png  used on input line 1427.
@@ -1213,7 +1213,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [41]
-<./images/connectivity-classes-1.png, id=689, 1543.7675pt x 429.605pt>
+<./images/connectivity-classes-1.png, id=698, 1543.7675pt x 429.605pt>
 File: ./images/connectivity-classes-1.png Graphic file (type png)
 <use ./images/connectivity-classes-1.png>
 Package pdftex.def Info: ./images/connectivity-classes-1.png  used on input line 1458.
@@ -1233,12 +1233,12 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [42 <./images/connecting-sequance.png>]
-<./images/communication-enums.png, id=696, 3478.9975pt x 477.785pt>
+<./images/communication-enums.png, id=705, 3478.9975pt x 477.785pt>
 File: ./images/communication-enums.png Graphic file (type png)
 <use ./images/communication-enums.png>
 Package pdftex.def Info: ./images/communication-enums.png  used on input line 1465.
 (pdftex.def)             Requested size: 450.69418pt x 61.89551pt.
-<./images/data-receiving-seq.png, id=698, 4095.3pt x 3344.495pt>
+<./images/data-receiving-seq.png, id=707, 4095.3pt x 3344.495pt>
 File: ./images/data-receiving-seq.png Graphic file (type png)
 <use ./images/data-receiving-seq.png>
 Package pdftex.def Info: ./images/data-receiving-seq.png  used on input line 1493.
@@ -1262,7 +1262,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [44 <./images/data-receiving-seq.png>]
-<./images/cursor-broadcasting.png, id=714, 4623.2725pt x 1078.0275pt>
+<./images/cursor-broadcasting.png, id=723, 4623.2725pt x 1078.0275pt>
 File: ./images/cursor-broadcasting.png Graphic file (type png)
 <use ./images/cursor-broadcasting.png>
 Package pdftex.def Info: ./images/cursor-broadcasting.png  used on input line 1560.
@@ -1277,12 +1277,12 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [45]
-<./images/ui-final-1.png, id=719, 616.3025pt x 485.815pt>
+<./images/ui-final-1.png, id=728, 616.3025pt x 485.815pt>
 File: ./images/ui-final-1.png Graphic file (type png)
 <use ./images/ui-final-1.png>
 Package pdftex.def Info: ./images/ui-final-1.png  used on input line 1576.
 (pdftex.def)             Requested size: 364.19669pt x 287.09538pt.
-<./images/ui-final-2.png, id=720, 628.3475pt x 491.8375pt>
+<./images/ui-final-2.png, id=729, 628.3475pt x 491.8375pt>
 File: ./images/ui-final-2.png Graphic file (type png)
 <use ./images/ui-final-2.png>
 Package pdftex.def Info: ./images/ui-final-2.png  used on input line 1583.
@@ -1312,12 +1312,12 @@ Underfull \hbox (badness 1490) in paragraph at lines 1623--1624
 []\T1/cmr/m/n/10.95 Docker im-age (74.4 MB), de-ployed on VPS at
  []
 
-<./images/analysis/fig3_1a_system_specs.png, id=738, 494.84875pt x 461.725pt>
+<./images/analysis/fig3_1a_system_specs.png, id=747, 494.84875pt x 461.725pt>
 File: ./images/analysis/fig3_1a_system_specs.png Graphic file (type png)
 <use ./images/analysis/fig3_1a_system_specs.png>
 Package pdftex.def Info: ./images/analysis/fig3_1a_system_specs.png  used on input line 1644.
 (pdftex.def)             Requested size: 245.82877pt x 229.37537pt.
-<./images/analysis/fig3_1b_livekit_version.png, id=739, 520.94624pt x 75.28125pt>
+<./images/analysis/fig3_1b_livekit_version.png, id=748, 520.94624pt x 75.28125pt>
 File: ./images/analysis/fig3_1b_livekit_version.png Graphic file (type png)
 <use ./images/analysis/fig3_1b_livekit_version.png>
 Package pdftex.def Info: ./images/analysis/fig3_1b_livekit_version.png  used on input line 1649.
@@ -1327,17 +1327,17 @@ Package pdftex.def Info: ./images/analysis/fig3_1b_livekit_version.png  used on 
 [48
 
 ]
-<./images/analysis/fig3_1c_network_ping.png, id=748, 502.87875pt x 387.4475pt>
+<./images/analysis/fig3_1c_network_ping.png, id=757, 502.87875pt x 387.4475pt>
 File: ./images/analysis/fig3_1c_network_ping.png Graphic file (type png)
 <use ./images/analysis/fig3_1c_network_ping.png>
 Package pdftex.def Info: ./images/analysis/fig3_1c_network_ping.png  used on input line 1658.
 (pdftex.def)             Requested size: 273.14925pt x 210.44821pt.
-<./images/analysis/fig3_1d_network_iperf_library.png, id=749, 1241.63875pt x 409.53pt>
+<./images/analysis/fig3_1d_network_iperf_library.png, id=758, 1241.63875pt x 409.53pt>
 File: ./images/analysis/fig3_1d_network_iperf_library.png Graphic file (type png)
 <use ./images/analysis/fig3_1d_network_iperf_library.png>
 Package pdftex.def Info: ./images/analysis/fig3_1d_network_iperf_library.png  used on input line 1666.
 (pdftex.def)             Requested size: 218.51523pt x 72.06874pt.
-<./images/analysis/fig3_1e_network_iperf_home.png, id=750, 1014.79124pt x 536.0025pt>
+<./images/analysis/fig3_1e_network_iperf_home.png, id=759, 1014.79124pt x 536.0025pt>
 File: ./images/analysis/fig3_1e_network_iperf_home.png Graphic file (type png)
 <use ./images/analysis/fig3_1e_network_iperf_home.png>
 Package pdftex.def Info: ./images/analysis/fig3_1e_network_iperf_home.png  used on input line 1671.
@@ -1391,7 +1391,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [50]
-<./images/analysis/fig3_2_unit_tests.png, id=767, 704.6325pt x 351.3125pt>
+<./images/analysis/fig3_2_unit_tests.png, id=776, 704.6325pt x 351.3125pt>
 File: ./images/analysis/fig3_2_unit_tests.png Graphic file (type png)
 <use ./images/analysis/fig3_2_unit_tests.png>
 Package pdftex.def Info: ./images/analysis/fig3_2_unit_tests.png  used on input line 1738.
@@ -1406,7 +1406,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [51 <./images/analysis/fig3_2_unit_tests.png>]
-<./images/analysis/fig3_3a_sync_local_benchmark.png, id=777, 806.01125pt x 343.2825pt>
+<./images/analysis/fig3_3a_sync_local_benchmark.png, id=786, 806.01125pt x 343.2825pt>
 File: ./images/analysis/fig3_3a_sync_local_benchmark.png Graphic file (type png)
 <use ./images/analysis/fig3_3a_sync_local_benchmark.png>
 Package pdftex.def Info: ./images/analysis/fig3_3a_sync_local_benchmark.png  used on input line 1790.
@@ -1430,7 +1430,7 @@ Underfull \hbox (badness 1655) in paragraph at lines 1819--1819
 []\T1/cmr/m/n/10.95 Table 3.5: []End-to-end sync la-tency over
  []
 
-<./images/analysis/fig3_3b_e2e_latency_home.png, id=787, 723.70375pt x 839.135pt>
+<./images/analysis/fig3_3b_e2e_latency_home.png, id=796, 723.70375pt x 839.135pt>
 File: ./images/analysis/fig3_3b_e2e_latency_home.png Graphic file (type png)
 <use ./images/analysis/fig3_3b_e2e_latency_home.png>
 Package pdftex.def Info: ./images/analysis/fig3_3b_e2e_latency_home.png  used on input line 1835.
@@ -1445,7 +1445,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [53 <./images/analysis/fig3_3b_e2e_latency_home.png>]
-<./images/analysis/fig3_4_load_benchmark.png, id=797, 790.955pt x 244.915pt>
+<./images/analysis/fig3_4_load_benchmark.png, id=807, 790.955pt x 244.915pt>
 File: ./images/analysis/fig3_4_load_benchmark.png Graphic file (type png)
 <use ./images/analysis/fig3_4_load_benchmark.png>
 Package pdftex.def Info: ./images/analysis/fig3_4_load_benchmark.png  used on input line 1871.
@@ -1460,17 +1460,17 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [54 <./images/analysis/fig3_4_load_benchmark.png>]
-<./images/analysis/fig3_5a_multiuser_env.png, id=811, 1031.855pt x 487.8225pt>
+<./images/analysis/fig3_5a_multiuser_env.png, id=820, 1031.855pt x 487.8225pt>
 File: ./images/analysis/fig3_5a_multiuser_env.png Graphic file (type png)
 <use ./images/analysis/fig3_5a_multiuser_env.png>
 Package pdftex.def Info: ./images/analysis/fig3_5a_multiuser_env.png  used on input line 1908.
 (pdftex.def)             Requested size: 386.96028pt x 182.94043pt.
-<./images/analysis/fig3_5d_multiuser_4p.png, id=812, 1806.75pt x 1075.01625pt>
+<./images/analysis/fig3_5d_multiuser_4p.png, id=821, 1806.75pt x 1075.01625pt>
 File: ./images/analysis/fig3_5d_multiuser_4p.png Graphic file (type png)
 <use ./images/analysis/fig3_5d_multiuser_4p.png>
 Package pdftex.def Info: ./images/analysis/fig3_5d_multiuser_4p.png  used on input line 1916.
 (pdftex.def)             Requested size: 218.51523pt x 130.0134pt.
-<./images/analysis/fig3_5e_multiuser_5p.png, id=813, 1806.75pt x 1106.1325pt>
+<./images/analysis/fig3_5e_multiuser_5p.png, id=822, 1806.75pt x 1106.1325pt>
 File: ./images/analysis/fig3_5e_multiuser_5p.png Graphic file (type png)
 <use ./images/analysis/fig3_5e_multiuser_5p.png>
 Package pdftex.def Info: ./images/analysis/fig3_5e_multiuser_5p.png  used on input line 1921.
@@ -1494,22 +1494,22 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [56]
-<./images/analysis/fig3_6c_fps_100_strokes.png, id=857, 442.65375pt x 208.78pt>
+<./images/analysis/fig3_6c_fps_100_strokes.png, id=866, 442.65375pt x 208.78pt>
 File: ./images/analysis/fig3_6c_fps_100_strokes.png Graphic file (type png)
 <use ./images/analysis/fig3_6c_fps_100_strokes.png>
 Package pdftex.def Info: ./images/analysis/fig3_6c_fps_100_strokes.png  used on input line 1998.
 (pdftex.def)             Requested size: 218.51523pt x 103.06447pt.
-<./images/analysis/fig3_6d_fps_500_strokes.png, id=858, 323.2075pt x 181.67876pt>
+<./images/analysis/fig3_6d_fps_500_strokes.png, id=867, 323.2075pt x 181.67876pt>
 File: ./images/analysis/fig3_6d_fps_500_strokes.png Graphic file (type png)
 <use ./images/analysis/fig3_6d_fps_500_strokes.png>
 Package pdftex.def Info: ./images/analysis/fig3_6d_fps_500_strokes.png  used on input line 2003.
 (pdftex.def)             Requested size: 218.51523pt x 122.83023pt.
-<./images/analysis/fig3_6e_fps_1000_strokes.png, id=859, 325.215pt x 183.68625pt>
+<./images/analysis/fig3_6e_fps_1000_strokes.png, id=868, 325.215pt x 183.68625pt>
 File: ./images/analysis/fig3_6e_fps_1000_strokes.png Graphic file (type png)
 <use ./images/analysis/fig3_6e_fps_1000_strokes.png>
 Package pdftex.def Info: ./images/analysis/fig3_6e_fps_1000_strokes.png  used on input line 2010.
 (pdftex.def)             Requested size: 218.51523pt x 123.42229pt.
-<./images/analysis/fig3_6f_fps_5000_strokes.png, id=860, 325.215pt x 178.6675pt>
+<./images/analysis/fig3_6f_fps_5000_strokes.png, id=869, 325.215pt x 178.6675pt>
 File: ./images/analysis/fig3_6f_fps_5000_strokes.png Graphic file (type png)
 <use ./images/analysis/fig3_6f_fps_5000_strokes.png>
 Package pdftex.def Info: ./images/analysis/fig3_6f_fps_5000_strokes.png  used on input line 2015.
@@ -1524,7 +1524,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [57 <./images/analysis/fig3_6c_fps_100_strokes.png> <./images/analysis/fig3_6d_fps_500_strokes.png> <./images/analysis/fig3_6e_fps_1000_strokes.png> <./images/analysis/fig3_6f_fps_5000_strokes.png>]
-<./images/analysis/fig3_7_convergence_benchmark.png, id=870, 833.1125pt x 789.95125pt>
+<./images/analysis/fig3_7_convergence_benchmark.png, id=879, 833.1125pt x 789.95125pt>
 File: ./images/analysis/fig3_7_convergence_benchmark.png Graphic file (type png)
 <use ./images/analysis/fig3_7_convergence_benchmark.png>
 Package pdftex.def Info: ./images/analysis/fig3_7_convergence_benchmark.png  used on input line 2079.
@@ -1754,10 +1754,10 @@ Here is how much of TeX's memory you used:
  1141 hyphenation exceptions out of 8191
  75i,17n,79p,753b,2091s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfbx1095.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfcc1095.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfit1000.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfti1095.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sftt1000.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sftt1095.pfb>
-Output written on thesis-en.pdf (71 pages, 13589182 bytes).
+Output written on thesis-en.pdf (71 pages, 13589458 bytes).
 PDF statistics:
- 1091 PDF objects out of 1200 (max. 8388607)
- 829 compressed objects within 9 object streams
+ 1097 PDF objects out of 1200 (max. 8388607)
+ 835 compressed objects within 9 object streams
  282 named destinations out of 1000 (max. 500000)
  709 words of extra memory for PDF output out of 10000 (max. 10000000)
 
