@@ -823,7 +823,7 @@ It provides a simple API for creating rooms and managing connections between
  Therefore, I decided to use LiveKit as the communication layer for the application - 
  both on client side with usage of Rust livekit SDK and on server side with LiveKit SFU as 
  a docker container, which might be easly scaled if needed horizontaly with usage of Kubernetes 
- and load balancers.
+ and load balancers~\cite{livekit-deployment}.
 
  The communication needs to be efficient and non-blocking, therefore I decided to use Tokio 
  - a Rust library for asynchronous programming. It provides a runtime for executing asynchronous 
@@ -1373,7 +1373,7 @@ data structures are being synchronized. This section focuses on the \emph{commun
 \subsection{LiveKit and WebRTC data channels}
 % star topology via livekit SFU, room-basen sessions, why webRTC data channels
 The application uses LiveKit as the underlying real-time communication platform. 
-LiveKit provides a scalable SFU (Selective Forwarding Unit) architecture that 
+LiveKit provides a scalable SFU (Selective Forwarding Unit) architecture~\cite{livekit-sfu} that 
 allows multiple peers to connect to a shared room and exchange media and 
 data streams efficiently. It is an open-source alternative to services like 
 Twilio or Agora, offering low-latency connectivity and built-in support for 
@@ -2414,7 +2414,8 @@ from a terminal with the required environment variables set (see Section~B.3).
 \section*{Running in a development environment}
 
 Build the application from source following the instructions in \texttt{README.md},
-then start a local LiveKit server as described below.
+then start a local LiveKit server as described below. The procedure follows the official
+LiveKit self-hosting documentation~\cite{livekit-deployment}.
 
 \subsection*{Starting the LiveKit SFU (Docker)}
 
