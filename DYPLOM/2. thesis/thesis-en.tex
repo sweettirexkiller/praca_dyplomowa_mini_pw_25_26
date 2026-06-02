@@ -461,7 +461,7 @@ Known examples of local-first applications are: Figma, Miro, Notion, Obsidian, R
 \end{figure}
 
 Connectivity among multiple users always comes down to one of two choices: peer-to-peer, 
-where clients talk directly to each other, or a more centralised relay model such
+where clients talk directly to each other~\cite{conclave}, or a more centralised relay model such
  as star topology. Neither is strictly better - each makes different trade-offs. 
  The table below is a straightforward comparison of the two when the goal is a local-first 
  collaborative whiteboard.
@@ -510,7 +510,7 @@ Two families of algorithms address this. The older one is OT - operational trans
 The idea is to transform operations relative to each other so that applying them in any order 
 yields the same outcome. Google Docs is the most famous example and OT still powers it today.
  The trouble is that getting OT right is genuinely difficult - the edge cases multiply quickly,
-  and bugs in the transformation logic can silently corrupt documents.
+  and bugs in the transformation logic can silently corrupt documents~\cite{conclave}.
 
 CRDTs took a different path. Instead of transforming operations at merge time, 
 you bake the convergence rules directly into the data structure itself~\cite{inkandswitch-localfirst}. If you design 
@@ -1375,7 +1375,7 @@ allows multiple peers to connect to a shared room and exchange media and
 data streams efficiently. It is an open-source alternative to services like 
 Twilio or Agora, offering low-latency connectivity and built-in support for 
 WebRTC data channels, which are ideal for real-time synchronization of CRDT 
-messages and cursor positions in a collaborative whiteboard application.
+messages and cursor positions in a collaborative whiteboard application~\cite{conclave, mdn-webrtc}.
 This solution uses a start topology where each peer connects to the LiveKit server,
  which forwards messages to all other participants in the room. The pros and 
  cons of this approach were discussed in the introduction chapter.
