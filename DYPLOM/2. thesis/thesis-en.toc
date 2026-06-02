@@ -29,7 +29,7 @@
 \contentsline {subsection}{\numberline {2.4.4}Initial synchronization of a new peer}{36}{subsection.2.4.4}%
 \contentsline {section}{\numberline {2.5}CRDT Data Model - What is being synchronized?}{36}{section.2.5}%
 \contentsline {subsection}{\numberline {2.5.1}Document schema}{36}{subsection.2.5.1}%
-\contentsline {paragraph}{Why JSON strings inside a List?}{36}{lstnumber.-2.3}%
+\contentsline {paragraph}{Why JSON strings inside a List?}{37}{lstnumber.-2.3}%
 \contentsline {subsection}{\numberline {2.5.2}Stroke representation}{37}{subsection.2.5.2}%
 \contentsline {paragraph}{Why a vector of points rather than pixels?}{37}{lstnumber.-3.10}%
 \contentsline {subsection}{\numberline {2.5.3}Intent abstraction}{38}{subsection.2.5.3}%

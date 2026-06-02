@@ -974,7 +974,7 @@ I find it helpful to think about the synchronization architecture as three neste
 %  with operation-log hisotry
 
 Automerge is technically a state-based CRDT, but its sync protocol behaves much more like a 
-delta-based system~\cite{automerge-docs}. Rather than broadcasting the full document on every change,
+delta-based system~\cite{automerge-docs, shapiro-crdt}. Rather than broadcasting the full document on every change,
  it tracks exactly what each peer has already acknowledged and sends only the missing pieces.
 
 Each peer keeps a \texttt{sync::State} per remote peer - a bookmark recording what that remote last saw.
@@ -1053,7 +1053,7 @@ or dependency resolution), subsequent messages will complete the synchronization
 \subsection{Conflict resolution and guarantees}
 
 In Automerge (and most CRDTs), conflict resolution is governed by the principle of 
-\textbf{strong eventual consistency}. This means that if two peers perform different actions 
+\textbf{strong eventual consistency}~\cite{shapiro-crdt}. This means that if two peers perform different actions 
 on the same piece of data at the same time, they must both arrive at the exact same result 
 without a central server deciding the outcome. Automerge achieves this through deterministic 
 rules embedded directly into the data structure operations.
@@ -1154,7 +1154,9 @@ the background image are represented as CRDT objects, how user actions translate
 \subsection{Document schema}
 
 The Automerge document follows a simple, flat schema with two top-level keys stored under the 
-document root (\texttt{ROOT}):
+document root (\texttt{ROOT}). Automerge itself is built on a conflict-free replicated JSON
+datatype~\cite{kleppmann-jsoncrdt}, so any value that can be expressed as JSON - including
+nested maps, lists, and primitives - can be stored and merged automatically.
 
 \begin{lstlisting}[language=Rust]
 ROOT
@@ -2320,11 +2322,15 @@ loop or a higher-level supervision strategy for the background thread.
 
 \bibitem[5]{kleppmann-egwalker} M.~Kleppmann, \emph{Eg-Walker: Efficient Collaborative Text Editing}, 2025, \url{https://martin.kleppmann.com/2025/04/02/eg-walker-collaborative-text.html}.
 
+\bibitem[6]{kleppmann-jsoncrdt} M.~Kleppmann, A.~R.~Beresford, \emph{A Conflict-Free Replicated JSON Datatype}, IEEE Transactions on Parallel and Distributed Systems, vol.~28, no.~10, pp.~2733--2746, 2017, \url{https://arxiv.org/abs/1608.03960}.
+
 \bibitem[6]{livekit-deployment} LiveKit Inc., \emph{LiveKit Self-Hosting and Deployment Guide}, \url{https://docs.livekit.io/home/self-hosting/deployment/}, accessed March 2026.
 
 \bibitem[7]{livekit-sfu} LiveKit Inc., \emph{LiveKit SFU Internals}, \url{https://docs.livekit.io/reference/internals/livekit-sfu/}, accessed March 2026.
 
 \bibitem[8]{mdn-webrtc} Mozilla Contributors, \emph{WebRTC Connectivity - MDN Web Docs}, \url{https://developer.mozilla.org/en-US/docs/Web/API/WebRTC_API/Connectivity}, accessed March 2026.
+
+\bibitem[9]{shapiro-crdt} M.~Shapiro, N.~Preguiça, C.~Baquero, M.~Zawirski, \emph{Conflict-free Replicated Data Types}, in: Proc.\ 13th Int.\ Symp.\ on Stabilization, Safety, and Security of Distributed Systems (SSS), 2011, pp.~386--400, \url{https://hal.inria.fr/inria-00609399}.
 
 \end{thebibliography}
 \pagenumbering{gobble}
