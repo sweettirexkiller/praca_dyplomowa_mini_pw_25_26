@@ -515,13 +515,10 @@ yields the same outcome. Google Docs is the most famous example and OT still pow
 CRDTs took a different path. Instead of transforming operations at merge time, 
 you bake the convergence rules directly into the data structure itself~\cite{inkandswitch-localfirst}. If you design 
 the structure correctly, merging two independently-evolved replicas is always well-defined 
-and always produces the same result, with no coordination needed. The trade-off is that CRDTs 
-can be less expressive than OT in some scenarios, but for most collaborative editing use 
-cases the fit is excellent. Figma, Miro, Notion, Obsidian, and Coda all rely on CRDTs 
-- a reasonable signal that the approach has matured enough for production use. Recent
-research has further narrowed the gap between the two approaches: Eg-walker~\cite{kleppmann-egwalker}
-achieves CRDT-like decentralisation with memory and loading performance competitive with
-centralised OT systems.
+and always produces the same result, with no coordination needed. Figma, Miro, Notion, Obsidian, and Coda 
+all rely on CRDTs - a reasonable signal that the approach has matured for production use. Recent
+work such as Eg-walker~\cite{kleppmann-egwalker} has further narrowed the historical performance gap 
+with OT.
 
 % Provide motivating examples.
 \section{Vision of the System}
