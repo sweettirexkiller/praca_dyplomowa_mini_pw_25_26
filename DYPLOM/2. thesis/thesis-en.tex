@@ -326,8 +326,7 @@ of everyday devices.
 And the apps for collaborative work today couldn’t exist 20 years ago. They haven’t been simply invented yet. When online
  applications first came out, their architectures were really simple. In fact, online applications were 
  nothing more than client-server applications. On the Server side, data was stored and processed; 
- On the Client side, the data was presented. The library is used to send data to the user and to
-  send user input to the server. This architecture had its advantages and disadvantages. It was
+ On the Client side, the data was presented. This architecture had its advantages and disadvantages. It was
    simple and easy to implement, but it had a single point of failure. When the server went down, 
    the entire web site went down. It also wasn't very scalable because all requests came from the
     clients to the one server.
@@ -347,7 +346,7 @@ decade
 of fast development. From simple client server architectures the system rose to more difficult forms of 
 large size client-side application with lots of layers and microservices. Picture below shows architectures 
 that emerged 
-on the market with rise of popularity of mobile and web apps from 2010.
+on the market with rise of popularity of mobile and web apps from around 2010.
 
 % Place image exactly here
 \begin{figure}[H]
@@ -369,9 +368,12 @@ How far are these architectures from beeing good fit for collaboarative appliact
 
 As we can see, the level of complexity is already very high. A single user interaction triggers a cascade through multiple functions, modules, and services. Trying to layer real-time collaboration on top of this kind of architecture is, frankly, a nightmare - it would require coordinating asynchronous, time-consuming remote calls across all those services just to keep everyone in sync.
 
-For a while people did try exactly this. The approach was called OT - operational transformation - and it is still the backbone of Google Docs today. OT works, but it is notoriously hard to implement correctly, and the failure modes under concurrent edits are subtle. In this thesis I chose to focus on local-first architectures instead, which have gained much broader traction in the industry and open up a wider range of application types. 
+For a while people did try exactly this, but the first true well-known approach to creating collaborative applications was called OT - operational transformation. To be honest it is still the backbone 
+of Google Docs today. OT works, but it is notoriously hard to implement correctly,
+ and the failure modes under concurrent edits are subtle. In further chapters I discuss more about the cloud - OT approach and its alternatives, but for the purposes of
+  this thesis I chose to focus on local-first architectures instead, which have gained much broader traction in the industry and open up a wider range of application types. 
 
-There are also other reasons to be skeptical of cloud-first when it comes to collaborative applications.
+Among the reasons reasons to be skeptical of cloud-first when it comes to collaborative applications is connectivity.
 Consider what actually happens during a typical user interaction. Below we can see the general asynchronous
 flow of a user interacting with a standard cloud-based application. 
 \begin{figure}[H]
@@ -398,7 +400,13 @@ With that distinction in mind, let's look at how a typical user interaction play
 \end{figure}
 
 
-The contrast is immediately visible. In a local-first system, the user is never blocked waiting for a database roundtrip - all interactions happen against the local replica, and connectivity to other peers is a bonus rather than a prerequisite. Synchronization of state between users happens on each machine independently. That is precisely what makes the system distributed in any meaningful sense. It is also worth noting that the architecture is considerably flatter: far fewer services and remote calls are involved. Later chapters will show concretely how this property is what makes true real-time collaboration actually achievable.
+The contrast is immediately visible. In a local-first system, the user is never blocked waiting for a
+ database roundtrip - all interactions happen against the local replica, and connectivity to other peers
+ is a bonus rather than a prerequisite. \textbf{Synchronization of state between users happens on each machine 
+  independently.} That is precisely what makes the system distributed in any meaningful sense. It is
+   also worth noting that the architecture is considerably flatter: far fewer services and remote
+    calls are involved. Later chapters will show concretely how this property is what makes true 
+    real-time collaboration actually achievable.
 
 
 \section{Local-first vs Cloud-first}
@@ -538,7 +546,7 @@ of remote users are shown live on the canvas.
 Each stroke is represented as a vector of sampled points with an associated color and width - not as raw pixels.
 One deliberate design choice worth noting upfront: the application does not persist anything by default.
 When the app is closed, the session is gone unless the user explicitly exported it first.
-A mobile version was never part of the scope.
+A mobile or web version was never part of the scope.
 
 \section{Requirements Specification}
 
@@ -805,9 +813,9 @@ Becasue the application is a desktop application, I decided to use egui library 
 
   When deciding on how to implement / use CRDTs in the project, the first idea was to use own implementation 
   of CRDTs, more specifically a RGA - Replicated Growable Array and keep strokes as pixels in a matrix (array of arrays), 
-  but during the research, I stumbled upon a very highly regarded and industry wide accepted library developed 
-  by Cambride Cumputer Scientist - Martin Kleppmann. The library is Automerge and it implements most of
-  basic data structures as CRDTS. In my case I would use mostly use only few of them, 
+  but during the research, I stumbled upon a very highly regarded and widely accepted in the industry library developed 
+  by Cambridge Computer Scientist - Martin Kleppmann. The library is Automerge and it implements most of
+  basic data structures as CRDTS. In my case I would mostly use only few of them, 
   but the library still provides a lot of useful methods for merging, generating sync messages, applying sync messages and so on~\cite{automerge-docs}.
 
 While doing research on how to implement the communication layer, I found out that
@@ -1628,7 +1636,7 @@ infrastructure.
     \label{tab:test-env}
 \end{table}
 
-For the compilation of the application we used release mode (i.e., \texttt{cargo build --release}) for all performance measurements.
+For the compilation of the application I used release mode (i.e., \texttt{cargo build --release}) for all performance measurements.
 
 Figures~\ref{fig:system-specs-livekit} confirms the hardware and LiveKit server version.
 Network measurements are shown in Figures~\ref{fig:ping} and~\ref{fig:iperf-comparison}.
